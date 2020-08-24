@@ -1,5 +1,5 @@
 object Versions {
-    const val KOTLIN: String = "1.4"
+    const val KOTLIN: String = "1.4.0"
     const val ANDROID_STUDIO: String = "4.0.1"
     const val KOTLIN_COROUTINES: String = "1.3.9"
     const val MATERIAL_COMPONENTS: String = "1.3.0-alpha02"
