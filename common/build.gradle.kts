@@ -63,7 +63,7 @@ dependencies {
     kapt(Dependencies.Google.Dagger.DAGGER_COMPILER)
 
     // AssistedInject
-    compileOnly(Dependencies.AssistedInject.ASSISTED_INJECT_ANNOTATIONS_DAGGER_2)
+    api(Dependencies.AssistedInject.ASSISTED_INJECT_ANNOTATIONS_DAGGER_2)
     kapt(Dependencies.AssistedInject.ASSISTED_INJECT_PROCESSOR_DAGGER_2)
 
     // Timber

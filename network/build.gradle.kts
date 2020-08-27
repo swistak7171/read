@@ -16,7 +16,6 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     implementation(project(":common"))
-    implementation(project(":data"))
 
     // Retrofit
     api(Dependencies.Retrofit.RETROFIT)
