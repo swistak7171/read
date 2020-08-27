@@ -79,10 +79,6 @@ object Dependencies {
             const val RECYCLER_VIEW: String = "androidx.recyclerview:recyclerview:${Versions.RECYCLER_VIEW}"
         }
 
-        object ViewPager2 {
-            const val VIEW_PAGER_2: String = "androidx.viewpager2:viewpager2:${Versions.VIEW_PAGER_2}"
-        }
-
         object SwipeRefreshLayout {
             const val SWIPE_REFRESH_LAYOUT: String = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.SWIPE_REFRESH_LAYOUT}"
         }

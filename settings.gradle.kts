@@ -2,6 +2,7 @@ include(
     ":app",
     ":common",
     ":data",
-    ":network"
+    ":network",
+    ":ui"
 )
 rootProject.name = "read"
