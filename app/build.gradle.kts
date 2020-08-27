@@ -48,6 +48,10 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     implementation(project(":common"))
+    implementation(project(":data"))
+    implementation(project(":domain"))
+    implementation(project(":network"))
+    implementation(project(":ui"))
 
     // LeakCanary
     debugImplementation(Dependencies.LEAK_CANARY_ANDROID)
