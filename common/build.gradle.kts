@@ -36,7 +36,7 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    ktlint(Dependencies.KTLINT);
+    ktlint(Dependencies.KTLINT)
 
     // Kotlin Coroutines
     api(Dependencies.Kotlin.Coroutines.KOTLIN_COROUTINES_CORE)
