@@ -8,6 +8,7 @@ import dagger.android.support.AndroidSupportInjectionModule
 import pl.kamilszustak.read.ReadApplication
 import pl.kamilszustak.read.di.module.ApplicationModule
 import pl.kamilszustak.read.di.module.AssistedInjectModule
+import pl.kamilszustak.read.ui.di.module.ActivityModule
 import javax.inject.Singleton
 
 @Singleton
@@ -16,6 +17,7 @@ import javax.inject.Singleton
         AndroidSupportInjectionModule::class,
         ApplicationModule::class,
         AssistedInjectModule::class,
+        ActivityModule::class
     ]
 )
 interface ApplicationComponent : AndroidInjector<ReadApplication> {
