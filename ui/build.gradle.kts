@@ -36,7 +36,7 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     implementation(project(":common"))
-    // implementation(project(":domain"))
+    implementation(project(":domain"))
 
     // Material Components
     implementation(Dependencies.Google.Material.MATERIAL_COMPONENTS)
