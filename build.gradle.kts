@@ -1,9 +1,12 @@
+import org.jetbrains.dokka.gradle.DokkaTask
+
 plugins {
     id(Plugins.KTLINT) version (Versions.KTLINT)
     id(Plugins.DOKKA) version (Versions.DOKKA)
 }
 
 buildscript {
+    val kotlin_version by extra("1.4.0")
     repositories {
         google()
         jcenter()
@@ -14,6 +17,7 @@ buildscript {
         classpath(Dependencies.Kotlin.KOTLIN_GRADLE_PLUGIN)
         classpath(Dependencies.AndroidX.Navigation.NAVIGATION_SAFE_ARGS_GRADLE_PLUGIN)
         classpath(Dependencies.KTLINT_GRADLE)
+        "classpath"("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
     }
 }
 
@@ -28,4 +32,9 @@ allprojects {
 
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
+}
+
+val dokka: DokkaTask by tasks.getting(DokkaTask::class) {
+    outputDirectory = "$buildDir/dokka"
+    outputFormat = "html"
 }
