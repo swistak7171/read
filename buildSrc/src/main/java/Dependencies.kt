@@ -152,7 +152,7 @@ object Dependencies {
     }
 
     const val ANDROID_GRADLE_BUILD_TOOLS: String = "com.android.tools.build:gradle:${Versions.ANDROID_STUDIO}"
-    const val KTLINT_GRADLE: String = "org.jlleitschuh.gradle:ktlint-gradle:${Versions.KTLINT}"
+    const val KTLINT: String = "com.pinterest:ktlint:${Versions.KTLINT}"
     const val TIMBER: String = "com.jakewharton.timber:timber:${Versions.TIMBER}"
     const val LEAK_CANARY_ANDROID: String = "com.squareup.leakcanary:leakcanary-android:${Versions.LEAK_CANARY}"
     const val TOASTY: String = "com.github.GrenderG:Toasty:${Versions.TOASTY}"

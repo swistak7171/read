@@ -1,15 +1,22 @@
+import Configuration.BUILD_TOOLS_VERSION
+import Configuration.COMPILE_SDK_VERSION
+import Configuration.MIN_SDK_VERSION
+import org.gradle.api.artifacts.Configuration
+
 plugins {
     id(Plugins.ANDROID_LIBRARY)
     id(Plugins.KOTLIN_ANDROID)
     id(Plugins.KOTLIN_KAPT)
 }
 
+val ktlint: Configuration by configurations.creating
+
 android {
-    compileSdkVersion(Configuration.COMPILE_SDK_VERSION)
-    buildToolsVersion(Configuration.BUILD_TOOLS_VERSION)
+    compileSdkVersion(COMPILE_SDK_VERSION)
+    buildToolsVersion(BUILD_TOOLS_VERSION)
 
     defaultConfig {
-        minSdkVersion(Configuration.MIN_SDK_VERSION)
+        minSdkVersion(MIN_SDK_VERSION)
     }
 
     buildFeatures {
@@ -28,6 +35,8 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+
+    ktlint(Dependencies.KTLINT);
 
     // Kotlin Coroutines
     api(Dependencies.Kotlin.Coroutines.KOTLIN_COROUTINES_CORE)
@@ -59,4 +68,27 @@ dependencies {
 
     // Timber
     api(Dependencies.TIMBER)
+}
+
+val outputDir = "${project.buildDir}/reports/ktlint/"
+val inputFiles = project.fileTree(mapOf("dir" to "src", "include" to "**/*.kt"))
+
+val ktlintCheck by tasks.creating(JavaExec::class) {
+    inputs.files(inputFiles)
+    outputs.dir(outputDir)
+
+    description = "Check Kotlin code style."
+    classpath = ktlint
+    main = "com.pinterest.ktlint.Main"
+    args = listOf("src/**/*.kt")
+}
+
+val ktlintFormat by tasks.creating(JavaExec::class) {
+    inputs.files(inputFiles)
+    outputs.dir(outputDir)
+
+    description = "Fix Kotlin code style deviations."
+    classpath = ktlint
+    main = "com.pinterest.ktlint.Main"
+    args = listOf("-F", "src/**/*.kt")
 }

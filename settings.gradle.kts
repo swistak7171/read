@@ -1,5 +1,6 @@
 include(
     ":app",
-    ":common"
+    ":common",
+    ":data"
 )
 rootProject.name = "read"

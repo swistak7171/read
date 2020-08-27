@@ -31,7 +31,7 @@ object Versions {
     const val ASSENT: String = "3.0.0-RC4"
     const val TOASTY: String = "1.4.2"
     const val GLIDE: String = "4.11.0"
-    const val KTLINT: String = "9.3.0"
+    const val KTLINT: String = "0.38.1"
     const val DOKKA: String = "0.10.1"
     const val ROOMIGRANT: String = "0.1.7"
 }

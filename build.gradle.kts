@@ -1,12 +1,10 @@
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
-    id(Plugins.KTLINT) version (Versions.KTLINT)
     id(Plugins.DOKKA) version (Versions.DOKKA)
 }
 
 buildscript {
-    val kotlin_version by extra("1.4.0")
     repositories {
         google()
         jcenter()
@@ -16,8 +14,7 @@ buildscript {
         classpath(Dependencies.ANDROID_GRADLE_BUILD_TOOLS)
         classpath(Dependencies.Kotlin.KOTLIN_GRADLE_PLUGIN)
         classpath(Dependencies.AndroidX.Navigation.NAVIGATION_SAFE_ARGS_GRADLE_PLUGIN)
-        classpath(Dependencies.KTLINT_GRADLE)
-        "classpath"("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
+        classpath(Dependencies.KTLINT)
     }
 }
 
