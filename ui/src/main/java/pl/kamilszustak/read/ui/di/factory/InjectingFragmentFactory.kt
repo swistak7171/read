@@ -12,8 +12,7 @@ class InjectingFragmentFactory @Inject constructor(
 
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
         val fragmentClass = loadFragmentClass(classLoader, className)
-        val creator = fragments[fragmentClass].also {
-        }
+        val creator = fragments[fragmentClass]
             ?: return super.instantiate(classLoader, className).also {
                 Timber.w("No provider found for class: $className. Using default constructor")
             }
