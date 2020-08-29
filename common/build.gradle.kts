@@ -1,15 +1,13 @@
+
 import Configuration.BUILD_TOOLS_VERSION
 import Configuration.COMPILE_SDK_VERSION
 import Configuration.MIN_SDK_VERSION
-import org.gradle.api.artifacts.Configuration
 
 plugins {
     id(Plugins.ANDROID_LIBRARY)
     id(Plugins.KOTLIN_ANDROID)
     id(Plugins.KOTLIN_KAPT)
 }
-
-val ktlint: Configuration by configurations.creating
 
 android {
     compileSdkVersion(COMPILE_SDK_VERSION)
@@ -35,8 +33,6 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-
-    ktlint(Dependencies.KTLINT)
 
     // Kotlin Coroutines
     api(Dependencies.Kotlin.Coroutines.KOTLIN_COROUTINES_CORE)
@@ -68,27 +64,8 @@ dependencies {
 
     // Timber
     api(Dependencies.TIMBER)
-}
 
-val outputDir = "${project.buildDir}/reports/ktlint/"
-val inputFiles = project.fileTree(mapOf("dir" to "src", "include" to "**/*.kt"))
-
-val ktlintCheck by tasks.creating(JavaExec::class) {
-    inputs.files(inputFiles)
-    outputs.dir(outputDir)
-
-    description = "Check Kotlin code style."
-    classpath = ktlint
-    main = "com.pinterest.ktlint.Main"
-    args = listOf("src/**/*.kt")
-}
-
-val ktlintFormat by tasks.creating(JavaExec::class) {
-    inputs.files(inputFiles)
-    outputs.dir(outputDir)
-
-    description = "Fix Kotlin code style deviations."
-    classpath = ktlint
-    main = "com.pinterest.ktlint.Main"
-    args = listOf("-F", "src/**/*.kt")
+    // Firebase Authentication
+    implementation(Dependencies.Google.Firebase.Authentication.AUTH)
+    implementation(Dependencies.Google.Firebase.Authentication.AUTH_UI)
 }

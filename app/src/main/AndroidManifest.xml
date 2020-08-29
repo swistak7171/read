@@ -12,7 +12,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <activity android:name="pl.kamilszustak.read.ui.activity.authentication.AuthenticationActivity">
+        <activity
+            android:name="pl.kamilszustak.read.ui.activity.authentication.AuthenticationActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

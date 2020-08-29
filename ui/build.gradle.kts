@@ -3,6 +3,7 @@ plugins {
     id(Plugins.KOTLIN_ANDROID)
     id(Plugins.KOTLIN_ANDROID_EXTENSIONS)
     id(Plugins.KOTLIN_KAPT)
+    id(Plugins.GOOGLE_SERVICES)
 }
 
 android {
@@ -30,9 +31,9 @@ android {
     sourceSets {
         getByName("main") {
             res.srcDirs(
-                "src/main/res/layouts/authentication",
-                "src/main/res/layouts",
-                "src/main/res"
+                    "src/main/res/layouts/authentication",
+                    "src/main/res/layouts",
+                    "src/main/res"
             )
         }
     }

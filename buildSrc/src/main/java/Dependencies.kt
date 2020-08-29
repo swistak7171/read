@@ -20,6 +20,17 @@ object Dependencies {
             const val DAGGER_ANDROID_PROCESSOR: String = "com.google.dagger:dagger-android-processor:${Versions.DAGGER}"
             const val DAGGER_COMPILER: String = "com.google.dagger:dagger-compiler:${Versions.DAGGER}"
         }
+
+        object Firebase {
+            object Authentication {
+                const val AUTH: String = "com.google.firebase:firebase-auth-ktx:${Versions.FIREBASE_AUTH}"
+                const val AUTH_UI: String = "com.firebaseui:firebase-ui-auth:${Versions.FIREBASE_AUTH_UI}"
+            }
+        }
+
+        object Gms {
+            const val GOOGLE_SERVICES: String = "com.google.gms:google-services:${Versions.GOOGLE_SERVICES}"
+        }
     }
 
     object AndroidX {
@@ -145,6 +156,10 @@ object Dependencies {
     object Roomigrant {
         const val ROOMIGRANT: String = "com.github.MatrixDev.Roomigrant:RoomigrantLib:${Versions.ROOMIGRANT}"
         const val COMPILER: String = "com.github.MatrixDev.Roomigrant:RoomigrantCompiler:${Versions.ROOMIGRANT}"
+    }
+
+    object Facebook {
+
     }
 
     const val ANDROID_GRADLE_BUILD_TOOLS: String = "com.android.tools.build:gradle:${Versions.ANDROID_STUDIO}"

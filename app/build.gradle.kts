@@ -2,6 +2,7 @@ plugins {
     id(Plugins.ANDROID_APPLICATION)
     id(Plugins.KOTLIN_ANDROID)
     id(Plugins.DOKKA)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -32,13 +33,13 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
         freeCompilerArgs = listOf(
-            "-Xallow-result-return-type",
-            "-XXLanguage:+InlineClasses"
+                "-Xallow-result-return-type",
+                "-XXLanguage:+InlineClasses"
         )
     }
 
     testOptions {
-        tasks.withType<Test>().configureEach {
+        tasks.withType < Test > ().configureEach {
             useJUnitPlatform()
         }
     }
