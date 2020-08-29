@@ -1,8 +1,9 @@
 plugins {
     id(Plugins.ANDROID_APPLICATION)
     id(Plugins.KOTLIN_ANDROID)
+    id(Plugins.KOTLIN_KAPT)
     id(Plugins.DOKKA)
-    id("com.google.gms.google-services")
+    id(Plugins.GOOGLE_SERVICES)
 }
 
 android {
@@ -65,6 +66,12 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":network"))
     implementation(project(":ui"))
+
+    // Dagger
+    api(Dependencies.Google.Dagger.DAGGER_ANDROID)
+    api(Dependencies.Google.Dagger.DAGGER_ANDROID_SUPPORT)
+    kapt(Dependencies.Google.Dagger.DAGGER_ANDROID_PROCESSOR)
+    kapt(Dependencies.Google.Dagger.DAGGER_COMPILER)
 
     // LeakCanary
     debugImplementation(Dependencies.LEAK_CANARY_ANDROID)

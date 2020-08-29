@@ -3,7 +3,6 @@ plugins {
     id(Plugins.KOTLIN_ANDROID)
     id(Plugins.KOTLIN_ANDROID_EXTENSIONS)
     id(Plugins.KOTLIN_KAPT)
-    id(Plugins.GOOGLE_SERVICES)
 }
 
 android {
@@ -121,4 +120,14 @@ dependencies {
     // Glide
     implementation(Dependencies.Glide.GLIDE)
     kapt(Dependencies.Glide.GLIDE_COMPILER)
+
+    // Firebase Authentication
+    implementation(Dependencies.Google.Firebase.Authentication.AUTH)
+    implementation(Dependencies.Google.Firebase.Authentication.AUTH_UI)
+
+    // Facebok Android SDK
+    implementation(Dependencies.FACEBOOK_ANDROID_SDK)
+
+    // Twitter Android SDK
+    implementation(Dependencies.TWITTER_ANDROID_SDK)
 }

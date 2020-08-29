@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import pl.kamilszustak.read.ui.activity.authentication.AuthenticationActivity
 import pl.kamilszustak.read.ui.di.factory.InjectingFragmentFactory
+import pl.kamilszustak.read.ui.di.module.authentication.AuthenticationActivityModule
 import pl.kamilszustak.read.ui.di.scope.ActivityScope
 
 @Module
@@ -16,7 +17,7 @@ interface ActivityModule {
     @ActivityScope
     @ContributesAndroidInjector(
         modules = [
-            //AuthenticationActivityFragmentModule::class
+            AuthenticationActivityModule::class
         ]
     )
     fun contributeAuthenticationActivity(): AuthenticationActivity

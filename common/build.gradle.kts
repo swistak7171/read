@@ -1,4 +1,3 @@
-
 import Configuration.BUILD_TOOLS_VERSION
 import Configuration.COMPILE_SDK_VERSION
 import Configuration.MIN_SDK_VERSION
@@ -64,8 +63,4 @@ dependencies {
 
     // Timber
     api(Dependencies.TIMBER)
-
-    // Firebase Authentication
-    implementation(Dependencies.Google.Firebase.Authentication.AUTH)
-    implementation(Dependencies.Google.Firebase.Authentication.AUTH_UI)
 }

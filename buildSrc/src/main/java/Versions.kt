@@ -36,4 +36,6 @@ object Versions {
     const val FIREBASE_AUTH: String = "19.3.2"
     const val FIREBASE_AUTH_UI: String = "6.3.0"
     const val GOOGLE_SERVICES: String = "4.3.3"
+    const val FACEBOOK_ANDROID_SDK: String = "7.1.0"
+    const val TWITTER_ANDROID_SDK: String = "3.3.0"
 }

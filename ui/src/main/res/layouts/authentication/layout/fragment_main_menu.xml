@@ -4,4 +4,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <com.google.android.gms.common.SignInButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/googleLoginButton"
+        android:layout_margin="16dp" />
+
+    <com.facebook.login.widget.LoginButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/facebookLoginButton"
+        android:layout_margin="16dp" />
+
+    <com.twitter.sdk.android.core.identity.TwitterLoginButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/twitterLoginButton"
+        android:layout_margin="16dp" />
 </LinearLayout>

@@ -3,8 +3,8 @@ package pl.kamilszustak.read.di.component
 import android.app.Application
 import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
-import dagger.android.support.AndroidSupportInjectionModule
 import pl.kamilszustak.read.ReadApplication
 import pl.kamilszustak.read.di.module.ApplicationModule
 import pl.kamilszustak.read.di.module.AssistedInjectModule
@@ -14,7 +14,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
-        AndroidSupportInjectionModule::class,
+        AndroidInjectionModule::class,
         ApplicationModule::class,
         AssistedInjectModule::class,
         ActivityModule::class

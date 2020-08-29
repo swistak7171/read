@@ -158,13 +158,11 @@ object Dependencies {
         const val COMPILER: String = "com.github.MatrixDev.Roomigrant:RoomigrantCompiler:${Versions.ROOMIGRANT}"
     }
 
-    object Facebook {
-
-    }
-
     const val ANDROID_GRADLE_BUILD_TOOLS: String = "com.android.tools.build:gradle:${Versions.ANDROID_STUDIO}"
     const val KTLINT: String = "com.pinterest:ktlint:${Versions.KTLINT}"
     const val TIMBER: String = "com.jakewharton.timber:timber:${Versions.TIMBER}"
     const val LEAK_CANARY_ANDROID: String = "com.squareup.leakcanary:leakcanary-android:${Versions.LEAK_CANARY}"
     const val TOASTY: String = "com.github.GrenderG:Toasty:${Versions.TOASTY}"
+    const val FACEBOOK_ANDROID_SDK: String = "com.facebook.android:facebook-android-sdk:${Versions.FACEBOOK_ANDROID_SDK}"
+    const val TWITTER_ANDROID_SDK: String = "com.twitter.sdk.android:twitter-core:${Versions.TWITTER_ANDROID_SDK}"
 }
