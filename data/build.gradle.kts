@@ -32,6 +32,12 @@ dependencies {
     implementation(project(":common"))
     implementation(project(":network"))
 
+    // Dagger
+    api(Dependencies.Google.Dagger.DAGGER_ANDROID)
+    api(Dependencies.Google.Dagger.DAGGER_ANDROID_SUPPORT)
+    kapt(Dependencies.Google.Dagger.DAGGER_ANDROID_PROCESSOR)
+    kapt(Dependencies.Google.Dagger.DAGGER_COMPILER)
+
     // Room
     implementation(Dependencies.AndroidX.Room.ROOM_KTX)
     implementation(Dependencies.AndroidX.Room.ROOM_RUNTIME)

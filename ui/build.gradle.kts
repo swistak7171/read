@@ -48,6 +48,12 @@ dependencies {
     implementation(project(":common"))
     implementation(project(":domain"))
 
+    // Dagger
+    api(Dependencies.Google.Dagger.DAGGER_ANDROID)
+    api(Dependencies.Google.Dagger.DAGGER_ANDROID_SUPPORT)
+    kapt(Dependencies.Google.Dagger.DAGGER_ANDROID_PROCESSOR)
+    kapt(Dependencies.Google.Dagger.DAGGER_COMPILER)
+
     // Material Components
     implementation(Dependencies.Google.Material.MATERIAL_COMPONENTS)
 

@@ -17,6 +17,12 @@ dependencies {
 
     implementation(project(":common"))
 
+    // Dagger
+    api(Dependencies.Google.Dagger.DAGGER_ANDROID)
+    api(Dependencies.Google.Dagger.DAGGER_ANDROID_SUPPORT)
+    kapt(Dependencies.Google.Dagger.DAGGER_ANDROID_PROCESSOR)
+    kapt(Dependencies.Google.Dagger.DAGGER_COMPILER)
+
     // Retrofit
     api(Dependencies.Retrofit.RETROFIT)
     api(Dependencies.Retrofit.RETROFIT_CONVERTER_MOSHI)
