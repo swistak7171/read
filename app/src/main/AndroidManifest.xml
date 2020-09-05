@@ -13,7 +13,7 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name="pl.kamilszustak.read.ui.activity.authentication.AuthenticationActivity"
+            android:name="pl.kamilszustak.read.ui.AuthenticationActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
             <intent-filter>

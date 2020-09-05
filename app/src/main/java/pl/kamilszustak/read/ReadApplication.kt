@@ -9,8 +9,7 @@ import timber.log.Timber
 
 class ReadApplication : DaggerApplication() {
     val applicationComponent: ApplicationComponent by lazy {
-        val uiComponent = DaggerUiComponent.builder()
-            .build()
+        val uiComponent = DaggerUiComponent.create()
 
         DaggerApplicationComponent.builder()
             .application(this)

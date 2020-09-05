@@ -65,7 +65,7 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":domain"))
     implementation(project(":network"))
-    implementation(project(":ui"))
+    implementation(project(":ui-authentication"))
 
     // Dagger
     api(Dependencies.Google.Dagger.DAGGER_ANDROID)
