@@ -28,7 +28,7 @@ interface ApplicationComponent : AndroidInjector<ReadApplication> {
     @Component.Builder
     interface Builder {
         fun application(@BindsInstance application: Application): Builder
-        fun uiComponent(component: AuthenticationComponent): Builder
+        fun authenticationComponent(component: AuthenticationComponent): Builder
         fun build(): ApplicationComponent
     }
 }

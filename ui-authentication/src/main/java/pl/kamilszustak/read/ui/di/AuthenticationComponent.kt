@@ -2,12 +2,16 @@ package pl.kamilszustak.read.ui.di
 
 import dagger.Component
 import pl.kamilszustak.read.ui.di.module.AuthenticationActivityModule
-import javax.inject.Singleton
+import pl.kamilszustak.ui.di.BaseUiComponent
+import pl.kamilszustak.ui.di.scope.ModuleScope
 
-@Singleton
+@ModuleScope
 @Component(
     modules = [
         AuthenticationActivityModule::class,
+    ],
+    dependencies = [
+        BaseUiComponent::class,
     ]
 )
 interface AuthenticationComponent

@@ -4,16 +4,20 @@ import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import pl.kamilszustak.read.di.ApplicationComponent
 import pl.kamilszustak.read.di.DaggerApplicationComponent
-import pl.kamilszustak.read.ui.di.DaggerUiComponent
+import pl.kamilszustak.read.ui.di.DaggerAuthenticationComponent
+import pl.kamilszustak.ui.di.DaggerBaseUiComponent
 import timber.log.Timber
 
 class ReadApplication : DaggerApplication() {
     val applicationComponent: ApplicationComponent by lazy {
-        val uiComponent = DaggerUiComponent.create()
+        val baseUiComponent = DaggerBaseUiComponent.create()
+        val authenticationComponent = DaggerAuthenticationComponent.builder()
+            .baseUiComponent(baseUiComponent)
+            .build()
 
         DaggerApplicationComponent.builder()
             .application(this)
-            .uiComponent(uiComponent)
+            .authenticationComponent(authenticationComponent)
             .build()
     }
 

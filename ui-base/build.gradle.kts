@@ -35,9 +35,13 @@ androidExtensions {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
+    implementation(project(":common"))
+
     // Dagger
     api(Dependencies.Google.Dagger.DAGGER_ANDROID)
     api(Dependencies.Google.Dagger.DAGGER_ANDROID_SUPPORT)
+    kapt(Dependencies.Google.Dagger.DAGGER_ANDROID_PROCESSOR)
+    kapt(Dependencies.Google.Dagger.DAGGER_COMPILER)
 
     // AppCompat
     implementation(Dependencies.AndroidX.AppCompat.APP_COMPAT)
@@ -98,4 +102,7 @@ dependencies {
     implementation(Dependencies.Anko.ANKO)
     implementation(Dependencies.Anko.ANKO_DESIGN)
     implementation(Dependencies.Anko.ANKO_COMMONS)
+
+    // Timber
+    api(Dependencies.TIMBER)
 }

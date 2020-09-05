@@ -8,7 +8,7 @@ import pl.kamilszustak.ui.di.factory.InjectingFragmentFactory
 import pl.kamilszustak.ui.di.factory.ViewModelFactory
 
 @Module
-interface UiModule {
+interface BaseUiModule {
     @Binds
     fun bindFragmentFactory(factory: InjectingFragmentFactory): FragmentFactory
 
