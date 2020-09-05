@@ -2,14 +2,19 @@ package pl.kamilszustak.read
 
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
-import pl.kamilszustak.read.di.component.ApplicationComponent
-import pl.kamilszustak.read.di.component.DaggerApplicationComponent
+import pl.kamilszustak.read.di.ApplicationComponent
+import pl.kamilszustak.read.di.DaggerApplicationComponent
+import pl.kamilszustak.read.ui.di.DaggerUiComponent
 import timber.log.Timber
 
 class ReadApplication : DaggerApplication() {
     val applicationComponent: ApplicationComponent by lazy {
+        val uiComponent = DaggerUiComponent.builder()
+            .build()
+
         DaggerApplicationComponent.builder()
             .application(this)
+            .uiComponent(uiComponent)
             .build()
     }
 

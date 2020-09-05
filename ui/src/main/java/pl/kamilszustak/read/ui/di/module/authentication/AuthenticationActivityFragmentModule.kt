@@ -7,12 +7,8 @@ import dagger.multibindings.IntoMap
 import pl.kamilszustak.read.ui.activity.authentication.mainmenu.MainMenuFragment
 import pl.kamilszustak.read.ui.di.key.FragmentKey
 
-@Module(
-    includes = [
-        AuthenticationViewModelModule::class
-    ]
-)
-interface AuthenticationActivityModule {
+@Module
+interface AuthenticationActivityFragmentModule {
     @Binds
     @IntoMap
     @FragmentKey(MainMenuFragment::class)

@@ -16,7 +16,6 @@ buildscript {
         classpath(Dependencies.AndroidX.Navigation.NAVIGATION_SAFE_ARGS_GRADLE_PLUGIN)
         classpath(Dependencies.KTLINT)
         classpath(Dependencies.Google.Gms.GOOGLE_SERVICES)
-        "classpath"("com.google.gms:google-services:4.3.3")
     }
 }
 
