@@ -9,7 +9,6 @@ import pl.kamilszustak.read.ReadApplication
 import pl.kamilszustak.read.di.module.ApplicationModule
 import pl.kamilszustak.read.di.module.AssistedInjectModule
 import pl.kamilszustak.read.di.scope.ApplicationScope
-import pl.kamilszustak.read.ui.di.AuthenticationComponent
 
 @ApplicationScope
 @Component(
@@ -19,16 +18,16 @@ import pl.kamilszustak.read.ui.di.AuthenticationComponent
         AssistedInjectModule::class,
     ],
     dependencies = [
-        AuthenticationComponent::class,
+        // AuthenticationComponent::class,
     ]
 )
 interface ApplicationComponent : AndroidInjector<ReadApplication> {
-    val uiComponent: AuthenticationComponent
+    // val uiComponent: AuthenticationComponent
 
     @Component.Builder
     interface Builder {
         fun application(@BindsInstance application: Application): Builder
-        fun authenticationComponent(component: AuthenticationComponent): Builder
+        // fun authenticationComponent(component: AuthenticationComponent): Builder
         fun build(): ApplicationComponent
     }
 }

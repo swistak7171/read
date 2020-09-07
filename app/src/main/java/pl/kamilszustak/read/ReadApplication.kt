@@ -4,25 +4,27 @@ import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import pl.kamilszustak.read.di.ApplicationComponent
 import pl.kamilszustak.read.di.DaggerApplicationComponent
-import pl.kamilszustak.read.ui.di.DaggerAuthenticationComponent
+import pl.kamilszustak.read.ui.di.AuthenticationComponentProvider
 import pl.kamilszustak.ui.di.DaggerBaseUiComponent
 import timber.log.Timber
 
-class ReadApplication : DaggerApplication() {
+class ReadApplication : DaggerApplication(), AuthenticationComponentProvider {
     val applicationComponent: ApplicationComponent by lazy {
-        val baseUiComponent = DaggerBaseUiComponent.create()
-        val authenticationComponent = DaggerAuthenticationComponent.builder()
-            .baseUiComponent(baseUiComponent)
-            .build()
-
         DaggerApplicationComponent.builder()
             .application(this)
-            .authenticationComponent(authenticationComponent)
+            .authenticationComponent(provideAuthenticationComponent())
             .build()
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> =
         applicationComponent
+
+    override fun provideAuthenticationComponent(): AuthenticationComponent {
+        val baseUiComponent = DaggerBaseUiComponent.create()
+        val authenticationComponent = DaggerAuthenticationComponent.builder()
+            .baseUiComponent(baseUiComponent)
+            .build()
+    }
 
     override fun onCreate() {
         super.onCreate()
