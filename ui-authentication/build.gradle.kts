@@ -35,7 +35,7 @@ androidExtensions {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    api(project(":ui-base"))
+    implementation(project(":ui-base"))
     implementation(project(":common"))
     implementation(project(":domain"))
 

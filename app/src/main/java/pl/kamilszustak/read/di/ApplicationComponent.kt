@@ -8,26 +8,26 @@ import dagger.android.AndroidInjector
 import pl.kamilszustak.read.ReadApplication
 import pl.kamilszustak.read.di.module.ApplicationModule
 import pl.kamilszustak.read.di.module.AssistedInjectModule
-import pl.kamilszustak.read.di.scope.ApplicationScope
+import pl.kamilszustak.read.di.module.SubcomponentsModule
+import pl.kamilszustak.read.ui.di.component.AuthenticationComponent
+import javax.inject.Singleton
 
-@ApplicationScope
 @Component(
     modules = [
         AndroidInjectionModule::class,
         ApplicationModule::class,
+        SubcomponentsModule::class,
         AssistedInjectModule::class,
-    ],
-    dependencies = [
-        // AuthenticationComponent::class,
     ]
 )
+@Singleton
 interface ApplicationComponent : AndroidInjector<ReadApplication> {
-    // val uiComponent: AuthenticationComponent
+    fun authenticationComponent(): AuthenticationComponent.Factory
 
     @Component.Builder
     interface Builder {
-        fun application(@BindsInstance application: Application): Builder
-        // fun authenticationComponent(component: AuthenticationComponent): Builder
+        @BindsInstance
+        fun application(application: Application): Builder
         fun build(): ApplicationComponent
     }
 }

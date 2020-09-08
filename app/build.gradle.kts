@@ -65,6 +65,7 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":domain"))
     implementation(project(":network"))
+    implementation(project(":ui-base"))
     implementation(project(":ui-authentication"))
 
     // Dagger

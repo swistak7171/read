@@ -2,8 +2,8 @@ package pl.kamilszustak.read.ui
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentFactory
-import pl.kamilszustak.read.ui.di.AuthenticationComponent
-import pl.kamilszustak.read.ui.di.AuthenticationComponentProvider
+import pl.kamilszustak.read.ui.di.component.AuthenticationComponent
+import pl.kamilszustak.read.ui.di.component.AuthenticationComponentProvider
 import pl.kamilszustak.ui.BaseActivity
 import javax.inject.Inject
 
