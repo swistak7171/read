@@ -1,3 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="email_address_sign_in">Sign in with email address</string>
+    <string name="phone_number_sign_in">Sign in with phone number</string>
+    <string name="google_sign_in">Sign in with Google account</string>
+    <string name="facebook_sign_in">Sign in with Facebook account</string>
+    <string name="twitter_sign_in">Sign in with Twitter account</string>
 </resources>

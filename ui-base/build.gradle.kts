@@ -38,70 +38,70 @@ dependencies {
     implementation(project(":common"))
 
     // Dagger
-    api(Dependencies.Google.Dagger.DAGGER_ANDROID)
-    api(Dependencies.Google.Dagger.DAGGER_ANDROID_SUPPORT)
+    implementation(Dependencies.Google.Dagger.DAGGER_ANDROID)
+    implementation(Dependencies.Google.Dagger.DAGGER_ANDROID_SUPPORT)
     kapt(Dependencies.Google.Dagger.DAGGER_ANDROID_PROCESSOR)
     kapt(Dependencies.Google.Dagger.DAGGER_COMPILER)
 
     // AppCompat
-    implementation(Dependencies.AndroidX.AppCompat.APP_COMPAT)
-    implementation(Dependencies.AndroidX.AppCompat.APP_COMPAT_RESOURCES)
+    api(Dependencies.AndroidX.AppCompat.APP_COMPAT)
+    api(Dependencies.AndroidX.AppCompat.APP_COMPAT_RESOURCES)
 
     // Activity
-    implementation(Dependencies.AndroidX.Activity.ACTIVITY)
-    implementation(Dependencies.AndroidX.Activity.ACTIVITY_KTX)
+    api(Dependencies.AndroidX.Activity.ACTIVITY)
+    api(Dependencies.AndroidX.Activity.ACTIVITY_KTX)
 
     // Fragment
-    implementation(Dependencies.AndroidX.Fragment.FRAGMENT)
-    implementation(Dependencies.AndroidX.Fragment.FRAGMENT_KTX)
+    api(Dependencies.AndroidX.Fragment.FRAGMENT)
+    api(Dependencies.AndroidX.Fragment.FRAGMENT_KTX)
 
     // AppCompat
-    implementation(Dependencies.AndroidX.AppCompat.APP_COMPAT)
-    implementation(Dependencies.AndroidX.AppCompat.APP_COMPAT_RESOURCES)
+    api(Dependencies.AndroidX.AppCompat.APP_COMPAT)
+    api(Dependencies.AndroidX.AppCompat.APP_COMPAT_RESOURCES)
 
     // Lifecycle
-    implementation(Dependencies.AndroidX.Lifecycle.LIFECYCLE_VIEWMODEL_KTX)
-    implementation(Dependencies.AndroidX.Lifecycle.LIFECYCLE_LIVEDATA_KTX)
-    implementation(Dependencies.AndroidX.Lifecycle.LIFECYCLE_RUNTIME_KTX)
-    implementation(Dependencies.AndroidX.Lifecycle.LIFECYCLE_COMMON_JAVA_8)
+    api(Dependencies.AndroidX.Lifecycle.LIFECYCLE_VIEWMODEL_KTX)
+    api(Dependencies.AndroidX.Lifecycle.LIFECYCLE_LIVEDATA_KTX)
+    api(Dependencies.AndroidX.Lifecycle.LIFECYCLE_RUNTIME_KTX)
+    api(Dependencies.AndroidX.Lifecycle.LIFECYCLE_COMMON_JAVA_8)
 
     // Navigation
-    implementation(Dependencies.AndroidX.Navigation.NAVIGATION_FRAGMENT_KTX)
-    implementation(Dependencies.AndroidX.Navigation.NAVIGATION_UI_KTX)
+    api(Dependencies.AndroidX.Navigation.NAVIGATION_FRAGMENT_KTX)
+    api(Dependencies.AndroidX.Navigation.NAVIGATION_UI_KTX)
 
     // Material Components
-    implementation(Dependencies.Google.Material.MATERIAL_COMPONENTS)
+    api(Dependencies.Google.Material.MATERIAL_COMPONENTS)
 
     // Material Dialogs
-    implementation(Dependencies.MaterialDialogs.MATERIAL_DIALOGS_CORE)
-    implementation(Dependencies.MaterialDialogs.MATERIAL_DIALOGS_INPUT)
-    implementation(Dependencies.MaterialDialogs.MATERIAL_DIALOGS_DATETIME)
-    implementation(Dependencies.MaterialDialogs.MATERIAL_DIALOGS_LIFECYCLE)
+    api(Dependencies.MaterialDialogs.MATERIAL_DIALOGS_CORE)
+    api(Dependencies.MaterialDialogs.MATERIAL_DIALOGS_INPUT)
+    api(Dependencies.MaterialDialogs.MATERIAL_DIALOGS_DATETIME)
+    api(Dependencies.MaterialDialogs.MATERIAL_DIALOGS_LIFECYCLE)
 
     // FastAdapter & Materialize
-    implementation(Dependencies.FastAdapter.FAST_ADAPTER)
-    implementation(Dependencies.FastAdapter.FAST_ADAPTER_EXTENSIONS_BINDING)
-    implementation(Dependencies.FastAdapter.FAST_ADAPTER_EXTENSIONS_EXPANDABLE)
-    implementation(Dependencies.FastAdapter.FAST_ADAPTER_EXTENSIONS_DIFF)
-    implementation(Dependencies.FastAdapter.FAST_ADAPTER_EXTENSIONS_DRAG)
-    implementation(Dependencies.FastAdapter.FAST_ADAPTER_EXTENSIONS_PAGED)
-    implementation(Dependencies.FastAdapter.FAST_ADAPTER_EXTENSIONS_SCROLL)
-    implementation(Dependencies.FastAdapter.FAST_ADAPTER_EXTENSIONS_SWIPE)
-    implementation(Dependencies.FastAdapter.FAST_ADAPTER_EXTENSIONS_UI)
-    implementation(Dependencies.FastAdapter.FAST_ADAPTER_EXTENSIONS_UTILS)
-    implementation(Dependencies.FastAdapter.MATERIALIZE)
+    api(Dependencies.FastAdapter.FAST_ADAPTER)
+    api(Dependencies.FastAdapter.FAST_ADAPTER_EXTENSIONS_BINDING)
+    api(Dependencies.FastAdapter.FAST_ADAPTER_EXTENSIONS_EXPANDABLE)
+    api(Dependencies.FastAdapter.FAST_ADAPTER_EXTENSIONS_DIFF)
+    api(Dependencies.FastAdapter.FAST_ADAPTER_EXTENSIONS_DRAG)
+    api(Dependencies.FastAdapter.FAST_ADAPTER_EXTENSIONS_PAGED)
+    api(Dependencies.FastAdapter.FAST_ADAPTER_EXTENSIONS_SCROLL)
+    api(Dependencies.FastAdapter.FAST_ADAPTER_EXTENSIONS_SWIPE)
+    api(Dependencies.FastAdapter.FAST_ADAPTER_EXTENSIONS_UI)
+    api(Dependencies.FastAdapter.FAST_ADAPTER_EXTENSIONS_UTILS)
+    api(Dependencies.FastAdapter.MATERIALIZE)
 
     // Assent
-    implementation(Dependencies.Assent.ASSENT_CORE)
-    implementation(Dependencies.Assent.ASSENT_COROUTINES)
+    api(Dependencies.Assent.ASSENT_CORE)
+    api(Dependencies.Assent.ASSENT_COROUTINES)
 
     // Toasty
-    implementation(Dependencies.TOASTY)
+    api(Dependencies.TOASTY)
 
     // Anko
-    implementation(Dependencies.Anko.ANKO)
-    implementation(Dependencies.Anko.ANKO_DESIGN)
-    implementation(Dependencies.Anko.ANKO_COMMONS)
+    api(Dependencies.Anko.ANKO)
+    api(Dependencies.Anko.ANKO_DESIGN)
+    api(Dependencies.Anko.ANKO_COMMONS)
 
     // Timber
     api(Dependencies.TIMBER)

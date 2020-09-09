@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="email_address_sign_in">Zaloguj się za pomocą adres email</string>
+    <string name="phone_number_sign_in">Zaloguj się za pomocą numeru telefonu</string>
+    <string name="google_sign_in">Zaloguj się za pomocą konta Google</string>
+    <string name="facebook_sign_in">Zaloguj się za pomocą konta Facebook</string>
+    <string name="twitter_sign_in">Zaloguj się za pomocą konta Twitter</string>
+</resources>

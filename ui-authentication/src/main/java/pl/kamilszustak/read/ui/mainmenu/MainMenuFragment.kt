@@ -1,5 +1,7 @@
 package pl.kamilszustak.read.ui.mainmenu
 
+import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import pl.kamilszustak.read.ui.R
 import pl.kamilszustak.read.ui.databinding.FragmentMainMenuBinding
@@ -14,4 +16,8 @@ class MainMenuFragment @Inject constructor(
 
     override val binding: FragmentMainMenuBinding by viewBinding(FragmentMainMenuBinding::bind)
     override val viewModel: MainMenuViewModel by viewModels(viewModelFactory)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
 }

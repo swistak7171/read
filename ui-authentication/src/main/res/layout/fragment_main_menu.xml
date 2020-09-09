@@ -5,9 +5,42 @@
     android:orientation="vertical"
     android:padding="@dimen/default_padding">
 
-    <com.google.android.gms.common.SignInButton
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/applicationNameTextView"
+        android:text="@string/app_name"
+        android:textSize="32sp"
+        android:gravity="center"
+        android:fontFamily="sans-serif-light" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/emailAddressSignInButton"
+        style="@style/FirebaseUI.Button.AccountChooser.EmailButton" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/phoneNumberSignInButton"
+        style="@style/FirebaseUI.Button.AccountChooser.PhoneButton" />
+
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/googleSignInButton"
         style="@style/FirebaseUI.Button.AccountChooser.GoogleButton" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/facebookSignInButton"
+        style="@style/FirebaseUI.Button.AccountChooser.FacebookButton" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/twitterSignInButton"
+        style="@style/FirebaseUI.Button.AccountChooser.TwitterButton" />
 </LinearLayout>
