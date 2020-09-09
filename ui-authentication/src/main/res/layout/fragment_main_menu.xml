@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -18,29 +19,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/emailAddressSignInButton"
-        style="@style/FirebaseUI.Button.AccountChooser.EmailButton" />
+        android:text="@string/email_address_sign_in"
+        style="@style/Authentication.Button.EmailAddress"
+        android:layout_marginTop="@dimen/default_margin"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/phoneNumberSignInButton"
-        style="@style/FirebaseUI.Button.AccountChooser.PhoneButton" />
+        android:text="@string/phone_number_sign_in"
+        style="@style/Authentication.Button.PhoneNumber"
+        android:layout_marginTop="@dimen/default_margin"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/googleSignInButton"
-        style="@style/FirebaseUI.Button.AccountChooser.GoogleButton" />
+        android:text="@string/google_account_sign_in"
+        style="@style/Authentication.Button.GoogleAccount"
+        android:layout_marginTop="@dimen/default_margin" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/facebookSignInButton"
-        style="@style/FirebaseUI.Button.AccountChooser.FacebookButton" />
+        android:text="@string/facebook_account_sign_in"
+        style="@style/Authentication.Button.FacebookAccount"
+        android:layout_marginTop="@dimen/default_margin" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/twitterSignInButton"
-        style="@style/FirebaseUI.Button.AccountChooser.TwitterButton" />
+        android:text="@string/twitter_account_sign_in"
+        style="@style/Authentication.Button.TwitterAccount"
+        android:layout_marginTop="@dimen/default_margin" />
 </LinearLayout>
