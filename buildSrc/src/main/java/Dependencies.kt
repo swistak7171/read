@@ -23,7 +23,7 @@ object Dependencies {
 
         object Firebase {
             object Authentication {
-                const val AUTH: String = "com.google.firebase:firebase-auth-ktx:${Versions.FIREBASE_AUTH}"
+                const val AUTH_KTX: String = "com.google.firebase:firebase-auth-ktx:${Versions.FIREBASE_AUTH}"
                 const val AUTH_UI: String = "com.firebaseui:firebase-ui-auth:${Versions.FIREBASE_AUTH_UI}"
             }
         }

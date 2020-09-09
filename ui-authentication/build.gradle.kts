@@ -63,7 +63,7 @@ dependencies {
     kapt(Dependencies.Glide.GLIDE_COMPILER)
 
     // Firebase Authentication
-    implementation(Dependencies.Google.Firebase.Authentication.AUTH)
+    implementation(Dependencies.Google.Firebase.Authentication.AUTH_KTX)
     implementation(Dependencies.Google.Firebase.Authentication.AUTH_UI)
 
     // Facebok Android SDK
