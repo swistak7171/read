@@ -2,6 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
+            name="dupa"
+            type="java.lang.String" />
+
+        <variable
             name="viewModel"
             type="pl.kamilszustak.read.ui.signin.email.EmailSignInViewModel" />
     </data>
