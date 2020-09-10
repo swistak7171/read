@@ -34,13 +34,13 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
         freeCompilerArgs = listOf(
-                "-Xallow-result-return-type",
-                "-XXLanguage:+InlineClasses"
+            "-Xallow-result-return-type",
+            "-XXLanguage:+InlineClasses"
         )
     }
 
     testOptions {
-        tasks.withType < Test > ().configureEach {
+        tasks.withType<Test>().configureEach {
             useJUnitPlatform()
         }
     }
@@ -56,6 +56,11 @@ android {
         exclude("META-INF/ASL2.0")
         exclude("META-INF/*.kotlin_module")
     }
+
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -69,8 +74,8 @@ dependencies {
     implementation(project(":ui-authentication"))
 
     // Dagger
-    api(Dependencies.Google.Dagger.DAGGER_ANDROID)
-    api(Dependencies.Google.Dagger.DAGGER_ANDROID_SUPPORT)
+    implementation(Dependencies.Google.Dagger.DAGGER_ANDROID)
+    implementation(Dependencies.Google.Dagger.DAGGER_ANDROID_SUPPORT)
     kapt(Dependencies.Google.Dagger.DAGGER_ANDROID_PROCESSOR)
     kapt(Dependencies.Google.Dagger.DAGGER_COMPILER)
 

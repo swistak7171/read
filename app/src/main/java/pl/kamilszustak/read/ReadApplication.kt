@@ -4,8 +4,8 @@ import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import pl.kamilszustak.read.di.ApplicationComponent
 import pl.kamilszustak.read.di.DaggerApplicationComponent
-import pl.kamilszustak.read.ui.di.component.AuthenticationComponent
-import pl.kamilszustak.read.ui.di.component.AuthenticationComponentProvider
+import pl.kamilszustak.read.ui.authentication.di.component.AuthenticationComponent
+import pl.kamilszustak.read.ui.authentication.di.component.AuthenticationComponentProvider
 import timber.log.Timber
 
 class ReadApplication : DaggerApplication(), AuthenticationComponentProvider {

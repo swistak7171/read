@@ -9,7 +9,7 @@ import pl.kamilszustak.read.ReadApplication
 import pl.kamilszustak.read.di.module.ApplicationModule
 import pl.kamilszustak.read.di.module.AssistedInjectModule
 import pl.kamilszustak.read.di.module.SubcomponentsModule
-import pl.kamilszustak.read.ui.di.component.AuthenticationComponent
+import pl.kamilszustak.read.ui.authentication.di.component.AuthenticationComponent
 import javax.inject.Singleton
 
 @Component(

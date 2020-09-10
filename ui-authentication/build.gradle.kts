@@ -14,11 +14,6 @@ android {
         minSdkVersion(Configuration.MIN_SDK_VERSION)
     }
 
-    buildFeatures {
-        viewBinding = true
-        dataBinding = true
-    }
-
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -26,6 +21,11 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
     }
 }
 

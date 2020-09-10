@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="choose_sign_in_option">Choose sign in option</string>
+    <string name="email_address_sign_in">Sign in with email address</string>
+    <string name="phone_number_sign_in">Sign in with phone number</string>
+    <string name="google_account_sign_in">Sign in with Google account</string>
+    <string name="facebook_account_sign_in">Sign in with Facebook account</string>
+    <string name="twitter_account_sign_in">Sign in with Twitter account</string>
+</resources>

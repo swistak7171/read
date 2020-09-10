@@ -16,10 +16,6 @@ android {
         minSdkVersion(MIN_SDK_VERSION)
     }
 
-    buildFeatures {
-        dataBinding = true
-    }
-
     kotlinOptions {
         jvmTarget = "1.8"
     }
