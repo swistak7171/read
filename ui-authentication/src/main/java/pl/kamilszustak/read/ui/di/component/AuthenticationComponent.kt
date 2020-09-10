@@ -6,7 +6,7 @@ import pl.kamilszustak.read.ui.di.module.AuthenticationActivityModule
 import pl.kamilszustak.read.ui.di.module.authentication.AuthenticationFragmentModule
 import pl.kamilszustak.read.ui.di.module.authentication.AuthenticationViewModelModule
 import pl.kamilszustak.read.ui.di.scope.AuthenticationScope
-import pl.kamilszustak.ui.di.module.BaseUiModule
+import pl.kamilszustak.read.ui.di.module.BaseUiModule
 
 @Subcomponent(
     modules = [

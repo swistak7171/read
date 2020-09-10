@@ -5,7 +5,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import pl.kamilszustak.read.ui.mainmenu.MainMenuViewModel
-import pl.kamilszustak.ui.di.key.ViewModelKey
+import pl.kamilszustak.read.ui.di.key.ViewModelKey
 
 @Module
 interface AuthenticationViewModelModule {

@@ -5,7 +5,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import pl.kamilszustak.read.ui.mainmenu.MainMenuFragment
-import pl.kamilszustak.ui.di.key.FragmentKey
+import pl.kamilszustak.read.ui.di.key.FragmentKey
 
 @Module
 interface AuthenticationFragmentModule {

@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.fragment.app.FragmentFactory
 import pl.kamilszustak.read.ui.di.component.AuthenticationComponent
 import pl.kamilszustak.read.ui.di.component.AuthenticationComponentProvider
-import pl.kamilszustak.ui.BaseActivity
 import javax.inject.Inject
 
 class AuthenticationActivity : BaseActivity(R.layout.activity_authentication) {

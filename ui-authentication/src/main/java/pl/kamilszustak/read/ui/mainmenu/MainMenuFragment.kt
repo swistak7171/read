@@ -5,9 +5,10 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import pl.kamilszustak.read.ui.R
 import pl.kamilszustak.read.ui.databinding.FragmentMainMenuBinding
-import pl.kamilszustak.ui.BaseFragment
-import pl.kamilszustak.ui.binding.viewBinding
-import pl.kamilszustak.ui.util.viewModels
+import pl.kamilszustak.read.ui.BaseFragment
+import pl.kamilszustak.read.ui.binding.viewBinding
+import pl.kamilszustak.read.ui.util.navigateTo
+import pl.kamilszustak.read.ui.util.viewModels
 import javax.inject.Inject
 
 class MainMenuFragment @Inject constructor(
@@ -19,5 +20,14 @@ class MainMenuFragment @Inject constructor(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setListeners()
+    }
+
+    private fun setListeners() {
+        binding.emailAddressSignInButton.setOnClickListener {
+            val direction = MainMenuFragmentDirections.actionMainMenuFragmentToEmailSignInFragment()
+            navigateTo(direction)
+        }
     }
 }

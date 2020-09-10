@@ -3,6 +3,7 @@ plugins {
     id(Plugins.KOTLIN_ANDROID)
     id(Plugins.KOTLIN_ANDROID_EXTENSIONS)
     id(Plugins.KOTLIN_KAPT)
+    id(Plugins.NAVIGATION_SAFE_ARGS_KOTLIN)
 }
 
 android {

@@ -8,6 +8,15 @@
     <fragment
         android:id="@+id/mainMenuFragment"
         android:name="pl.kamilszustak.read.ui.mainmenu.MainMenuFragment"
-        android:label="MainMenuFragment"
-        tools:layout="@layout/fragment_main_menu" />
+        android:label="@string/choose_sign_in_option"
+        tools:layout="@layout/fragment_main_menu" >
+        <action
+            android:id="@+id/action_mainMenuFragment_to_emailSignInFragment"
+            app:destination="@id/emailSignInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/emailSignInFragment"
+        android:name="pl.kamilszustak.read.ui.signin.email.EmailSignInFragment"
+        android:label="@string/email_address_sign_in"
+        tools:layout="@layout/fragment_email_sign_in" />
 </navigation>
