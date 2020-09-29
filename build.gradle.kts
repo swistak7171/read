@@ -25,6 +25,7 @@ allprojects {
         jcenter()
         maven(Repositories.GRADLE_PLUGINS_M2)
         maven(Repositories.JITPACK)
+        maven(Repositories.MOKO)
     }
 }
 

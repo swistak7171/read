@@ -14,7 +14,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:hint="@string/email_address">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -27,6 +28,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/password"
             android:layout_marginTop="@dimen/default_margin">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -40,14 +42,22 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/confirm_password"
             android:layout_marginTop="@dimen/default_margin">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/retypedPasswordEditText"
-                android:text="@={viewModel.retypedUserPassword}"
+                android:id="@+id/confirmedPasswordEditText"
+                android:text="@={viewModel.confirmedUserPassword}"
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/signInButton"
+            android:text="@string/sign_in"
+            android:layout_marginTop="@dimen/default_margin" />
     </LinearLayout>
 </layout>

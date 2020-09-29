@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="sign_in">Zaloguj się</string>
+
     <string name="choose_sign_in_option">Wybierz sposób logowania</string>
     <string name="email_address_sign_in">Zaloguj się za pomocą adres email</string>
     <string name="phone_number_sign_in">Zaloguj się za pomocą numeru telefonu</string>
     <string name="google_account_sign_in">Zaloguj się za pomocą konta Google</string>
     <string name="facebook_account_sign_in">Zaloguj się za pomocą konta Facebook</string>
     <string name="twitter_account_sign_in">Zaloguj się za pomocą konta Twitter</string>
+
+    <string name="email_address">Adres email</string>
+    <string name="password">Hasło</string>
+    <string name="confirm_password">Potwierdź hasło</string>
 </resources>
