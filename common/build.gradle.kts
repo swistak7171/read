@@ -30,8 +30,9 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     // Kotlin Coroutines
-    api(Dependencies.Kotlin.Coroutines.KOTLIN_COROUTINES_CORE)
-    api(Dependencies.Kotlin.Coroutines.KOTLIN_COROUTINES_ANDROID)
+    api(Dependencies.Kotlin.Coroutines.KOTLINX_COROUTINES_CORE)
+    api(Dependencies.Kotlin.Coroutines.KOTLINX_COROUTINES_ANDROID)
+    api(Dependencies.Kotlin.Coroutines.KOTLINX_COROUTINES_PLAY_SERVICES)
 
     // Lifecycle
     implementation(Dependencies.AndroidX.Lifecycle.LIFECYCLE_LIVEDATA_KTX)

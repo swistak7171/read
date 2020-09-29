@@ -4,4 +4,5 @@ import pl.kamilszustak.read.ui.base.view.State
 
 sealed class EmailSignInState : State {
     object Authenticated : EmailSignInState()
+    data class Error(val stringResourceId: Int) : EmailSignInState()
 }

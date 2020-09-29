@@ -13,4 +13,8 @@ abstract class BaseViewModel<E : Event, S : State> : ViewModel() {
         get() = _state
 
     abstract fun handleEvent(event: E)
+
+    protected fun setState(state: S) {
+        _state.value = state
+    }
 }

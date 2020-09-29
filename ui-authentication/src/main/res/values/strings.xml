@@ -12,4 +12,7 @@
     <string name="email_address">Email address</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm password</string>
+    <string name="invalid_email_address">Invalid email address</string>
+    <string name="invalid_password">Invalid password</string>
+    <string name="not_equal_passwords">Not equal passwords</string>
 </resources>

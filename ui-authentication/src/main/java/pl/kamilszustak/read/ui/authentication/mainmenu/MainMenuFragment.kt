@@ -2,6 +2,7 @@ package pl.kamilszustak.read.ui.authentication.mainmenu
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
 import pl.kamilszustak.read.ui.authentication.R
@@ -22,12 +23,23 @@ class MainMenuFragment @Inject constructor(
         super.onViewCreated(view, savedInstanceState)
 
         setListeners()
+        observeViewModel()
     }
 
     private fun setListeners() {
         binding.emailAddressSignInButton.setOnClickListener {
-            val direction = MainMenuFragmentDirections.actionMainMenuFragmentToEmailSignInFragment()
-            navigateTo(direction)
+            viewModel.handleEvent(MainMenuEvent.OnEmailSignInButtonClicked)
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.state.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                MainMenuState.EmailAuthentication -> {
+                    val direction = MainMenuFragmentDirections.actionMainMenuFragmentToEmailSignInFragment()
+                    navigateTo(direction)
+                }
+            }
         }
     }
 }

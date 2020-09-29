@@ -4,8 +4,9 @@ object Dependencies {
         const val KOTLIN_GRADLE_PLUGIN: String = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.KOTLIN}"
 
         object Coroutines {
-            const val KOTLIN_COROUTINES_CORE: String = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.KOTLIN_COROUTINES}"
-            const val KOTLIN_COROUTINES_ANDROID: String = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.KOTLIN_COROUTINES}"
+            const val KOTLINX_COROUTINES_CORE: String = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.KOTLINX_COROUTINES}"
+            const val KOTLINX_COROUTINES_ANDROID: String = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.KOTLINX_COROUTINES}"
+            const val KOTLINX_COROUTINES_PLAY_SERVICES: String = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${Versions.KOTLINX_COROUTINES}"
         }
     }
 
