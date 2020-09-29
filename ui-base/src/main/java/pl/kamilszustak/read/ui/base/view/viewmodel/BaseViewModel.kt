@@ -8,13 +8,9 @@ import pl.kamilszustak.read.ui.base.view.Event
 import pl.kamilszustak.read.ui.base.view.State
 
 abstract class BaseViewModel<E : Event, S : State> : ViewModel() {
-    protected val _state: UniqueLiveData<S> = UniqueLiveData()
+    protected val _state: SingleLiveData<S> = SingleLiveData()
     val state: LiveData<S>
         get() = _state
 
     abstract fun handleEvent(event: E)
-
-    protected fun setState(state: S) {
-        _state.value = state
-    }
 }

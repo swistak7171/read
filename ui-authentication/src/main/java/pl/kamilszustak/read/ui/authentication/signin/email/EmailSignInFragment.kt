@@ -8,6 +8,7 @@ import com.google.firebase.ktx.Firebase
 import pl.kamilszustak.read.ui.authentication.AuthenticationDataBindingFragment
 import pl.kamilszustak.read.ui.authentication.R
 import pl.kamilszustak.read.ui.authentication.databinding.FragmentEmailSignInBinding
+import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.viewModels
 import javax.inject.Inject
 
@@ -21,11 +22,20 @@ class EmailSignInFragment @Inject constructor(
         super.onViewCreated(view, savedInstanceState)
 
         setListeners()
+        observeViewModel()
     }
 
     private fun setListeners() {
         binding.signInButton.setOnClickListener {
             viewModel.handleEvent(EmailSignInEvent.OnSignInButtonClicked)
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.state.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is EmailSignInState.Error -> errorToast(state.stringResourceId)
+            }
         }
     }
 }

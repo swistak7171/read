@@ -15,4 +15,5 @@
     <string name="invalid_email_address">Invalid email address</string>
     <string name="invalid_password">Invalid password</string>
     <string name="not_equal_passwords">Not equal passwords</string>
+    <string name="user_with_email_exists">User with this email already exists</string>
 </resources>

@@ -15,4 +15,5 @@
     <string name="invalid_email_address">Nieprawidłowy adres email</string>
     <string name="invalid_password">Nieprawidłowe hasło</string>
     <string name="not_equal_passwords">Nieidentyczne hasła</string>
+    <string name="user_with_email_exists">Użytkownik z tym adresem email już istnieje</string>
 </resources>

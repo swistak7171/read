@@ -2,6 +2,9 @@ package pl.kamilszustak.read.ui.authentication.signin.email
 
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import pl.kamilszustak.read.common.form.FormValidator
@@ -46,9 +49,20 @@ class EmailSignInViewModel @Inject constructor(
             return
         }
 
-        viewModelScope.launch {
-            val result = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
-            Timber.i(result.user.toString())
+        viewModelScope.launch(Dispatchers.IO) {
+            var result = try {
+                firebaseAuth.createUserWithEmailAndPassword(email, password).await()
+            } catch (exception: FirebaseAuthUserCollisionException) {
+                val errorState = EmailSignInState.Error(R.string.user_with_email_exists)
+                _state.postValue(errorState)
+                null
+            }
+
+            if (result == null) {
+                result = firebaseAuth.signInWithEmailAndPassword(email, password).await()
+            }
+
+            Timber.i(result.toString())
         }
     }
 }
