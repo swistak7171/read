@@ -66,12 +66,12 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    implementation(project(":common"))
-    implementation(project(":data"))
-    implementation(project(":domain"))
-    implementation(project(":network"))
-    implementation(project(":ui-base"))
-    implementation(project(":ui-authentication"))
+    implementation(project(Modules.COMMON))
+    implementation(project(Modules.DATA))
+    implementation(project(Modules.DOMAIN))
+    implementation(project(Modules.NETWORK))
+    implementation(project(Modules.UI_BASE))
+    implementation(project(Modules.UI_AUTHENTICATION))
 
     // Dagger
     implementation(Dependencies.Google.Dagger.DAGGER_ANDROID)

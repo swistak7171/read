@@ -15,7 +15,7 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    implementation(project(":common"))
+    implementation(project(Modules.COMMON))
 
     // Dagger
     api(Dependencies.Google.Dagger.DAGGER_ANDROID)

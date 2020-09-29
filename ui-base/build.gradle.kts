@@ -35,7 +35,7 @@ androidExtensions {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    implementation(project(":common"))
+    implementation(project(Modules.COMMON))
 
     // Dagger
     implementation(Dependencies.Google.Dagger.DAGGER_ANDROID)
