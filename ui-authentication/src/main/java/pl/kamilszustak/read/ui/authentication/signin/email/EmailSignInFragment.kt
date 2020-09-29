@@ -3,6 +3,8 @@ package pl.kamilszustak.read.ui.authentication.signin.email
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import pl.kamilszustak.read.ui.authentication.AuthenticationDataBindingFragment
 import pl.kamilszustak.read.ui.authentication.R
 import pl.kamilszustak.read.ui.authentication.databinding.FragmentEmailSignInBinding
@@ -17,5 +19,13 @@ class EmailSignInFragment @Inject constructor(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setListeners()
+    }
+
+    private fun setListeners() {
+        binding.signInButton.setOnClickListener {
+            viewModel.handleEvent(EmailSignInEvent.OnSignInButtonClicked)
+        }
     }
 }

@@ -1,4 +1,4 @@
-package pl.kamilszustak.read.ui.base
+package pl.kamilszustak.read.ui.base.view.fragment
 
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment

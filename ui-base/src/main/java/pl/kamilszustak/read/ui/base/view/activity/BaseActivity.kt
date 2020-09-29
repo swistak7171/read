@@ -1,4 +1,4 @@
-package pl.kamilszustak.read.ui.base
+package pl.kamilszustak.read.ui.base.view.activity
 
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity

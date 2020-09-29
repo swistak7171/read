@@ -47,6 +47,9 @@ dependencies {
     // WorkManager
     api(Dependencies.AndroidX.Work.WORK_RUNTIME_KTX)
 
+    // Firebase Authentication
+    api(Dependencies.Google.Firebase.Authentication.AUTH_KTX)
+
     // Dagger
     api(Dependencies.Google.Dagger.DAGGER_ANDROID)
     api(Dependencies.Google.Dagger.DAGGER_ANDROID_SUPPORT)

@@ -3,7 +3,7 @@ package pl.kamilszustak.read.ui.authentication.mainmenu
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import pl.kamilszustak.read.ui.base.BaseFragment
+import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
 import pl.kamilszustak.read.ui.authentication.R
 import pl.kamilszustak.read.ui.authentication.databinding.FragmentMainMenuBinding
 import pl.kamilszustak.read.ui.base.binding.viewBinding

@@ -1,4 +1,4 @@
-package pl.kamilszustak.read.ui.base
+package pl.kamilszustak.read.ui.base.view.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ViewModel
 
 abstract class DataBindingFragment<DB : ViewDataBinding, VM : ViewModel>(
