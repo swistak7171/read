@@ -7,6 +7,7 @@ class MainMenuViewModel @Inject constructor(): BaseViewModel<MainMenuEvent, Main
     override fun handleEvent(event: MainMenuEvent) {
         _state.value = when (event) {
             MainMenuEvent.OnEmailSignInButtonClicked -> MainMenuState.EmailAuthentication
+            MainMenuEvent.OnPhoneSignInButtonClicked -> MainMenuState.PhoneAuthentication
         }
     }
 }

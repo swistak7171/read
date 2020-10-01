@@ -13,10 +13,19 @@
         <action
             android:id="@+id/action_mainMenuFragment_to_emailSignInFragment"
             app:destination="@id/emailSignInFragment" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_phoneSignInFragment"
+            app:destination="@id/phoneSignInFragment" />
     </fragment>
     <fragment
         android:id="@+id/emailSignInFragment"
         android:name="pl.kamilszustak.read.ui.authentication.signin.email.EmailSignInFragment"
         android:label="@string/email_address_sign_in"
         tools:layout="@layout/fragment_email_sign_in" />
+
+    <fragment
+        android:id="@+id/phoneSignInFragment"
+        android:name="pl.kamilszustak.read.ui.authentication.signin.phone.PhoneSignInFragment"
+        android:label="@string/phone_number_sign_in"
+        tools:layout="@layout/fragment_phone_sign_in" />
 </navigation>

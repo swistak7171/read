@@ -4,4 +4,5 @@ import pl.kamilszustak.read.ui.base.view.State
 
 sealed class MainMenuState : State {
     object EmailAuthentication : MainMenuState()
+    object PhoneAuthentication : MainMenuState()
 }

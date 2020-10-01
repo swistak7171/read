@@ -2,14 +2,13 @@ package pl.kamilszustak.read.ui.authentication.mainmenu
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
 import pl.kamilszustak.read.ui.authentication.R
 import pl.kamilszustak.read.ui.authentication.databinding.FragmentMainMenuBinding
 import pl.kamilszustak.read.ui.base.binding.viewBinding
 import pl.kamilszustak.read.ui.base.util.navigateTo
 import pl.kamilszustak.read.ui.base.util.viewModels
+import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
 import javax.inject.Inject
 
 class MainMenuFragment @Inject constructor(
@@ -30,6 +29,10 @@ class MainMenuFragment @Inject constructor(
         binding.emailAddressSignInButton.setOnClickListener {
             viewModel.handleEvent(MainMenuEvent.OnEmailSignInButtonClicked)
         }
+
+        binding.phoneNumberSignInButton.setOnClickListener {
+            viewModel.handleEvent(MainMenuEvent.OnPhoneSignInButtonClicked)
+        }
     }
 
     private fun observeViewModel() {
@@ -37,6 +40,11 @@ class MainMenuFragment @Inject constructor(
             when (state) {
                 MainMenuState.EmailAuthentication -> {
                     val direction = MainMenuFragmentDirections.actionMainMenuFragmentToEmailSignInFragment()
+                    navigateTo(direction)
+                }
+
+                MainMenuState.PhoneAuthentication -> {
+                    val direction = MainMenuFragmentDirections.actionMainMenuFragmentToPhoneSignInFragment()
                     navigateTo(direction)
                 }
             }

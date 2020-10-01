@@ -24,5 +24,12 @@
                 android:text="@={viewModel.phoneNumber}"
                 android:inputType="phone" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/signInButton"
+            android:text="@string/sign_in"
+            android:layout_marginTop="@dimen/default_margin" />
     </LinearLayout>
 </layout>
