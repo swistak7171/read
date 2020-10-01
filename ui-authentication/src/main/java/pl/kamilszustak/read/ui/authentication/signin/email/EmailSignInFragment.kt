@@ -3,8 +3,6 @@ package pl.kamilszustak.read.ui.authentication.signin.email
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import pl.kamilszustak.read.ui.authentication.AuthenticationDataBindingFragment
 import pl.kamilszustak.read.ui.authentication.R
 import pl.kamilszustak.read.ui.authentication.databinding.FragmentEmailSignInBinding
@@ -34,7 +32,7 @@ class EmailSignInFragment @Inject constructor(
     private fun observeViewModel() {
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when (state) {
-                is EmailSignInState.Error -> errorToast(state.stringResourceId)
+                is EmailSignInState.Error -> errorToast(state.messageResourceId)
             }
         }
     }
