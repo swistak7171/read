@@ -15,7 +15,7 @@ class PhoneSignInViewModel @Inject constructor(
     override fun handleEvent(event: PhoneSignInEvent) {
         val number = phoneNumber.value
 
-        if (number.isNullOrBlank()) {
+        if (number.isNullOrBlank() || !formValidator.validatePhoneAddress(number)) {
             _state.value = PhoneSignInState.Error(R.string.invalid_phone_number)
             return
         }

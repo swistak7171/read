@@ -17,7 +17,6 @@ object Dependencies {
 
         object Dagger {
             const val DAGGER_ANDROID: String = "com.google.dagger:dagger-android:${Versions.DAGGER}"
-            const val DAGGER_ANDROID_SUPPORT: String = "com.google.dagger:dagger-android-support:${Versions.DAGGER}"
             const val DAGGER_ANDROID_PROCESSOR: String = "com.google.dagger:dagger-android-processor:${Versions.DAGGER}"
             const val DAGGER_COMPILER: String = "com.google.dagger:dagger-compiler:${Versions.DAGGER}"
         }
