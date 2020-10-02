@@ -8,6 +8,7 @@ import pl.kamilszustak.read.ui.authentication.R
 import pl.kamilszustak.read.ui.authentication.databinding.FragmentPhoneSignInBinding
 import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.viewModels
+import timber.log.Timber
 import javax.inject.Inject
 
 class PhoneSignInFragment @Inject constructor(
@@ -24,6 +25,10 @@ class PhoneSignInFragment @Inject constructor(
     }
 
     private fun setListeners() {
+        binding.countryCodeEditText.setOnClickListener {
+            viewModel.handleEvent(PhoneSignInEvent.OnCountryEditTextClicked)
+        }
+
         binding.signInButton.setOnClickListener {
             viewModel.handleEvent(PhoneSignInEvent.OnSignInButtonClicked)
         }
@@ -32,6 +37,10 @@ class PhoneSignInFragment @Inject constructor(
     private fun observeViewModel() {
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when (state) {
+                is PhoneSignInState.CountryPickerOpened -> {
+                    Timber.i(state.countries.toString())
+                }
+
                 is PhoneSignInState.Error -> {
                     errorToast(state.messageResourceId)
                 }

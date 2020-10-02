@@ -39,6 +39,7 @@ dependencies {
     implementation(project(Modules.UI_BASE))
     implementation(project(Modules.COMMON))
     implementation(project(Modules.DOMAIN))
+    implementation(project(Modules.DATA))
 
     // Dagger
     api(Dependencies.Google.Dagger.DAGGER_ANDROID)

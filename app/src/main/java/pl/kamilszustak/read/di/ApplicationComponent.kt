@@ -10,6 +10,7 @@ import pl.kamilszustak.read.di.module.ApplicationModule
 import pl.kamilszustak.read.di.module.AssistedInjectModule
 import pl.kamilszustak.read.di.module.FirebaseAuthenticationModule
 import pl.kamilszustak.read.di.module.SubcomponentsModule
+import pl.kamilszustak.read.domain.di.UseCaseModule
 import pl.kamilszustak.read.ui.authentication.di.component.AuthenticationComponent
 import javax.inject.Singleton
 
@@ -20,6 +21,7 @@ import javax.inject.Singleton
         SubcomponentsModule::class,
         AssistedInjectModule::class,
         FirebaseAuthenticationModule::class,
+        UseCaseModule::class,
     ]
 )
 @Singleton
