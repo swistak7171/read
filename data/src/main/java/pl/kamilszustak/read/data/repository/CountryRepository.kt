@@ -1,0 +1,62 @@
+package pl.kamilszustak.read.data.repository
+
+import android.app.Application
+import android.content.res.Resources
+import pl.kamilszustak.read.data.R
+import pl.kamilszustak.read.data.model.Country
+import javax.inject.Inject
+import javax.inject.Singleton
+
+@Singleton
+class CountryRepository @Inject constructor(
+    private val application: Application
+) {
+    @OptIn(ExperimentalStdlibApi::class)
+    fun getAll(): List<Country> {
+         return with(application.resources) {
+             val names = getStringArray(R.array.country_names_by_code)
+             val codes = getStringArray(R.array.country_codes_a_z)
+             val longCodes = getStringArray(R.array.country_codes_3_a_z)
+             val extensions = getStringArray(R.array.country_extensions_by_country_code)
+
+             if (
+                 names.isNullOrEmpty() ||
+                 codes.isNullOrEmpty() ||
+                 longCodes.isNullOrEmpty() ||
+                 extensions.isNullOrEmpty()
+             ) {
+                 throw Resources.NotFoundException("Countries resources not found")
+             }
+
+             buildList {
+                 names.forEachIndexed { index, name -> 
+                     val code = codes.getOrNull(index)
+                     val longCode = longCodes.getOrNull(index)
+                     val extension = extensions.getOrNull(index)
+
+                     if (
+                         name.isNullOrBlank() ||
+                         code.isNullOrBlank() ||
+                         longCode.isNullOrBlank() ||
+                         extension.isNullOrBlank()
+                     ) { 
+                         throw Resources.NotFoundException("Countries resources are not consistent")
+                     }
+
+                     val identifier = getIdentifier("flag_$code", "drawable", application.packageName)
+                     val flagDrawable = application.getDrawable(identifier) 
+                         ?: throw Resources.NotFoundException("$name flag not found")
+                     
+                     val country = Country(
+                         name = name,
+                         code = longCode,
+                         extension = extension,
+                         flagDrawable = flagDrawable
+                     )
+                     
+                     add(country)
+                 }
+             }
+         }
+    }
+}

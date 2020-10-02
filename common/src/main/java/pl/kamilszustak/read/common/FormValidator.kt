@@ -1,4 +1,4 @@
-package pl.kamilszustak.read.common.form
+package pl.kamilszustak.read.common
 
 import android.util.Patterns
 import javax.inject.Inject

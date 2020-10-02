@@ -62,4 +62,7 @@ dependencies {
 
     // Timber
     api(Dependencies.TIMBER)
+
+    // android-flags
+    api(Dependencies.ANDROID_FLAGS)
 }
