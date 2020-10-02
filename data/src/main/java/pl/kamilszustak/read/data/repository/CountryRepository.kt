@@ -2,8 +2,10 @@ package pl.kamilszustak.read.data.repository
 
 import android.app.Application
 import android.content.res.Resources
+import pl.kamilszustak.read.common.util.tryOrNull
 import pl.kamilszustak.read.data.R
 import pl.kamilszustak.read.data.model.Country
+import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -29,7 +31,7 @@ class CountryRepository @Inject constructor(
              }
 
              buildList {
-                 names.forEachIndexed { index, name -> 
+                 names.forEachIndexed { index, name ->
                      val code = codes.getOrNull(index)
                      val longCode = longCodes.getOrNull(index)
                      val extension = extensions.getOrNull(index)
@@ -43,10 +45,12 @@ class CountryRepository @Inject constructor(
                          throw Resources.NotFoundException("Countries resources are not consistent")
                      }
 
-                     val identifier = getIdentifier("flag_$code", "drawable", application.packageName)
-                     val flagDrawable = application.getDrawable(identifier) 
-                         ?: throw Resources.NotFoundException("$name flag not found")
-                     
+                     val lowerCaseCode = code.toLowerCase(Locale.getDefault())
+                     val identifier = getIdentifier("flag_$lowerCaseCode", "drawable", application.packageName)
+                     val flagDrawable = tryOrNull {
+                         application.getDrawable(identifier)
+                     }
+
                      val country = Country(
                          name = name,
                          code = longCode,
