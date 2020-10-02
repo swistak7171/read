@@ -165,4 +165,5 @@ object Dependencies {
     const val TOASTY: String = "com.github.GrenderG:Toasty:${Versions.TOASTY}"
     const val FACEBOOK_ANDROID_SDK: String = "com.facebook.android:facebook-android-sdk:${Versions.FACEBOOK_ANDROID_SDK}"
     const val TWITTER_ANDROID_SDK: String = "com.twitter.sdk.android:twitter-core:${Versions.TWITTER_ANDROID_SDK}"
+    const val ANDROID_FLAGS: String = "com.github.Shusshu:android-flags:${Versions.ANDROID_FLAGS}"
 }

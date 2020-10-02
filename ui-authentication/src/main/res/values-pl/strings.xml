@@ -17,6 +17,7 @@
     <string name="not_equal_passwords">Nieidentyczne hasła</string>
     <string name="user_with_email_exists">Użytkownik z tym adresem email już istnieje</string>
 
+    <string name="country_code">Kod kraju</string>
     <string name="phone_number">Numer telefonu</string>
     <string name="invalid_phone_number">Nieprawidłowy numer telefonu</string>
 </resources>
