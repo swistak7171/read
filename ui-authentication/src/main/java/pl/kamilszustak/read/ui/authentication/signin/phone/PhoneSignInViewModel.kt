@@ -11,6 +11,7 @@ import pl.kamilszustak.read.common.FormValidator
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.data.model.Country
 import pl.kamilszustak.read.domain.usecase.country.GetAllCountriesUseCase
+import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryUseCase
 import pl.kamilszustak.read.ui.authentication.R
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import timber.log.Timber
@@ -23,7 +24,8 @@ import kotlin.coroutines.suspendCoroutine
 
 class PhoneSignInViewModel @Inject constructor(
     private val formValidator: FormValidator,
-    private val getAllCountries: GetAllCountriesUseCase
+    private val getDefaultCountry: GetDefaultCountryUseCase,
+    private val getAllCountries: GetAllCountriesUseCase,
 ) : BaseViewModel<PhoneSignInEvent, PhoneSignInState>() {
 
     val phoneNumber: UniqueLiveData<String> = UniqueLiveData()
@@ -33,6 +35,13 @@ class PhoneSignInViewModel @Inject constructor(
 
     private val countries: List<Country> by lazy {
         getAllCountries()
+    }
+
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            launch { countries }
+            launch { _country.value = getDefaultCountry() }
+        }
     }
 
     override fun handleEvent(event: PhoneSignInEvent) {
@@ -52,7 +61,13 @@ class PhoneSignInViewModel @Inject constructor(
     }
 
     private fun handleSignInEvent() {
+        val country = country.value
         val number = phoneNumber.value
+
+        if (country == null) {
+            _state.value = PhoneSignInState.Error(R.string.not_selected_country_code)
+            return
+        }
 
         if (number.isNullOrBlank() || !formValidator.validatePhoneAddress(number)) {
             _state.value = PhoneSignInState.Error(R.string.invalid_phone_number)

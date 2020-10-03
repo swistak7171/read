@@ -10,6 +10,7 @@ import pl.kamilszustak.read.ui.authentication.databinding.FragmentPhoneSignInBin
 import pl.kamilszustak.read.ui.base.util.dialog
 import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.viewModels
+import java.util.Locale
 import javax.inject.Inject
 
 class PhoneSignInFragment @Inject constructor(

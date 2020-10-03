@@ -18,6 +18,7 @@
             android:id="@+id/countryCodeInputLayout"
             android:hint="@string/country_code"
             app:startIconDrawable="@{viewModel.country.flagDrawable}"
+            app:startIconTint="@null"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/phoneNumberInputLayout"
             app:layout_constraintBottom_toBottomOf="@id/phoneNumberInputLayout">
@@ -26,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/countryCodeEditText"
-                android:text="@{`(+` + viewModel.country.extension + `)`}"/>
+                android:text="@{`+` + viewModel.country.extension}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout

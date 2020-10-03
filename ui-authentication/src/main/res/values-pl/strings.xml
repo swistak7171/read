@@ -19,5 +19,6 @@
 
     <string name="country_code">Kod kraju</string>
     <string name="phone_number">Numer telefonu</string>
+    <string name="not_selected_country_code">Niewybrany kod kraju</string>
     <string name="invalid_phone_number">Nieprawidłowy numer telefonu</string>
 </resources>

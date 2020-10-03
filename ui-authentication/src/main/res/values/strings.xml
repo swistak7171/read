@@ -19,5 +19,6 @@
 
     <string name="country_code">Country code</string>
     <string name="phone_number">Phone number</string>
+    <string name="not_selected_country_code">Country code not selected</string>
     <string name="invalid_phone_number">Invalid phone number</string>
 </resources>
