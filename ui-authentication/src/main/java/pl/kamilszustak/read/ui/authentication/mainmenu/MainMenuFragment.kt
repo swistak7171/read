@@ -27,11 +27,11 @@ class MainMenuFragment @Inject constructor(
 
     private fun setListeners() {
         binding.emailAddressSignInButton.setOnClickListener {
-            viewModel.handleEvent(MainMenuEvent.OnEmailSignInButtonClicked)
+            viewModel.dispatchEvent(MainMenuEvent.OnEmailSignInButtonClicked)
         }
 
         binding.phoneNumberSignInButton.setOnClickListener {
-            viewModel.handleEvent(MainMenuEvent.OnPhoneSignInButtonClicked)
+            viewModel.dispatchEvent(MainMenuEvent.OnPhoneSignInButtonClicked)
         }
     }
 

@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/countryCodeInputLayout"
             android:hint="@string/country_code"
+            app:startIconDrawable="@{viewModel.country.flagDrawable}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/phoneNumberInputLayout"
             app:layout_constraintBottom_toBottomOf="@id/phoneNumberInputLayout">
@@ -24,7 +25,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/countryCodeEditText" />
+                android:id="@+id/countryCodeEditText"
+                android:text="@{`(+` + viewModel.country.extension + `)`}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -37,13 +39,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="@dimen/default_margin">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/phoneNumberEditText"
-            android:text="@={viewModel.phoneNumber}"
-            android:inputType="phone" />
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/phoneNumberEditText"
+                android:text="@={viewModel.phoneNumber}"
+                android:inputType="phone" />
+        </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:layout_width="match_parent"

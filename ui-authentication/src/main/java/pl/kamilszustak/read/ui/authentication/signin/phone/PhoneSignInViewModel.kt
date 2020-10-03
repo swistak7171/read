@@ -1,5 +1,6 @@
 package pl.kamilszustak.read.ui.authentication.signin.phone
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.PhoneAuthCredential
@@ -26,6 +27,10 @@ class PhoneSignInViewModel @Inject constructor(
 ) : BaseViewModel<PhoneSignInEvent, PhoneSignInState>() {
 
     val phoneNumber: UniqueLiveData<String> = UniqueLiveData()
+    private val _country: UniqueLiveData<Country> = UniqueLiveData()
+    val country: LiveData<Country>
+        get() = _country
+
     private val countries: List<Country> by lazy {
         getAllCountries()
     }
@@ -33,12 +38,17 @@ class PhoneSignInViewModel @Inject constructor(
     override fun handleEvent(event: PhoneSignInEvent) {
         when (event) {
             PhoneSignInEvent.OnCountryEditTextClicked -> handleCountryChoiceEvent()
+            is PhoneSignInEvent.OnCountrySelected -> handleOnCountrySelectedEvent(event)
             PhoneSignInEvent.OnSignInButtonClicked -> handleSignInEvent()
         }
     }
 
     private fun handleCountryChoiceEvent() {
         _state.value = PhoneSignInState.CountryPickerOpened(countries)
+    }
+
+    private fun handleOnCountrySelectedEvent(event: PhoneSignInEvent.OnCountrySelected) {
+        _country.value = countries.getOrNull(event.index)
     }
 
     private fun handleSignInEvent() {

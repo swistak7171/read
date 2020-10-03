@@ -10,7 +10,6 @@ import pl.kamilszustak.read.ui.authentication.databinding.FragmentPhoneSignInBin
 import pl.kamilszustak.read.ui.base.util.dialog
 import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.viewModels
-import timber.log.Timber
 import javax.inject.Inject
 
 class PhoneSignInFragment @Inject constructor(
@@ -28,11 +27,11 @@ class PhoneSignInFragment @Inject constructor(
 
     private fun setListeners() {
         binding.countryCodeEditText.setOnClickListener {
-            viewModel.handleEvent(PhoneSignInEvent.OnCountryEditTextClicked)
+            viewModel.dispatchEvent(PhoneSignInEvent.OnCountryEditTextClicked)
         }
 
         binding.signInButton.setOnClickListener {
-            viewModel.handleEvent(PhoneSignInEvent.OnSignInButtonClicked)
+            viewModel.dispatchEvent(PhoneSignInEvent.OnSignInButtonClicked)
         }
     }
 
@@ -40,7 +39,19 @@ class PhoneSignInFragment @Inject constructor(
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is PhoneSignInState.CountryPickerOpened -> {
+                    val namesAndCodes = state.countries.map { country ->
+                        "(+${country.extension}) ${country.name}"
+                    }
+
                     dialog {
+                        listItems(
+                            items = namesAndCodes,
+                            waitForPositiveButton = false,
+                            selection = { dialog, index, text ->
+                                val event = PhoneSignInEvent.OnCountrySelected(index)
+                                viewModel.dispatchEvent(event)
+                            }
+                        )
                     }
                 }
 
