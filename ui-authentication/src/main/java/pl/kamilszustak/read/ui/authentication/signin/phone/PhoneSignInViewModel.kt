@@ -18,14 +18,12 @@ import timber.log.Timber
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 class PhoneSignInViewModel @Inject constructor(
     private val formValidator: FormValidator,
-    private val getDefaultCountry: GetDefaultCountryUseCase,
     private val getAllCountries: GetAllCountriesUseCase,
+    private val getDefaultCountry: GetDefaultCountryUseCase,
 ) : BaseViewModel<PhoneSignInEvent, PhoneSignInState>() {
 
     val phoneNumber: UniqueLiveData<String> = UniqueLiveData()
@@ -40,7 +38,10 @@ class PhoneSignInViewModel @Inject constructor(
     init {
         viewModelScope.launch(Dispatchers.IO) {
             launch { countries }
-            launch { _country.value = getDefaultCountry() }
+            launch {
+                val defaultCountry = getDefaultCountry()
+                _country.postValue(defaultCountry)
+            }
         }
     }
 
@@ -79,22 +80,23 @@ class PhoneSignInViewModel @Inject constructor(
                 val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     override fun onCodeSent(p0: String, token: PhoneAuthProvider.ForceResendingToken) {
                         Timber.i("onCodeSent")
-                        continuation.resume(PhoneAuthenticationResult.OnCodeSent)
+                        // continuation.resume(PhoneAuthenticationResult.OnCodeSent)
                     }
 
                     override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                         Timber.i("onVerificationCompleted")
-                        continuation.resume(PhoneAuthenticationResult.OnVerificationCompleted)
+                        // continuation.resume(PhoneAuthenticationResult.OnVerificationCompleted)
                     }
 
                     override fun onVerificationFailed(exception: FirebaseException) {
-                        Timber.i("onVerificationFailed")
-                        continuation.resumeWithException(exception)
+                        Timber.i("onVerificationFailed: ${exception.message}")
+                        // continuation.resumeWithException(exception)
                     }
                 }
 
+                val fullNumber = "+${country.extension}$number"
                 PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                    number,
+                    fullNumber,
                     60,
                     TimeUnit.SECONDS,
                     Executors.newSingleThreadExecutor(),

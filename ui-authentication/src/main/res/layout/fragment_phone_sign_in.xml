@@ -27,7 +27,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/countryCodeEditText"
-                android:text="@{`+` + viewModel.country.extension}"/>
+                android:text="@{`+` + viewModel.country.extension}"
+                android:focusable="false"
+                android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
