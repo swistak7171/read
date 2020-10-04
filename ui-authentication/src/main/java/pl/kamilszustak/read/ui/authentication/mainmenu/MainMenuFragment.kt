@@ -1,5 +1,6 @@
 package pl.kamilszustak.read.ui.authentication.mainmenu
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
@@ -18,6 +19,13 @@ class MainMenuFragment @Inject constructor(
     override val binding: FragmentMainMenuBinding by viewBinding(FragmentMainMenuBinding::bind)
     override val viewModel: MainMenuViewModel by viewModels(viewModelFactory)
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        val event = MainMenuEvent.OnActivityResult(requestCode, resultCode, data)
+        viewModel.dispatchEvent(event)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -33,6 +41,16 @@ class MainMenuFragment @Inject constructor(
         binding.phoneNumberSignInButton.setOnClickListener {
             viewModel.dispatchEvent(MainMenuEvent.OnPhoneSignInButtonClicked)
         }
+
+        binding.googleSignInButton.setOnClickListener {
+            val webClientId = getString(R.string.default_web_client_id)
+            val event = MainMenuEvent.OnGoogleSignInButtonClicked(webClientId)
+            viewModel.dispatchEvent(event)
+        }
+
+        binding.facebookSignInButton.setOnClickListener {
+            viewModel.dispatchEvent(MainMenuEvent.OnFacebookSignInButtonClicked)
+        }
     }
 
     private fun observeViewModel() {
@@ -47,7 +65,15 @@ class MainMenuFragment @Inject constructor(
                     val direction = MainMenuFragmentDirections.actionMainMenuFragmentToPhoneSignInFragment()
                     navigateTo(direction)
                 }
+
+                is MainMenuState.FacebookAuthentication -> {
+                    handleFacebookAuthentication(state)
+                }
             }
         }
+    }
+
+    private fun handleFacebookAuthentication(state: MainMenuState.FacebookAuthentication) {
+        state.loginManager.logInWithReadPermissions(this, state.permissions)
     }
 }
