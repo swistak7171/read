@@ -27,6 +27,7 @@ class PhoneSignInFragment @Inject constructor(
     }
 
     private fun setListeners() {
+        requireActivity().mainExecutor
         binding.countryCodeEditText.setOnClickListener {
             viewModel.dispatchEvent(PhoneSignInEvent.OnCountryEditTextClicked)
         }

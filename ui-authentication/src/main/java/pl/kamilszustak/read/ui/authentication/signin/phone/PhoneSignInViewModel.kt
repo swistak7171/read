@@ -2,6 +2,7 @@ package pl.kamilszustak.read.ui.authentication.signin.phone
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.tasks.TaskExecutors
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
@@ -76,7 +77,7 @@ class PhoneSignInViewModel @Inject constructor(
         }
 
         viewModelScope.launch(Dispatchers.IO) {
-            val callbacks = suspendCoroutine<PhoneAuthenticationResult> { continuation ->
+            suspendCoroutine<PhoneAuthenticationResult> { continuation ->
                 val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     override fun onCodeSent(p0: String, token: PhoneAuthProvider.ForceResendingToken) {
                         Timber.i("onCodeSent")
@@ -99,7 +100,7 @@ class PhoneSignInViewModel @Inject constructor(
                     fullNumber,
                     60,
                     TimeUnit.SECONDS,
-                    Executors.newSingleThreadExecutor(),
+                    TaskExecutors.MAIN_THREAD,
                     callbacks
                 )
             }
