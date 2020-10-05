@@ -11,9 +11,13 @@ sealed class MainMenuEvent : Event {
         val webClientId: String
     ) : MainMenuEvent()
 
+    data class OnActivityGoogleResult(
+        val intent: Intent
+    ) : MainMenuEvent()
+
     object OnFacebookSignInButtonClicked : MainMenuEvent()
 
-    data class OnActivityResult(
+    data class OnActivityFacebookResult(
         val requestCode: Int,
         val resultCode: Int,
         val data: Intent?
