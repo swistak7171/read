@@ -12,10 +12,18 @@
         tools:layout="@layout/fragment_main_menu" >
         <action
             android:id="@+id/action_mainMenuFragment_to_emailSignInFragment"
-            app:destination="@id/emailSignInFragment" />
+            app:destination="@id/emailSignInFragment"
+            app:enterAnim="@anim/zoom_in_enter"
+            app:exitAnim="@anim/zoom_out_exit"
+            app:popEnterAnim="@anim/zoom_in_pop_enter"
+            app:popExitAnim="@anim/zoom_out_pop_exit" />
         <action
             android:id="@+id/action_mainMenuFragment_to_phoneSignInFragment"
-            app:destination="@id/phoneSignInFragment" />
+            app:destination="@id/phoneSignInFragment"
+            app:enterAnim="@anim/zoom_in_enter"
+            app:exitAnim="@anim/zoom_out_exit"
+            app:popEnterAnim="@anim/zoom_in_pop_enter"
+            app:popExitAnim="@anim/zoom_out_pop_exit" />
     </fragment>
     <fragment
         android:id="@+id/emailSignInFragment"
