@@ -10,6 +10,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.OAuthProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -51,7 +52,16 @@ class MainMenuViewModel @Inject constructor(
             }
 
             is MainMenuEvent.OnActivityFacebookResult -> {
-                facebookCallbackManager.onActivityResult(event.requestCode, event.resultCode, event.data)
+                facebookCallbackManager.onActivityResult(
+                    event.requestCode,
+                    event.resultCode,
+                    event.data
+                )
+                null
+            }
+
+            is MainMenuEvent.OnTwitterSignInButtonClicked -> {
+                handleTwitterAuthentication(event)
                 null
             }
         }
@@ -91,5 +101,19 @@ class MainMenuViewModel @Inject constructor(
         }
 
         facebookLoginManager.registerCallback(facebookCallbackManager, facebookCallback)
+    }
+
+    private fun handleTwitterAuthentication(event: MainMenuEvent.OnTwitterSignInButtonClicked) {
+        val provider = OAuthProvider.newBuilder("twitter.com")
+            .build()
+
+        val activity = event.activityReference.get() ?: return
+        event.activityReference.clear()
+        val task = firebaseAuth.startActivityForSignInWithProvider(activity, provider)
+
+        viewModelScope.launch {
+            val result = task.await()
+            Timber.i(result.user.toString())
+        }
     }
 }

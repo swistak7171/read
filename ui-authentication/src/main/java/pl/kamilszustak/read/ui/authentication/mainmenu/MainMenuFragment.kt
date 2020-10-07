@@ -1,5 +1,6 @@
 package pl.kamilszustak.read.ui.authentication.mainmenu
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -13,6 +14,7 @@ import pl.kamilszustak.read.ui.base.binding.viewBinding
 import pl.kamilszustak.read.ui.base.util.navigateTo
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
+import java.lang.ref.WeakReference
 import javax.inject.Inject
 
 class MainMenuFragment @Inject constructor(
@@ -55,6 +57,12 @@ class MainMenuFragment @Inject constructor(
 
         binding.facebookSignInButton.setOnClickListener {
             viewModel.dispatchEvent(MainMenuEvent.OnFacebookSignInButtonClicked)
+        }
+
+        binding.twitterSignInButton.setOnClickListener {
+            val reference = WeakReference(requireActivity() as Activity)
+            val event = MainMenuEvent.OnTwitterSignInButtonClicked(reference)
+            viewModel.dispatchEvent(event)
         }
     }
 
