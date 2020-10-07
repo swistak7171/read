@@ -21,4 +21,6 @@
     <string name="phone_number">Phone number</string>
     <string name="not_selected_country_code">Country code not selected</string>
     <string name="invalid_phone_number">Invalid phone number</string>
+
+    <string name="twitter_authentication_cancelled_by_user">Authentication was cancelled by the user</string>
 </resources>

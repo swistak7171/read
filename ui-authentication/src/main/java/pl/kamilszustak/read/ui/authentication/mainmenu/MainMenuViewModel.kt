@@ -1,5 +1,6 @@
 package pl.kamilszustak.read.ui.authentication.mainmenu
 
+import android.content.Intent
 import androidx.lifecycle.viewModelScope
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -9,11 +10,15 @@ import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthWebException
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.OAuthProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import pl.kamilszustak.read.common.util.getOnce
+import pl.kamilszustak.read.common.util.useOrNull
+import pl.kamilszustak.read.ui.authentication.R
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -36,8 +41,8 @@ class MainMenuViewModel @Inject constructor(
             }
 
             is MainMenuEvent.OnGoogleSignInButtonClicked -> {
-                val options = handleGoogleAuthentication(event.webClientId)
-                MainMenuState.GoogleAuthentication(options)
+                val intent = handleGoogleAuthentication(event)
+                intent.useOrNull { MainMenuState.GoogleAuthentication(it) }
             }
 
             is MainMenuEvent.OnActivityGoogleResult -> {
@@ -45,18 +50,13 @@ class MainMenuViewModel @Inject constructor(
                 null
             }
 
-            MainMenuEvent.OnFacebookSignInButtonClicked -> {
-                handleFacebookAuthentication()
-                val permissions = listOf("email", "public_profile")
-                MainMenuState.FacebookAuthentication(facebookLoginManager, permissions)
+            is MainMenuEvent.OnFacebookSignInButtonClicked -> {
+                handleFacebookAuthentication(event)
+                null
             }
 
             is MainMenuEvent.OnActivityFacebookResult -> {
-                facebookCallbackManager.onActivityResult(
-                    event.requestCode,
-                    event.resultCode,
-                    event.data
-                )
+                facebookCallbackManager.onActivityResult(event.requestCode, event.resultCode, event.data)
                 null
             }
 
@@ -67,11 +67,16 @@ class MainMenuViewModel @Inject constructor(
         }
     }
 
-    private fun handleGoogleAuthentication(webClientId: String): GoogleSignInOptions {
-        return GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(webClientId)
+    private fun handleGoogleAuthentication(event: MainMenuEvent.OnGoogleSignInButtonClicked): Intent? {
+        val activity = event.activityReference.getOnce() ?: return null
+        val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(event.webClientId)
             .requestEmail()
             .build()
+
+        val client = GoogleSignIn.getClient(activity, options)
+
+        return client.signInIntent
     }
 
     private fun handleActivityGoogleResult(event: MainMenuEvent.OnActivityGoogleResult) {
@@ -85,7 +90,9 @@ class MainMenuViewModel @Inject constructor(
         }
     }
 
-    private fun handleFacebookAuthentication() {
+    private fun handleFacebookAuthentication(event: MainMenuEvent.OnFacebookSignInButtonClicked) {
+        val fragment = event.fragmentReference.getOnce() ?: return
+        val permissions = listOf("email", "public_profile")
         val facebookCallback = object : FacebookCallback<LoginResult> {
             override fun onSuccess(result: LoginResult?) {
                 Timber.i("onSuccess")
@@ -100,20 +107,26 @@ class MainMenuViewModel @Inject constructor(
             }
         }
 
-        facebookLoginManager.registerCallback(facebookCallbackManager, facebookCallback)
+        with(facebookLoginManager) {
+            registerCallback(facebookCallbackManager, facebookCallback)
+            logInWithReadPermissions(fragment, permissions)
+        }
     }
 
     private fun handleTwitterAuthentication(event: MainMenuEvent.OnTwitterSignInButtonClicked) {
         val provider = OAuthProvider.newBuilder("twitter.com")
             .build()
 
-        val activity = event.activityReference.get() ?: return
-        event.activityReference.clear()
+        val activity = event.activityReference.getOnce() ?: return
         val task = firebaseAuth.startActivityForSignInWithProvider(activity, provider)
 
         viewModelScope.launch {
-            val result = task.await()
-            Timber.i(result.user.toString())
+            try {
+                val result = task.await()
+                Timber.i(result.user.toString())
+            } catch (exception: FirebaseAuthWebException) {
+                _state.value = MainMenuState.Error(R.string.twitter_authentication_cancelled_by_user)
+            }
         }
     }
 }

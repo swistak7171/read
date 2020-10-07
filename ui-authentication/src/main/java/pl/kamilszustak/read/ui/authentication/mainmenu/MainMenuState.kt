@@ -1,7 +1,7 @@
 package pl.kamilszustak.read.ui.authentication.mainmenu
 
-import com.facebook.login.LoginManager
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import android.content.Intent
+import androidx.annotation.StringRes
 import pl.kamilszustak.read.ui.base.view.State
 
 sealed class MainMenuState : State {
@@ -9,11 +9,10 @@ sealed class MainMenuState : State {
     object PhoneAuthentication : MainMenuState()
 
     data class GoogleAuthentication(
-        val options: GoogleSignInOptions
+        val intent: Intent,
     ) : MainMenuState()
 
-    data class FacebookAuthentication(
-        val loginManager: LoginManager,
-        val permissions: List<String>
+    data class Error(
+        @StringRes val messageResourceId: Int,
     ) : MainMenuState()
 }

@@ -1,20 +1,19 @@
 package pl.kamilszustak.read.ui.authentication.mainmenu
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.gms.auth.api.signin.GoogleSignIn
+import pl.kamilszustak.read.common.util.asWeakReference
 import pl.kamilszustak.read.ui.authentication.R
 import pl.kamilszustak.read.ui.authentication.databinding.FragmentMainMenuBinding
 import pl.kamilszustak.read.ui.base.binding.viewBinding
+import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.navigateTo
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
-import java.lang.ref.WeakReference
 import javax.inject.Inject
 
 class MainMenuFragment @Inject constructor(
@@ -51,16 +50,18 @@ class MainMenuFragment @Inject constructor(
 
         binding.googleSignInButton.setOnClickListener {
             val webClientId = getString(R.string.google_web_client_id)
-            val event = MainMenuEvent.OnGoogleSignInButtonClicked(webClientId)
+            val reference = requireActivity().asWeakReference()
+            val event = MainMenuEvent.OnGoogleSignInButtonClicked(reference, webClientId)
             viewModel.dispatchEvent(event)
         }
 
         binding.facebookSignInButton.setOnClickListener {
-            viewModel.dispatchEvent(MainMenuEvent.OnFacebookSignInButtonClicked)
+            val event = MainMenuEvent.OnFacebookSignInButtonClicked(this.asWeakReference())
+            viewModel.dispatchEvent(event)
         }
 
         binding.twitterSignInButton.setOnClickListener {
-            val reference = WeakReference(requireActivity() as Activity)
+            val reference = requireActivity().asWeakReference()
             val event = MainMenuEvent.OnTwitterSignInButtonClicked(reference)
             viewModel.dispatchEvent(event)
         }
@@ -83,8 +84,8 @@ class MainMenuFragment @Inject constructor(
                     handleGoogleAuthentication(state)
                 }
 
-                is MainMenuState.FacebookAuthentication -> {
-                    handleFacebookAuthentication(state)
+                is MainMenuState.Error -> {
+                    errorToast(state.messageResourceId)
                 }
             }
         }
@@ -100,11 +101,6 @@ class MainMenuFragment @Inject constructor(
     }
 
     private fun handleGoogleAuthentication(state: MainMenuState.GoogleAuthentication) {
-        val client = GoogleSignIn.getClient(requireContext(), state.options)
-        googleActivityLauncher?.launch(client.signInIntent)
-    }
-
-    private fun handleFacebookAuthentication(state: MainMenuState.FacebookAuthentication) {
-        state.loginManager.logInWithReadPermissions(this, state.permissions)
+        googleActivityLauncher?.launch(state.intent)
     }
 }
