@@ -33,7 +33,6 @@ dependencies {
     implementation(project(Modules.NETWORK))
 
     // Dagger
-    api(Dependencies.Google.Dagger.DAGGER_ANDROID)
     kapt(Dependencies.Google.Dagger.DAGGER_ANDROID_PROCESSOR)
     kapt(Dependencies.Google.Dagger.DAGGER_COMPILER)
 

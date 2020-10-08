@@ -85,9 +85,9 @@ dependencies {
     implementation(project(Modules.NETWORK))
     implementation(project(Modules.UI_BASE))
     implementation(project(Modules.UI_AUTHENTICATION))
+    implementation(project(Modules.UI_MAIN))
 
     // Dagger
-    implementation(Dependencies.Google.Dagger.DAGGER_ANDROID)
     kapt(Dependencies.Google.Dagger.DAGGER_ANDROID_PROCESSOR)
     kapt(Dependencies.Google.Dagger.DAGGER_COMPILER)
 

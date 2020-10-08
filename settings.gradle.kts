@@ -4,6 +4,7 @@ include(
     ":data",
     ":network",
     ":domain",
+    ":domain-access",
     ":ui-base",
     ":ui-authentication",
     ":ui-main"
