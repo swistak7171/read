@@ -1,4 +1,4 @@
-package pl.kamilszustak.read.ui.authentication.di.component
+package pl.kamilszustak.read.ui.authentication.di
 
 import dagger.Subcomponent
 import pl.kamilszustak.read.ui.authentication.AuthenticationActivity
@@ -21,6 +21,10 @@ interface AuthenticationComponent {
     @Subcomponent.Factory
     interface Factory {
         fun create(): AuthenticationComponent
+    }
+
+    interface ComponentProvider {
+        fun provideAuthenticationComponent(): AuthenticationComponent
     }
 
     fun inject(activity: AuthenticationActivity)

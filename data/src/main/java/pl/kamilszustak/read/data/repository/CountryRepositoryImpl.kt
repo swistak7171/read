@@ -5,6 +5,7 @@ import android.content.res.Resources
 import pl.kamilszustak.read.common.util.tryOrNull
 import pl.kamilszustak.read.data.R
 import pl.kamilszustak.read.data.access.repository.CountryRepository
+import pl.kamilszustak.read.model.domain.Country
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -15,7 +16,7 @@ class CountryRepositoryImpl @Inject constructor(
 ) : CountryRepository {
 
     @OptIn(ExperimentalStdlibApi::class)
-    override fun getAll(): List<pl.kamilszustak.read.model.domain.Country> {
+    override fun getAll(): List<Country> {
         return with(application.resources) {
             val names = getStringArray(R.array.country_names_by_code)
             val codes = getStringArray(R.array.country_codes_a_z)
@@ -52,7 +53,7 @@ class CountryRepositoryImpl @Inject constructor(
                         application.getDrawable(identifier)
                     }
 
-                    val country = pl.kamilszustak.read.model.domain.Country(
+                    val country = Country(
                         name = name,
                         code = longCode,
                         extension = extension,
@@ -65,7 +66,7 @@ class CountryRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getByCode(countryCode: String): pl.kamilszustak.read.model.domain.Country? {
+    override fun getByCode(code: String): Country? {
         return with(application.resources) {
             val names = getStringArray(R.array.country_names_by_code)
             val codes = getStringArray(R.array.country_codes_a_z)
@@ -82,7 +83,7 @@ class CountryRepositoryImpl @Inject constructor(
             }
 
             codes.forEachIndexed { index, code ->
-                if (code.toLowerCase(Locale.getDefault()) != countryCode.toLowerCase(Locale.getDefault())) {
+                if (code.toLowerCase(Locale.getDefault()) != code.toLowerCase(Locale.getDefault())) {
                     return@forEachIndexed
                 }
 
@@ -105,7 +106,7 @@ class CountryRepositoryImpl @Inject constructor(
                     application.getDrawable(identifier)
                 }
 
-                return pl.kamilszustak.read.model.domain.Country(
+                return Country(
                     name = name,
                     code = longCode,
                     extension = extension,

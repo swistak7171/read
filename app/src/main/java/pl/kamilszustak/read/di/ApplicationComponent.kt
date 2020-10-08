@@ -12,8 +12,8 @@ import pl.kamilszustak.read.di.module.AssistedInjectModule
 import pl.kamilszustak.read.di.module.FirebaseAuthenticationModule
 import pl.kamilszustak.read.di.module.SubcomponentsModule
 import pl.kamilszustak.read.domain.di.DomainModule
-import pl.kamilszustak.read.domain.di.UseCaseModule
-import pl.kamilszustak.read.ui.authentication.di.component.AuthenticationComponent
+import pl.kamilszustak.read.ui.authentication.di.AuthenticationComponent
+import pl.kamilszustak.read.ui.main.di.MainComponent
 import javax.inject.Singleton
 
 @Component(
@@ -30,6 +30,7 @@ import javax.inject.Singleton
 @Singleton
 interface ApplicationComponent : AndroidInjector<ReadApplication> {
     fun authenticationComponent(): AuthenticationComponent.Factory
+    fun mainComponent(): MainComponent.Factory
 
     @Component.Builder
     interface Builder {

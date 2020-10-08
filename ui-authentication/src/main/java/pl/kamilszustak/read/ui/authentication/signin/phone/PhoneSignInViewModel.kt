@@ -10,9 +10,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pl.kamilszustak.read.common.FormValidator
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
-import pl.kamilszustak.read.data.model.Country
 import pl.kamilszustak.read.domain.access.usecase.country.GetAllCountriesUseCase
 import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryUseCase
+import pl.kamilszustak.read.model.domain.Country
 import pl.kamilszustak.read.ui.authentication.R
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import timber.log.Timber
