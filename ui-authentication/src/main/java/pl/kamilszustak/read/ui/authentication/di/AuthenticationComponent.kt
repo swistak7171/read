@@ -3,8 +3,8 @@ package pl.kamilszustak.read.ui.authentication.di
 import dagger.Subcomponent
 import pl.kamilszustak.read.ui.authentication.AuthenticationActivity
 import pl.kamilszustak.read.ui.authentication.di.module.AuthenticationActivityModule
-import pl.kamilszustak.read.ui.authentication.di.module.authentication.AuthenticationFragmentModule
-import pl.kamilszustak.read.ui.authentication.di.module.authentication.AuthenticationViewModelModule
+import pl.kamilszustak.read.ui.authentication.di.module.AuthenticationFragmentModule
+import pl.kamilszustak.read.ui.authentication.di.module.AuthenticationViewModelModule
 import pl.kamilszustak.read.ui.authentication.di.scope.AuthenticationScope
 import pl.kamilszustak.read.ui.base.di.module.BaseUiModule
 

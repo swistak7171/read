@@ -1,4 +1,4 @@
-package pl.kamilszustak.read.ui.authentication.di.module.authentication
+package pl.kamilszustak.read.ui.authentication.di.module
 
 import androidx.fragment.app.Fragment
 import dagger.Binds

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/navigation_collection">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_collection"
+    app:startDestination="@id/collectionFragment">
 
+    <fragment
+        android:id="@+id/collectionFragment"
+        android:name="pl.kamilszustak.read.ui.main.collection.CollectionFragment"
+        android:label="@string/menu_collection_item_title"
+        tools:layout="@layout/fragment_collection" />
 </navigation>
