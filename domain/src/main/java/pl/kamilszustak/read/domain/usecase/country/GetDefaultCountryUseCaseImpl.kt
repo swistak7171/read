@@ -4,6 +4,7 @@ import android.app.Application
 import android.os.Build
 import pl.kamilszustak.read.data.model.Country
 import pl.kamilszustak.read.data.repository.CountryRepository
+import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryUseCase
 import javax.inject.Inject
 import javax.inject.Singleton
 

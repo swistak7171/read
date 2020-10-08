@@ -12,6 +12,7 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     implementation(project(Modules.COMMON))
+    implementation(project(Modules.DOMAIN_ACCESS))
     implementation(project(Modules.DATA))
 
     // Dagger

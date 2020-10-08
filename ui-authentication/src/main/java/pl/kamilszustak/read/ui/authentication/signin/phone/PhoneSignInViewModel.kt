@@ -11,20 +11,19 @@ import kotlinx.coroutines.launch
 import pl.kamilszustak.read.common.FormValidator
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.data.model.Country
-import pl.kamilszustak.read.domain.usecase.country.GetAllCountriesUseCase
-import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryUseCase
+import pl.kamilszustak.read.domain.access.usecase.country.GetAllCountriesUseCase
+import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryUseCase
 import pl.kamilszustak.read.ui.authentication.R
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import timber.log.Timber
-import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import kotlin.coroutines.suspendCoroutine
 
 class PhoneSignInViewModel @Inject constructor(
     private val formValidator: FormValidator,
-    private val getAllCountries: GetAllCountriesUseCase,
-    private val getDefaultCountry: GetDefaultCountryUseCase,
+    private val getAllCountries: pl.kamilszustak.read.domain.access.usecase.country.GetAllCountriesUseCase,
+    private val getDefaultCountry: pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryUseCase,
 ) : BaseViewModel<PhoneSignInEvent, PhoneSignInState>() {
 
     val phoneNumber: UniqueLiveData<String> = UniqueLiveData()
