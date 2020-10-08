@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_collection_item_title">Kolekcja</string>
+    <string name="menu_search_item_title">Szukaj</string>
+    <string name="menu_discover_item_title">Odkrywaj</string>
+    <string name="menu_quotes_item_title">Cytaty</string>
+    <string name="menu_profile_item_title">Profil</string>
+</resources>

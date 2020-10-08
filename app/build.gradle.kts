@@ -81,7 +81,9 @@ dependencies {
 
     implementation(project(Modules.COMMON))
     implementation(project(Modules.DATA))
+    implementation(project(Modules.DATA_ACCESS))
     implementation(project(Modules.DOMAIN))
+    implementation(project(Modules.DOMAIN_ACCESS))
     implementation(project(Modules.NETWORK))
     implementation(project(Modules.UI_BASE))
     implementation(project(Modules.UI_AUTHENTICATION))
