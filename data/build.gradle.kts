@@ -2,7 +2,6 @@ plugins {
     id(Plugins.ANDROID_LIBRARY)
     id(Plugins.KOTLIN_ANDROID)
     id(Plugins.KOTLIN_KAPT)
-    id(Plugins.KOTLIN_ANDROID_EXTENSIONS)
 }
 
 android {
@@ -31,6 +30,8 @@ dependencies {
 
     implementation(project(Modules.COMMON))
     implementation(project(Modules.NETWORK))
+    implementation(project(Modules.DATA_ACCESS))
+    implementation(project(Modules.MODEL_DOMAIN))
 
     // Dagger
     kapt(Dependencies.Google.Dagger.DAGGER_ANDROID_PROCESSOR)

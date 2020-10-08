@@ -4,17 +4,19 @@ import android.app.Application
 import android.content.res.Resources
 import pl.kamilszustak.read.common.util.tryOrNull
 import pl.kamilszustak.read.data.R
-import pl.kamilszustak.read.data.model.Country
+import pl.kamilszustak.read.data.access.repository.CountryRepository
+import pl.kamilszustak.read.model.domain.Country
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CountryRepository @Inject constructor(
+class CountryRepositoryImpl @Inject constructor(
     private val application: Application
-) {
+) : CountryRepository {
+
     @OptIn(ExperimentalStdlibApi::class)
-    fun getAll(): List<Country> {
+    override fun getAll(): List<pl.kamilszustak.read.model.domain.Country> {
         return with(application.resources) {
             val names = getStringArray(R.array.country_names_by_code)
             val codes = getStringArray(R.array.country_codes_a_z)
@@ -51,7 +53,7 @@ class CountryRepository @Inject constructor(
                         application.getDrawable(identifier)
                     }
 
-                    val country = Country(
+                    val country = pl.kamilszustak.read.model.domain.Country(
                         name = name,
                         code = longCode,
                         extension = extension,
@@ -64,7 +66,7 @@ class CountryRepository @Inject constructor(
         }
     }
 
-    fun getByCode(countryCode: String): Country? {
+    override fun getByCode(countryCode: String): pl.kamilszustak.read.model.domain.Country? {
         return with(application.resources) {
             val names = getStringArray(R.array.country_names_by_code)
             val codes = getStringArray(R.array.country_codes_a_z)
@@ -104,7 +106,7 @@ class CountryRepository @Inject constructor(
                     application.getDrawable(identifier)
                 }
 
-                return Country(
+                return pl.kamilszustak.read.model.domain.Country(
                     name = name,
                     code = longCode,
                     extension = extension,

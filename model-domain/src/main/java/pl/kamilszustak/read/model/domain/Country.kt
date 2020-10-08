@@ -1,4 +1,4 @@
-package pl.kamilszustak.read.data.model
+package pl.kamilszustak.read.model.domain
 
 import android.graphics.drawable.Drawable
 
