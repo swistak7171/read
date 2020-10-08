@@ -37,7 +37,6 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     implementation(project(Modules.UI_BASE))
-    implementation(project(Modules.UI_MAIN))
     implementation(project(Modules.COMMON))
     implementation(project(Modules.DOMAIN))
 
@@ -47,10 +46,4 @@ dependencies {
 
     // Firebase Authentication
     implementation(Dependencies.Google.Firebase.Authentication.AUTH_UI)
-
-    // Facebok Android SDK
-    implementation(Dependencies.FACEBOOK_ANDROID_SDK)
-
-    // Twitter Android SDK
-    implementation(Dependencies.TWITTER_ANDROID_SDK)
 }

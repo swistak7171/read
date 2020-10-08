@@ -71,6 +71,19 @@ dependencies {
     // Material Components
     api(Dependencies.Google.Material.MATERIAL_COMPONENTS)
 
+    // ConstraintLayout
+    api(Dependencies.AndroidX.ConstraintLayout.CONSTRAINT_LAYOUT)
+
+    // Preference
+    api(Dependencies.AndroidX.Preference.PREFERENCE)
+    api(Dependencies.AndroidX.Preference.PREFERENCE_KTX)
+
+    // SwipeRefreshLayout
+    api(Dependencies.AndroidX.SwipeRefreshLayout.SWIPE_REFRESH_LAYOUT)
+
+    // RecyclerView
+    api(Dependencies.AndroidX.RecyclerView.RECYCLER_VIEW)
+
     // Material Dialogs
     api(Dependencies.MaterialDialogs.MATERIAL_DIALOGS_CORE)
     api(Dependencies.MaterialDialogs.MATERIAL_DIALOGS_INPUT)
@@ -104,4 +117,8 @@ dependencies {
 
     // Timber
     api(Dependencies.TIMBER)
+
+    // Glide
+    api(Dependencies.Glide.GLIDE)
+    kapt(Dependencies.Glide.GLIDE_COMPILER)
 }

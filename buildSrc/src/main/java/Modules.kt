@@ -6,4 +6,5 @@ object Modules {
     const val NETWORK: String = ":network"
     const val UI_BASE: String = ":ui-base"
     const val UI_AUTHENTICATION: String = ":ui-authentication"
+    const val UI_MAIN: String = ":ui-main"
 }

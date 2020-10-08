@@ -5,6 +5,7 @@ include(
     ":network",
     ":domain",
     ":ui-base",
-    ":ui-authentication"
+    ":ui-authentication",
+    ":ui-main"
 )
 rootProject.name = "read"
