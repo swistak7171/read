@@ -5,7 +5,6 @@ import android.content.res.Resources
 import pl.kamilszustak.read.common.util.tryOrNull
 import pl.kamilszustak.read.data.R
 import pl.kamilszustak.read.data.access.repository.CountryRepository
-import pl.kamilszustak.read.model.domain.Country
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Singleton
