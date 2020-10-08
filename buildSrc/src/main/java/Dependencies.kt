@@ -4,8 +4,9 @@ object Dependencies {
         const val KOTLIN_GRADLE_PLUGIN: String = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.KOTLIN}"
 
         object Coroutines {
-            const val KOTLIN_COROUTINES_CORE: String = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.KOTLIN_COROUTINES}"
-            const val KOTLIN_COROUTINES_ANDROID: String = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.KOTLIN_COROUTINES}"
+            const val KOTLINX_COROUTINES_CORE: String = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.KOTLINX_COROUTINES}"
+            const val KOTLINX_COROUTINES_ANDROID: String = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.KOTLINX_COROUTINES}"
+            const val KOTLINX_COROUTINES_PLAY_SERVICES: String = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${Versions.KOTLINX_COROUTINES}"
         }
     }
 
@@ -16,9 +17,19 @@ object Dependencies {
 
         object Dagger {
             const val DAGGER_ANDROID: String = "com.google.dagger:dagger-android:${Versions.DAGGER}"
-            const val DAGGER_ANDROID_SUPPORT: String = "com.google.dagger:dagger-android-support:${Versions.DAGGER}"
             const val DAGGER_ANDROID_PROCESSOR: String = "com.google.dagger:dagger-android-processor:${Versions.DAGGER}"
             const val DAGGER_COMPILER: String = "com.google.dagger:dagger-compiler:${Versions.DAGGER}"
+        }
+
+        object Firebase {
+            object Authentication {
+                const val AUTH_KTX: String = "com.google.firebase:firebase-auth-ktx:${Versions.FIREBASE_AUTH}"
+                const val AUTH_UI: String = "com.firebaseui:firebase-ui-auth:${Versions.FIREBASE_AUTH_UI}"
+            }
+        }
+
+        object Gms {
+            const val GOOGLE_SERVICES: String = "com.google.gms:google-services:${Versions.GOOGLE_SERVICES}"
         }
     }
 
@@ -152,4 +163,7 @@ object Dependencies {
     const val TIMBER: String = "com.jakewharton.timber:timber:${Versions.TIMBER}"
     const val LEAK_CANARY_ANDROID: String = "com.squareup.leakcanary:leakcanary-android:${Versions.LEAK_CANARY}"
     const val TOASTY: String = "com.github.GrenderG:Toasty:${Versions.TOASTY}"
+    const val FACEBOOK_ANDROID_SDK: String = "com.facebook.android:facebook-android-sdk:${Versions.FACEBOOK_ANDROID_SDK}"
+    const val TWITTER_ANDROID_SDK: String = "com.twitter.sdk.android:twitter-core:${Versions.TWITTER_ANDROID_SDK}"
+    const val ANDROID_FLAGS: String = "com.github.Shusshu:android-flags:${Versions.ANDROID_FLAGS}"
 }

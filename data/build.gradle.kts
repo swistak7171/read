@@ -10,7 +10,7 @@ android {
     buildToolsVersion(Configuration.BUILD_TOOLS_VERSION)
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
     defaultConfig {
@@ -29,8 +29,13 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    implementation(project(":common"))
-    implementation(project(":network"))
+    implementation(project(Modules.COMMON))
+    implementation(project(Modules.NETWORK))
+
+    // Dagger
+    api(Dependencies.Google.Dagger.DAGGER_ANDROID)
+    kapt(Dependencies.Google.Dagger.DAGGER_ANDROID_PROCESSOR)
+    kapt(Dependencies.Google.Dagger.DAGGER_COMPILER)
 
     // Room
     implementation(Dependencies.AndroidX.Room.ROOM_KTX)

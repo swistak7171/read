@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Authentication.Button" parent="@style/Widget.MaterialComponents.Button">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:padding">@dimen/default_padding</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="iconTint">@null</item>
+        <item name="iconGravity">start</item>
+        <item name="android:typeface">normal</item>
+    </style>
+
+    <style name="Authentication.Button.EmailAddress">
+        <item name="icon">@drawable/fui_ic_mail_white_24dp</item>
+        <item name="backgroundTint">@color/fui_bgEmail</item>
+    </style>
+
+    <style name="Authentication.Button.PhoneNumber">
+        <item name="icon">@drawable/fui_ic_phone_white_24dp</item>
+        <item name="backgroundTint">@color/fui_bgPhone</item>
+    </style>
+
+    <style name="Authentication.Button.GoogleAccount">
+        <item name="icon">@drawable/fui_ic_googleg_color_24dp</item>
+        <item name="backgroundTint">@color/fui_bgGoogle</item>
+        <item name="android:textColor">#757575</item>
+    </style>
+
+    <style name="Authentication.Button.FacebookAccount">
+        <item name="icon">@drawable/fui_ic_facebook_white_22dp</item>
+        <item name="backgroundTint">@color/fui_bgFacebook</item>
+    </style>
+
+    <style name="Authentication.Button.TwitterAccount">
+        <item name="icon">@drawable/fui_ic_twitter_bird_white_24dp</item>
+        <item name="backgroundTint">@color/fui_bgTwitter</item>
+    </style>
+</resources>

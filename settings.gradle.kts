@@ -3,7 +3,8 @@ include(
     ":common",
     ":data",
     ":network",
-    ":ui",
-    ":domain"
+    ":domain",
+    ":ui-base",
+    ":ui-authentication"
 )
 rootProject.name = "read"

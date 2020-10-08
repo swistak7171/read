@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sign_in">Zaloguj się</string>
+
+    <string name="choose_sign_in_option">Wybierz sposób logowania</string>
+    <string name="email_address_sign_in">Zaloguj się za pomocą adres email</string>
+    <string name="phone_number_sign_in">Zaloguj się za pomocą numeru telefonu</string>
+    <string name="google_account_sign_in">Zaloguj się za pomocą konta Google</string>
+    <string name="facebook_account_sign_in">Zaloguj się za pomocą konta Facebook</string>
+    <string name="twitter_account_sign_in">Zaloguj się za pomocą konta Twitter</string>
+
+    <string name="email_address">Adres email</string>
+    <string name="password">Hasło</string>
+    <string name="confirm_password">Potwierdź hasło</string>
+    <string name="invalid_email_address">Nieprawidłowy adres email</string>
+    <string name="invalid_password">Nieprawidłowe hasło</string>
+    <string name="not_equal_passwords">Nieidentyczne hasła</string>
+    <string name="user_with_email_exists">Użytkownik z tym adresem email już istnieje</string>
+
+    <string name="country_code">Kod kraju</string>
+    <string name="phone_number">Numer telefonu</string>
+    <string name="not_selected_country_code">Niewybrany kod kraju</string>
+    <string name="invalid_phone_number">Nieprawidłowy numer telefonu</string>
+
+    <string name="twitter_authentication_cancelled_by_user">Uwierzytelnianie zostało anulowane przez użytkownika</string>
+</resources>

@@ -8,15 +8,19 @@ android {
     compileSdkVersion(Configuration.COMPILE_SDK_VERSION)
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    implementation(project(":common"))
-    implementation(project(":data"))
+    implementation(project(Modules.COMMON))
+
+    // Dagger
+    api(Dependencies.Google.Dagger.DAGGER_ANDROID)
+    kapt(Dependencies.Google.Dagger.DAGGER_ANDROID_PROCESSOR)
+    kapt(Dependencies.Google.Dagger.DAGGER_COMPILER)
 
     // Retrofit
     api(Dependencies.Retrofit.RETROFIT)

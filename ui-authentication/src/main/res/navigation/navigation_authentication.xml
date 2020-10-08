@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_authentication"
+    app:startDestination="@id/mainMenuFragment">
+
+    <fragment
+        android:id="@+id/mainMenuFragment"
+        android:name="pl.kamilszustak.read.ui.authentication.mainmenu.MainMenuFragment"
+        android:label="@string/choose_sign_in_option"
+        tools:layout="@layout/fragment_main_menu" >
+        <action
+            android:id="@+id/action_mainMenuFragment_to_emailSignInFragment"
+            app:destination="@id/emailSignInFragment"
+            app:enterAnim="@anim/zoom_in_enter"
+            app:exitAnim="@anim/zoom_out_exit"
+            app:popEnterAnim="@anim/zoom_in_pop_enter"
+            app:popExitAnim="@anim/zoom_out_pop_exit" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_phoneSignInFragment"
+            app:destination="@id/phoneSignInFragment"
+            app:enterAnim="@anim/zoom_in_enter"
+            app:exitAnim="@anim/zoom_out_exit"
+            app:popEnterAnim="@anim/zoom_in_pop_enter"
+            app:popExitAnim="@anim/zoom_out_pop_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/emailSignInFragment"
+        android:name="pl.kamilszustak.read.ui.authentication.signin.email.EmailSignInFragment"
+        android:label="@string/email_address_sign_in"
+        tools:layout="@layout/fragment_email_sign_in" />
+
+    <fragment
+        android:id="@+id/phoneSignInFragment"
+        android:name="pl.kamilszustak.read.ui.authentication.signin.phone.PhoneSignInFragment"
+        android:label="@string/phone_number_sign_in"
+        tools:layout="@layout/fragment_phone_sign_in" />
+</navigation>

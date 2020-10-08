@@ -10,4 +10,5 @@ object Plugins {
     const val NAVIGATION_SAFE_ARGS_KOTLIN: String = "androidx.navigation.safeargs.kotlin"
     const val KTLINT: String = "org.jlleitschuh.gradle.ktlint"
     const val DOKKA: String = "org.jetbrains.dokka"
+    const val GOOGLE_SERVICES: String = "com.google.gms.google-services"
 }

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="pl.kamilszustak.read.ui.authentication.signin.phone.PhoneSignInViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/default_padding">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/countryCodeInputLayout"
+            android:hint="@string/country_code"
+            app:startIconDrawable="@{viewModel.country.flagDrawable}"
+            app:startIconTint="@null"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/phoneNumberInputLayout"
+            app:layout_constraintBottom_toBottomOf="@id/phoneNumberInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/countryCodeEditText"
+                android:text="@{`+` + viewModel.country.extension}"
+                android:focusable="false"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/phoneNumberInputLayout"
+            android:hint="@string/phone_number"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/countryCodeInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="@dimen/default_margin">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/phoneNumberEditText"
+                android:text="@={viewModel.phoneNumber}"
+                android:inputType="phone" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/signInButton"
+        android:text="@string/sign_in"
+        app:layout_constraintTop_toBottomOf="@id/phoneNumberInputLayout"
+        android:layout_marginTop="@dimen/default_margin" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
