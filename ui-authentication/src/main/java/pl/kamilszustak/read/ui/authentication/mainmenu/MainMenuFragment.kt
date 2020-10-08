@@ -17,7 +17,7 @@ import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
 import javax.inject.Inject
 
 class MainMenuFragment @Inject constructor(
-    viewModelFactory: ViewModelProvider.Factory
+    viewModelFactory: ViewModelProvider.Factory,
 ) : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel>(R.layout.fragment_main_menu) {
 
     override val binding: FragmentMainMenuBinding by viewBinding(FragmentMainMenuBinding::bind)

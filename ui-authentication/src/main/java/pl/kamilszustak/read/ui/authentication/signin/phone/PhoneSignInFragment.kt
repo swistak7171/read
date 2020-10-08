@@ -13,7 +13,7 @@ import pl.kamilszustak.read.ui.base.util.viewModels
 import javax.inject.Inject
 
 class PhoneSignInFragment @Inject constructor(
-    viewModelFactory: ViewModelProvider.Factory
+    viewModelFactory: ViewModelProvider.Factory,
 ) : AuthenticationDataBindingFragment<FragmentPhoneSignInBinding, PhoneSignInViewModel>(R.layout.fragment_phone_sign_in) {
 
     override val viewModel: PhoneSignInViewModel by viewModels(viewModelFactory)

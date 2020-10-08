@@ -6,5 +6,5 @@ data class Country(
     val name: String,
     val code: String,
     val extension: String,
-    val flagDrawable: Drawable?
+    val flagDrawable: Drawable?,
 )
