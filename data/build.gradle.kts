@@ -45,4 +45,7 @@ dependencies {
     // Roomigrant
     implementation(Dependencies.Roomigrant.ROOMIGRANT)
     kapt(Dependencies.Roomigrant.COMPILER)
+
+    // Firebase Database
+    implementation(Dependencies.Google.Firebase.Database.DATABASE_KTX)
 }

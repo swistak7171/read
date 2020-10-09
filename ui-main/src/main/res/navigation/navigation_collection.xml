@@ -21,5 +21,6 @@
     <fragment
         android:id="@+id/bookEditFragment"
         android:name="pl.kamilszustak.read.ui.main.book.edit.BookEditFragment"
+        android:label=""
         tools:layout="@layout/fragment_book_edit" />
 </navigation>

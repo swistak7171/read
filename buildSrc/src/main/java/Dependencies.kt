@@ -26,6 +26,10 @@ object Dependencies {
                 const val AUTH_KTX: String = "com.google.firebase:firebase-auth-ktx:${Versions.FIREBASE_AUTH}"
                 const val AUTH_UI: String = "com.firebaseui:firebase-ui-auth:${Versions.FIREBASE_AUTH_UI}"
             }
+
+            object Database {
+                const val DATABASE_KTX: String = "com.google.firebase:firebase-database-ktx:${Versions.FIREBASE_DATABASE}"
+            }
         }
 
         object Gms {
