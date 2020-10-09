@@ -1,7 +1,5 @@
 package pl.kamilszustak.read.ui.authentication.signin.phone
 
-import android.os.Bundle
-import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.afollestad.materialdialogs.list.listItems
 import org.jetbrains.anko.support.v4.startActivity
@@ -20,14 +18,7 @@ class PhoneSignInFragment @Inject constructor(
 
     override val viewModel: PhoneSignInViewModel by viewModels(viewModelFactory)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        setListeners()
-        observeViewModel()
-    }
-
-    private fun setListeners() {
+    override fun setListeners() {
         binding.countryCodeEditText.setOnClickListener {
             viewModel.dispatchEvent(PhoneSignInEvent.OnCountryEditTextClicked)
         }
@@ -37,7 +28,7 @@ class PhoneSignInFragment @Inject constructor(
         }
     }
 
-    private fun observeViewModel() {
+    override fun observeViewModel() {
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is PhoneSignInState.CountryPickerOpened -> {

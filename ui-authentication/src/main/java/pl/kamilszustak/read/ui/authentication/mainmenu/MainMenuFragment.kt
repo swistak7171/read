@@ -36,12 +36,10 @@ class MainMenuFragment @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setListeners()
-        observeViewModel()
         registerForActivityResults()
     }
 
-    private fun setListeners() {
+    override fun setListeners() {
         binding.emailAddressSignInButton.setOnClickListener {
             viewModel.dispatchEvent(MainMenuEvent.OnEmailSignInButtonClicked)
         }
@@ -69,7 +67,7 @@ class MainMenuFragment @Inject constructor(
         }
     }
 
-    private fun observeViewModel() {
+    override fun observeViewModel() {
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when (state) {
                 MainMenuState.EmailAuthentication -> {

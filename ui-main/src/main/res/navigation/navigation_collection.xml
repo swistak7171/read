@@ -9,5 +9,17 @@
         android:id="@+id/collectionFragment"
         android:name="pl.kamilszustak.read.ui.main.collection.CollectionFragment"
         android:label="@string/menu_collection_item_title"
-        tools:layout="@layout/fragment_collection" />
+        tools:layout="@layout/fragment_collection" >
+        <action
+            android:id="@+id/action_collectionFragment_to_bookEditFragment"
+            app:destination="@id/bookEditFragment"
+            app:enterAnim="@anim/zoom_in_enter"
+            app:exitAnim="@anim/zoom_out_exit"
+            app:popEnterAnim="@anim/zoom_in_pop_enter"
+            app:popExitAnim="@anim/zoom_out_pop_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookEditFragment"
+        android:name="pl.kamilszustak.read.ui.main.book.edit.BookEditFragment"
+        tools:layout="@layout/fragment_book_edit" />
 </navigation>

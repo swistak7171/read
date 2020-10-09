@@ -2,6 +2,7 @@ package pl.kamilszustak.read.ui.main.collection
 
 import androidx.lifecycle.ViewModelProvider
 import pl.kamilszustak.read.ui.base.binding.viewBinding
+import pl.kamilszustak.read.ui.base.util.navigateTo
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
 import pl.kamilszustak.read.ui.main.R
@@ -14,4 +15,21 @@ class CollectionFragment @Inject constructor(
 
     override val viewModel: CollectionViewModel by viewModels(viewModelFactory)
     override val binding: FragmentCollectionBinding by viewBinding(FragmentCollectionBinding::bind)
+
+    override fun setListeners() {
+        binding.addBookButton.setOnClickListener {
+            viewModel.dispatchEvent(CollectionEvent.OnAddBookButtonClicked)
+        }
+    }
+
+    override fun observeViewModel() {
+        viewModel.state.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                CollectionState.NavigateToBookEditFragment -> {
+                    val direction = CollectionFragmentDirections.actionCollectionFragmentToBookEditFragment()
+                    navigateTo(direction)
+                }
+            }
+        }
+    }
 }

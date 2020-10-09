@@ -1,7 +1,5 @@
 package pl.kamilszustak.read.ui.authentication.signin.email
 
-import android.os.Bundle
-import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import org.jetbrains.anko.support.v4.startActivity
 import pl.kamilszustak.read.ui.authentication.AuthenticationDataBindingFragment
@@ -18,20 +16,13 @@ class EmailSignInFragment @Inject constructor(
 
     override val viewModel: EmailSignInViewModel by viewModels(viewModelFactory)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        setListeners()
-        observeViewModel()
-    }
-
-    private fun setListeners() {
+    override fun setListeners() {
         binding.signInButton.setOnClickListener {
             viewModel.dispatchEvent(EmailSignInEvent.OnSignInButtonClicked)
         }
     }
 
-    private fun observeViewModel() {
+    override fun observeViewModel() {
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is EmailSignInState.Error -> {
