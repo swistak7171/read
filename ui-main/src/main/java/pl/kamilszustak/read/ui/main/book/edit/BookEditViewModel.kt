@@ -7,6 +7,7 @@ import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.domain.access.DateFormats
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
+import timber.log.Timber
 import java.util.Date
 import javax.inject.Inject
 
@@ -35,5 +36,10 @@ class BookEditViewModel @Inject constructor(
     }
 
     override fun handleEvent(event: BookEditEvent) {
+        when (event) {
+            BookEditEvent.OnAddBookButtonClicked -> {
+                Timber.i("Add book")
+            }
+        }
     }
 }

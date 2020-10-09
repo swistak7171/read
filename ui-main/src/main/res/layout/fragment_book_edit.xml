@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/publicationDateEditText"
                 android:text="@{viewModel.bookPublicationDate}"
-                android:inputType="number" />
+                android:focusable="false" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -112,7 +112,7 @@
                 android:id="@+id/descriptionEditText"
                 android:text="@={viewModel.bookDescription}"
                 android:inputType="textCapSentences|textMultiLine"
-                android:lines="4"
+                android:lines="5"
                 android:gravity="start|top" />
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
