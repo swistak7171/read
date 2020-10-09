@@ -6,6 +6,7 @@ import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.domain.access.DateFormats
 import pl.kamilszustak.read.domain.access.usecase.collection.AddCollectionBookUseCase
+import pl.kamilszustak.read.model.domain.CollectionBook
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
 import java.util.Date
@@ -64,5 +65,16 @@ class BookEditViewModel @Inject constructor(
             _state.value = BookEditState.Error(R.string.blank_book_number_of_pages)
             return
         }
+
+        val book = CollectionBook(
+            title = title,
+            author = author,
+            numberOfPages = pages,
+            publicationDate = date,
+            isbn = isbn,
+            description = description
+        )
+
+        addCollectionBook(book)
     }
 }

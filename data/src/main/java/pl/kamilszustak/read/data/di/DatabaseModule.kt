@@ -6,12 +6,14 @@ import com.google.firebase.ktx.Firebase
 import dagger.Module
 import dagger.Provides
 import pl.kamilszustak.read.data.qualifier.CollectionBookReference
+import pl.kamilszustak.read.data.qualifier.RootDatabaseReference
 import javax.inject.Singleton
 
 @Module
 class DatabaseModule {
     @Provides
     @Singleton
+    @RootDatabaseReference
     fun provideDatabaseReference(): DatabaseReference {
         val database = Firebase.database.apply {
             setPersistenceEnabled(true)
@@ -25,6 +27,6 @@ class DatabaseModule {
     @Provides
     @Singleton
     @CollectionBookReference
-    fun provideCollectionBookReference(reference: DatabaseReference): DatabaseReference =
+    fun provideCollectionBookReference(@RootDatabaseReference reference: DatabaseReference): DatabaseReference =
         reference.child("collection_books")
 }
