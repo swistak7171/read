@@ -85,6 +85,7 @@ class PhoneSignInViewModel @Inject constructor(
 
                     override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                         Timber.i("onVerificationCompleted")
+                        _state.postValue(PhoneSignInState.Authenticated)
                         // continuation.resume(PhoneAuthenticationResult.OnVerificationCompleted)
                     }
 

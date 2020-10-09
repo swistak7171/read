@@ -3,11 +3,13 @@ package pl.kamilszustak.read.ui.authentication.signin.email
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import org.jetbrains.anko.support.v4.startActivity
 import pl.kamilszustak.read.ui.authentication.AuthenticationDataBindingFragment
 import pl.kamilszustak.read.ui.authentication.R
 import pl.kamilszustak.read.ui.authentication.databinding.FragmentEmailSignInBinding
 import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.viewModels
+import pl.kamilszustak.read.ui.main.MainActivity
 import javax.inject.Inject
 
 class EmailSignInFragment @Inject constructor(
@@ -32,7 +34,14 @@ class EmailSignInFragment @Inject constructor(
     private fun observeViewModel() {
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when (state) {
-                is EmailSignInState.Error -> errorToast(state.messageResourceId)
+                is EmailSignInState.Error -> {
+                    errorToast(state.messageResourceId)
+                }
+
+                EmailSignInState.Authenticated -> {
+                    startActivity<MainActivity>()
+                    requireActivity().finish()
+                }
             }
         }
     }

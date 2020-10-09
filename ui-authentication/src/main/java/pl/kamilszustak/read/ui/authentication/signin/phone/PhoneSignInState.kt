@@ -12,4 +12,6 @@ sealed class PhoneSignInState : State {
     data class Error(
         @StringRes val messageResourceId: Int,
     ) : PhoneSignInState()
+
+    object Authenticated : PhoneSignInState()
 }
