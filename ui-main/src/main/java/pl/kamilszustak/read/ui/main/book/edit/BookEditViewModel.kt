@@ -5,14 +5,15 @@ import androidx.lifecycle.map
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.domain.access.DateFormats
+import pl.kamilszustak.read.domain.access.usecase.collection.AddCollectionBookUseCase
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
-import timber.log.Timber
 import java.util.Date
 import javax.inject.Inject
 
 class BookEditViewModel @Inject constructor(
     private val dateFormats: DateFormats,
+    private val addCollectionBook: AddCollectionBookUseCase,
 ) : BaseViewModel<BookEditEvent, BookEditState>() {
 
     private val _actionBarTitle: UniqueLiveData<Int> = UniqueLiveData()
@@ -37,9 +38,31 @@ class BookEditViewModel @Inject constructor(
 
     override fun handleEvent(event: BookEditEvent) {
         when (event) {
-            BookEditEvent.OnAddBookButtonClicked -> {
-                Timber.i("Add book")
-            }
+            BookEditEvent.OnAddBookButtonClicked -> addBook()
+        }
+    }
+
+    private fun addBook() {
+        val title = bookTitle.value
+        val author = bookAuthor.value
+        val pages = numberOfPages.value
+        val isbn = bookIsbn.value
+        val date = _bookPublicationDate.value
+        val description = bookDescription.value
+
+        if (title.isNullOrBlank()) {
+            _state.value = BookEditState.Error(R.string.blank_book_title)
+            return
+        }
+
+        if (author.isNullOrBlank()) {
+            _state.value = BookEditState.Error(R.string.blank_book_author)
+            return
+        }
+
+        if (pages == null || pages == 0) {
+            _state.value = BookEditState.Error(R.string.blank_book_number_of_pages)
+            return
         }
     }
 }

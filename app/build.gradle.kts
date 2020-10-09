@@ -95,4 +95,7 @@ dependencies {
 
     // LeakCanary
     debugImplementation(Dependencies.LEAK_CANARY_ANDROID)
+
+    // Firebase Database
+    implementation(Dependencies.Google.Firebase.Database.DATABASE_KTX)
 }

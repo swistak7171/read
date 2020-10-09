@@ -15,4 +15,8 @@
     <string name="publication_date">Publication date</string>
     <string name="isbn" translatable="false">ISBN</string>
     <string name="description">Description</string>
+
+    <string name="blank_book_title">Blank title</string>
+    <string name="blank_book_author">Blank author</string>
+    <string name="blank_book_number_of_pages">Blank number of pages</string>
 </resources>
