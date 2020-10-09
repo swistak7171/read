@@ -15,4 +15,6 @@ sealed class MainMenuState : State {
     data class Error(
         @StringRes val messageResourceId: Int,
     ) : MainMenuState()
+
+    object Authenticated : MainMenuState()
 }

@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import pl.kamilszustak.read.ui.base.view.fragment.DataBindingFragment
 
 abstract class AuthenticationDataBindingFragment<DB : ViewDataBinding, VM : ViewModel>(
-    @LayoutRes private val layoutResourceId: Int
+    @LayoutRes private val layoutResourceId: Int,
 ) : DataBindingFragment<DB, VM>(layoutResourceId) {
 
     override val viewModelId: Int

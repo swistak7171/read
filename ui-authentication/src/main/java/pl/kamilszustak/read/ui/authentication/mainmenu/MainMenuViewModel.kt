@@ -31,38 +31,36 @@ class MainMenuViewModel @Inject constructor(
     private val facebookCallbackManager: CallbackManager = CallbackManager.Factory.create()
 
     override fun handleEvent(event: MainMenuEvent) {
-        _state.value = when (event) {
+        when (event) {
             MainMenuEvent.OnEmailSignInButtonClicked -> {
-                MainMenuState.EmailAuthentication
+                _state.value = MainMenuState.EmailAuthentication
             }
 
             MainMenuEvent.OnPhoneSignInButtonClicked -> {
-                MainMenuState.PhoneAuthentication
+                _state.value = MainMenuState.PhoneAuthentication
             }
 
             is MainMenuEvent.OnGoogleSignInButtonClicked -> {
                 val intent = handleGoogleAuthentication(event)
-                intent.useOrNull { MainMenuState.GoogleAuthentication(it) }
+                intent.useOrNull {
+                    _state.value = MainMenuState.GoogleAuthentication(it)
+                }
             }
 
             is MainMenuEvent.OnActivityGoogleResult -> {
                 handleActivityGoogleResult(event)
-                null
             }
 
             is MainMenuEvent.OnFacebookSignInButtonClicked -> {
                 handleFacebookAuthentication(event)
-                null
             }
 
             is MainMenuEvent.OnActivityFacebookResult -> {
                 facebookCallbackManager.onActivityResult(event.requestCode, event.resultCode, event.data)
-                null
             }
 
             is MainMenuEvent.OnTwitterSignInButtonClicked -> {
                 handleTwitterAuthentication(event)
-                null
             }
         }
     }
@@ -85,8 +83,10 @@ class MainMenuViewModel @Inject constructor(
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
 
         viewModelScope.launch(Dispatchers.IO) {
-            val user = firebaseAuth.signInWithCredential(credential).await()
-            Timber.i(user.toString())
+            val result = firebaseAuth.signInWithCredential(credential).await()
+            if (result?.user != null) {
+                _state.postValue(MainMenuState.Authenticated)
+            }
         }
     }
 
@@ -96,6 +96,7 @@ class MainMenuViewModel @Inject constructor(
         val facebookCallback = object : FacebookCallback<LoginResult> {
             override fun onSuccess(result: LoginResult?) {
                 Timber.i("onSuccess")
+                _state.value = MainMenuState.Authenticated
             }
 
             override fun onError(error: FacebookException?) {
@@ -123,7 +124,9 @@ class MainMenuViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val result = task.await()
-                Timber.i(result.user.toString())
+                if (result?.user != null) {
+                    _state.postValue(MainMenuState.Authenticated)
+                }
             } catch (exception: FirebaseAuthWebException) {
                 _state.value = MainMenuState.Error(R.string.twitter_authentication_cancelled_by_user)
             }

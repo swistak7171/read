@@ -10,12 +10,11 @@ import pl.kamilszustak.read.common.FormValidator
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.ui.authentication.R
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
-import timber.log.Timber
 import javax.inject.Inject
 
 class EmailSignInViewModel @Inject constructor(
     private val formValidator: FormValidator,
-    private val firebaseAuth: FirebaseAuth
+    private val firebaseAuth: FirebaseAuth,
 ) : BaseViewModel<EmailSignInEvent, EmailSignInState>() {
 
     val userEmailAddress: UniqueLiveData<String> = UniqueLiveData()
@@ -61,7 +60,9 @@ class EmailSignInViewModel @Inject constructor(
                 result = firebaseAuth.signInWithEmailAndPassword(email, password).await()
             }
 
-            Timber.i(result.toString())
+            if (result?.user != null) {
+                _state.postValue(EmailSignInState.Authenticated)
+            }
         }
     }
 }

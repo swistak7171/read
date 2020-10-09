@@ -10,7 +10,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 
 abstract class DataBindingFragment<DB : ViewDataBinding, VM : ViewModel>(
-    @LayoutRes private val layoutResourceId: Int
+    @LayoutRes private val layoutResourceId: Int,
 ) : BaseFragment<DB, VM>() {
 
     private var _binding: DB? = null

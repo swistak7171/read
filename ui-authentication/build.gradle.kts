@@ -37,31 +37,14 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     implementation(project(Modules.UI_BASE))
+    implementation(project(Modules.UI_MAIN))
     implementation(project(Modules.COMMON))
-    implementation(project(Modules.DOMAIN))
-    implementation(project(Modules.DATA))
+    implementation(project(Modules.DOMAIN_ACCESS))
+    implementation(project(Modules.MODEL_DOMAIN))
 
     // Dagger
-    api(Dependencies.Google.Dagger.DAGGER_ANDROID)
     kapt(Dependencies.Google.Dagger.DAGGER_ANDROID_PROCESSOR)
     kapt(Dependencies.Google.Dagger.DAGGER_COMPILER)
-
-    // ConstraintLayout
-    implementation(Dependencies.AndroidX.ConstraintLayout.CONSTRAINT_LAYOUT)
-
-    // Preference
-    implementation(Dependencies.AndroidX.Preference.PREFERENCE)
-    implementation(Dependencies.AndroidX.Preference.PREFERENCE_KTX)
-
-    // SwipeRefreshLayout
-    implementation(Dependencies.AndroidX.SwipeRefreshLayout.SWIPE_REFRESH_LAYOUT)
-
-    // RecyclerView
-    implementation(Dependencies.AndroidX.RecyclerView.RECYCLER_VIEW)
-
-    // Glide
-    implementation(Dependencies.Glide.GLIDE)
-    kapt(Dependencies.Glide.GLIDE_COMPILER)
 
     // Firebase Authentication
     implementation(Dependencies.Google.Firebase.Authentication.AUTH_UI)
