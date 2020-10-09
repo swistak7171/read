@@ -3,15 +3,20 @@ package pl.kamilszustak.read.domain.di
 import dagger.Binds
 import dagger.Module
 import pl.kamilszustak.read.domain.access.usecase.country.GetAllCountriesUseCase
-import pl.kamilszustak.read.domain.usecase.country.GetAllCountriesUseCaseImpl
+import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryCodeUseCase
 import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryUseCase
+import pl.kamilszustak.read.domain.usecase.country.GetAllCountriesUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryCodeUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryUseCaseImpl
 
 @Module
 interface UseCaseModule {
     @Binds
-    fun bindGetAllCountriesUseCase(useCase: GetAllCountriesUseCaseImpl): pl.kamilszustak.read.domain.access.usecase.country.GetAllCountriesUseCase
+    fun bindGetAllCountriesUseCase(useCaseImpl: GetAllCountriesUseCaseImpl): GetAllCountriesUseCase
 
     @Binds
-    fun bindGetDefaultCountryUseCase(useCase: GetDefaultCountryUseCaseImpl): pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryUseCase
+    fun bindGetDefaultCountryUseCase(useCaseImpl: GetDefaultCountryUseCaseImpl): GetDefaultCountryUseCase
+
+    @Binds
+    fun bindGetDefaultCountryCodeUseCase(useCaseImpl: GetDefaultCountryCodeUseCaseImpl): GetDefaultCountryCodeUseCase
 }
