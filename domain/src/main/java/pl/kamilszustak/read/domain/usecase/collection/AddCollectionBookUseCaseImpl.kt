@@ -11,7 +11,6 @@ class AddCollectionBookUseCaseImpl @Inject constructor(
     private val collectionBookRepository: CollectionBookRepository,
 ) : AddCollectionBookUseCase {
 
-    override fun invoke(input: CollectionBook) {
+    override suspend fun invoke(input: CollectionBook): Result<Unit> =
         collectionBookRepository.add(input)
-    }
 }

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.ui.base.util.errorToast
+import pl.kamilszustak.read.ui.base.util.successToast
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.main.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.R
@@ -56,6 +57,10 @@ class BookEditFragment @Inject constructor(
             when (state) {
                 is BookEditState.Error -> {
                     errorToast(state.messageResourceId)
+                }
+
+                BookEditState.BookAdded -> {
+                    successToast(R.string.book_added_successfully)
                 }
             }
         }

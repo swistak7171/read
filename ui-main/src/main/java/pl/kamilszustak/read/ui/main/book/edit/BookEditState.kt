@@ -7,4 +7,6 @@ sealed class BookEditState : State {
     data class Error(
         @StringRes val messageResourceId: Int,
     ) : BookEditState()
+
+    object BookAdded : BookEditState()
 }

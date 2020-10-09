@@ -19,4 +19,6 @@
     <string name="blank_book_title">Blank title</string>
     <string name="blank_book_author">Blank author</string>
     <string name="blank_book_number_of_pages">Blank number of pages</string>
+    <string name="adding_book_error_message">An error occurred while adding the book</string>
+    <string name="book_added_successfully">Book added successfully</string>
 </resources>

@@ -2,6 +2,9 @@ package pl.kamilszustak.read.ui.main.book.edit
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.domain.access.DateFormats
@@ -75,6 +78,12 @@ class BookEditViewModel @Inject constructor(
             description = description
         )
 
-        addCollectionBook(book)
+        viewModelScope.launch(Dispatchers.IO) {
+            addCollectionBook(book).onSuccess {
+                _state.value = BookEditState.BookAdded
+            }.onFailure {
+                _state.value = BookEditState.Error(R.string.adding_book_error_message)
+            }
+        }
     }
 }
