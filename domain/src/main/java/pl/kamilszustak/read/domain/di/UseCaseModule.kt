@@ -2,9 +2,11 @@ package pl.kamilszustak.read.domain.di
 
 import dagger.Binds
 import dagger.Module
+import pl.kamilszustak.read.domain.access.usecase.collection.AddCollectionBookUseCase
 import pl.kamilszustak.read.domain.access.usecase.country.GetAllCountriesUseCase
 import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryCodeUseCase
 import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryUseCase
+import pl.kamilszustak.read.domain.usecase.collection.AddCollectionBookUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.country.GetAllCountriesUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryCodeUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryUseCaseImpl
@@ -19,4 +21,7 @@ interface UseCaseModule {
 
     @Binds
     fun bindGetDefaultCountryCodeUseCase(useCaseImpl: GetDefaultCountryCodeUseCaseImpl): GetDefaultCountryCodeUseCase
+
+    @Binds
+    fun bindAddCollectionBookUseCase(useCaseImpl: AddCollectionBookUseCaseImpl): AddCollectionBookUseCase
 }
