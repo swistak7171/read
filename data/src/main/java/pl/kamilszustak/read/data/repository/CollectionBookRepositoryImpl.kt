@@ -3,6 +3,7 @@ package pl.kamilszustak.read.data.repository
 import com.google.firebase.database.DatabaseReference
 import kotlinx.coroutines.tasks.await
 import pl.kamilszustak.read.common.util.useOrNull
+import pl.kamilszustak.read.common.util.withIOContext
 import pl.kamilszustak.read.data.access.repository.CollectionBookRepository
 import pl.kamilszustak.read.data.qualifier.CollectionBookReference
 import pl.kamilszustak.read.model.domain.CollectionBook
@@ -15,10 +16,12 @@ class CollectionBookRepositoryImpl @Inject constructor(
 ) : CollectionBookRepository {
 
     override suspend fun add(book: CollectionBook): Result<Unit> {
-        databaseReference.push().key.useOrNull { book.id = it }
+        return withIOContext {
+            databaseReference.push().key.useOrNull { book.id = it }
 
-        return runCatching {
-            databaseReference.setValue(book).await()
-        }
+            runCatching {
+                databaseReference.setValue(book).await()
+            }
+        }.map { Unit }
     }
 }

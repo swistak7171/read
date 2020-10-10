@@ -7,4 +7,6 @@ sealed class QuoteEditState : State {
     data class Error(
         @StringRes val messageResourceId: Int,
     ) : QuoteEditState()
+
+    object QuoteAdded : QuoteEditState()
 }

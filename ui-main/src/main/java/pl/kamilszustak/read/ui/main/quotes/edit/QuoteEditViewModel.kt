@@ -1,8 +1,12 @@
 package pl.kamilszustak.read.ui.main.quotes.edit
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.domain.access.usecase.quote.AddQuoteUseCase
+import pl.kamilszustak.read.model.domain.Quote
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
 import javax.inject.Inject
@@ -42,6 +46,22 @@ class QuoteEditViewModel @Inject constructor(
         if (author.isNullOrBlank()) {
             _state.value = QuoteEditState.Error(R.string.blank_quote_author)
             return
+        }
+
+        val quote = Quote(
+            content = content,
+            author = author,
+            book = book
+        )
+
+        viewModelScope.launch(Dispatchers.Main) {
+            addQuote(quote)
+                .onSuccess {
+                    _state.value = QuoteEditState.QuoteAdded
+                }
+                .onFailure {
+                    _state.value = QuoteEditState.Error(R.string.adding_quote_error_message)
+                }
         }
     }
 }

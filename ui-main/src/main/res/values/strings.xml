@@ -30,4 +30,6 @@
     <string name="book_title">Book title</string>
     <string name="blank_quote_content">Blank content</string>
     <string name="blank_quote_author">Blank author</string>
+    <string name="adding_quote_error_message">An error occurred while adding the quote</string>
+    <string name="quote_added_successfully">Quote added successfully</string>
 </resources>

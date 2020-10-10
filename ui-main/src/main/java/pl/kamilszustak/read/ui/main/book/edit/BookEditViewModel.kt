@@ -3,6 +3,7 @@ package pl.kamilszustak.read.ui.main.book.edit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.common.util.useOrNull
@@ -87,14 +88,13 @@ class BookEditViewModel @Inject constructor(
             description = description
         )
 
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.Main) {
             addCollectionBook(book)
                 .onSuccess {
-                    _state.postValue(BookEditState.BookAdded)
+                    _state.value = BookEditState.BookAdded
                 }
                 .onFailure {
-                    val errorState = BookEditState.Error(R.string.adding_book_error_message)
-                    _state.postValue(errorState)
+                    _state.value = BookEditState.Error(R.string.adding_book_error_message)
                 }
         }
     }

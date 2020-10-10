@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.ui.base.util.errorToast
+import pl.kamilszustak.read.ui.base.util.navigateUp
+import pl.kamilszustak.read.ui.base.util.successToast
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.main.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.R
@@ -56,6 +58,11 @@ class QuoteEditFragment @Inject constructor(
             when (state) {
                 is QuoteEditState.Error -> {
                     errorToast(state.messageResourceId)
+                }
+
+                QuoteEditState.QuoteAdded -> {
+                    successToast(R.string.quote_added_successfully)
+                    navigateUp()
                 }
             }
         }
