@@ -26,4 +26,6 @@
     <!-- QuoteEditFragment -->
     <string name="content">Treść</string>
     <string name="book_title">Tytuł książki</string>
+    <string name="blank_quote_content">Pusta treść</string>
+    <string name="blank_quote_author">Brak autora</string>
 </resources>

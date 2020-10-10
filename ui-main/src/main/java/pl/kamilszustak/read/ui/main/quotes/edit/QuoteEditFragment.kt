@@ -6,6 +6,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.main.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.R
@@ -40,5 +41,15 @@ class QuoteEditFragment @Inject constructor(
         super.onViewCreated(view, savedInstanceState)
 
         setHasOptionsMenu(true)
+    }
+
+    override fun observeViewModel() {
+        viewModel.state.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is QuoteEditState.Error -> {
+                    errorToast(state.messageResourceId)
+                }
+            }
+        }
     }
 }

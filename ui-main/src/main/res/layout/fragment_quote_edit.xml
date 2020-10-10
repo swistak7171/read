@@ -27,6 +27,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/authorEditText"
+                    android:text="@={viewModel.quoteContent}"
                     android:inputType="textCapWords" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -41,6 +42,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/bookTitleEditText"
+                    android:text="@={viewModel.quoteAuthor}"
                     android:inputType="textCapSentences" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -55,6 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/contentEditText"
+                    android:text="@={viewModel.quoteBook}"
                     android:inputType="textCapSentences|textMultiLine"
                     android:lines="5" />
             </com.google.android.material.textfield.TextInputLayout>
