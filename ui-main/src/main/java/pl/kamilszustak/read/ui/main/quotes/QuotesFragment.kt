@@ -2,6 +2,7 @@ package pl.kamilszustak.read.ui.main.quotes
 
 import androidx.lifecycle.ViewModelProvider
 import pl.kamilszustak.read.ui.base.binding.viewBinding
+import pl.kamilszustak.read.ui.base.util.navigateTo
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
 import pl.kamilszustak.read.ui.main.R
@@ -14,4 +15,21 @@ class QuotesFragment @Inject constructor(
 
     override val viewModel: QuotesViewModel by viewModels(viewModelFactory)
     override val binding: FragmentQuotesBinding by viewBinding(FragmentQuotesBinding::bind)
+
+    override fun setListeners() {
+        binding.addQuoteButton.setOnClickListener {
+            viewModel.dispatchEvent(QuotesEvent.OnAddQuoteButtonClicked)
+        }
+    }
+
+    override fun observeViewModel() {
+        viewModel.state.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                QuotesState.NavigateToQuoteEditFragment -> {
+                    val direction = QuotesFragmentDirections.actionQuotesFragmentToQuoteEditFragment()
+                    navigateTo(direction)
+                }
+            }
+        }
+    }
 }
