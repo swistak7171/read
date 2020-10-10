@@ -10,6 +10,7 @@ import pl.kamilszustak.read.ui.main.collection.CollectionFragment
 import pl.kamilszustak.read.ui.main.discover.DiscoverFragment
 import pl.kamilszustak.read.ui.main.profile.ProfileFragment
 import pl.kamilszustak.read.ui.main.quotes.QuotesFragment
+import pl.kamilszustak.read.ui.main.quotes.edit.QuoteEditFragment
 import pl.kamilszustak.read.ui.main.search.SearchFragment
 
 @Module
@@ -43,4 +44,9 @@ interface MainFragmentModule {
     @IntoMap
     @FragmentKey(BookEditFragment::class)
     fun bindBookEditFragment(fragment: BookEditFragment): Fragment
+
+    @Binds
+    @IntoMap
+    @FragmentKey(QuoteEditFragment::class)
+    fun bindQuoteEditFragment(fragment: QuoteEditFragment): Fragment
 }
