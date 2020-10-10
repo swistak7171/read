@@ -22,4 +22,8 @@
     <string name="blank_book_number_of_pages">Blank number of pages</string>
     <string name="adding_book_error_message">An error occurred while adding the book</string>
     <string name="book_added_successfully">Book added successfully</string>
+
+    <!-- QuoteEditFragment -->
+    <string name="content">Content</string>
+    <string name="book_title">Book title</string>
 </resources>

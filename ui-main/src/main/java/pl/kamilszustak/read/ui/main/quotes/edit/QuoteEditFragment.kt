@@ -1,5 +1,10 @@
 package pl.kamilszustak.read.ui.main.quotes.edit
 
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.main.MainDataBindingFragment
@@ -12,4 +17,28 @@ class QuoteEditFragment @Inject constructor(
 ) : MainDataBindingFragment<FragmentQuoteEditBinding, QuoteEditViewModel>(R.layout.fragment_quote_edit) {
 
     override val viewModel: QuoteEditViewModel by viewModels(viewModelFactory)
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_quote_edit_fragment, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.addQuoteItem -> {
+                viewModel.dispatchEvent(QuoteEditEvent.OnAddQuoteButtonClicked)
+                true
+            }
+
+            else -> {
+                return super.onOptionsItemSelected(item)
+            }
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setHasOptionsMenu(true)
+    }
 }
