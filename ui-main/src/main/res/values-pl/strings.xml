@@ -24,6 +24,8 @@
     <string name="book_added_successfully">Książka dodana pomyślnie</string>
 
     <!-- QuoteEditFragment -->
+    <string name="add_quote">Dodaj cytat</string>
+    <string name="edit_quote">Edytuj cytat</string>
     <string name="content">Treść</string>
     <string name="book_title">Tytuł książki</string>
     <string name="blank_quote_content">Pusta treść</string>

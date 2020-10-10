@@ -1,5 +1,6 @@
 package pl.kamilszustak.read.ui.main.quotes.edit
 
+import androidx.lifecycle.LiveData
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
@@ -8,9 +9,17 @@ import javax.inject.Inject
 class QuoteEditViewModel @Inject constructor(
 ) : BaseViewModel<QuoteEditEvent, QuoteEditState>() {
 
+    private val _actionBarTitle: UniqueLiveData<Int> = UniqueLiveData()
+    val actionBarTitle: LiveData<Int>
+        get() = _actionBarTitle
+
     val quoteContent: UniqueLiveData<String> = UniqueLiveData()
     val quoteAuthor: UniqueLiveData<String> = UniqueLiveData()
     val quoteBook: UniqueLiveData<String> = UniqueLiveData()
+
+    init {
+        _actionBarTitle.value = R.string.add_quote
+    }
 
     override fun handleEvent(event: QuoteEditEvent) {
         when (event) {

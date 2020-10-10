@@ -5,7 +5,9 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.main.MainDataBindingFragment
@@ -44,6 +46,12 @@ class QuoteEditFragment @Inject constructor(
     }
 
     override fun observeViewModel() {
+        viewModel.actionBarTitle.observe(viewLifecycleOwner) { titleResourceId ->
+            titleResourceId.useOrNull { resourceId ->
+                (activity as? AppCompatActivity)?.supportActionBar?.title = getString(resourceId)
+            }
+        }
+
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is QuoteEditState.Error -> {
