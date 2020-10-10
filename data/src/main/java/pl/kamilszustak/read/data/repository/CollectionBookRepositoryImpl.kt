@@ -11,14 +11,14 @@ import javax.inject.Singleton
 
 @Singleton
 class CollectionBookRepositoryImpl @Inject constructor(
-    @CollectionBookReference private val reference: DatabaseReference,
+    @CollectionBookReference private val databaseReference: DatabaseReference,
 ) : CollectionBookRepository {
 
     override suspend fun add(book: CollectionBook): Result<Unit> {
-        reference.push().key.useOrNull { book.id = it }
+        databaseReference.push().key.useOrNull { book.id = it }
 
         return runCatching {
-            reference.setValue(book).await()
+            databaseReference.setValue(book).await()
         }
     }
 }
