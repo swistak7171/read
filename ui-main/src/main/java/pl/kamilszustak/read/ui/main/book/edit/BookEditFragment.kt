@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.ui.base.util.errorToast
+import pl.kamilszustak.read.ui.base.util.navigateUp
 import pl.kamilszustak.read.ui.base.util.successToast
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.main.MainDataBindingFragment
@@ -61,6 +62,7 @@ class BookEditFragment @Inject constructor(
 
                 BookEditState.BookAdded -> {
                     successToast(R.string.book_added_successfully)
+                    navigateUp()
                 }
             }
         }

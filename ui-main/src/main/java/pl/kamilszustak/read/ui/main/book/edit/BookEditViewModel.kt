@@ -78,11 +78,13 @@ class BookEditViewModel @Inject constructor(
             description = description
         )
 
-        viewModelScope.launch(Dispatchers.IO) {
-            addCollectionBook(book).onSuccess {
-                _state.value = BookEditState.BookAdded
-            }.onFailure {
-                _state.value = BookEditState.Error(R.string.adding_book_error_message)
+        viewModelScope.launch(Dispatchers.Main) {
+            val result = addCollectionBook(book)
+            if (result.isSuccess) {
+                _state.postValue(BookEditState.BookAdded)
+            } else {
+                val errorState = BookEditState.Error(R.string.adding_book_error_message)
+                _state.postValue(errorState)
             }
         }
     }
