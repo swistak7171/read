@@ -2,11 +2,13 @@ package pl.kamilszustak.read.ui.main.quotes.edit
 
 import androidx.lifecycle.LiveData
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
+import pl.kamilszustak.read.domain.access.usecase.quote.AddQuoteUseCase
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
 import javax.inject.Inject
 
 class QuoteEditViewModel @Inject constructor(
+    private val addQuote: AddQuoteUseCase,
 ) : BaseViewModel<QuoteEditEvent, QuoteEditState>() {
 
     private val _actionBarTitle: UniqueLiveData<Int> = UniqueLiveData()
