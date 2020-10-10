@@ -15,6 +15,7 @@
     <string name="publication_date">Data wydania</string>
     <string name="isbn" translatable="false">ISBN</string>
     <string name="description">Opis</string>
+    <string name="select_a_publication_date">Wybierz datę publikacji</string>
 
     <string name="blank_book_title">Brak tytułu</string>
     <string name="blank_book_author">Brak autora</string>

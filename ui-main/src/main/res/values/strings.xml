@@ -15,6 +15,7 @@
     <string name="publication_date">Publication date</string>
     <string name="isbn" translatable="false">ISBN</string>
     <string name="description">Description</string>
+    <string name="select_a_publication_date">Select a publication date</string>
 
     <string name="blank_book_title">Blank title</string>
     <string name="blank_book_author">Blank author</string>

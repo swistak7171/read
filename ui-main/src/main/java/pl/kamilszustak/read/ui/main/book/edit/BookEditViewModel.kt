@@ -3,7 +3,6 @@ package pl.kamilszustak.read.ui.main.book.edit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.common.util.useOrNull
@@ -42,7 +41,17 @@ class BookEditViewModel @Inject constructor(
 
     override fun handleEvent(event: BookEditEvent) {
         when (event) {
-            BookEditEvent.OnAddBookButtonClicked -> addBook()
+            BookEditEvent.OnDateEditTextClicked -> {
+                _state.value = BookEditState.OpenDatePicker
+            }
+
+            is BookEditEvent.OnPublicationDateSelected -> {
+                _bookPublicationDate.value = event.date
+            }
+
+            BookEditEvent.OnAddBookButtonClicked -> {
+                addBook()
+            }
         }
     }
 
@@ -78,14 +87,15 @@ class BookEditViewModel @Inject constructor(
             description = description
         )
 
-        viewModelScope.launch(Dispatchers.Main) {
-            val result = addCollectionBook(book)
-            if (result.isSuccess) {
-                _state.postValue(BookEditState.BookAdded)
-            } else {
-                val errorState = BookEditState.Error(R.string.adding_book_error_message)
-                _state.postValue(errorState)
-            }
+        viewModelScope.launch {
+            addCollectionBook(book)
+                .onSuccess {
+                    _state.postValue(BookEditState.BookAdded)
+                }
+                .onFailure {
+                    val errorState = BookEditState.Error(R.string.adding_book_error_message)
+                    _state.postValue(errorState)
+                }
         }
     }
 }

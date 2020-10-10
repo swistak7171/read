@@ -8,5 +8,6 @@ sealed class BookEditState : State {
         @StringRes val messageResourceId: Int,
     ) : BookEditState()
 
+    object OpenDatePicker : BookEditState()
     object BookAdded : BookEditState()
 }
