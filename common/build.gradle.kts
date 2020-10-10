@@ -18,6 +18,10 @@ android {
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+        freeCompilerArgs = listOf(
+            "-Xallow-result-return-type",
+            "-XXLanguage:+InlineClasses"
+        )
     }
 
     compileOptions {
@@ -29,8 +33,11 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
+    api(Dependencies.Kotlin.KOTLIN_STANDARD_LIBRARY)
+
     // Kotlin Coroutines
     api(Dependencies.Kotlin.Coroutines.KOTLINX_COROUTINES_CORE)
+    api(Dependencies.Kotlin.Coroutines.KOTLINX_COROUTINES_CORE_JVM)
     api(Dependencies.Kotlin.Coroutines.KOTLINX_COROUTINES_ANDROID)
     api(Dependencies.Kotlin.Coroutines.KOTLINX_COROUTINES_PLAY_SERVICES)
 

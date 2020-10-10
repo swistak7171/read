@@ -5,5 +5,10 @@ import javax.inject.Inject
 
 class CollectionViewModel @Inject constructor() : BaseViewModel<CollectionEvent, CollectionState>() {
     override fun handleEvent(event: CollectionEvent) {
+        when (event) {
+            CollectionEvent.OnAddBookButtonClicked -> {
+                _state.value = CollectionState.NavigateToBookEditFragment
+            }
+        }
     }
 }

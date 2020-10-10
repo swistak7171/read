@@ -39,4 +39,5 @@ object Versions {
     const val FACEBOOK_ANDROID_SDK: String = "7.1.0"
     const val TWITTER_ANDROID_SDK: String = "3.3.0"
     const val ANDROID_FLAGS: String = "1.0.4"
+    const val FIREBASE_DATABASE: String = "19.5.0"
 }

@@ -5,6 +5,7 @@ import dagger.Module
 @Module(
     includes = [
         RepositoryModule::class,
+        DatabaseModule::class,
     ]
 )
 interface DataModule

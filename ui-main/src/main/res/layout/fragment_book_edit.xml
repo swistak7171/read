@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="pl.kamilszustak.read.ui.main.book.edit.BookEditViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_padding">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/titleInputLayout"
+                android:hint="@string/title"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/titleEditText"
+                    android:text="@={viewModel.bookTitle}"
+                    android:inputType="textCapSentences" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/authorInputLayout"
+                android:hint="@string/author"
+                app:layout_constraintTop_toBottomOf="@id/titleInputLayout"
+                android:layout_marginTop="@dimen/default_margin">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/authorEditText"
+                    android:text="@={viewModel.bookAuthor}"
+                    android:inputType="textCapWords" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/numberOfPagesInputLayout"
+                android:hint="@string/number_of_pages"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/publicationDateInputLayout"
+                app:layout_constraintTop_toBottomOf="@id/authorInputLayout"
+                android:layout_marginEnd="@dimen/default_half_margin"
+                android:layout_marginTop="@dimen/default_margin">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/numberOfPagesEditText"
+                    android:text="@={viewModel.numberOfPages}"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/publicationDateInputLayout"
+                android:hint="@string/publication_date"
+                app:layout_constraintStart_toEndOf="@id/numberOfPagesInputLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/numberOfPagesInputLayout"
+                android:layout_marginStart="@dimen/default_half_margin">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/publicationDateEditText"
+                    android:text="@{viewModel.bookPublicationDate}"
+                    android:focusable="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/isbnInputLayout"
+                android:hint="@string/isbn"
+                app:layout_constraintTop_toBottomOf="@id/numberOfPagesInputLayout"
+                android:layout_marginTop="@dimen/default_margin">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/isbnEditText"
+                    android:text="@={viewModel.bookIsbn}"
+                    android:inputType="number"
+                    android:maxLength="13" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/descriptionInputLayout"
+                android:hint="@string/description"
+                app:layout_constraintTop_toBottomOf="@id/isbnInputLayout"
+                android:layout_marginTop="@dimen/default_margin">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/descriptionEditText"
+                    android:text="@={viewModel.bookDescription}"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:lines="5"
+                    android:gravity="start|top" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

@@ -20,11 +20,11 @@ import javax.inject.Singleton
     modules = [
         AndroidInjectionModule::class,
         ApplicationModule::class,
-        SubcomponentsModule::class,
         AssistedInjectModule::class,
         FirebaseAuthenticationModule::class,
         DataModule::class,
         DomainModule::class,
+        SubcomponentsModule::class,
     ]
 )
 @Singleton

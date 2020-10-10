@@ -5,4 +5,21 @@
     <string name="menu_discover_item_title">Odkrywaj</string>
     <string name="menu_quotes_item_title">Cytaty</string>
     <string name="menu_profile_item_title">Profil</string>
+
+    <!-- BookEditFragment -->
+    <string name="add_book">Dodaj książkę</string>
+    <string name="edit_book">Edytuj książkę</string>
+    <string name="title">Tytuł</string>
+    <string name="author">Autor</string>
+    <string name="number_of_pages">Liczba stron</string>
+    <string name="publication_date">Data wydania</string>
+    <string name="isbn" translatable="false">ISBN</string>
+    <string name="description">Opis</string>
+    <string name="select_a_publication_date">Wybierz datę publikacji</string>
+
+    <string name="blank_book_title">Brak tytułu</string>
+    <string name="blank_book_author">Brak autora</string>
+    <string name="blank_book_number_of_pages">Brak ilości stron</string>
+    <string name="adding_book_error_message">Wystąpił błąd podczas dodawania książki</string>
+    <string name="book_added_successfully">Książka dodana pomyślnie</string>
 </resources>

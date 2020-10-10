@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id(Plugins.ANDROID_LIBRARY)
     id(Plugins.KOTLIN_ANDROID)
@@ -10,6 +12,10 @@ android {
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+        freeCompilerArgs = listOf(
+            "-Xallow-result-return-type",
+            "-XXLanguage:+InlineClasses"
+        )
     }
 
     defaultConfig {
@@ -45,4 +51,7 @@ dependencies {
     // Roomigrant
     implementation(Dependencies.Roomigrant.ROOMIGRANT)
     kapt(Dependencies.Roomigrant.COMPILER)
+
+    // Firebase Database
+    implementation(Dependencies.Google.Firebase.Database.DATABASE_KTX)
 }

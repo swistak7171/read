@@ -58,6 +58,14 @@ android {
         }
     }
 
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        freeCompilerArgs = listOf(
+            "-Xallow-result-return-type",
+            "-XXLanguage:+InlineClasses"
+        )
+    }
+
     packagingOptions {
         exclude("META-INF/DEPENDENCIES")
         exclude("META-INF/LICENSE")
@@ -95,4 +103,7 @@ dependencies {
 
     // LeakCanary
     debugImplementation(Dependencies.LEAK_CANARY_ANDROID)
+
+    // Firebase Database
+    implementation(Dependencies.Google.Firebase.Database.DATABASE_KTX)
 }

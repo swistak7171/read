@@ -9,6 +9,10 @@ android {
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+        freeCompilerArgs = listOf(
+            "-Xallow-result-return-type",
+            "-XXLanguage:+InlineClasses"
+        )
     }
 }
 

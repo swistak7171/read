@@ -5,4 +5,21 @@
     <string name="menu_discover_item_title">Discover</string>
     <string name="menu_quotes_item_title">Quotes</string>
     <string name="menu_profile_item_title">Profile</string>
+
+    <!-- BookEditFragment -->
+    <string name="add_book">Add book</string>
+    <string name="edit_book">Edit book</string>
+    <string name="title">Title</string>
+    <string name="author">Author</string>
+    <string name="number_of_pages">Number of pages</string>
+    <string name="publication_date">Publication date</string>
+    <string name="isbn" translatable="false">ISBN</string>
+    <string name="description">Description</string>
+    <string name="select_a_publication_date">Select a publication date</string>
+
+    <string name="blank_book_title">Blank title</string>
+    <string name="blank_book_author">Blank author</string>
+    <string name="blank_book_number_of_pages">Blank number of pages</string>
+    <string name="adding_book_error_message">An error occurred while adding the book</string>
+    <string name="book_added_successfully">Book added successfully</string>
 </resources>
