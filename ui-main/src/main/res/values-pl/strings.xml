@@ -2,7 +2,7 @@
 <resources>
     <string name="menu_collection_item_title">Kolekcja</string>
     <string name="menu_search_item_title">Szukaj</string>
-    <string name="menu_discover_item_title">Odkrywaj</string>
+    <string name="menu_scanner_item_title">Skaner</string>
     <string name="menu_quotes_item_title">Cytaty</string>
     <string name="menu_profile_item_title">Profil</string>
 
@@ -32,4 +32,8 @@
     <string name="blank_quote_author">Brak autora</string>
     <string name="adding_quote_error_message">Wystąpił błąd podczas dodawania cytatu</string>
     <string name="quote_added_successfully">Cytat dodany pomyślnie</string>
+
+    <!-- ScannerFragment -->
+    <string name="camera_permission_denied">Dostęp do kamery został odrzucony</string>
+    <string name="camera_permission_permanently_denied">Dostęp do kamery został odrzucony na stałe</string>
 </resources>

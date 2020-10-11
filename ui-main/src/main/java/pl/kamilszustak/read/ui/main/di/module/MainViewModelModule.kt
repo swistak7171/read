@@ -7,7 +7,7 @@ import dagger.multibindings.IntoMap
 import pl.kamilszustak.read.ui.base.di.key.ViewModelKey
 import pl.kamilszustak.read.ui.main.book.edit.BookEditViewModel
 import pl.kamilszustak.read.ui.main.collection.CollectionViewModel
-import pl.kamilszustak.read.ui.main.discover.DiscoverViewModel
+import pl.kamilszustak.read.ui.main.scanner.ScannerViewModel
 import pl.kamilszustak.read.ui.main.profile.ProfileViewModel
 import pl.kamilszustak.read.ui.main.quotes.QuotesViewModel
 import pl.kamilszustak.read.ui.main.quotes.edit.QuoteEditViewModel
@@ -27,8 +27,8 @@ interface MainViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(DiscoverViewModel::class)
-    fun bindDiscoverViewModel(viewModel: DiscoverViewModel): ViewModel
+    @ViewModelKey(ScannerViewModel::class)
+    fun bindScannerViewModel(viewModel: ScannerViewModel): ViewModel
 
     @Binds
     @IntoMap

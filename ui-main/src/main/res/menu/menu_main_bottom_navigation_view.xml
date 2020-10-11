@@ -15,9 +15,9 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/navigation_discover"
-        android:icon="@drawable/icon_compass"
-        android:title="@string/menu_discover_item_title"
+        android:id="@+id/navigation_scanner"
+        android:icon="@drawable/icon_capture"
+        android:title="@string/menu_scanner_item_title"
         app:showAsAction="always" />
 
     <item

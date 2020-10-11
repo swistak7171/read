@@ -2,7 +2,7 @@
 <resources>
     <string name="menu_collection_item_title">Collection</string>
     <string name="menu_search_item_title">Search</string>
-    <string name="menu_discover_item_title">Discover</string>
+    <string name="menu_scanner_item_title">Scanner</string>
     <string name="menu_quotes_item_title">Quotes</string>
     <string name="menu_profile_item_title">Profile</string>
 
@@ -32,4 +32,8 @@
     <string name="blank_quote_author">Blank author</string>
     <string name="adding_quote_error_message">An error occurred while adding the quote</string>
     <string name="quote_added_successfully">Quote added successfully</string>
+
+    <!-- ScannerFragment -->
+    <string name="camera_permission_denied">Camera permission denied</string>
+    <string name="camera_permission_permanently_denied">Camera permission permanently denied</string>
 </resources>

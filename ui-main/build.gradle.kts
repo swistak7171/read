@@ -51,4 +51,10 @@ dependencies {
 
     // Firebase Authentication
     implementation(Dependencies.Google.Firebase.Authentication.AUTH_UI)
+
+    // CameraX
+    implementation(Dependencies.AndroidX.CameraX.CAMERA_CORE)
+    implementation(Dependencies.AndroidX.CameraX.CAMERA_2)
+    implementation(Dependencies.AndroidX.CameraX.CAMERA_LIFECYCLE)
+    implementation(Dependencies.AndroidX.CameraX.CAMERA_VIEW)
 }

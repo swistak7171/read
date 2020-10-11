@@ -4,10 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <androidx.camera.view.PreviewView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/menu_discover_item_title"
-        android:textSize="64sp" />
+        android:id="@+id/previewView" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/icon_capture"
+        android:alpha="0.50" />
 </androidx.constraintlayout.widget.ConstraintLayout>

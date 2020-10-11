@@ -36,6 +36,10 @@ object Dependencies {
         object Gms {
             const val GOOGLE_SERVICES: String = "com.google.gms:google-services:${Versions.GOOGLE_SERVICES}"
         }
+
+        object MLKit {
+            const val BARCODE_SCANNING: String = "com.google.mlkit:barcode-scanning:${Versions.ML_KIT_BARCODE_SCANNING}"
+        }
     }
 
     object AndroidX {
@@ -97,6 +101,13 @@ object Dependencies {
 
         object SwipeRefreshLayout {
             const val SWIPE_REFRESH_LAYOUT: String = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.SWIPE_REFRESH_LAYOUT}"
+        }
+
+        object CameraX {
+            const val CAMERA_CORE: String = "androidx.camera:camera-core:${Versions.CAMERA_X}"
+            const val CAMERA_LIFECYCLE: String = "androidx.camera:camera-lifecycle:${Versions.CAMERA_X}"
+            const val CAMERA_2: String = "androidx.camera:camera-camera2:${Versions.CAMERA_X}"
+            const val CAMERA_VIEW: String = "androidx.camera:camera-view:${Versions.CAMERA_X_VIEW}"
         }
     }
 
