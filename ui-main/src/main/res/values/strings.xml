@@ -32,4 +32,7 @@
     <string name="blank_quote_author">Blank author</string>
     <string name="adding_quote_error_message">An error occurred while adding the quote</string>
     <string name="quote_added_successfully">Quote added successfully</string>
+
+    <!-- ScannerFragment -->
+    <string name="camera_permission_not_granted">Camera permission not granted</string>
 </resources>
