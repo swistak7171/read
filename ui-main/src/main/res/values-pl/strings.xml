@@ -22,4 +22,14 @@
     <string name="blank_book_number_of_pages">Brak ilości stron</string>
     <string name="adding_book_error_message">Wystąpił błąd podczas dodawania książki</string>
     <string name="book_added_successfully">Książka dodana pomyślnie</string>
+
+    <!-- QuoteEditFragment -->
+    <string name="add_quote">Dodaj cytat</string>
+    <string name="edit_quote">Edytuj cytat</string>
+    <string name="content">Treść</string>
+    <string name="book_title">Tytuł książki</string>
+    <string name="blank_quote_content">Pusta treść</string>
+    <string name="blank_quote_author">Brak autora</string>
+    <string name="adding_quote_error_message">Wystąpił błąd podczas dodawania cytatu</string>
+    <string name="quote_added_successfully">Cytat dodany pomyślnie</string>
 </resources>

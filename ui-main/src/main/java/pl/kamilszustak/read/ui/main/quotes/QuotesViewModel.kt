@@ -5,5 +5,10 @@ import javax.inject.Inject
 
 class QuotesViewModel @Inject constructor() : BaseViewModel<QuotesEvent, QuotesState>() {
     override fun handleEvent(event: QuotesEvent) {
+        when (event) {
+            QuotesEvent.OnAddQuoteButtonClicked -> {
+                _state.value = QuotesState.NavigateToQuoteEditFragment
+            }
+        }
     }
 }

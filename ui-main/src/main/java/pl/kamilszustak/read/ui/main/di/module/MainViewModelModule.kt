@@ -10,6 +10,7 @@ import pl.kamilszustak.read.ui.main.collection.CollectionViewModel
 import pl.kamilszustak.read.ui.main.discover.DiscoverViewModel
 import pl.kamilszustak.read.ui.main.profile.ProfileViewModel
 import pl.kamilszustak.read.ui.main.quotes.QuotesViewModel
+import pl.kamilszustak.read.ui.main.quotes.edit.QuoteEditViewModel
 import pl.kamilszustak.read.ui.main.search.SearchViewModel
 
 @Module
@@ -43,4 +44,9 @@ interface MainViewModelModule {
     @IntoMap
     @ViewModelKey(BookEditViewModel::class)
     fun bindBookEditViewModel(viewModel: BookEditViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(QuoteEditViewModel::class)
+    fun bindQuoteEditViewModel(viewModel: QuoteEditViewModel): ViewModel
 }

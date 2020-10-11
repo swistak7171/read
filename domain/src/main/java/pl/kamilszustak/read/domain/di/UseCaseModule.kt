@@ -6,10 +6,12 @@ import pl.kamilszustak.read.domain.access.usecase.collection.AddCollectionBookUs
 import pl.kamilszustak.read.domain.access.usecase.country.GetAllCountriesUseCase
 import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryCodeUseCase
 import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryUseCase
+import pl.kamilszustak.read.domain.access.usecase.quote.AddQuoteUseCase
 import pl.kamilszustak.read.domain.usecase.collection.AddCollectionBookUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.country.GetAllCountriesUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryCodeUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.quote.AddQuoteUseCaseImpl
 
 @Module
 interface UseCaseModule {
@@ -24,4 +26,7 @@ interface UseCaseModule {
 
     @Binds
     fun bindAddCollectionBookUseCase(useCaseImpl: AddCollectionBookUseCaseImpl): AddCollectionBookUseCase
+
+    @Binds
+    fun bindAddQuoteUseCase(useCaseImpl: AddQuoteUseCaseImpl): AddQuoteUseCase
 }
