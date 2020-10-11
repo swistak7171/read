@@ -14,4 +14,8 @@ sealed class ScannerState : State {
     data class Error(
         @StringRes val messageResourceId: Int,
     ) : ScannerState()
+
+    data class BarcodeDetected(
+        val value: String,
+    ) : ScannerState()
 }

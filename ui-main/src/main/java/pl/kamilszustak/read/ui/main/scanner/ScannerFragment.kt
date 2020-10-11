@@ -51,6 +51,10 @@ class ScannerFragment @Inject constructor(
                 is ScannerState.Error -> {
                     errorToast(state.messageResourceId)
                 }
+
+                is ScannerState.BarcodeDetected -> {
+                    Timber.i(state.value)
+                }
             }
         }
     }
@@ -86,7 +90,8 @@ class ScannerFragment @Inject constructor(
 
         val executor = Executors.newSingleThreadExecutor()
         imageAnalysis.setAnalyzer(executor) { image ->
-            Timber.i(image.height.toString())
+            val event = ScannerEvent.OnImageCaptured(image)
+            viewModel.dispatchEvent(event)
         }
 
         cameraProvider.unbindAll()

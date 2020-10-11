@@ -36,6 +36,10 @@ object Dependencies {
         object Gms {
             const val GOOGLE_SERVICES: String = "com.google.gms:google-services:${Versions.GOOGLE_SERVICES}"
         }
+
+        object MLKit {
+            const val BARCODE_SCANNING: String = "com.google.mlkit:barcode-scanning:${Versions.ML_KIT_BARCODE_SCANNING}"
+        }
     }
 
     object AndroidX {

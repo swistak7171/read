@@ -42,5 +42,5 @@ object Versions {
     const val TWITTER_ANDROID_SDK: String = "3.3.0"
     const val ANDROID_FLAGS: String = "1.0.4"
     const val FIREBASE_DATABASE: String = "19.5.0"
-    const val MLKIT_BARCODE_SCANNING: String = "16.0.3"
+    const val ML_KIT_BARCODE_SCANNING: String = "16.0.3"
 }
