@@ -6,7 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.domain.access.usecase.quote.AddQuoteUseCase
-import pl.kamilszustak.read.model.data.Quote
+import pl.kamilszustak.read.model.domain.Quote
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
 import javax.inject.Inject
@@ -48,7 +48,7 @@ class QuoteEditViewModel @Inject constructor(
             return
         }
 
-        val quote = pl.kamilszustak.read.model.data.Quote(
+        val quote = Quote(
             content = content,
             author = author,
             book = book

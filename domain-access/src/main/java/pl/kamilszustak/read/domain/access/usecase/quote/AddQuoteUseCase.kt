@@ -1,6 +1,6 @@
 package pl.kamilszustak.read.domain.access.usecase.quote
 
 import pl.kamilszustak.read.domain.access.usecase.CoroutineParametrizedUseCase
-import pl.kamilszustak.read.model.data.QuoteEntity
+import pl.kamilszustak.read.model.domain.Quote
 
-interface AddQuoteUseCase : CoroutineParametrizedUseCase<QuoteEntity, Result<Unit>>
+interface AddQuoteUseCase : CoroutineParametrizedUseCase<Quote, Result<Unit>>

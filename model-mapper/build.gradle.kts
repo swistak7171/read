@@ -18,4 +18,10 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+
+    implementation(project(Modules.MODEL_DOMAIN))
+    implementation(project(Modules.MODEL_DATA))
+
+    // Dagger
+    implementation(Dependencies.Google.Dagger.DAGGER_ANDROID)
 }
