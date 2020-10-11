@@ -1,7 +1,5 @@
 package pl.kamilszustak.read.ui.main.scanner
 
-import android.os.Bundle
-import android.view.View
 import androidx.camera.core.Camera
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
@@ -33,18 +31,35 @@ class ScannerFragment @Inject constructor(
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
     private lateinit var camera: Camera
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onResume() {
+        super.onResume()
+        viewModel.dispatchEvent(ScannerEvent.OnResumed)
+    }
 
-        lifecycleScope.launchWhenResumed {
-            val permission = Permission.CAMERA
-            askForPermissions(permission) { result ->
-                val isGranted = result.isAllGranted(permission)
-                if (isGranted) {
-                    initializaCameraProvider()
-                } else {
-                    errorToast(R.string.camera_permission_not_granted)
+    override fun observeViewModel() {
+        viewModel.state.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is ScannerState.CameraPermissionState -> {
+                    when (state) {
+                        ScannerState.CameraPermissionState.Unknown -> checkCameraPermission()
+                        ScannerState.CameraPermissionState.Granted -> initializaCameraProvider()
+                        ScannerState.CameraPermissionState.Denied -> errorToast(R.string.camera_permission_denied)
+                        ScannerState.CameraPermissionState.PermanentlyDenied -> errorToast(R.string.camera_permission_permanently_denied)
+                    }
                 }
+
+                is ScannerState.Error -> {
+                    errorToast(state.messageResourceId)
+                }
+            }
+        }
+    }
+
+    private fun checkCameraPermission() {
+        lifecycleScope.launchWhenResumed {
+            askForPermissions(Permission.CAMERA) { result ->
+                val event = ScannerEvent.OnCameraPermissionResult(result)
+                viewModel.dispatchEvent(event)
             }
         }
     }

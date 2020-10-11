@@ -34,5 +34,6 @@
     <string name="quote_added_successfully">Cytat dodany pomyślnie</string>
 
     <!-- ScannerFragment -->
-    <string name="camera_permission_not_granted">Dostęp do kamery nie został przyznany</string>
+    <string name="camera_permission_denied">Dostęp do kamery został odrzucony</string>
+    <string name="camera_permission_permanently_denied">Dostęp do kamery został odrzucony na stałe</string>
 </resources>

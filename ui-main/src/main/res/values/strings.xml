@@ -34,5 +34,6 @@
     <string name="quote_added_successfully">Quote added successfully</string>
 
     <!-- ScannerFragment -->
-    <string name="camera_permission_not_granted">Camera permission not granted</string>
+    <string name="camera_permission_denied">Camera permission denied</string>
+    <string name="camera_permission_permanently_denied">Camera permission permanently denied</string>
 </resources>
