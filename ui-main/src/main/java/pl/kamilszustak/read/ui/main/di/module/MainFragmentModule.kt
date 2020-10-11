@@ -7,7 +7,7 @@ import dagger.multibindings.IntoMap
 import pl.kamilszustak.read.ui.base.di.key.FragmentKey
 import pl.kamilszustak.read.ui.main.book.edit.BookEditFragment
 import pl.kamilszustak.read.ui.main.collection.CollectionFragment
-import pl.kamilszustak.read.ui.main.discover.DiscoverFragment
+import pl.kamilszustak.read.ui.main.scanner.ScannerFragment
 import pl.kamilszustak.read.ui.main.profile.ProfileFragment
 import pl.kamilszustak.read.ui.main.quotes.QuotesFragment
 import pl.kamilszustak.read.ui.main.quotes.edit.QuoteEditFragment
@@ -27,8 +27,8 @@ interface MainFragmentModule {
 
     @Binds
     @IntoMap
-    @FragmentKey(DiscoverFragment::class)
-    fun bindDiscoverFragment(fragment: DiscoverFragment): Fragment
+    @FragmentKey(ScannerFragment::class)
+    fun bindScannerFragment(fragment: ScannerFragment): Fragment
 
     @Binds
     @IntoMap

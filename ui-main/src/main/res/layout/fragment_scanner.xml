@@ -8,6 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="@string/menu_discover_item_title"
+        android:text="@string/menu_scanner_item_title"
         android:textSize="64sp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

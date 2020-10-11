@@ -54,7 +54,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
         val navGraphIds = listOf(
             R.navigation.navigation_collection,
             R.navigation.navigation_search,
-            R.navigation.navigation_discover,
+            R.navigation.navigation_scanner,
             R.navigation.navigation_quotes,
             R.navigation.navigation_profile
         )

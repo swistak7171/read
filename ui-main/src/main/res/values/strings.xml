@@ -2,7 +2,7 @@
 <resources>
     <string name="menu_collection_item_title">Collection</string>
     <string name="menu_search_item_title">Search</string>
-    <string name="menu_discover_item_title">Discover</string>
+    <string name="menu_scanner_item_title">Scanner</string>
     <string name="menu_quotes_item_title">Quotes</string>
     <string name="menu_profile_item_title">Profile</string>
 
