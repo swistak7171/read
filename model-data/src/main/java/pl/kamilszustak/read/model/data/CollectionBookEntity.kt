@@ -27,6 +27,10 @@ data class CollectionBookEntity(
     @get:PropertyName(DESCRIPTION_PROPERTY)
     @set:PropertyName(DESCRIPTION_PROPERTY)
     var description: String?,
+
+    @get:PropertyName(DESCRIPTION_PROPERTY)
+    @set:PropertyName(DESCRIPTION_PROPERTY)
+    var userId: String,
 ) : Entity() {
 
     companion object {
@@ -36,5 +40,6 @@ data class CollectionBookEntity(
         const val PUBLICATION_DATE_PROPERTY: String = "publication_date"
         const val ISBD_PROPERTY: String = "isbn"
         const val DESCRIPTION_PROPERTY: String = "description"
+        const val USER_ID_PROPERTY: String = "user_id"
     }
 }
