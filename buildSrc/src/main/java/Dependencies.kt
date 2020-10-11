@@ -98,6 +98,13 @@ object Dependencies {
         object SwipeRefreshLayout {
             const val SWIPE_REFRESH_LAYOUT: String = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.SWIPE_REFRESH_LAYOUT}"
         }
+
+        object CameraX {
+            const val CAMERA_CORE: String = "androidx.camera:camera-core:${Versions.CAMERA_X}"
+            const val CAMERA_LIFECYCLE: String = "androidx.camera:camera-lifecycle:${Versions.CAMERA_X}"
+            const val CAMERA_2: String = "androidx.camera:camera-camera2:${Versions.CAMERA_X}"
+            const val CAMERA_VIEW: String = "androidx.camera:camera-view:${Versions.CAMERA_X_VIEW}"
+        }
     }
 
     object Retrofit {
