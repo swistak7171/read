@@ -1,24 +1,14 @@
 package pl.kamilszustak.read.model.domain
 
-import com.google.firebase.database.PropertyName
+import kotlinx.android.parcel.Parcelize
+import java.util.Date
 
-data class Quote(
-    @get:PropertyName(CONTENT_PROPERTY)
-    @set:PropertyName(CONTENT_PROPERTY)
-    var content: String,
-
-    @get:PropertyName(AUTHOR_PROPERTY)
-    @set:PropertyName(AUTHOR_PROPERTY)
-    var author: String,
-
-    @get:PropertyName(BOOK_PROPERTY)
-    @set:PropertyName(BOOK_PROPERTY)
-    var book: String?
-) : Entity() {
-
-    companion object {
-        const val CONTENT_PROPERTY: String = "content"
-        const val AUTHOR_PROPERTY: String = "author"
-        const val BOOK_PROPERTY: String = "book"
-    }
-}
+@Parcelize
+class Quote(
+    override val id: String,
+    override val creationDate: Date,
+    override val modificationDate: Date,
+    val content: String,
+    val author: String,
+    val book: String?
+) : Model()

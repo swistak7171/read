@@ -1,4 +1,4 @@
-package pl.kamilszustak.read.model.domain
+package pl.kamilszustak.read.model.data
 
 import com.google.firebase.database.PropertyName
 import java.util.Date

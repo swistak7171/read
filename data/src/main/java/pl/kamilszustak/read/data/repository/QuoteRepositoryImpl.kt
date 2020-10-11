@@ -6,7 +6,7 @@ import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.common.util.withIOContext
 import pl.kamilszustak.read.data.access.repository.QuoteRepository
 import pl.kamilszustak.read.data.qualifier.QuoteReference
-import pl.kamilszustak.read.model.domain.Quote
+import pl.kamilszustak.read.model.data.QuoteEntity
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -15,7 +15,7 @@ class QuoteRepositoryImpl @Inject constructor(
     @QuoteReference private val databaseReference: DatabaseReference,
 ) : QuoteRepository {
 
-    override suspend fun add(quote: Quote): Result<Unit> {
+    override suspend fun add(quote: QuoteEntity): Result<Unit> {
         return withIOContext {
             databaseReference.push().key.useOrNull { quote.id = it }
 

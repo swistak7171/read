@@ -9,7 +9,7 @@ import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.domain.access.DateFormats
 import pl.kamilszustak.read.domain.access.usecase.collection.AddCollectionBookUseCase
-import pl.kamilszustak.read.model.domain.CollectionBook
+import pl.kamilszustak.read.model.data.CollectionBook
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
 import java.util.Date
@@ -79,7 +79,7 @@ class BookEditViewModel @Inject constructor(
             return
         }
 
-        val book = CollectionBook(
+        val book = pl.kamilszustak.read.model.data.CollectionBook(
             title = title,
             author = author,
             numberOfPages = pages,
