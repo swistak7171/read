@@ -3,12 +3,22 @@ package pl.kamilszustak.read.model.domain
 import com.google.firebase.database.PropertyName
 
 data class Quote(
-    @PropertyName("content")
-    val content: String,
+    @get:PropertyName(CONTENT_PROPERTY)
+    @set:PropertyName(CONTENT_PROPERTY)
+    var content: String,
 
-    @PropertyName("author")
-    val author: String,
+    @get:PropertyName(AUTHOR_PROPERTY)
+    @set:PropertyName(AUTHOR_PROPERTY)
+    var author: String,
 
-    @PropertyName("book")
-    val book: String?
-) : Model()
+    @get:PropertyName(BOOK_PROPERTY)
+    @set:PropertyName(BOOK_PROPERTY)
+    var book: String?
+) : Model() {
+
+    companion object {
+        const val CONTENT_PROPERTY: String = "content"
+        const val AUTHOR_PROPERTY: String = "author"
+        const val BOOK_PROPERTY: String = "book"
+    }
+}

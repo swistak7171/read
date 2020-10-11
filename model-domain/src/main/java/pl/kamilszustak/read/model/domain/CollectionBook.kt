@@ -4,21 +4,37 @@ import com.google.firebase.database.PropertyName
 import java.util.Date
 
 data class CollectionBook(
-    @PropertyName("title")
-    val title: String,
+    @get:PropertyName(TITLE_PROPERTY)
+    @set:PropertyName(TITLE_PROPERTY)
+    var title: String,
 
-    @PropertyName("author")
-    val author: String,
+    @get:PropertyName(AUTHOR_PROPERTY)
+    @set:PropertyName(AUTHOR_PROPERTY)
+    var author: String,
 
-    @PropertyName("number_of_pages")
-    val numberOfPages: Int,
+    @get:PropertyName(NUMBER_OF_PAGES_PROPERTY)
+    @set:PropertyName(NUMBER_OF_PAGES_PROPERTY)
+    var numberOfPages: Int,
 
-    @PropertyName("publication_date")
-    val publicationDate: Date?,
+    @get:PropertyName(PUBLICATION_DATE_PROPERTY)
+    @set:PropertyName(PUBLICATION_DATE_PROPERTY)
+    var publicationDate: Date?,
 
-    @PropertyName("isbn")
-    val isbn: String?,
+    @get:PropertyName(ISBD_PROPERTY)
+    @set:PropertyName(ISBD_PROPERTY)
+    var isbn: String?,
 
-    @PropertyName("description")
-    val description: String?,
-) : Model()
+    @get:PropertyName(DESCRIPTION_PROPERTY)
+    @set:PropertyName(DESCRIPTION_PROPERTY)
+    var description: String?,
+) : Model() {
+
+    companion object {
+        const val TITLE_PROPERTY: String = "title"
+        const val AUTHOR_PROPERTY: String = "author"
+        const val NUMBER_OF_PAGES_PROPERTY: String = "number_of_pages"
+        const val PUBLICATION_DATE_PROPERTY: String = "publication_date"
+        const val ISBD_PROPERTY: String = "isbn"
+        const val DESCRIPTION_PROPERTY: String = "description"
+    }
+}
