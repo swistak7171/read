@@ -49,7 +49,7 @@ class ScannerFragment @Inject constructor(
                 }
 
                 is ScannerState.Error -> {
-                    errorToast(state.throwable.message)
+                    errorToast(state.throwable.message ?: "")
                 }
 
                 is ScannerState.BarcodeDetected -> {
