@@ -1,14 +1,14 @@
 package pl.kamilszustak.read.model.domain
 
-import com.google.firebase.database.PropertyName
+import kotlinx.android.parcel.Parcelize
+import java.util.Date
 
-data class Quote(
-    @PropertyName("content")
+@Parcelize
+class Quote(
+    override val id: String = "",
+    override val creationDate: Date = Date(),
+    override val modificationDate: Date = Date(),
     val content: String,
-
-    @PropertyName("author")
     val author: String,
-
-    @PropertyName("book")
     val book: String?
 ) : Model()

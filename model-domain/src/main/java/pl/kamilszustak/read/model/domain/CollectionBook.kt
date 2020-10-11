@@ -1,24 +1,17 @@
 package pl.kamilszustak.read.model.domain
 
-import com.google.firebase.database.PropertyName
+import kotlinx.android.parcel.Parcelize
 import java.util.Date
 
+@Parcelize
 data class CollectionBook(
-    @PropertyName("title")
+    override val id: String = "",
+    override val creationDate: Date = Date(),
+    override val modificationDate: Date = Date(),
     val title: String,
-
-    @PropertyName("author")
     val author: String,
-
-    @PropertyName("number_of_pages")
     val numberOfPages: Int,
-
-    @PropertyName("publication_date")
     val publicationDate: Date?,
-
-    @PropertyName("isbn")
     val isbn: String?,
-
-    @PropertyName("description")
-    val description: String?,
+    val description: String?
 ) : Model()

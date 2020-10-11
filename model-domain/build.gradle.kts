@@ -18,7 +18,4 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-
-    // Firebase Database
-    implementation(Dependencies.Google.Firebase.Database.DATABASE_KTX)
 }

@@ -6,7 +6,7 @@ import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.common.util.withIOContext
 import pl.kamilszustak.read.data.access.repository.CollectionBookRepository
 import pl.kamilszustak.read.data.qualifier.CollectionBookReference
-import pl.kamilszustak.read.model.domain.CollectionBook
+import pl.kamilszustak.read.model.data.CollectionBookEntity
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -15,7 +15,7 @@ class CollectionBookRepositoryImpl @Inject constructor(
     @CollectionBookReference private val databaseReference: DatabaseReference,
 ) : CollectionBookRepository {
 
-    override suspend fun add(book: CollectionBook): Result<Unit> {
+    override suspend fun add(book: CollectionBookEntity): Result<Unit> {
         return withIOContext {
             databaseReference.push().key.useOrNull { book.id = it }
 
