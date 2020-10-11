@@ -57,7 +57,4 @@ dependencies {
     implementation(Dependencies.AndroidX.CameraX.CAMERA_2)
     implementation(Dependencies.AndroidX.CameraX.CAMERA_LIFECYCLE)
     implementation(Dependencies.AndroidX.CameraX.CAMERA_VIEW)
-
-    // ML Kit Barcode Scanning
-    implementation(Dependencies.Google.MLKit.BARCODE_SCANNING)
 }

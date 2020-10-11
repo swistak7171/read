@@ -1,6 +1,5 @@
 package pl.kamilszustak.read.ui.main.scanner
 
-import androidx.annotation.StringRes
 import pl.kamilszustak.read.ui.base.view.State
 
 sealed class ScannerState : State {
@@ -12,7 +11,7 @@ sealed class ScannerState : State {
     }
 
     data class Error(
-        @StringRes val messageResourceId: Int,
+        val throwable: Throwable,
     ) : ScannerState()
 
     data class BarcodeDetected(

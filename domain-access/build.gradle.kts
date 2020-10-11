@@ -26,4 +26,7 @@ dependencies {
     // Dagger
     kapt(Dependencies.Google.Dagger.DAGGER_ANDROID_PROCESSOR)
     kapt(Dependencies.Google.Dagger.DAGGER_COMPILER)
+
+    // CameraX
+    implementation(Dependencies.AndroidX.CameraX.CAMERA_CORE)
 }
