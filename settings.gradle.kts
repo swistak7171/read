@@ -1,4 +1,3 @@
-include()
 include(
     ":app",
     ":common",
@@ -8,6 +7,7 @@ include(
     ":domain-access",
     ":network",
     ":model-domain",
+    ":model-data",
     ":ui-base",
     ":ui-authentication",
     ":ui-main"

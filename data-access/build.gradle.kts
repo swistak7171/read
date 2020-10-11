@@ -26,4 +26,5 @@ dependencies {
     implementation(project(Modules.COMMON))
     implementation(project(Modules.NETWORK))
     implementation(project(Modules.MODEL_DOMAIN))
+    implementation(project(Modules.MODEL_DATA))
 }

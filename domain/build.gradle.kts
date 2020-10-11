@@ -23,6 +23,7 @@ dependencies {
     implementation(project(Modules.DOMAIN_ACCESS))
     implementation(project(Modules.DATA_ACCESS))
     implementation(project(Modules.MODEL_DOMAIN))
+    implementation(project(Modules.MODEL_DATA))
 
     // Dagger
     kapt(Dependencies.Google.Dagger.DAGGER_ANDROID_PROCESSOR)

@@ -14,7 +14,7 @@ data class Quote(
     @get:PropertyName(BOOK_PROPERTY)
     @set:PropertyName(BOOK_PROPERTY)
     var book: String?
-) : Model() {
+) : Entity() {
 
     companion object {
         const val CONTENT_PROPERTY: String = "content"

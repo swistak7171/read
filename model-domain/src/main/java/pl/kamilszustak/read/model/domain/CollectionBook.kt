@@ -27,7 +27,7 @@ data class CollectionBook(
     @get:PropertyName(DESCRIPTION_PROPERTY)
     @set:PropertyName(DESCRIPTION_PROPERTY)
     var description: String?,
-) : Model() {
+) : Entity() {
 
     companion object {
         const val TITLE_PROPERTY: String = "title"

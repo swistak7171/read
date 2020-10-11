@@ -3,7 +3,7 @@ package pl.kamilszustak.read.model.domain
 import com.google.firebase.database.PropertyName
 import java.util.Date
 
-abstract class Model {
+abstract class Entity {
     @get:PropertyName(ID_PROPERTY)
     @set:PropertyName(ID_PROPERTY)
     var id: String = ""
