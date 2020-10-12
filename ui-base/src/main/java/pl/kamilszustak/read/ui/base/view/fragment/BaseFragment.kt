@@ -17,8 +17,12 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel> : Fragment {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initializeRecyclerView()
         setListeners()
         observeViewModel()
+    }
+
+    protected open fun initializeRecyclerView() {
     }
 
     protected open fun setListeners() {

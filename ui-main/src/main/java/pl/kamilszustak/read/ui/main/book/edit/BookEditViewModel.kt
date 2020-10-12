@@ -3,6 +3,7 @@ package pl.kamilszustak.read.ui.main.book.edit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
@@ -12,6 +13,7 @@ import pl.kamilszustak.read.domain.access.usecase.collection.AddCollectionBookUs
 import pl.kamilszustak.read.model.domain.CollectionBook
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
+import timber.log.Timber
 import java.util.Date
 import javax.inject.Inject
 
@@ -88,7 +90,11 @@ class BookEditViewModel @Inject constructor(
             description = description
         )
 
-        viewModelScope.launch(Dispatchers.Main) {
+        val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
+            Timber.e(throwable)
+        }
+
+        viewModelScope.launch(Dispatchers.Main + exceptionHandler) {
             addCollectionBook(book)
                 .onSuccess {
                     _state.value = BookEditState.BookAdded

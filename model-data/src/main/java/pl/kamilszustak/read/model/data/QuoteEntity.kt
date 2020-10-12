@@ -13,12 +13,18 @@ data class QuoteEntity(
 
     @get:PropertyName(BOOK_PROPERTY)
     @set:PropertyName(BOOK_PROPERTY)
-    var book: String?
+    var book: String?,
+
+    @get:PropertyName(BOOK_PROPERTY)
+    @set:PropertyName(BOOK_PROPERTY)
+    var userId: String
 ) : Entity() {
 
     companion object {
+        const val TABLE_NAME: String = "quotes"
         const val CONTENT_PROPERTY: String = "content"
         const val AUTHOR_PROPERTY: String = "author"
         const val BOOK_PROPERTY: String = "book"
+        const val USER_ID_PROPERTY: String = "user_id"
     }
 }

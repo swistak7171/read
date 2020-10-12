@@ -36,4 +36,7 @@
     <!-- ScannerFragment -->
     <string name="camera_permission_denied">Camera permission denied</string>
     <string name="camera_permission_permanently_denied">Camera permission permanently denied</string>
+
+    <!-- CollectionFragment -->
+    <string name="progress_percentage" translatable="false">%1$d%%</string>
 </resources>

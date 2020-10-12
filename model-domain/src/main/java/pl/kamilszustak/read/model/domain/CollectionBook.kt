@@ -2,6 +2,7 @@ package pl.kamilszustak.read.model.domain
 
 import kotlinx.android.parcel.Parcelize
 import java.util.Date
+import kotlin.math.roundToInt
 
 @Parcelize
 data class CollectionBook(
@@ -13,5 +14,14 @@ data class CollectionBook(
     val numberOfPages: Int,
     val publicationDate: Date?,
     val isbn: String?,
-    val description: String?
-) : Model()
+    val description: String?,
+    val coverImageUrl: String? = null,
+    val readPages: Int = 0,
+) : Model() {
+
+    val progress: Float
+        get() = (readPages / numberOfPages.toFloat())
+
+    val progressPercentage: Int
+        get() = (progress * 100).roundToInt()
+}

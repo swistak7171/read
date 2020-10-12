@@ -2,6 +2,7 @@ plugins {
     id(Plugins.ANDROID_LIBRARY)
     id(Plugins.KOTLIN_ANDROID)
     id(Plugins.KOTLIN_ANDROID_EXTENSIONS)
+    id(Plugins.KOTLIN_KAPT)
 }
 
 android {
@@ -21,7 +22,13 @@ dependencies {
 
     implementation(project(Modules.MODEL_DOMAIN))
     implementation(project(Modules.MODEL_DATA))
+    implementation(project(Modules.DOMAIN_ACCESS))
 
     // Dagger
     implementation(Dependencies.Google.Dagger.DAGGER_ANDROID)
+    kapt(Dependencies.Google.Dagger.DAGGER_ANDROID_PROCESSOR)
+    kapt(Dependencies.Google.Dagger.DAGGER_COMPILER)
+
+    // Firebase Authentication
+    api(Dependencies.Google.Firebase.Authentication.AUTH_KTX)
 }

@@ -27,14 +27,30 @@ data class CollectionBookEntity(
     @get:PropertyName(DESCRIPTION_PROPERTY)
     @set:PropertyName(DESCRIPTION_PROPERTY)
     var description: String?,
+
+    @get:PropertyName(DESCRIPTION_PROPERTY)
+    @set:PropertyName(DESCRIPTION_PROPERTY)
+    var coverImageUrl: String? = null,
+
+    @get:PropertyName(DESCRIPTION_PROPERTY)
+    @set:PropertyName(DESCRIPTION_PROPERTY)
+    var userId: String,
+
+    @get:PropertyName(READ_PAGES_PROPERTY)
+    @set:PropertyName(READ_PAGES_PROPERTY)
+    var readPages: Int = 0,
 ) : Entity() {
 
     companion object {
+        const val TABLE_NAME: String = "collection_books"
         const val TITLE_PROPERTY: String = "title"
         const val AUTHOR_PROPERTY: String = "author"
         const val NUMBER_OF_PAGES_PROPERTY: String = "number_of_pages"
+        const val READ_PAGES_PROPERTY: String = "read_pages"
         const val PUBLICATION_DATE_PROPERTY: String = "publication_date"
         const val ISBD_PROPERTY: String = "isbn"
         const val DESCRIPTION_PROPERTY: String = "description"
+        const val COVER_IMAGE_URL: String = "cover_image"
+        const val USER_ID_PROPERTY: String = "user_id"
     }
 }

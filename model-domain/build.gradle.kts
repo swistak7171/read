@@ -18,4 +18,7 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+
+    // Firebase Authentication
+    implementation(Dependencies.Google.Firebase.Authentication.AUTH_KTX)
 }

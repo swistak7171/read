@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     id(Plugins.ANDROID_LIBRARY)
     id(Plugins.KOTLIN_ANDROID)
@@ -39,6 +37,7 @@ dependencies {
     implementation(project(Modules.DATA_ACCESS))
     implementation(project(Modules.MODEL_DOMAIN))
     implementation(project(Modules.MODEL_DATA))
+    implementation(project(Modules.DOMAIN_ACCESS))
 
     // Dagger
     kapt(Dependencies.Google.Dagger.DAGGER_ANDROID_PROCESSOR)
