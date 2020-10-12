@@ -8,6 +8,8 @@ import dagger.Provides
 import pl.kamilszustak.read.data.qualifier.CollectionBookReference
 import pl.kamilszustak.read.data.qualifier.QuoteReference
 import pl.kamilszustak.read.data.qualifier.RootDatabaseReference
+import pl.kamilszustak.read.model.data.CollectionBookEntity
+import pl.kamilszustak.read.model.data.QuoteEntity
 import javax.inject.Singleton
 
 @Module
@@ -29,11 +31,11 @@ class DatabaseModule {
     @Singleton
     @CollectionBookReference
     fun provideCollectionBookReference(@RootDatabaseReference reference: DatabaseReference): DatabaseReference =
-        reference.child("collection_books")
+        reference.child(CollectionBookEntity.TABLE_NAME)
 
     @Provides
     @Singleton
     @QuoteReference
     fun provideQuoteReference(@RootDatabaseReference reference: DatabaseReference): DatabaseReference =
-        reference.child("quotes")
+        reference.child(QuoteEntity.TABLE_NAME)
 }
