@@ -13,5 +13,7 @@ data class CollectionBook(
     val numberOfPages: Int,
     val publicationDate: Date?,
     val isbn: String?,
-    val description: String?
+    val description: String?,
+    val coverImageUrl: String? = null,
+    val readPages: Int = 0,
 ) : Model()

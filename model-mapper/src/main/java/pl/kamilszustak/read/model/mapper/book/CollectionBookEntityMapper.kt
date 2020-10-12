@@ -16,6 +16,8 @@ class CollectionBookEntityMapper @Inject constructor() : Mapper<CollectionBookEn
             numberOfPages = model.numberOfPages,
             publicationDate = model.publicationDate,
             isbn = model.isbn,
-            description = model.description
+            description = model.description,
+            coverImageUrl = model.coverImageUrl,
+            readPages = model.readPages
         )
 }

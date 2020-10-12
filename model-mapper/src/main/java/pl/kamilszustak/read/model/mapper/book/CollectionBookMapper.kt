@@ -20,7 +20,9 @@ class CollectionBookMapper @Inject constructor(
             publicationDate = model.publicationDate,
             isbn = model.isbn,
             description = model.description,
-            userId = userId
+            userId = userId,
+            coverImageUrl = model.coverImageUrl,
+            readPages = model.readPages
         ).apply {
             id = model.id
             creationDate = model.creationDate

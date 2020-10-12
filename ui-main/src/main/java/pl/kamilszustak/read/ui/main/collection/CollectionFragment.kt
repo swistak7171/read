@@ -1,13 +1,16 @@
 package pl.kamilszustak.read.ui.main.collection
 
 import androidx.lifecycle.ViewModelProvider
+import com.mikepenz.fastadapter.FastAdapter
+import com.mikepenz.fastadapter.adapters.ModelAdapter
+import pl.kamilszustak.read.model.domain.CollectionBook
 import pl.kamilszustak.read.ui.base.binding.viewBinding
 import pl.kamilszustak.read.ui.base.util.navigateTo
+import pl.kamilszustak.read.ui.base.util.updateModels
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.FragmentCollectionBinding
-import timber.log.Timber
 import javax.inject.Inject
 
 class CollectionFragment @Inject constructor(
@@ -16,6 +19,16 @@ class CollectionFragment @Inject constructor(
 
     override val viewModel: CollectionViewModel by viewModels(viewModelFactory)
     override val binding: FragmentCollectionBinding by viewBinding(FragmentCollectionBinding::bind)
+    private val modelAdapter: ModelAdapter<CollectionBook, CollectionBookItem> by lazy {
+        ModelAdapter { CollectionBookItem(it) }
+    }
+
+    override fun initializeRecyclerView() {
+        val fastAdapter = FastAdapter.with(modelAdapter)
+        binding.booksRecyclerView.apply {
+            this.adapter = fastAdapter
+        }
+    }
 
     override fun setListeners() {
         binding.addBookButton.setOnClickListener {
@@ -34,7 +47,7 @@ class CollectionFragment @Inject constructor(
         }
 
         viewModel.collectionBooks.observe(viewLifecycleOwner) { books ->
-            Timber.i(books.toString())
+            modelAdapter.updateModels(books)
         }
     }
 }

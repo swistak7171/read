@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="book"
+            type="pl.kamilszustak.read.model.domain.CollectionBook" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentPadding="@dimen/default_padding"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="@dimen/default_radius">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="128dp"
+                android:id="@+id/coverImageView"
+                app:imageUrl="@{book.coverImageUrl}"
+                tools:src="@tools:sample/avatars"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/barrierView"
+                android:visibility="invisible"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/coverImageView"
+                android:layout_marginStart="@dimen/default_margin" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/titleTextView"
+                android:text="@{book.title}"
+                tools:text="@tools:sample/lorem/random"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:ellipsize="end"
+                android:lines="1"
+                app:layout_constraintStart_toEndOf="@id/barrierView"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/authorTexttView"
+                android:text="@{book.author}"
+                tools:text="@tools:sample/lorem"
+                android:ellipsize="end"
+                android:lines="1"
+                app:layout_constraintStart_toEndOf="@id/barrierView"
+                app:layout_constraintEnd_toEndOf="@id/titleTextView"
+                app:layout_constraintTop_toBottomOf="@id/titleTextView" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/descriptionTextView"
+                android:text="@{book.description}"
+                tools:text="@tools:sample/lorem/random"
+                android:maxLines="5"
+                android:ellipsize="end"
+                app:layout_constraintStart_toEndOf="@id/barrierView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/authorTexttView"
+                android:layout_marginTop="@dimen/default_half_margin" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

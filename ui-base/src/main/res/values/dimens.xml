@@ -5,4 +5,7 @@
 
     <dimen name="default_padding">16dp</dimen>
     <dimen name="default_half_padding">8dp</dimen>
+
+    <dimen name="default_radius">12dp</dimen>
+    <dimen name="default_half_radius">6dp</dimen>
 </resources>
