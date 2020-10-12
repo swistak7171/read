@@ -4,6 +4,7 @@ import dagger.Binds
 import dagger.Module
 import pl.kamilszustak.read.domain.access.usecase.barcode.ReadBarcodeUseCase
 import pl.kamilszustak.read.domain.access.usecase.collection.AddCollectionBookUseCase
+import pl.kamilszustak.read.domain.access.usecase.collection.GetAllCollectionBooksUseCase
 import pl.kamilszustak.read.domain.access.usecase.country.GetAllCountriesUseCase
 import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryCodeUseCase
 import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryUseCase
@@ -12,6 +13,7 @@ import pl.kamilszustak.read.domain.access.usecase.user.GetUserUseCase
 import pl.kamilszustak.read.domain.access.usecase.user.SignOutUseCase
 import pl.kamilszustak.read.domain.usecase.barcode.ReadBarcodeUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.collection.AddCollectionBookUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.collection.GetAllCollectionBooksUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.country.GetAllCountriesUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryCodeUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryUseCaseImpl
@@ -32,6 +34,9 @@ interface UseCaseModule {
 
     @Binds
     fun bindAddCollectionBookUseCase(useCaseImpl: AddCollectionBookUseCaseImpl): AddCollectionBookUseCase
+
+    @Binds
+    fun bindGetAllCollectionBooksUseCase(useCaseImpl: GetAllCollectionBooksUseCaseImpl): GetAllCollectionBooksUseCase
 
     @Binds
     fun bindAddQuoteUseCase(useCaseImpl: AddQuoteUseCaseImpl): AddQuoteUseCase

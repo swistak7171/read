@@ -7,6 +7,7 @@ import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.FragmentCollectionBinding
+import timber.log.Timber
 import javax.inject.Inject
 
 class CollectionFragment @Inject constructor(
@@ -30,6 +31,10 @@ class CollectionFragment @Inject constructor(
                     navigateTo(direction)
                 }
             }
+        }
+
+        viewModel.collectionBooks.observe(viewLifecycleOwner) { books ->
+            Timber.i(books.toString())
         }
     }
 }
