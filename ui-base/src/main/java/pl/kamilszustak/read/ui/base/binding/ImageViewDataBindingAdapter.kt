@@ -9,7 +9,9 @@ object ImageViewDataBindingAdapter {
 
     @BindingAdapter(IMAGE_URL_ATTRIBUTE)
     @JvmStatic
-    fun ImageView.setImageUrl(imageUrl: String) {
-        load(imageUrl)
+    fun ImageView.setImageUrl(imageUrl: String?) {
+        if (imageUrl != null) {
+            load(imageUrl)
+        }
     }
 }
