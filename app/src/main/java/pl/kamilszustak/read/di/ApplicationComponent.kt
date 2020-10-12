@@ -6,7 +6,7 @@ import dagger.Component
 import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
 import pl.kamilszustak.read.ReadApplication
-import pl.kamilszustak.read.data.di.DataModule
+import pl.kamilszustak.read.data.di.module.DataModule
 import pl.kamilszustak.read.di.module.ApplicationModule
 import pl.kamilszustak.read.di.module.AssistedInjectModule
 import pl.kamilszustak.read.di.module.FirebaseAuthenticationModule

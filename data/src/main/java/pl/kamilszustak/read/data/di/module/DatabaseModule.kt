@@ -1,13 +1,13 @@
-package pl.kamilszustak.read.data.di
+package pl.kamilszustak.read.data.di.module
 
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import dagger.Module
 import dagger.Provides
-import pl.kamilszustak.read.data.qualifier.CollectionBookReference
-import pl.kamilszustak.read.data.qualifier.QuoteReference
-import pl.kamilszustak.read.data.qualifier.RootDatabaseReference
+import pl.kamilszustak.read.data.di.qualifier.CollectionBookReference
+import pl.kamilszustak.read.data.di.qualifier.QuoteReference
+import pl.kamilszustak.read.data.di.qualifier.RootDatabaseReference
 import pl.kamilszustak.read.model.data.CollectionBookEntity
 import pl.kamilszustak.read.model.data.QuoteEntity
 import javax.inject.Singleton

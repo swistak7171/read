@@ -9,7 +9,6 @@ import pl.kamilszustak.read.ui.base.util.navigateTo
 import pl.kamilszustak.read.ui.base.util.updateModels
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
-import pl.kamilszustak.read.ui.base.view.recyclerview.MarginItemDecoration
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.FragmentCollectionBinding
 import javax.inject.Inject
@@ -27,8 +26,7 @@ class CollectionFragment @Inject constructor(
     override fun initializeRecyclerView() {
         val fastAdapter = FastAdapter.with(modelAdapter)
         binding.booksRecyclerView.apply {
-            addItemDecoration(MarginItemDecoration())
-            this.adapter = fastAdapter
+            adapter = fastAdapter
         }
     }
 

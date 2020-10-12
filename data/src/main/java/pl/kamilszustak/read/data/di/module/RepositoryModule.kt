@@ -1,4 +1,4 @@
-package pl.kamilszustak.read.data.di
+package pl.kamilszustak.read.data.di.module
 
 import dagger.Binds
 import dagger.Module

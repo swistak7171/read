@@ -1,4 +1,4 @@
-package pl.kamilszustak.read.data.qualifier
+package pl.kamilszustak.read.data.di.qualifier
 
 import javax.inject.Qualifier
 
