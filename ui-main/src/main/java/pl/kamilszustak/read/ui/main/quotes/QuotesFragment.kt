@@ -27,7 +27,6 @@ class QuotesFragment @Inject constructor(
     override fun initializeRecyclerView() {
         val fastAdapter = FastAdapter.with(modelAdapter)
         binding.quotesRecyclerView.apply {
-            addItemDecoration(MarginItemDecoration())
             adapter = fastAdapter
         }
     }
