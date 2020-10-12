@@ -12,7 +12,7 @@ import kotlinx.coroutines.tasks.await
 import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.common.util.withIOContext
 import pl.kamilszustak.read.data.access.repository.CollectionBookRepository
-import pl.kamilszustak.read.data.qualifier.CollectionBookReference
+import pl.kamilszustak.read.data.di.qualifier.CollectionBookReference
 import pl.kamilszustak.read.domain.access.usecase.user.GetUserUseCase
 import pl.kamilszustak.read.model.data.CollectionBookEntity
 import timber.log.Timber
