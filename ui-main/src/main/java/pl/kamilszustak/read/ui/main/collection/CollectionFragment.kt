@@ -28,7 +28,7 @@ class CollectionFragment @Inject constructor(
         val fastAdapter = FastAdapter.with(modelAdapter)
         binding.booksRecyclerView.apply {
             addItemDecoration(MarginItemDecoration())
-            this.adapter = fastAdapter
+            adapter = fastAdapter
         }
     }
 

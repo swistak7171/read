@@ -15,10 +15,7 @@ class CollectionBookItem(book: CollectionBook) : ModelAbstractBindingItem<Collec
     override val type: Int
         get() = R.id.fastadapter_collection_book_item
 
-    override fun createBinding(
-        inflater: LayoutInflater,
-        parent: ViewGroup?
-    ): ItemCollectionBookBinding =
+    override fun createBinding(inflater: LayoutInflater, parent: ViewGroup?): ItemCollectionBookBinding =
         ItemCollectionBookBinding.inflate(inflater, parent, false)
 
     override fun bindView(binding: ItemCollectionBookBinding, payloads: List<Any>) {
