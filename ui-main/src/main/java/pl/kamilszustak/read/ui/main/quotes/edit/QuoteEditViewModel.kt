@@ -12,7 +12,7 @@ import pl.kamilszustak.read.ui.main.R
 import javax.inject.Inject
 
 class QuoteEditViewModel @Inject constructor(
-    private val addQuote: AddQuoteUseCase,
+    private val addQuote: AddQuoteUseCase
 ) : BaseViewModel<QuoteEditEvent, QuoteEditState>() {
 
     private val _actionBarTitle: UniqueLiveData<Int> = UniqueLiveData()

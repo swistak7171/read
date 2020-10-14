@@ -8,7 +8,7 @@ import javax.inject.Singleton
 
 @Singleton
 class GetDefaultCountryCodeUseCaseImpl @Inject constructor(
-    private val application: Application,
+    private val application: Application
 ) : GetDefaultCountryCodeUseCase {
 
     override fun invoke(): String? {

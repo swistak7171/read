@@ -8,7 +8,7 @@ import javax.inject.Singleton
 
 @Singleton
 class GetAllCountriesUseCaseImpl @Inject constructor(
-    private val countryRepository: CountryRepository,
+    private val countryRepository: CountryRepository
 ) : GetAllCountriesUseCase {
 
     override fun invoke(): List<Country> =

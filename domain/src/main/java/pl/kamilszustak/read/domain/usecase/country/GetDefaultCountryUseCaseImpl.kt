@@ -12,7 +12,7 @@ import javax.inject.Singleton
 class GetDefaultCountryUseCaseImpl @Inject constructor(
     private val application: Application,
     private val countryRepository: CountryRepository,
-    private val getDefaultCountryCode: GetDefaultCountryCodeUseCase,
+    private val getDefaultCountryCode: GetDefaultCountryCodeUseCase
 ) : GetDefaultCountryUseCase {
 
     override fun invoke(): Country? {

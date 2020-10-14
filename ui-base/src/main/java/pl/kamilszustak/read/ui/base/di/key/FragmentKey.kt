@@ -8,5 +8,5 @@ import kotlin.reflect.KClass
 @Retention(AnnotationRetention.RUNTIME)
 @MapKey
 annotation class FragmentKey(
-    val value: KClass<out Fragment>,
+    val value: KClass<out Fragment>
 )

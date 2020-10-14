@@ -38,7 +38,7 @@ data class CollectionBookEntity(
 
     @get:PropertyName(READ_PAGES_PROPERTY)
     @set:PropertyName(READ_PAGES_PROPERTY)
-    var readPages: Int = 0,
+    var readPages: Int = 0
 ) : Entity() {
 
     companion object {

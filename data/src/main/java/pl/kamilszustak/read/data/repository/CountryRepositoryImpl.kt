@@ -12,7 +12,7 @@ import javax.inject.Singleton
 
 @Singleton
 class CountryRepositoryImpl @Inject constructor(
-    private val application: Application,
+    private val application: Application
 ) : CountryRepository {
 
     @OptIn(ExperimentalStdlibApi::class)

@@ -24,7 +24,7 @@ import javax.inject.Singleton
         FirebaseAuthenticationModule::class,
         DataModule::class,
         DomainModule::class,
-        SubcomponentsModule::class,
+        SubcomponentsModule::class
     ]
 )
 @Singleton

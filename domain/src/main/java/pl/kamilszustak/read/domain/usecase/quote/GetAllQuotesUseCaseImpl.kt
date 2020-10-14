@@ -12,7 +12,7 @@ import javax.inject.Singleton
 @Singleton
 class GetAllQuotesUseCaseImpl @Inject constructor(
     private val quoteRepository: QuoteRepository,
-    private val mapper: QuoteEntityMapper,
+    private val mapper: QuoteEntityMapper
 ) : GetAllQuotesUseCase {
 
     override fun invoke(): Flow<List<Quote>> =

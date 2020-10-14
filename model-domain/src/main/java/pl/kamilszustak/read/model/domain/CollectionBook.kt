@@ -16,7 +16,7 @@ data class CollectionBook(
     val isbn: String?,
     val description: String?,
     val coverImageUrl: String? = null,
-    val readPages: Int = 0,
+    val readPages: Int = 0
 ) : Model() {
 
     val progress: Float

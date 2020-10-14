@@ -9,7 +9,6 @@ import java.util.concurrent.atomic.AtomicBoolean
 import timber.log.Timber
 
 open class SingleLiveData<T> : MutableLiveData<T>() {
-
     private val pending = AtomicBoolean(false)
 
     @MainThread

@@ -7,7 +7,7 @@ import javax.inject.Singleton
 
 @Singleton
 class SignOutUseCaseImpl @Inject constructor(
-    private val auth: FirebaseAuth,
+    private val auth: FirebaseAuth
 ) : SignOutUseCase {
 
     override fun invoke() {

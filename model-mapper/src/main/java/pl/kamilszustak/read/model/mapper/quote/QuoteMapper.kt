@@ -7,7 +7,7 @@ import pl.kamilszustak.read.model.mapper.Mapper
 import javax.inject.Inject
 
 class QuoteMapper @Inject constructor(
-    getUser: GetUserUseCase,
+    getUser: GetUserUseCase
 ) : Mapper<Quote, QuoteEntity>() {
 
     private val userId: String = getUser().uid

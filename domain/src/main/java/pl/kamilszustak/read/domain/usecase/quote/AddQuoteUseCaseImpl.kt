@@ -10,7 +10,7 @@ import javax.inject.Singleton
 @Singleton
 class AddQuoteUseCaseImpl @Inject constructor(
     private val quoteRepository: QuoteRepository,
-    private val quoteMapper: QuoteMapper,
+    private val quoteMapper: QuoteMapper
 ) : AddQuoteUseCase {
 
     override suspend fun invoke(input: Quote): Result<Unit> {
