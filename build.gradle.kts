@@ -5,6 +5,8 @@ plugins {
 }
 
 buildscript {
+    extra["kotlin_version"] = Versions.KOTLIN
+
     repositories {
         google()
         jcenter()
