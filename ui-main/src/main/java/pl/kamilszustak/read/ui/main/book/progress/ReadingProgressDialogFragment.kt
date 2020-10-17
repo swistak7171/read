@@ -1,4 +1,9 @@
 package pl.kamilszustak.read.ui.main.book.progress
 
-class ReadingProgressDialogFragment {
+import androidx.fragment.app.DialogFragment
+import javax.inject.Inject
+
+class ReadingProgressDialogFragment @Inject constructor(
+    viewModelFactory: ReadingProgressViewModelFactory,
+) : DialogFragment() {
 }

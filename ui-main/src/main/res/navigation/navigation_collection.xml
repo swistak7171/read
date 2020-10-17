@@ -17,10 +17,20 @@
             app:exitAnim="@anim/zoom_out_exit"
             app:popEnterAnim="@anim/zoom_in_pop_enter"
             app:popExitAnim="@anim/zoom_out_pop_exit" />
+        <action
+            android:id="@+id/action_collectionFragment_to_readingProgressDialogFragment"
+            app:destination="@id/readingProgressDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/bookEditFragment"
         android:name="pl.kamilszustak.read.ui.main.book.edit.BookEditFragment"
-        android:label=""
         tools:layout="@layout/fragment_book_edit" />
+    <dialog
+        android:id="@+id/readingProgressDialogFragment"
+        android:name="pl.kamilszustak.read.ui.main.book.progress.ReadingProgressDialogFragment"
+        android:label="ReadingProgressDialogFragment" >
+        <argument
+            android:name="collectionBookId"
+            app:argType="string" />
+    </dialog>
 </navigation>

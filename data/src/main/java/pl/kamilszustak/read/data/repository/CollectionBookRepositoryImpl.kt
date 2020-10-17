@@ -19,20 +19,21 @@ class CollectionBookRepositoryImpl @Inject constructor(
     private val getUser: GetUserUseCase,
 ) : CollectionBookRepository {
 
-    override suspend fun add(book: CollectionBookEntity): Result<Unit> {
-        return withIOContext {
-            runCatching {
-                databaseReference.push()
-                    .setValue(book)
-                    .await()
-            }
-        }.map { Unit }
-    }
+    override suspend fun add(book: CollectionBookEntity): Result<Unit> = withIOContext {
+        runCatching {
+            databaseReference.push()
+                .setValue(book)
+                .await()
+        }
+    }.map { Unit }
 
-    override suspend fun update(book: CollectionBookEntity): Result<Unit> = runCatching {
-        databaseReference.child(book.id)
-            .setValue(book)
-    }
+    override suspend fun update(book: CollectionBookEntity): Result<Unit> = withIOContext {
+        runCatching {
+            databaseReference.child(book.id)
+                .setValue(book)
+                .await()
+        }
+    }.map { Unit }
 
     override fun getAll(): Flow<List<CollectionBookEntity>> = entityListFlow {
         val userId = getUser().uid
@@ -40,7 +41,7 @@ class CollectionBookRepositoryImpl @Inject constructor(
             .equalTo(userId)
     }
 
-    override suspend fun getById(id: String): CollectionBookEntity? = readEntity {
-        databaseReference.child(id)
+    override suspend fun getById(id: String): CollectionBookEntity? = withIOContext {
+        readEntity { databaseReference.child(id) }
     }
 }
