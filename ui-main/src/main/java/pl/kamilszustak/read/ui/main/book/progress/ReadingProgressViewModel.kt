@@ -30,5 +30,18 @@ class ReadingProgressViewModel(
     }
 
     override fun handleEvent(event: ReadingProgressEvent) {
+        when (event) {
+            ReadingProgressEvent.OnCancelButtonClicked -> {
+                _state.value = ReadingProgressState.NavigateUp
+            }
+
+            ReadingProgressEvent.OnSaveButtonClicked -> {
+                handleSaveButtonClicked()
+            }
+        }
+    }
+
+    private fun handleSaveButtonClicked() {
+
     }
 }
