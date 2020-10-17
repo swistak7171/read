@@ -22,6 +22,7 @@ dependencies {
     implementation(project(Modules.COMMON))
     implementation(project(Modules.DOMAIN_ACCESS))
     implementation(project(Modules.DATA_ACCESS))
+    implementation(project(Modules.MODEL_COMMON))
     implementation(project(Modules.MODEL_DOMAIN))
     implementation(project(Modules.MODEL_DATA))
     implementation(project(Modules.MODEL_MAPPER))
