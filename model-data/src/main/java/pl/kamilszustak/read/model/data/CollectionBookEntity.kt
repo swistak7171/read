@@ -6,35 +6,35 @@ import java.util.Date
 data class CollectionBookEntity(
     @get:PropertyName(TITLE_PROPERTY)
     @set:PropertyName(TITLE_PROPERTY)
-    var title: String,
+    var title: String = "",
 
     @get:PropertyName(AUTHOR_PROPERTY)
     @set:PropertyName(AUTHOR_PROPERTY)
-    var author: String,
+    var author: String = "",
 
     @get:PropertyName(NUMBER_OF_PAGES_PROPERTY)
     @set:PropertyName(NUMBER_OF_PAGES_PROPERTY)
-    var numberOfPages: Int,
+    var numberOfPages: Int = 0,
 
     @get:PropertyName(PUBLICATION_DATE_PROPERTY)
     @set:PropertyName(PUBLICATION_DATE_PROPERTY)
-    var publicationDate: Date?,
+    var publicationDate: Date? = null,
 
     @get:PropertyName(ISBD_PROPERTY)
     @set:PropertyName(ISBD_PROPERTY)
-    var isbn: String?,
+    var isbn: String? = null,
 
     @get:PropertyName(DESCRIPTION_PROPERTY)
     @set:PropertyName(DESCRIPTION_PROPERTY)
-    var description: String?,
+    var description: String? = null,
 
-    @get:PropertyName(DESCRIPTION_PROPERTY)
-    @set:PropertyName(DESCRIPTION_PROPERTY)
+    @get:PropertyName(COVER_IMAGE_URL)
+    @set:PropertyName(COVER_IMAGE_URL)
     var coverImageUrl: String? = null,
 
-    @get:PropertyName(DESCRIPTION_PROPERTY)
-    @set:PropertyName(DESCRIPTION_PROPERTY)
-    var userId: String,
+    @get:PropertyName(USER_ID_PROPERTY)
+    @set:PropertyName(USER_ID_PROPERTY)
+    var userId: String = "",
 
     @get:PropertyName(READ_PAGES_PROPERTY)
     @set:PropertyName(READ_PAGES_PROPERTY)

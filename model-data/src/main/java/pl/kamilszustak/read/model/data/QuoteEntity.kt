@@ -5,19 +5,19 @@ import com.google.firebase.database.PropertyName
 data class QuoteEntity(
     @get:PropertyName(CONTENT_PROPERTY)
     @set:PropertyName(CONTENT_PROPERTY)
-    var content: String,
+    var content: String = "",
 
     @get:PropertyName(AUTHOR_PROPERTY)
     @set:PropertyName(AUTHOR_PROPERTY)
-    var author: String,
+    var author: String = "",
 
     @get:PropertyName(BOOK_PROPERTY)
     @set:PropertyName(BOOK_PROPERTY)
-    var book: String?,
+    var book: String? = "",
 
-    @get:PropertyName(BOOK_PROPERTY)
-    @set:PropertyName(BOOK_PROPERTY)
-    var userId: String
+    @get:PropertyName(USER_ID_PROPERTY)
+    @set:PropertyName(USER_ID_PROPERTY)
+    var userId: String = ""
 ) : Entity() {
 
     companion object {

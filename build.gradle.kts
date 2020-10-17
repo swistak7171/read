@@ -5,11 +5,10 @@ plugins {
 }
 
 buildscript {
-    extra["kotlin_version"] = Versions.KOTLIN
-
     repositories {
         google()
         jcenter()
+        maven(Repositories.KOTLIN_EAP)
     }
 
     dependencies {
@@ -27,6 +26,7 @@ allprojects {
         jcenter()
         maven(Repositories.GRADLE_PLUGINS_M2)
         maven(Repositories.JITPACK)
+        maven(Repositories.KOTLIN_EAP)
     }
 }
 
