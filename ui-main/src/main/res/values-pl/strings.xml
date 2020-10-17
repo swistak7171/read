@@ -36,4 +36,8 @@
     <!-- ScannerFragment -->
     <string name="camera_permission_denied">Dostęp do kamery został odrzucony</string>
     <string name="camera_permission_permanently_denied">Dostęp do kamery został odrzucony na stałe</string>
+
+    <!-- ReadingProgressDialogFragment -->
+    <string name="invalid_read_pages_number_error_message">Niepoprawna wartość przeczytanych stron</string>
+    <string name="reading_progress_edit_error_message">Wystąpił błąd podczas edycji postępu czytania</string>
 </resources>

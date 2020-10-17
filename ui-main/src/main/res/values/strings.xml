@@ -39,4 +39,8 @@
 
     <!-- CollectionFragment -->
     <string name="progress_percentage" translatable="false">%1$d%%</string>
+
+    <!-- ReadingProgressDialogFragment -->
+    <string name="invalid_read_pages_number_error_message">Invalid read pages number</string>
+    <string name="reading_progress_edit_error_message">An error occurred while editing reading progress</string>
 </resources>
