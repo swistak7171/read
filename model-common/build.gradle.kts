@@ -1,7 +1,6 @@
 plugins {
     id(Plugins.ANDROID_LIBRARY)
     id(Plugins.KOTLIN_ANDROID)
-    id(Plugins.KOTLIN_ANDROID_EXTENSIONS)
 }
 
 android {
@@ -18,9 +17,4 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-
-    implementation(project(Modules.MODEL_COMMON))
-
-    // Firebase Authentication
-    implementation(Dependencies.Google.Firebase.Authentication.AUTH_KTX)
 }

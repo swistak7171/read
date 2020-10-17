@@ -6,6 +6,7 @@ include(
     ":domain",
     ":domain-access",
     ":network",
+    ":model-common",
     ":model-domain",
     ":model-data",
     ":model-mapper",

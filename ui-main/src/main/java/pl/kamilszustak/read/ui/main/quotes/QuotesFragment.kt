@@ -9,7 +9,6 @@ import pl.kamilszustak.read.ui.base.util.navigateTo
 import pl.kamilszustak.read.ui.base.util.updateModels
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
-import pl.kamilszustak.read.ui.base.view.recyclerview.MarginItemDecoration
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.FragmentQuotesBinding
 import javax.inject.Inject

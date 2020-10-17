@@ -5,6 +5,7 @@ import com.google.firebase.database.core.view.QuerySpec
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
+import pl.kamilszustak.read.common.util.asSoftReference
 import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.common.util.withIOContext
 import pl.kamilszustak.read.data.access.repository.QuoteRepository
@@ -17,6 +18,7 @@ import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.system.measureNanoTime
 
 @Singleton
 class QuoteRepositoryImpl @Inject constructor(
