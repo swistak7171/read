@@ -1,7 +1,7 @@
 package pl.kamilszustak.read.domain.usecase.collection
 
 import pl.kamilszustak.model.common.id.CollectionBookId
-import pl.kamilszustak.read.common.util.runNotNullable
+import pl.kamilszustak.read.common.util.runNotNull
 import pl.kamilszustak.read.data.access.repository.CollectionBookRepository
 import pl.kamilszustak.read.domain.access.usecase.collection.GetCollectionBookUseCase
 import pl.kamilszustak.read.domain.access.usecase.collection.UpdateCollectionBookUseCase
@@ -23,7 +23,7 @@ class UpdateCollectionBookUseCaseImpl @Inject constructor(
     ): Result<Unit> {
         val book = getCollectionBook(id)
 
-        return runNotNullable(book) {
+        return runNotNull(book) {
             val updated = update(it)
             val mapped = mapper.map(updated)
             repository.update(mapped)

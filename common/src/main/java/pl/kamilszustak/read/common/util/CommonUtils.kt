@@ -19,7 +19,7 @@ inline fun <T : Any, R> T?.useOrNull(action: (T) -> R): R? {
     }
 }
 
-inline fun <T, R> runNotNullable(value: T?, action: (T) -> R): Result<R> {
+inline fun <T, R> runNotNull(value: T?, action: (T) -> R): Result<R> {
     return if (value != null) {
         val result = action(value)
         Result.success(result)

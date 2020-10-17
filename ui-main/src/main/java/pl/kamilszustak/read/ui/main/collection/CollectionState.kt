@@ -1,7 +1,7 @@
 package pl.kamilszustak.read.ui.main.collection
 
-import pl.kamilszustak.read.ui.base.view.State
+import pl.kamilszustak.read.ui.base.view.ViewState
 
-sealed class CollectionState : State {
+sealed class CollectionState : ViewState {
     object NavigateToBookEditFragment : CollectionState()
 }
