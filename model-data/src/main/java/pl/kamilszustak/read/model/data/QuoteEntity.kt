@@ -17,7 +17,7 @@ data class QuoteEntity(
 
     @get:PropertyName(USER_ID_PROPERTY)
     @set:PropertyName(USER_ID_PROPERTY)
-    var userId: String = ""
+    var userId: String = "",
 ) : Entity() {
 
     companion object {

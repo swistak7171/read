@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class EmailSignInViewModel @Inject constructor(
     private val formValidator: FormValidator,
-    private val firebaseAuth: FirebaseAuth
+    private val firebaseAuth: FirebaseAuth,
 ) : BaseViewModel<EmailSignInEvent, EmailSignInState>() {
 
     val userEmailAddress: UniqueLiveData<String> = UniqueLiveData()

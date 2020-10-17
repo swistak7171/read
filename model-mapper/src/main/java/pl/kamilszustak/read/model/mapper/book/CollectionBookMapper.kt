@@ -7,7 +7,7 @@ import pl.kamilszustak.read.model.mapper.Mapper
 import javax.inject.Inject
 
 class CollectionBookMapper @Inject constructor(
-    getUser: GetUserUseCase
+    getUser: GetUserUseCase,
 ) : Mapper<CollectionBook, CollectionBookEntity>() {
 
     private val userId: String = getUser().uid

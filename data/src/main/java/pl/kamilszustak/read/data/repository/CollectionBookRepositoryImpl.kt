@@ -17,7 +17,7 @@ import javax.inject.Singleton
 @Singleton
 class CollectionBookRepositoryImpl @Inject constructor(
     @CollectionBookReference private val databaseReference: DatabaseReference,
-    private val getUser: GetUserUseCase
+    private val getUser: GetUserUseCase,
 ) : CollectionBookRepository {
 
     override suspend fun add(book: CollectionBookEntity): Result<Unit> {

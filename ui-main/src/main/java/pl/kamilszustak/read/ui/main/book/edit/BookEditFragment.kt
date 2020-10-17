@@ -20,7 +20,7 @@ import java.util.Date
 import javax.inject.Inject
 
 class BookEditFragment @Inject constructor(
-    viewModelFactory: ViewModelProvider.Factory
+    viewModelFactory: ViewModelProvider.Factory,
 ) : MainDataBindingFragment<FragmentBookEditBinding, BookEditViewModel>(R.layout.fragment_book_edit) {
 
     override val viewModel: BookEditViewModel by viewModels(viewModelFactory)

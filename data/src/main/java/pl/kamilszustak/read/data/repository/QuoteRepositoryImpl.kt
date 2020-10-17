@@ -23,7 +23,7 @@ import kotlin.system.measureNanoTime
 @Singleton
 class QuoteRepositoryImpl @Inject constructor(
     @QuoteReference private val databaseReference: DatabaseReference,
-    private val getUser: GetUserUseCase
+    private val getUser: GetUserUseCase,
 ) : QuoteRepository {
 
     override suspend fun add(quote: QuoteEntity): Result<Unit> {

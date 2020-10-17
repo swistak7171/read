@@ -6,7 +6,7 @@ import java.util.Locale
 import javax.inject.Inject
 
 class DateFormats @Inject constructor(
-    private val getDefaultCountryCode: GetDefaultCountryCodeUseCase
+    private val getDefaultCountryCode: GetDefaultCountryCodeUseCase,
 ) {
     private val format: SimpleDateFormat by lazy {
         val code = getDefaultCountryCode() ?: "EN"

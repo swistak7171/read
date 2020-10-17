@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import pl.kamilszustak.read.ui.base.R
 
 class MarginItemDecoration(
-    private val isHorizontalMarginEnabled: Boolean = false
+    private val isHorizontalMarginEnabled: Boolean = false,
 ) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(

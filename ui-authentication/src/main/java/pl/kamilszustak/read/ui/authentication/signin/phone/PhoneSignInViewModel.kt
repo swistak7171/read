@@ -23,7 +23,7 @@ import kotlin.coroutines.suspendCoroutine
 class PhoneSignInViewModel @Inject constructor(
     private val formValidator: FormValidator,
     private val getAllCountries: GetAllCountriesUseCase,
-    private val getDefaultCountry: GetDefaultCountryUseCase
+    private val getDefaultCountry: GetDefaultCountryUseCase,
 ) : BaseViewModel<PhoneSignInEvent, PhoneSignInState>() {
 
     val phoneNumber: UniqueLiveData<String> = UniqueLiveData()
