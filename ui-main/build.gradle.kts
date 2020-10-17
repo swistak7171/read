@@ -49,6 +49,9 @@ dependencies {
     kapt(Dependencies.Google.Dagger.DAGGER_ANDROID_PROCESSOR)
     kapt(Dependencies.Google.Dagger.DAGGER_COMPILER)
 
+    // AssistedInject
+    kapt(Dependencies.AssistedInject.ASSISTED_INJECT_PROCESSOR_DAGGER_2)
+
     // Firebase Authentication
     implementation(Dependencies.Google.Firebase.Authentication.AUTH_UI)
 

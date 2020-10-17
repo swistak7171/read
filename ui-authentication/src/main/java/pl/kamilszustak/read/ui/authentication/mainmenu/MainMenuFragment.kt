@@ -12,7 +12,7 @@ import pl.kamilszustak.read.ui.authentication.R
 import pl.kamilszustak.read.ui.authentication.databinding.FragmentMainMenuBinding
 import pl.kamilszustak.read.ui.base.binding.viewBinding
 import pl.kamilszustak.read.ui.base.util.errorToast
-import pl.kamilszustak.read.ui.base.util.navigateTo
+import pl.kamilszustak.read.ui.base.util.navigate
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
 import pl.kamilszustak.read.ui.main.MainActivity
@@ -72,12 +72,12 @@ class MainMenuFragment @Inject constructor(
             when (state) {
                 MainMenuState.EmailAuthentication -> {
                     val direction = MainMenuFragmentDirections.actionMainMenuFragmentToEmailSignInFragment()
-                    navigateTo(direction)
+                    navigate(direction)
                 }
 
                 MainMenuState.PhoneAuthentication -> {
                     val direction = MainMenuFragmentDirections.actionMainMenuFragmentToPhoneSignInFragment()
-                    navigateTo(direction)
+                    navigate(direction)
                 }
 
                 is MainMenuState.GoogleAuthentication -> {

@@ -16,6 +16,7 @@ import com.google.firebase.auth.OAuthProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import pl.kamilszustak.read.common.util.getOnce
 import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.ui.authentication.R
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel

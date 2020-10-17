@@ -5,7 +5,7 @@ import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ModelAdapter
 import pl.kamilszustak.read.model.domain.Quote
 import pl.kamilszustak.read.ui.base.binding.viewBinding
-import pl.kamilszustak.read.ui.base.util.navigateTo
+import pl.kamilszustak.read.ui.base.util.navigate
 import pl.kamilszustak.read.ui.base.util.updateModels
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
@@ -41,7 +41,7 @@ class QuotesFragment @Inject constructor(
             when (state) {
                 QuotesState.NavigateToQuoteEditFragment -> {
                     val direction = QuotesFragmentDirections.actionQuotesFragmentToQuoteEditFragment()
-                    navigateTo(direction)
+                    navigate(direction)
                 }
             }
         }

@@ -1,27 +1,27 @@
 package pl.kamilszustak.read.ui.main.book.progress
 
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import pl.kamilszustak.read.ui.base.util.navigateUp
-import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.main.MainDataBindingDialogFragment
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.DialogFragmentReadingProgressBinding
 import javax.inject.Inject
 
 class ReadingProgressDialogFragment @Inject constructor(
-    viewModelFactory: ReadingProgressViewModelFactory,
+    viewModelFactory: ReadingProgressViewModelFactory.Factory,
 ) : MainDataBindingDialogFragment<DialogFragmentReadingProgressBinding, ReadingProgressViewModel>(R.layout.dialog_fragment_reading_progress) {
 
-    override val viewModel: ReadingProgressViewModel by viewModels(viewModelFactory)
+    override val viewModel: ReadingProgressViewModel by viewModels { viewModelFactory.create(args)}
+    private val args: ReadingProgressDialogFragmentArgs by navArgs()
 
     override fun setListeners() {
-        with(binding) {
-            saveButton.setOnClickListener {
-                viewModel.dispatchEvent(ReadingProgressEvent.OnSaveButtonClicked)
-            }
+        binding.saveButton.setOnClickListener {
+            viewModel.dispatchEvent(ReadingProgressEvent.OnSaveButtonClicked)
+        }
 
-            cancelButton.setOnClickListener {
-                viewModel.dispatchEvent(ReadingProgressEvent.OnCancelButtonClicked)
-            }
+        binding.cancelButton.setOnClickListener {
+            viewModel.dispatchEvent(ReadingProgressEvent.OnCancelButtonClicked)
         }
     }
 
