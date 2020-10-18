@@ -32,7 +32,7 @@ class QuoteEditFragment @Inject constructor(
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.saveQuoteItem -> {
-                viewModel.dispatchEvent(QuoteEditEvent.OnAddQuoteButtonClicked)
+                viewModel.dispatchEvent(QuoteEditEvent.OnSaveQuoteButtonClicked)
                 true
             }
 
@@ -57,14 +57,9 @@ class QuoteEditFragment @Inject constructor(
 
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when (state) {
-                is QuoteEditState.Error -> {
-                    errorToast(state.messageResourceId)
-                }
-
-                QuoteEditState.QuoteAdded -> {
-                    successToast(R.string.quote_added_successfully)
-                    navigateUp()
-                }
+                is QuoteEditState.QuoteSaved -> successToast(state.messageResourceId)
+                is QuoteEditState.Error -> errorToast(state.messageResourceId)
+                QuoteEditState.NavigateUp -> navigateUp()
             }
         }
     }

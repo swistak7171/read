@@ -12,7 +12,6 @@ import pl.kamilszustak.read.domain.access.usecase.quote.GetQuoteUseCase
 import pl.kamilszustak.read.model.domain.Quote
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
-import timber.log.Timber
 
 class QuoteEditViewModel(
     private val arguments: QuoteEditFragmentArgs,
@@ -47,7 +46,7 @@ class QuoteEditViewModel(
 
     override fun handleEvent(event: QuoteEditEvent) {
         when (event) {
-            QuoteEditEvent.OnAddQuoteButtonClicked -> handleSaveButtonClick()
+            QuoteEditEvent.OnSaveQuoteButtonClicked -> handleSaveButtonClick()
         }
     }
 
@@ -72,21 +71,46 @@ class QuoteEditViewModel(
             return
         }
 
-        val quote = Quote(
-            content = content,
-            author = author,
-            book = book
-        )
-
         viewModelScope.launch(Dispatchers.Main) {
-            addQuote(quote)
-                .onSuccess {
-                    _state.value = QuoteEditState.QuoteAdded
+            val result = if (inEditMode) {
+                val id = QuoteId(arguments.quoteId ?: return@launch)
+                editQuote(id) { quote ->
+                    quote.copy(
+                        content = content,
+                        author = author,
+                        book = book
+                    )
                 }
-                .onFailure {
-                    Timber.e(it)
-                    _state.value = QuoteEditState.Error(R.string.adding_quote_error_message)
+            } else {
+                val quote = Quote(
+                    content = content,
+                    author = author,
+                    book = book
+                )
+
+                addQuote(quote)
+            }
+
+            result.onSuccess {
+                val resourceId = if (inEditMode) {
+                    R.string.quote_edited_successfully
+                } else {
+                    R.string.quote_added_successfully
                 }
+
+                with(_state) {
+                    value = QuoteEditState.QuoteSaved(resourceId)
+                    value = QuoteEditState.NavigateUp
+                }
+            }.onFailure {
+                val resourceId = if (inEditMode) {
+                    R.string.editing_quote_error_message
+                } else {
+                    R.string.adding_quote_error_message
+                }
+
+                _state.value = QuoteEditState.Error(resourceId)
+            }
         }
     }
 }
