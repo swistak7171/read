@@ -10,9 +10,9 @@ import pl.kamilszustak.read.model.domain.Quote
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
 import timber.log.Timber
-import javax.inject.Inject
 
-class QuoteEditViewModel @Inject constructor(
+class QuoteEditViewModel(
+    private val arguments: QuoteEditFragmentArgs,
     private val addQuote: AddQuoteUseCase,
 ) : BaseViewModel<QuoteEditEvent, QuoteEditState>() {
 
