@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/menuButton"
                 android:src="@drawable/icon_menu_vertical"
-                android:background="@drawable/md_transparent"
+                android:background="?selectableItemBackgroundBorderless"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

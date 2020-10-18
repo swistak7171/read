@@ -10,6 +10,7 @@ import pl.kamilszustak.model.common.id.CollectionBookId
 import pl.kamilszustak.read.model.domain.CollectionBook
 import pl.kamilszustak.read.ui.base.binding.viewBinding
 import pl.kamilszustak.read.ui.base.util.navigate
+import pl.kamilszustak.read.ui.base.util.popupMenu
 import pl.kamilszustak.read.ui.base.util.updateModels
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
@@ -36,7 +37,7 @@ class CollectionFragment @Inject constructor(
                 true
             }
 
-            val menuClickEventHook = object : ClickEventHook<CollectionBookItem>() {
+            addEventHook(object : ClickEventHook<CollectionBookItem>() {
                 override fun onBind(viewHolder: RecyclerView.ViewHolder): View? {
                     return if (viewHolder is CollectionBookItem.ViewHolder) {
                         viewHolder.binding.menuButton
@@ -51,12 +52,30 @@ class CollectionFragment @Inject constructor(
                     fastAdapter: FastAdapter<CollectionBookItem>,
                     item: CollectionBookItem
                 ) {
-                    val event = CollectionEvent.OnBookMenuButtonClicked(item.model.id)
-                    viewModel.dispatchEvent(event)
-                }
-            }
+                    popupMenu(v, R.menu.popup_menu_collection_book_item) {
+                        setForceShowIcon(true)
+                        setOnMenuItemClickListener { menuItem ->
+                            when (menuItem.itemId) {
+                                R.id.editBookItem -> {
+                                    val event = CollectionEvent.OnEditBookButtonClicked(item.model.id)
+                                    viewModel.dispatchEvent(event)
+                                    true
+                                }
 
-            addEventHook(menuClickEventHook)
+                                R.id.updateReadingProgressItem -> {
+                                    val event = CollectionEvent.OnUpdateReadingProgressButtonClicked(item.model.id)
+                                    viewModel.dispatchEvent(event)
+                                    true
+                                }
+
+                                else -> {
+                                    false
+                                }
+                            }
+                        }
+                    }
+                }
+            })
         }
 
         binding.booksRecyclerView.apply {

@@ -25,8 +25,12 @@ class CollectionViewModel @Inject constructor(
                 _state.value = CollectionState.NavigateToReadingProgressDialogFragment(event.collectionBookId)
             }
 
-            is CollectionEvent.OnBookMenuButtonClicked -> {
+            is CollectionEvent.OnEditBookButtonClicked -> {
                 _state.value = CollectionState.NavigateToBookEditFragment(event.collectionBookId)
+            }
+
+            is CollectionEvent.OnUpdateReadingProgressButtonClicked -> {
+                _state.value = CollectionState.NavigateToReadingProgressDialogFragment(event.collectionBookId)
             }
         }
     }

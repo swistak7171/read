@@ -19,6 +19,9 @@ class CollectionBookItem(book: CollectionBook) : ModelAbstractBindingItem<Collec
     override fun createBinding(inflater: LayoutInflater, parent: ViewGroup?): ItemCollectionBookBinding =
         ItemCollectionBookBinding.inflate(inflater, parent, false)
 
+    override fun getViewHolder(viewBinding: ItemCollectionBookBinding): BindingViewHolder<ItemCollectionBookBinding> =
+        ViewHolder(viewBinding)
+
     override fun bindView(binding: ItemCollectionBookBinding, payloads: List<Any>) {
         binding.book = model
     }
