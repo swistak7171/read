@@ -4,7 +4,9 @@ import pl.kamilszustak.model.common.id.CollectionBookId
 import pl.kamilszustak.read.ui.base.view.ViewState
 
 sealed class CollectionState : ViewState {
-    object NavigateToBookEditFragment : CollectionState()
+    data class NavigateToBookEditFragment(
+        val collectionBookId: CollectionBookId? = null,
+    ) : CollectionState()
 
     data class NavigateToReadingProgressDialogFragment(
         val collectionBookId: CollectionBookId,

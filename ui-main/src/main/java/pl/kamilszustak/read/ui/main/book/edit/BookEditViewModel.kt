@@ -27,7 +27,7 @@ class BookEditViewModel(
     private val editCollectionBook: EditCollectionBookUseCase,
 ) : BaseViewModel<BookEditEvent, BookEditState>() {
 
-    private val inEditMode: Boolean = arguments.collectionBookId.isNotBlank()
+    private val inEditMode: Boolean = (arguments.collectionBookId != null)
 
     private val _actionBarTitle: UniqueLiveData<Int> = UniqueLiveData()
     val actionBarTitle: LiveData<Int>
@@ -54,7 +54,7 @@ class BookEditViewModel(
 
         if (inEditMode) {
             viewModelScope.launch(Dispatchers.Main) {
-                val id = CollectionBookId(arguments.collectionBookId)
+                val id = CollectionBookId(arguments.collectionBookId ?: return@launch)
                 val book = getCollectionBook(id)
                 if (book != null) {
                     assignBookDetails(book)

@@ -28,7 +28,8 @@
         <argument
             android:name="collectionBookId"
             app:argType="string"
-            android:defaultValue="" />
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <dialog
         android:id="@+id/readingProgressDialogFragment"
