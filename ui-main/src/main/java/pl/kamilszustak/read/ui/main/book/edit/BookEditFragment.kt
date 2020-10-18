@@ -73,8 +73,11 @@ class BookEditFragment @Inject constructor(
                     errorToast(state.messageResourceId)
                 }
 
-                BookEditState.BookAdded -> {
-                    successToast(R.string.book_added_successfully)
+                is BookEditState.BookSaved -> {
+                    successToast(state.messageResourceId)
+                }
+
+                BookEditState.NavigateUp -> {
                     navigateUp()
                 }
             }

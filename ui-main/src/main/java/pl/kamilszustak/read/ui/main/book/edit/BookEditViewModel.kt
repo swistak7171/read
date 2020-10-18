@@ -3,7 +3,6 @@ package pl.kamilszustak.read.ui.main.book.edit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pl.kamilszustak.model.common.id.CollectionBookId
@@ -16,7 +15,6 @@ import pl.kamilszustak.read.domain.access.usecase.collection.GetCollectionBookUs
 import pl.kamilszustak.read.model.domain.CollectionBook
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
-import timber.log.Timber
 import java.util.*
 
 class BookEditViewModel(
@@ -111,7 +109,7 @@ class BookEditViewModel(
             return
         }
 
-        val book = CollectionBook(
+        val collectionBook = CollectionBook(
             title = title,
             author = author,
             numberOfPages = pages,
@@ -120,18 +118,41 @@ class BookEditViewModel(
             description = description
         )
 
-        val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
-            Timber.e(throwable)
-        }
+        viewModelScope.launch(Dispatchers.Main) {
+            val result = if (inEditMode) {
+                val id = CollectionBookId(arguments.collectionBookId ?: return@launch)
+                editCollectionBook(id) { book ->
+                    book.copy(
+                        title = title,
+                        author = author,
+                        numberOfPages = pages,
+                        publicationDate = date,
+                        isbn = isbn,
+                        description = description
+                    )
+                }
+            } else {
+                addCollectionBook(collectionBook)
+            }
 
-        viewModelScope.launch(Dispatchers.Main + exceptionHandler) {
-            addCollectionBook(book)
-                .onSuccess {
-                    _state.value = BookEditState.BookAdded
+            result.onSuccess {
+                val resourceId = if (inEditMode) {
+                    R.string.book_edited_successfully
+                } else {
+                    R.string.book_added_successfully
                 }
-                .onFailure {
-                    _state.value = BookEditState.Error(R.string.adding_book_error_message)
+
+                _state.value = BookEditState.BookSaved(resourceId)
+                _state.value = BookEditState.NavigateUp
+            }.onFailure {
+                val resourceId = if (inEditMode) {
+                    R.string.editing_book_error_message
+                } else {
+                    R.string.adding_book_error_message
                 }
+
+                _state.value = BookEditState.Error(resourceId)
+            }
         }
     }
 }
