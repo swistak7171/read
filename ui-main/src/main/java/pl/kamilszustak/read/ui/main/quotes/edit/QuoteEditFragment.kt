@@ -31,7 +31,7 @@ class QuoteEditFragment @Inject constructor(
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.addQuoteItem -> {
+            R.id.saveQuoteItem -> {
                 viewModel.dispatchEvent(QuoteEditEvent.OnAddQuoteButtonClicked)
                 true
             }

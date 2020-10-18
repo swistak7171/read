@@ -11,7 +11,9 @@ import pl.kamilszustak.read.domain.access.usecase.country.GetAllCountriesUseCase
 import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryCodeUseCase
 import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryUseCase
 import pl.kamilszustak.read.domain.access.usecase.quote.AddQuoteUseCase
+import pl.kamilszustak.read.domain.access.usecase.quote.EditQuoteUseCase
 import pl.kamilszustak.read.domain.access.usecase.quote.GetAllQuotesUseCase
+import pl.kamilszustak.read.domain.access.usecase.quote.GetQuoteUseCase
 import pl.kamilszustak.read.domain.access.usecase.user.GetUserUseCase
 import pl.kamilszustak.read.domain.access.usecase.user.SignOutUseCase
 import pl.kamilszustak.read.domain.usecase.barcode.ReadBarcodeUseCaseImpl
@@ -23,7 +25,9 @@ import pl.kamilszustak.read.domain.usecase.country.GetAllCountriesUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryCodeUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.quote.AddQuoteUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.quote.EditQuoteUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.quote.GetAllQuotesUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.quote.GetQuoteUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.user.GetUserUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.user.SignOutUseCaseImpl
 
@@ -54,7 +58,13 @@ interface UseCaseModule {
     fun bindAddQuoteUseCase(useCaseImpl: AddQuoteUseCaseImpl): AddQuoteUseCase
 
     @Binds
+    fun bindEditQuoteUseCase(useCaseImpl: EditQuoteUseCaseImpl): EditQuoteUseCase
+
+    @Binds
     fun bindGetAllQuotesUseCase(useCaseImpl: GetAllQuotesUseCaseImpl): GetAllQuotesUseCase
+
+    @Binds
+    fun bindGetQuoteUseCase(useCaseImpl: GetQuoteUseCaseImpl): GetQuoteUseCase
 
     @Binds
     fun bindReadBarcodeUseCase(useCaseImpl: ReadBarcodeUseCaseImpl): ReadBarcodeUseCase

@@ -19,13 +19,13 @@ class EditCollectionBookUseCaseImpl @Inject constructor(
 
     override suspend fun invoke(
         id: CollectionBookId,
-        update: (CollectionBook) -> CollectionBook
+        edit: (CollectionBook) -> CollectionBook
     ): Result<Unit> {
         val book = getCollectionBook(id)
 
         return runNotNull(book) {
-            val updated = update(it)
-            val mapped = mapper.map(updated)
+            val edited = edit(it)
+            val mapped = mapper.map(edited)
             repository.edit(mapped)
         }
     }
