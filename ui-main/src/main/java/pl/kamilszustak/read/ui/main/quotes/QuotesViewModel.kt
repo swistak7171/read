@@ -18,7 +18,11 @@ class QuotesViewModel @Inject constructor(
     override fun handleEvent(event: QuotesEvent) {
         when (event) {
             QuotesEvent.OnAddQuoteButtonClicked -> {
-                _state.value = QuotesState.NavigateToQuoteEditFragment
+                _state.value = QuotesState.NavigateToQuoteEditFragment()
+            }
+
+            is QuotesEvent.OnEditQuoteButtonClicked -> {
+                _state.value = QuotesState.NavigateToQuoteEditFragment(event.quoteId)
             }
         }
     }
