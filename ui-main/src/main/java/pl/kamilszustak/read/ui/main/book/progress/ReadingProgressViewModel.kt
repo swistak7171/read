@@ -7,7 +7,7 @@ import kotlinx.coroutines.launch
 import pl.kamilszustak.model.common.id.CollectionBookId
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.domain.access.usecase.collection.GetCollectionBookUseCase
-import pl.kamilszustak.read.domain.access.usecase.collection.UpdateCollectionBookUseCase
+import pl.kamilszustak.read.domain.access.usecase.collection.EditCollectionBookUseCase
 import pl.kamilszustak.read.model.domain.CollectionBook
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
@@ -15,7 +15,7 @@ import pl.kamilszustak.read.ui.main.R
 class ReadingProgressViewModel(
     private val arguments: ReadingProgressDialogFragmentArgs,
     private val getCollectionBook: GetCollectionBookUseCase,
-    private val updateCollectionBook: UpdateCollectionBookUseCase,
+    private val editCollectionBook: EditCollectionBookUseCase,
 ) : BaseViewModel<ReadingProgressEvent, ReadingProgressState>() {
 
     private val _collectionBook: UniqueLiveData<CollectionBook> = UniqueLiveData()
@@ -56,7 +56,7 @@ class ReadingProgressViewModel(
 
         val id = CollectionBookId(arguments.collectionBookId)
         viewModelScope.launch(Dispatchers.Main) {
-            updateCollectionBook(id) { book -> book.copy(readPages = pages) }
+            editCollectionBook(id) { book -> book.copy(readPages = pages) }
                 .onSuccess {
                     with(_state) {
                         value = ReadingProgressState.ProgressUpdated

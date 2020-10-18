@@ -21,7 +21,9 @@
     <string name="blank_book_author">Brak autora</string>
     <string name="blank_book_number_of_pages">Brak ilości stron</string>
     <string name="adding_book_error_message">Wystąpił błąd podczas dodawania książki</string>
-    <string name="book_added_successfully">Książka dodana pomyślnie</string>
+    <string name="book_added_successfully">Książka została dodana pomyślnie</string>
+    <string name="editing_book_error_message">Wystąpił błąd podczas edytowania książki</string>
+    <string name="book_edited_successfully">Książka została edytowana pomyślnie</string>
 
     <!-- QuoteEditFragment -->
     <string name="add_quote">Dodaj cytat</string>
@@ -38,6 +40,7 @@
     <string name="camera_permission_permanently_denied">Dostęp do kamery został odrzucony na stałe</string>
 
     <!-- ReadingProgressDialogFragment -->
+    <string name="update_reading_progress">Zaktualizuj postęp</string>
     <string name="invalid_read_pages_number_error_message">Niepoprawna wartość przeczytanych stron</string>
     <string name="reading_progress_edit_error_message">Wystąpił błąd podczas edycji postępu czytania</string>
     <string name="reading_progress_updated">Postęp zostały pomyślnie zaktualizowany</string>

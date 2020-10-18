@@ -51,6 +51,15 @@
                 android:ellipsize="end"
                 android:lines="1"
                 app:layout_constraintStart_toEndOf="@id/barrierView"
+                app:layout_constraintEnd_toStartOf="@id/menuButton"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/menuButton"
+                android:src="@drawable/icon_menu_vertical"
+                android:background="?selectableItemBackgroundBorderless"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

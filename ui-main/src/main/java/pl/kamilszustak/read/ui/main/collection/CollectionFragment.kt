@@ -1,12 +1,16 @@
 package pl.kamilszustak.read.ui.main.collection
 
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ModelAdapter
+import com.mikepenz.fastadapter.listeners.ClickEventHook
 import pl.kamilszustak.model.common.id.CollectionBookId
 import pl.kamilszustak.read.model.domain.CollectionBook
 import pl.kamilszustak.read.ui.base.binding.viewBinding
 import pl.kamilszustak.read.ui.base.util.navigate
+import pl.kamilszustak.read.ui.base.util.popupMenu
 import pl.kamilszustak.read.ui.base.util.updateModels
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
@@ -27,11 +31,51 @@ class CollectionFragment @Inject constructor(
 
     override fun initializeRecyclerView() {
         val fastAdapter = FastAdapter.with(modelAdapter).apply {
-            this.onLongClickListener = { view, adapter, item, position ->
+            onLongClickListener = { view, adapter, item, position ->
                 val event = CollectionEvent.OnBookLongClicked(item.model.id)
                 viewModel.dispatchEvent(event)
                 true
             }
+
+            addEventHook(object : ClickEventHook<CollectionBookItem>() {
+                override fun onBind(viewHolder: RecyclerView.ViewHolder): View? {
+                    return if (viewHolder is CollectionBookItem.ViewHolder) {
+                        viewHolder.binding.menuButton
+                    } else {
+                        null
+                    }
+                }
+
+                override fun onClick(
+                    v: View,
+                    position: Int,
+                    fastAdapter: FastAdapter<CollectionBookItem>,
+                    item: CollectionBookItem
+                ) {
+                    popupMenu(v, R.menu.popup_menu_collection_book_item) {
+                        setForceShowIcon(true)
+                        setOnMenuItemClickListener { menuItem ->
+                            when (menuItem.itemId) {
+                                R.id.editBookItem -> {
+                                    val event = CollectionEvent.OnEditBookButtonClicked(item.model.id)
+                                    viewModel.dispatchEvent(event)
+                                    true
+                                }
+
+                                R.id.updateReadingProgressItem -> {
+                                    val event = CollectionEvent.OnUpdateReadingProgressButtonClicked(item.model.id)
+                                    viewModel.dispatchEvent(event)
+                                    true
+                                }
+
+                                else -> {
+                                    false
+                                }
+                            }
+                        }
+                    }
+                }
+            })
         }
 
         binding.booksRecyclerView.apply {
@@ -48,8 +92,8 @@ class CollectionFragment @Inject constructor(
     override fun observeViewModel() {
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when (state) {
-                CollectionState.NavigateToBookEditFragment -> {
-                    navigator.navigateToBookEditFragment()
+                is CollectionState.NavigateToBookEditFragment -> {
+                    navigator.navigateToBookEditFragment(state.collectionBookId)
                 }
 
                 is CollectionState.NavigateToReadingProgressDialogFragment -> {
@@ -64,8 +108,8 @@ class CollectionFragment @Inject constructor(
     }
 
     private inner class Navigator {
-        fun navigateToBookEditFragment() {
-            val direction = CollectionFragmentDirections.actionCollectionFragmentToBookEditFragment()
+        fun navigateToBookEditFragment(collectionBookId: CollectionBookId? = null) {
+            val direction = CollectionFragmentDirections.actionCollectionFragmentToBookEditFragment(collectionBookId?.value)
             navigate(direction)
         }
 

@@ -18,10 +18,18 @@ class CollectionViewModel @Inject constructor(
     override fun handleEvent(event: CollectionEvent) {
         when (event) {
             CollectionEvent.OnAddBookButtonClicked -> {
-                _state.value = CollectionState.NavigateToBookEditFragment
+                _state.value = CollectionState.NavigateToBookEditFragment()
             }
 
             is CollectionEvent.OnBookLongClicked -> {
+                _state.value = CollectionState.NavigateToReadingProgressDialogFragment(event.collectionBookId)
+            }
+
+            is CollectionEvent.OnEditBookButtonClicked -> {
+                _state.value = CollectionState.NavigateToBookEditFragment(event.collectionBookId)
+            }
+
+            is CollectionEvent.OnUpdateReadingProgressButtonClicked -> {
                 _state.value = CollectionState.NavigateToReadingProgressDialogFragment(event.collectionBookId)
             }
         }

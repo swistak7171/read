@@ -4,9 +4,9 @@ import dagger.Binds
 import dagger.Module
 import pl.kamilszustak.read.domain.access.usecase.barcode.ReadBarcodeUseCase
 import pl.kamilszustak.read.domain.access.usecase.collection.AddCollectionBookUseCase
+import pl.kamilszustak.read.domain.access.usecase.collection.EditCollectionBookUseCase
 import pl.kamilszustak.read.domain.access.usecase.collection.GetAllCollectionBooksUseCase
 import pl.kamilszustak.read.domain.access.usecase.collection.GetCollectionBookUseCase
-import pl.kamilszustak.read.domain.access.usecase.collection.UpdateCollectionBookUseCase
 import pl.kamilszustak.read.domain.access.usecase.country.GetAllCountriesUseCase
 import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryCodeUseCase
 import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryUseCase
@@ -16,9 +16,9 @@ import pl.kamilszustak.read.domain.access.usecase.user.GetUserUseCase
 import pl.kamilszustak.read.domain.access.usecase.user.SignOutUseCase
 import pl.kamilszustak.read.domain.usecase.barcode.ReadBarcodeUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.collection.AddCollectionBookUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.collection.EditCollectionBookUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.collection.GetAllCollectionBooksUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.collection.GetCollectionBookUseCaseImpl
-import pl.kamilszustak.read.domain.usecase.collection.UpdateCollectionBookUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.country.GetAllCountriesUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryCodeUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryUseCaseImpl
@@ -48,7 +48,7 @@ interface UseCaseModule {
     fun bindGetCollectionBookUseCase(useCaseimpl: GetCollectionBookUseCaseImpl): GetCollectionBookUseCase
 
     @Binds
-    fun bindUpdateCollectionBookUseCase(useCaseImpl: UpdateCollectionBookUseCaseImpl): UpdateCollectionBookUseCase
+    fun bindEditCollectionBookUseCase(useCaseImpl: EditCollectionBookUseCaseImpl): EditCollectionBookUseCase
 
     @Binds
     fun bindAddQuoteUseCase(useCaseImpl: AddQuoteUseCaseImpl): AddQuoteUseCase
