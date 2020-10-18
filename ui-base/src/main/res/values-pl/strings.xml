@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ok">OK</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
+    <string name="loading">Ładowanie</string>
+    <string name="help">Pomoc</string>
+    <string name="cancel">Anuluj</string>
+    <string name="close">Zamknij</string>
+    <string name="retry">Powtórz</string>
+    <string name="contact">Kontakt</string>
+    <string name="clear">Wyczyść</string>
+    <string name="delete">Usuń</string>
+    <string name="save">Zapisz</string>
+    <string name="add">Dodaj</string>
+</resources>

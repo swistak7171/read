@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_collection_item_title">Kolekcja</string>
+    <string name="menu_search_item_title">Szukaj</string>
+    <string name="menu_scanner_item_title">Skaner</string>
+    <string name="menu_quotes_item_title">Cytaty</string>
+    <string name="menu_profile_item_title">Profil</string>
+
+    <!-- BookEditFragment -->
+    <string name="add_book">Dodaj książkę</string>
+    <string name="edit_book">Edytuj książkę</string>
+    <string name="title">Tytuł</string>
+    <string name="author">Autor</string>
+    <string name="number_of_pages">Liczba stron</string>
+    <string name="publication_date">Data wydania</string>
+    <string name="isbn" translatable="false">ISBN</string>
+    <string name="description">Opis</string>
+    <string name="select_a_publication_date">Wybierz datę publikacji</string>
+
+    <string name="blank_book_title">Brak tytułu</string>
+    <string name="blank_book_author">Brak autora</string>
+    <string name="blank_book_number_of_pages">Brak ilości stron</string>
+    <string name="adding_book_error_message">Wystąpił błąd podczas dodawania książki</string>
+    <string name="book_added_successfully">Książka dodana pomyślnie</string>
+
+    <!-- QuoteEditFragment -->
+    <string name="add_quote">Dodaj cytat</string>
+    <string name="edit_quote">Edytuj cytat</string>
+    <string name="content">Treść</string>
+    <string name="book_title">Tytuł książki</string>
+    <string name="blank_quote_content">Pusta treść</string>
+    <string name="blank_quote_author">Brak autora</string>
+    <string name="adding_quote_error_message">Wystąpił błąd podczas dodawania cytatu</string>
+    <string name="quote_added_successfully">Cytat dodany pomyślnie</string>
+
+    <!-- ScannerFragment -->
+    <string name="camera_permission_denied">Dostęp do kamery został odrzucony</string>
+    <string name="camera_permission_permanently_denied">Dostęp do kamery został odrzucony na stałe</string>
+
+    <!-- ReadingProgressDialogFragment -->
+    <string name="invalid_read_pages_number_error_message">Niepoprawna wartość przeczytanych stron</string>
+    <string name="reading_progress_edit_error_message">Wystąpił błąd podczas edycji postępu czytania</string>
+    <string name="reading_progress_updated">Postęp zostały pomyślnie zaktualizowany</string>
+</resources>
