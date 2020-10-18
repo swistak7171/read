@@ -1,12 +1,13 @@
 package pl.kamilszustak.read.model.domain
 
 import kotlinx.android.parcel.Parcelize
+import pl.kamilszustak.model.common.id.CollectionBookId
 import java.util.Date
 import kotlin.math.roundToInt
 
 @Parcelize
 data class CollectionBook(
-    override val id: String = "",
+    override val id: CollectionBookId = CollectionBookId(),
     override val creationDate: Date = Date(),
     override val modificationDate: Date = Date(),
     val title: String,
@@ -16,7 +17,7 @@ data class CollectionBook(
     val isbn: String?,
     val description: String?,
     val coverImageUrl: String? = null,
-    val readPages: Int = 0,
+    val readPages: Int = 0
 ) : Model() {
 
     val progress: Float

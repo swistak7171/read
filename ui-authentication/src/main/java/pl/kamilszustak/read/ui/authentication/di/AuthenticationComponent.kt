@@ -13,7 +13,7 @@ import pl.kamilszustak.read.ui.base.di.module.BaseUiModule
         BaseUiModule::class,
         AuthenticationActivityModule::class,
         AuthenticationFragmentModule::class,
-        AuthenticationViewModelModule::class,
+        AuthenticationViewModelModule::class
     ]
 )
 @AuthenticationScope

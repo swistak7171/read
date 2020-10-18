@@ -5,10 +5,11 @@ plugins {
 }
 
 buildscript {
-    val kotlin_version by extra("1.4.10")
     repositories {
         google()
         jcenter()
+        maven(Repositories.KOTLIN_EAP)
+        maven(Repositories.KOTLIN_DEV)
     }
 
     dependencies {
@@ -17,7 +18,6 @@ buildscript {
         classpath(Dependencies.AndroidX.Navigation.NAVIGATION_SAFE_ARGS_GRADLE_PLUGIN)
         classpath(Dependencies.KTLINT)
         classpath(Dependencies.Google.Gms.GOOGLE_SERVICES)
-        "classpath"("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
     }
 }
 
@@ -27,6 +27,8 @@ allprojects {
         jcenter()
         maven(Repositories.GRADLE_PLUGINS_M2)
         maven(Repositories.JITPACK)
+        maven(Repositories.KOTLIN_EAP)
+        maven(Repositories.KOTLIN_DEV)
     }
 }
 

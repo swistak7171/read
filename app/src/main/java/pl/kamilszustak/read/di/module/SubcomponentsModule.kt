@@ -7,7 +7,7 @@ import pl.kamilszustak.read.ui.main.di.MainComponent
 @Module(
     subcomponents = [
         AuthenticationComponent::class,
-        MainComponent::class,
+        MainComponent::class
     ]
 )
 interface SubcomponentsModule

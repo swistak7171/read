@@ -10,7 +10,7 @@ import javax.inject.Singleton
 @Singleton
 class AddCollectionBookUseCaseImpl @Inject constructor(
     private val collectionBookRepository: CollectionBookRepository,
-    private val collectionBookMapper: CollectionBookMapper,
+    private val collectionBookMapper: CollectionBookMapper
 ) : AddCollectionBookUseCase {
 
     override suspend fun invoke(input: CollectionBook): Result<Unit> {

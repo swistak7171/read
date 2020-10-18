@@ -1,6 +1,6 @@
 package pl.kamilszustak.read.ui.main.search
 
-import pl.kamilszustak.read.ui.base.view.Event
+import pl.kamilszustak.read.ui.base.view.ViewEvent
 
-sealed class SearchEvent : Event {
+sealed class SearchEvent : ViewEvent {
 }

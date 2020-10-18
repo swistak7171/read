@@ -18,3 +18,13 @@ inline fun <T : Any, R> T?.useOrNull(action: (T) -> R): R? {
         null
     }
 }
+
+inline fun <T, R> runNotNull(value: T?, action: (T) -> R): Result<R> {
+    return if (value != null) {
+        val result = action(value)
+        Result.success(result)
+    } else {
+        val exception = Exception("Value is null")
+        Result.failure(exception)
+    }
+}

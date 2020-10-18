@@ -33,6 +33,9 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
+    api(project(Modules.MODEL_COMMON))
+
+    // Kotlin Standard Library
     api(Dependencies.Kotlin.KOTLIN_STANDARD_LIBRARY)
 
     // Kotlin Coroutines

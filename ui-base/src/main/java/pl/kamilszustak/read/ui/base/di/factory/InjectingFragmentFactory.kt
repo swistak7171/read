@@ -7,7 +7,7 @@ import javax.inject.Inject
 import javax.inject.Provider
 
 class InjectingFragmentFactory @Inject constructor(
-    private val fragments: Map<Class<out Fragment>, @JvmSuppressWildcards Provider<Fragment>>,
+    private val fragments: Map<Class<out Fragment>, @JvmSuppressWildcards Provider<Fragment>>
 ) : FragmentFactory() {
 
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {

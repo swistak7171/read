@@ -1,8 +1,8 @@
 package pl.kamilszustak.read.ui.authentication.signin.phone
 
-import pl.kamilszustak.read.ui.base.view.Event
+import pl.kamilszustak.read.ui.base.view.ViewEvent
 
-sealed class PhoneSignInEvent : Event {
+sealed class PhoneSignInEvent : ViewEvent {
     object OnCountryEditTextClicked : PhoneSignInEvent()
     object OnSignInButtonClicked : PhoneSignInEvent()
 

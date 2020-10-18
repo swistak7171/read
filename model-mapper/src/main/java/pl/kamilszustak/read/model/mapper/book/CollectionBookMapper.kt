@@ -24,7 +24,7 @@ class CollectionBookMapper @Inject constructor(
             coverImageUrl = model.coverImageUrl,
             readPages = model.readPages
         ).apply {
-            id = model.id
+            id = model.id.value
             creationDate = model.creationDate
             modificationDate = model.modificationDate
         }

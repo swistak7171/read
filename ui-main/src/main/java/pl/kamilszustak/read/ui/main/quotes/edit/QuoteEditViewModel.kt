@@ -9,6 +9,7 @@ import pl.kamilszustak.read.domain.access.usecase.quote.AddQuoteUseCase
 import pl.kamilszustak.read.model.domain.Quote
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
+import timber.log.Timber
 import javax.inject.Inject
 
 class QuoteEditViewModel @Inject constructor(
@@ -60,6 +61,7 @@ class QuoteEditViewModel @Inject constructor(
                     _state.value = QuoteEditState.QuoteAdded
                 }
                 .onFailure {
+                    Timber.e(it)
                     _state.value = QuoteEditState.Error(R.string.adding_quote_error_message)
                 }
         }

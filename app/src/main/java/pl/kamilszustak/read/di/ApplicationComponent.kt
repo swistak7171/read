@@ -8,7 +8,6 @@ import dagger.android.AndroidInjector
 import pl.kamilszustak.read.ReadApplication
 import pl.kamilszustak.read.data.di.module.DataModule
 import pl.kamilszustak.read.di.module.ApplicationModule
-import pl.kamilszustak.read.di.module.AssistedInjectModule
 import pl.kamilszustak.read.di.module.FirebaseAuthenticationModule
 import pl.kamilszustak.read.di.module.SubcomponentsModule
 import pl.kamilszustak.read.domain.di.DomainModule
@@ -20,7 +19,6 @@ import javax.inject.Singleton
     modules = [
         AndroidInjectionModule::class,
         ApplicationModule::class,
-        AssistedInjectModule::class,
         FirebaseAuthenticationModule::class,
         DataModule::class,
         DomainModule::class,

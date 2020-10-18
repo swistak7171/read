@@ -19,7 +19,7 @@ class QuoteMapper @Inject constructor(
             book = model.book,
             userId = userId
         ).apply {
-            id = model.id
+            id = model.id.value
             creationDate = model.creationDate
             modificationDate = model.modificationDate
         }

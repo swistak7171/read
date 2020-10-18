@@ -1,8 +1,8 @@
 package pl.kamilszustak.read.ui.main.scanner
 
-import pl.kamilszustak.read.ui.base.view.State
+import pl.kamilszustak.read.ui.base.view.ViewState
 
-sealed class ScannerState : State {
+sealed class ScannerState : ViewState {
     sealed class CameraPermissionState : ScannerState() {
         object Unknown : CameraPermissionState()
         object Granted : CameraPermissionState()

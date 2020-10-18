@@ -8,7 +8,7 @@ import javax.inject.Singleton
 
 @Singleton
 class GetUserUseCaseImpl @Inject constructor(
-    private val auth: FirebaseAuth,
+    private val auth: FirebaseAuth
 ) : GetUserUseCase {
 
     override fun invoke(): FirebaseUser =

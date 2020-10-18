@@ -6,6 +6,7 @@ object Modules {
     const val DOMAIN: String = ":domain"
     const val DOMAIN_ACCESS: String = ":domain-access"
     const val NETWORK: String = ":network"
+    const val MODEL_COMMON: String = ":model-common"
     const val MODEL_DOMAIN: String = ":model-domain"
     const val MODEL_DATA: String = ":model-data"
     const val MODEL_MAPPER: String = ":model-mapper"

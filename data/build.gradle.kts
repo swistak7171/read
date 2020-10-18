@@ -21,9 +21,7 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = mapOf(
-                    "room.schemaLocation" to "$projectDir/schemas"
-                )
+                argument("room.schemaLocation", "$projectDir/schemas")
             }
         }
     }

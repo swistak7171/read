@@ -5,5 +5,7 @@ import pl.kamilszustak.read.model.data.CollectionBookEntity
 
 interface CollectionBookRepository {
     suspend fun add(book: CollectionBookEntity): Result<Unit>
+    suspend fun update(book: CollectionBookEntity): Result<Unit>
     fun getAll(): Flow<List<CollectionBookEntity>>
+    suspend fun getById(id: String): CollectionBookEntity?
 }

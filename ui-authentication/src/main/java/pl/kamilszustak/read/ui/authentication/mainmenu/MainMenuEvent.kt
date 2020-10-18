@@ -3,10 +3,10 @@ package pl.kamilszustak.read.ui.authentication.mainmenu
 import android.app.Activity
 import android.content.Intent
 import androidx.fragment.app.Fragment
-import pl.kamilszustak.read.ui.base.view.Event
+import pl.kamilszustak.read.ui.base.view.ViewEvent
 import java.lang.ref.WeakReference
 
-sealed class MainMenuEvent : Event {
+sealed class MainMenuEvent : ViewEvent {
     object OnEmailSignInButtonClicked : MainMenuEvent()
     object OnPhoneSignInButtonClicked : MainMenuEvent()
 
