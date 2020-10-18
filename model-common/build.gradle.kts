@@ -17,4 +17,7 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+
+    // Kotlin Standard Library
+    implementation(Dependencies.Kotlin.KOTLIN_STANDARD_LIBRARY)
 }

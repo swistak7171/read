@@ -43,4 +43,5 @@
     <!-- ReadingProgressDialogFragment -->
     <string name="invalid_read_pages_number_error_message">Invalid read pages number</string>
     <string name="reading_progress_edit_error_message">An error occurred while editing reading progress</string>
+    <string name="reading_progress_updated">Reading progress updated successfully</string>
 </resources>

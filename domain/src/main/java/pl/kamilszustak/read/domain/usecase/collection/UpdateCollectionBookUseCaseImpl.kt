@@ -7,6 +7,7 @@ import pl.kamilszustak.read.domain.access.usecase.collection.GetCollectionBookUs
 import pl.kamilszustak.read.domain.access.usecase.collection.UpdateCollectionBookUseCase
 import pl.kamilszustak.read.model.domain.CollectionBook
 import pl.kamilszustak.read.model.mapper.book.CollectionBookMapper
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -21,7 +22,9 @@ class UpdateCollectionBookUseCaseImpl @Inject constructor(
         id: CollectionBookId,
         update: (CollectionBook) -> CollectionBook
     ): Result<Unit> {
-        val book = getCollectionBook(id)
+        val book = getCollectionBook(id).also {
+            Timber.i(it.toString())
+        }
 
         return runNotNull(book) {
             val updated = update(it)

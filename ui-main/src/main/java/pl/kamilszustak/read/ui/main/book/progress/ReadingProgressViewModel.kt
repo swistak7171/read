@@ -26,7 +26,11 @@ class ReadingProgressViewModel(
     init {
         val id = CollectionBookId(arguments.collectionBookId)
         viewModelScope.launch(Dispatchers.Main) {
-            _collectionBook.value = getCollectionBook(id)
+            _collectionBook.value = getCollectionBook(id).also { book ->
+                if (book != null) {
+                    readPages.value = book.readPages
+                }
+            }
         }
     }
 
@@ -43,7 +47,6 @@ class ReadingProgressViewModel(
     }
 
     private fun handleSaveButtonClicked() {
-        val id = CollectionBookId(arguments.collectionBookId)
         val pages = readPages.value
 
         if (pages == null || pages < 0) {
@@ -51,9 +54,15 @@ class ReadingProgressViewModel(
             return
         }
 
+        val id = CollectionBookId(arguments.collectionBookId)
         viewModelScope.launch(Dispatchers.Main) {
             updateCollectionBook(id) { book -> book.copy(readPages = pages) }
-                .onSuccess { _state.value = ReadingProgressState.NavigateUp }
+                .onSuccess {
+                    with(_state) {
+                        value = ReadingProgressState.ProgressUpdated
+                        value = ReadingProgressState.NavigateUp
+                    }
+                }
                 .onFailure { _state.value = ReadingProgressState.Error(R.string.reading_progress_edit_error_message) }
         }
     }

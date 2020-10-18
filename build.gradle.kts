@@ -9,6 +9,7 @@ buildscript {
         google()
         jcenter()
         maven(Repositories.KOTLIN_EAP)
+        maven(Repositories.KOTLIN_DEV)
     }
 
     dependencies {
@@ -27,6 +28,7 @@ allprojects {
         maven(Repositories.GRADLE_PLUGINS_M2)
         maven(Repositories.JITPACK)
         maven(Repositories.KOTLIN_EAP)
+        maven(Repositories.KOTLIN_DEV)
     }
 }
 

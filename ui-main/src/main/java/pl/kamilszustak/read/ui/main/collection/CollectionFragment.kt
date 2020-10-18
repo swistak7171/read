@@ -28,10 +28,12 @@ class CollectionFragment @Inject constructor(
     override fun initializeRecyclerView() {
         val fastAdapter = FastAdapter.with(modelAdapter).apply {
             this.onLongClickListener = { view, adapter, item, position ->
-                navigator.navigateToReadingProgressDialogFragment(item.model.id)
+                val event = CollectionEvent.OnBookLongClicked(item.model.id)
+                viewModel.dispatchEvent(event)
                 true
             }
         }
+
         binding.booksRecyclerView.apply {
             adapter = fastAdapter
         }
@@ -47,8 +49,11 @@ class CollectionFragment @Inject constructor(
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when (state) {
                 CollectionState.NavigateToBookEditFragment -> {
-                    val direction = CollectionFragmentDirections.actionCollectionFragmentToBookEditFragment()
-                    navigate(direction)
+                    navigator.navigateToBookEditFragment()
+                }
+
+                is CollectionState.NavigateToReadingProgressDialogFragment -> {
+                    navigator.navigateToReadingProgressDialogFragment(state.collectionBookId)
                 }
             }
         }
@@ -59,6 +64,11 @@ class CollectionFragment @Inject constructor(
     }
 
     private inner class Navigator {
+        fun navigateToBookEditFragment() {
+            val direction = CollectionFragmentDirections.actionCollectionFragmentToBookEditFragment()
+            navigate(direction)
+        }
+
         fun navigateToReadingProgressDialogFragment(collectionBookId: CollectionBookId) {
             val direction = CollectionFragmentDirections.actionCollectionFragmentToReadingProgressDialogFragment(collectionBookId.value)
             navigate(direction)

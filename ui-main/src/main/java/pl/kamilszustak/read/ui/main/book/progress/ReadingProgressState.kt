@@ -4,6 +4,7 @@ import androidx.annotation.StringRes
 import pl.kamilszustak.read.ui.base.view.ViewState
 
 sealed class ReadingProgressState : ViewState {
+    object ProgressUpdated : ReadingProgressState()
     object NavigateUp : ReadingProgressState()
 
     data class Error(

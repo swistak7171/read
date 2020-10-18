@@ -1,6 +1,9 @@
 package pl.kamilszustak.read.data.util
 
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.Query
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -81,6 +84,11 @@ suspend inline fun <reified T : Entity> readEntity(query: Query): T? = suspendCa
         override fun onDataChange(snapshot: DataSnapshot) {
             try {
                 val value = snapshot.getValue<T>()
+                val key = snapshot.key
+                if (key != null) {
+                    value?.id = key
+                }
+
                 continuation.resume(value)
             } catch (throwable: Throwable) {
                 continuation.resumeWithException(throwable)

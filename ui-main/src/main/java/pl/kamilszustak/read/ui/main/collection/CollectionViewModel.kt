@@ -20,6 +20,10 @@ class CollectionViewModel @Inject constructor(
             CollectionEvent.OnAddBookButtonClicked -> {
                 _state.value = CollectionState.NavigateToBookEditFragment
             }
+
+            is CollectionEvent.OnBookLongClicked -> {
+                _state.value = CollectionState.NavigateToReadingProgressDialogFragment(event.collectionBookId)
+            }
         }
     }
 }
