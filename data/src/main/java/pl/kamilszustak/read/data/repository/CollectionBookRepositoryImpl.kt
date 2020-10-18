@@ -27,7 +27,7 @@ class CollectionBookRepositoryImpl @Inject constructor(
         }
     }.map { Unit }
 
-    override suspend fun update(book: CollectionBookEntity): Result<Unit> = withIOContext {
+    override suspend fun edit(book: CollectionBookEntity): Result<Unit> = withIOContext {
         runCatching {
             databaseReference.child(book.id)
                 .setValue(book)

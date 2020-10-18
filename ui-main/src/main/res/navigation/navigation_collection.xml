@@ -24,11 +24,16 @@
     <fragment
         android:id="@+id/bookEditFragment"
         android:name="pl.kamilszustak.read.ui.main.book.edit.BookEditFragment"
-        tools:layout="@layout/fragment_book_edit" />
+        tools:layout="@layout/fragment_book_edit" >
+        <argument
+            android:name="collectionBookId"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
     <dialog
         android:id="@+id/readingProgressDialogFragment"
         android:name="pl.kamilszustak.read.ui.main.book.progress.ReadingProgressDialogFragment"
-        android:label="ReadingProgressDialogFragment" >
+        tools:layout="@layout/dialog_fragment_reading_progress">
         <argument
             android:name="collectionBookId"
             app:argType="string" />

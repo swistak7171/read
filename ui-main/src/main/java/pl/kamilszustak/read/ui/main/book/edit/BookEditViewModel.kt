@@ -6,21 +6,28 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import pl.kamilszustak.model.common.id.CollectionBookId
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.domain.access.DateFormats
 import pl.kamilszustak.read.domain.access.usecase.collection.AddCollectionBookUseCase
+import pl.kamilszustak.read.domain.access.usecase.collection.EditCollectionBookUseCase
+import pl.kamilszustak.read.domain.access.usecase.collection.GetCollectionBookUseCase
 import pl.kamilszustak.read.model.domain.CollectionBook
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
 import timber.log.Timber
-import java.util.Date
-import javax.inject.Inject
+import java.util.*
 
-class BookEditViewModel @Inject constructor(
+class BookEditViewModel(
+    private val arguments: BookEditFragmentArgs,
     private val dateFormats: DateFormats,
+    private val getCollectionBook: GetCollectionBookUseCase,
     private val addCollectionBook: AddCollectionBookUseCase,
+    private val editCollectionBook: EditCollectionBookUseCase,
 ) : BaseViewModel<BookEditEvent, BookEditState>() {
+
+    private val inEditMode: Boolean = arguments.collectionBookId.isNotBlank()
 
     private val _actionBarTitle: UniqueLiveData<Int> = UniqueLiveData()
     val actionBarTitle: LiveData<Int>
@@ -39,7 +46,21 @@ class BookEditViewModel @Inject constructor(
         }
 
     init {
-        _actionBarTitle.value = R.string.add_book
+        _actionBarTitle.value = if (inEditMode) {
+            R.string.edit_book
+        } else {
+            R.string.add_book
+        }
+
+        if (inEditMode) {
+            viewModelScope.launch(Dispatchers.Main) {
+                val id = CollectionBookId(arguments.collectionBookId)
+                val book = getCollectionBook(id)
+                if (book != null) {
+                    assignBookDetails(book)
+                }
+            }
+        }
     }
 
     override fun handleEvent(event: BookEditEvent) {
@@ -52,13 +73,22 @@ class BookEditViewModel @Inject constructor(
                 _bookPublicationDate.value = event.date
             }
 
-            BookEditEvent.OnAddBookButtonClicked -> {
-                addBook()
+            BookEditEvent.OnSaveBookButtonClicked -> {
+                handleSaveButtonClick()
             }
         }
     }
 
-    private fun addBook() {
+    private fun assignBookDetails(book: CollectionBook) {
+        bookTitle.value = book.title
+        bookAuthor.value = book.author
+        numberOfPages.value = book.numberOfPages
+        bookIsbn.value = book.isbn
+        _bookPublicationDate.value = book.publicationDate
+        bookDescription.value = book.description
+    }
+
+    private fun handleSaveButtonClick() {
         val title = bookTitle.value
         val author = bookAuthor.value
         val pages = numberOfPages.value
