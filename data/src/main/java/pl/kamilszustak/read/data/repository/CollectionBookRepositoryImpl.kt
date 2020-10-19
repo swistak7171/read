@@ -35,6 +35,13 @@ class CollectionBookRepositoryImpl @Inject constructor(
         }
     }.map { Unit }
 
+    override suspend fun deleteById(id: String): Result<Unit> = withIOContext {
+        databaseReference.child(id)
+            .removeValue()
+            .await()
+    }.map { Unit }
+
+
     override fun getAll(): Flow<List<CollectionBookEntity>> = entityListFlow {
         val userId = getUser().uid
         databaseReference.orderByChild(CollectionBookEntity.USER_ID_PROPERTY)
