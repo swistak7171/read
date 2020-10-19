@@ -16,7 +16,7 @@ data class CollectionBook(
     val publicationDate: Date?,
     val isbn: String?,
     val description: String?,
-    val coverImageUrl: String? = null,
+    val coverImageUrl: String? = COVER_IMAGE_PLACEHOLDER_URL,
     val readPages: Int = 0
 ) : Model() {
 
@@ -25,4 +25,8 @@ data class CollectionBook(
 
     val progressPercentage: Int
         get() = (progress * 100).roundToInt()
+
+    companion object {
+        const val COVER_IMAGE_PLACEHOLDER_URL: String = "https://i.stack.imgur.com/1hvpD.jpg"
+    }
 }
