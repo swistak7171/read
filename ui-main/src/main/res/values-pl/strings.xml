@@ -12,6 +12,7 @@
     <string name="title">Tytuł</string>
     <string name="author">Autor</string>
     <string name="number_of_pages">Liczba stron</string>
+    <string name="read_pages">Przeczytane strony</string>
     <string name="publication_date">Data wydania</string>
     <string name="isbn" translatable="false">ISBN</string>
     <string name="description">Opis</string>
@@ -20,6 +21,7 @@
     <string name="blank_book_title">Brak tytułu</string>
     <string name="blank_book_author">Brak autora</string>
     <string name="blank_book_number_of_pages">Brak ilości stron</string>
+    <string name="read_pages_over_number_of_pages">Liczba przeczytanych stron nie może być wyższa niż liczba wszystkich stron</string>
     <string name="adding_book_error_message">Wystąpił błąd podczas dodawania książki</string>
     <string name="book_added_successfully">Książka została dodana pomyślnie</string>
     <string name="editing_book_error_message">Wystąpił błąd podczas edytowania książki</string>
