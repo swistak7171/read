@@ -50,10 +50,15 @@
     <string name="book_deleted">Book deleted</string>
     <string name="deleting_book_error_message">An error occurred while deleting the book</string>
 
-
     <!-- ReadingProgressDialogFragment -->
     <string name="update_reading_progress">Update reading progress</string>
     <string name="invalid_read_pages_number_error_message">Invalid read pages number</string>
     <string name="reading_progress_edit_error_message">An error occurred while editing reading progress</string>
     <string name="reading_progress_updated">Reading progress updated successfully</string>
+
+    <!-- QuotesFragment -->
+    <string name="delete_quote_dialog_title">Delete quote</string>
+    <string name="delete_quote_dialog_message">Do you want to delete this quote?</string>
+    <string name="quote_deleted">Quote deleted</string>
+    <string name="deleting_quote_error_message">An error occurred while deleting the quote</string>
 </resources>
