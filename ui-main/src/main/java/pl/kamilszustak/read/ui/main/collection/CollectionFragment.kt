@@ -9,10 +9,7 @@ import com.mikepenz.fastadapter.listeners.ClickEventHook
 import pl.kamilszustak.model.common.id.CollectionBookId
 import pl.kamilszustak.read.model.domain.CollectionBook
 import pl.kamilszustak.read.ui.base.binding.viewBinding
-import pl.kamilszustak.read.ui.base.util.navigate
-import pl.kamilszustak.read.ui.base.util.popupMenu
-import pl.kamilszustak.read.ui.base.util.updateModels
-import pl.kamilszustak.read.ui.base.util.viewModels
+import pl.kamilszustak.read.ui.base.util.*
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.FragmentCollectionBinding
@@ -56,15 +53,30 @@ class CollectionFragment @Inject constructor(
                         setForceShowIcon(true)
                         setOnMenuItemClickListener { menuItem ->
                             when (menuItem.itemId) {
+                                R.id.updateReadingProgressItem -> {
+                                    val event = CollectionEvent.OnUpdateReadingProgressButtonClicked(item.model.id)
+                                    viewModel.dispatchEvent(event)
+                                    true
+                                }
+
                                 R.id.editBookItem -> {
                                     val event = CollectionEvent.OnEditBookButtonClicked(item.model.id)
                                     viewModel.dispatchEvent(event)
                                     true
                                 }
 
-                                R.id.updateReadingProgressItem -> {
-                                    val event = CollectionEvent.OnUpdateReadingProgressButtonClicked(item.model.id)
-                                    viewModel.dispatchEvent(event)
+                                R.id.deleteBookItem -> {
+                                    dialog {
+                                        title(R.string.delete_book_dialog_title)
+                                        message(R.string.delete_book_dialog_message)
+                                        positiveButton(R.string.yes) {
+                                            val event = CollectionEvent.OnDeleteBookButtonClicked(item.model.id)
+                                            viewModel.dispatchEvent(event)
+                                        }
+                                        negativeButton(R.string.no) { dialog ->
+                                            dialog.dismiss()
+                                        }
+                                    }
                                     true
                                 }
 
@@ -98,6 +110,14 @@ class CollectionFragment @Inject constructor(
 
                 is CollectionState.NavigateToReadingProgressDialogFragment -> {
                     navigator.navigateToReadingProgressDialogFragment(state.collectionBookId)
+                }
+
+                CollectionState.BookDeleted -> {
+                    successToast(R.string.book_deleted)
+                }
+
+                is CollectionState.Error -> {
+                    errorToast(state.messageResourceId)
                 }
             }
         }

@@ -1,7 +1,7 @@
 package pl.kamilszustak.read.model.data
 
 import com.google.firebase.database.PropertyName
-import java.util.Date
+import java.util.*
 
 data class CollectionBookEntity(
     @get:PropertyName(TITLE_PROPERTY)
@@ -28,8 +28,8 @@ data class CollectionBookEntity(
     @set:PropertyName(DESCRIPTION_PROPERTY)
     var description: String? = null,
 
-    @get:PropertyName(COVER_IMAGE_URL)
-    @set:PropertyName(COVER_IMAGE_URL)
+    @get:PropertyName(COVER_IMAGE_URL_PROPERTY)
+    @set:PropertyName(COVER_IMAGE_URL_PROPERTY)
     var coverImageUrl: String? = null,
 
     @get:PropertyName(USER_ID_PROPERTY)
@@ -50,7 +50,7 @@ data class CollectionBookEntity(
         const val PUBLICATION_DATE_PROPERTY: String = "publication_date"
         const val ISBD_PROPERTY: String = "isbn"
         const val DESCRIPTION_PROPERTY: String = "description"
-        const val COVER_IMAGE_URL: String = "cover_image"
+        const val COVER_IMAGE_URL_PROPERTY: String = "cover_image_url"
         const val USER_ID_PROPERTY: String = "user_id"
     }
 }

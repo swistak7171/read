@@ -39,6 +39,12 @@
     <string name="editing_quote_error_message">Wystąpił błąd podczas edytowania cytatu</string>
     <string name="quote_edited_successfully">Cytat został edytowany pomyślnie</string>
 
+    <!-- CollectionFragment -->
+    <string name="delete_book_dialog_title">Usuń książkę</string>
+    <string name="delete_book_dialog_message">Czy chcesz usunąć tę książkę?</string>
+    <string name="book_deleted">Książka została usunięta</string>
+    <string name="deleting_book_error_message">Wystąpił błąd podczas usuwania książki</string>
+
     <!-- ScannerFragment -->
     <string name="camera_permission_denied">Dostęp do kamery został odrzucony</string>
     <string name="camera_permission_permanently_denied">Dostęp do kamery został odrzucony na stałe</string>
