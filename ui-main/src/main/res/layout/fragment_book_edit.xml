@@ -54,7 +54,7 @@
                 android:id="@+id/numberOfPagesInputLayout"
                 android:hint="@string/number_of_pages"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/publicationDateInputLayout"
+                app:layout_constraintEnd_toStartOf="@id/readPagesInputLayout"
                 app:layout_constraintTop_toBottomOf="@id/authorInputLayout"
                 android:layout_marginEnd="@dimen/default_half_margin"
                 android:layout_marginTop="@dimen/default_margin">
@@ -63,15 +63,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/numberOfPagesEditText"
-                    android:text="@={viewModel.numberOfPages}"
+                    android:text="@={viewModel.numberOfBookPages}"
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/publicationDateInputLayout"
-                android:hint="@string/publication_date"
+                android:id="@+id/readPagesInputLayout"
+                android:hint="@string/read_pages"
                 app:layout_constraintStart_toEndOf="@id/numberOfPagesInputLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/numberOfPagesInputLayout"
@@ -80,17 +80,20 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/publicationDateEditText"
-                    android:text="@{viewModel.bookPublicationDate}"
-                    android:focusable="false" />
+                    android:id="@+id/readPagesEditText"
+                    android:text="@={viewModel.bookReadPages}"
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/isbnInputLayout"
                 android:hint="@string/isbn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/publicationDateInputLayout"
                 app:layout_constraintTop_toBottomOf="@id/numberOfPagesInputLayout"
+                android:layout_marginEnd="@dimen/default_half_margin"
                 android:layout_marginTop="@dimen/default_margin">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -100,6 +103,24 @@
                     android:text="@={viewModel.bookIsbn}"
                     android:inputType="number"
                     android:maxLength="13" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/publicationDateInputLayout"
+                android:hint="@string/publication_date"
+                app:layout_constraintStart_toEndOf="@id/isbnInputLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/isbnInputLayout"
+                android:layout_marginStart="@dimen/default_half_margin">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/publicationDateEditText"
+                    android:text="@{viewModel.bookPublicationDate}"
+                    android:focusable="false" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout

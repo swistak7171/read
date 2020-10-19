@@ -33,7 +33,8 @@ class BookEditViewModel(
 
     val bookTitle: UniqueLiveData<String> = UniqueLiveData()
     val bookAuthor: UniqueLiveData<String> = UniqueLiveData()
-    val numberOfPages: UniqueLiveData<Int> = UniqueLiveData()
+    val numberOfBookPages: UniqueLiveData<Int> = UniqueLiveData()
+    val bookReadPages: UniqueLiveData<Int> = UniqueLiveData(0)
     val bookIsbn: UniqueLiveData<String?> = UniqueLiveData()
     val bookDescription: UniqueLiveData<String?> = UniqueLiveData()
 
@@ -80,7 +81,8 @@ class BookEditViewModel(
     private fun assignBookDetails(book: CollectionBook) {
         bookTitle.value = book.title
         bookAuthor.value = book.author
-        numberOfPages.value = book.numberOfPages
+        numberOfBookPages.value = book.numberOfPages
+        bookReadPages.value = book.readPages
         bookIsbn.value = book.isbn
         _bookPublicationDate.value = book.publicationDate
         bookDescription.value = book.description
@@ -89,7 +91,8 @@ class BookEditViewModel(
     private fun handleSaveButtonClick() {
         val title = bookTitle.value
         val author = bookAuthor.value
-        val pages = numberOfPages.value
+        val pages = numberOfBookPages.value
+        val readPages = bookReadPages.value ?: 0
         val isbn = bookIsbn.value
         val date = _bookPublicationDate.value
         val description = bookDescription.value
@@ -109,6 +112,11 @@ class BookEditViewModel(
             return
         }
 
+        if (readPages > pages) {
+            _state.value = BookEditState.Error(R.string.read_pages_over_number_of_pages)
+            return
+        }
+
         viewModelScope.launch(Dispatchers.Main) {
             val result = if (inEditMode) {
                 val id = CollectionBookId(arguments.collectionBookId ?: return@launch)
@@ -117,6 +125,7 @@ class BookEditViewModel(
                         title = title,
                         author = author,
                         numberOfPages = pages,
+                        readPages = readPages,
                         publicationDate = date,
                         isbn = isbn,
                         description = description
@@ -127,6 +136,7 @@ class BookEditViewModel(
                     title = title,
                     author = author,
                     numberOfPages = pages,
+                    readPages = readPages,
                     publicationDate = date,
                     isbn = isbn,
                     description = description
