@@ -11,7 +11,7 @@ class IsbnDtoMapper @Inject constructor() : Mapper<IsbnDto, Isbn>() {
         val type = when (model.type) {
             "ISBN_10" -> IsbnType.ISBN_10
             "ISBN_13" -> IsbnType.ISBN_13
-            else -> throw IllegalArgumentException("Invalid ISBN type: ${model.type}")
+            else -> throw IllegalArgumentException("Invalid ISBN type: ${model.type} - ${model.value}")
         }
 
         return Isbn(

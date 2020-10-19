@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-interface RetrofitModule {
+class RetrofitModule {
     @Provides
     @Singleton
     fun provideMoshiConverterFactory(moshi: Moshi): MoshiConverterFactory {

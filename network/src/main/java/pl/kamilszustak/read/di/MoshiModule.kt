@@ -9,7 +9,7 @@ import java.util.*
 import javax.inject.Singleton
 
 @Module
-interface MoshiModule {
+class MoshiModule {
     @OptIn(ExperimentalStdlibApi::class)
     @Provides
     @Singleton

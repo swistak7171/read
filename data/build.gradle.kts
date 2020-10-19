@@ -53,4 +53,7 @@ dependencies {
 
     // Firebase Database
     implementation(Dependencies.Google.Firebase.Database.DATABASE_KTX)
+
+    // Retrofit
+    implementation(Dependencies.Retrofit.RETROFIT)
 }

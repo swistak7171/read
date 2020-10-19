@@ -9,25 +9,25 @@ data class VolumeDetailsDto(
     val title: String,
 
     @Json(name = "subtitle")
-    val subtitle: String,
+    val subtitle: String?,
 
     @Json(name = "authors")
-    val authors: List<String>,
+    val authors: List<String>?,
 
     @Json(name = "publisher")
-    val publisher: String,
+    val publisher: String?,
 
     @Json(name = "publishedDate")
-    val publicationDate: String,
+    val publicationDate: String?,
 
     @Json(name = "description")
-    val description: String,
+    val description: String?,
 
     @Json(name = "pageCount")
-    val pagesNumber: Int,
+    val pagesNumber: Int?,
 
     @Json(name = "industryIdentifiers")
-    val isbns: List<IsbnDto>,
+    val isbns: List<IsbnDto>?,
 
     @Json(name = "imageLinks")
     val coverImageUrl: CoverImageUrlDto
