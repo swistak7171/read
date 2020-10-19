@@ -36,9 +36,11 @@ class CollectionBookRepositoryImpl @Inject constructor(
     }.map { Unit }
 
     override suspend fun deleteById(id: String): Result<Unit> = withIOContext {
-        databaseReference.child(id)
-            .removeValue()
-            .await()
+        runCatching {
+            databaseReference.child(id)
+                .removeValue()
+                .await()
+        }
     }.map { Unit }
 
 
