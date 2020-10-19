@@ -9,5 +9,5 @@ data class VolumeDto(
     val id: String,
 
     @Json(name = "volumeInfo")
-    val volume: VolumeDetails,
+    val volume: VolumeDetailsDto,
 )

@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class VolumeDetails(
+data class VolumeDetailsDto(
     @Json(name = "title")
     val title: String,
 
@@ -25,6 +25,9 @@ data class VolumeDetails(
 
     @Json(name = "pageCount")
     val pagesNumber: Int,
+
+    @Json(name = "industryIdentifiers")
+    val isbns: List<IsbnDto>,
 
     @Json(name = "imageLinks")
     val coverImageUrl: CoverImageUrlDto
