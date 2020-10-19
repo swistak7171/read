@@ -37,6 +37,14 @@ class QuoteRepositoryImpl @Inject constructor(
         }
     }.map { Unit }
 
+    override suspend fun deleteById(id: String): Result<Unit> = withIOContext {
+        runCatching {
+            databaseReference.child(id)
+                .removeValue()
+                .await()
+        }
+    }.map { Unit }
+
     override fun getAll(): Flow<List<QuoteEntity>> = entityListFlow {
         val userId = getUser().uid
         databaseReference.orderByChild(QuoteEntity.USER_ID_PROPERTY)
