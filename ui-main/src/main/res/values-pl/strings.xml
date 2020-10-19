@@ -58,6 +58,6 @@
     <!-- QuotesFragment -->
     <string name="delete_quote_dialog_title">Usuń cytat</string>
     <string name="delete_quote_dialog_message">Czy chcesz usunąć ten cytat?</string>
-    <string name="quote_deleted">Cytat usunięty</string>
+    <string name="quote_deleted">Cytat został usunięty</string>
     <string name="deleting_quote_error_message">Wystąpił błąd podczas usuwania cytatu</string>
 </resources>
