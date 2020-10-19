@@ -14,7 +14,7 @@ data class CollectionBookEntity(
 
     @get:PropertyName(NUMBER_OF_PAGES_PROPERTY)
     @set:PropertyName(NUMBER_OF_PAGES_PROPERTY)
-    var numberOfPages: Int = 0,
+    var pagesNumber: Int = 0,
 
     @get:PropertyName(PUBLICATION_DATE_PROPERTY)
     @set:PropertyName(PUBLICATION_DATE_PROPERTY)

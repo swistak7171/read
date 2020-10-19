@@ -81,7 +81,7 @@ class BookEditViewModel(
     private fun assignBookDetails(book: CollectionBook) {
         bookTitle.value = book.title
         bookAuthor.value = book.author
-        numberOfBookPages.value = book.numberOfPages
+        numberOfBookPages.value = book.pagesNumber
         bookReadPages.value = book.readPages
         bookIsbn.value = book.isbn
         _bookPublicationDate.value = book.publicationDate
@@ -124,7 +124,7 @@ class BookEditViewModel(
                     book.copy(
                         title = title,
                         author = author,
-                        numberOfPages = pages,
+                        pagesNumber = pages,
                         readPages = readPages,
                         publicationDate = date,
                         isbn = isbn,
@@ -135,7 +135,7 @@ class BookEditViewModel(
                 val collectionBook = CollectionBook(
                     title = title,
                     author = author,
-                    numberOfPages = pages,
+                    pagesNumber = pages,
                     readPages = readPages,
                     publicationDate = date,
                     isbn = isbn,

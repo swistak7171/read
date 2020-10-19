@@ -5,6 +5,7 @@ plugins {
 }
 
 buildscript {
+    val kotlin_version by extra("1.4.20-M2")
     repositories {
         google()
         jcenter()
@@ -18,6 +19,7 @@ buildscript {
         classpath(Dependencies.AndroidX.Navigation.NAVIGATION_SAFE_ARGS_GRADLE_PLUGIN)
         classpath(Dependencies.KTLINT)
         classpath(Dependencies.Google.Gms.GOOGLE_SERVICES)
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
     }
 }
 

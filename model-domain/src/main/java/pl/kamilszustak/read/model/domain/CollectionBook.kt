@@ -12,7 +12,7 @@ data class CollectionBook(
     override val modificationDate: Date = Date(),
     val title: String,
     val author: String,
-    val numberOfPages: Int,
+    val pagesNumber: Int,
     val publicationDate: Date?,
     val isbn: String?,
     val description: String?,
@@ -21,7 +21,7 @@ data class CollectionBook(
 ) : Model() {
 
     val progress: Float
-        get() = (readPages / numberOfPages.toFloat())
+        get() = (readPages / pagesNumber.toFloat())
 
     val progressPercentage: Int
         get() = (progress * 100).roundToInt()

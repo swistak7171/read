@@ -13,7 +13,6 @@ class VolumeSearchParameterFactory @Inject constructor() {
                 append(generalValue)
             }
 
-
             parameters.forEach { entry ->
                 if (entry.key == VolumeSearchParameterType.GENERAL) {
                     return@forEach
@@ -21,6 +20,7 @@ class VolumeSearchParameterFactory @Inject constructor() {
 
                 if (!isFirst) {
                     append('+')
+                    isFirst = false
                 }
 
                 append(entry.key.queryName)

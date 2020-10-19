@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/pageNumberPicker"
             app:min="@{0}"
-            app:max="@{viewModel.collectionBook.numberOfPages}"
+            app:max="@{viewModel.collectionBook.pagesNumber}"
             android:value="@={viewModel.readPages}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

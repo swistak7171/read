@@ -21,6 +21,7 @@ dependencies {
 
     implementation(project(Modules.COMMON))
     implementation(project(Modules.MODEL_COMMON))
+    implementation(project(Modules.MODEL_NETWORK))
 
     // Dagger
     implementation(Dependencies.Google.Dagger.DAGGER_ANDROID)

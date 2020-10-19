@@ -9,6 +9,7 @@ include(
     ":model-common",
     ":model-domain",
     ":model-data",
+    ":model-network",
     ":model-mapper",
     ":ui-base",
     ":ui-authentication",
