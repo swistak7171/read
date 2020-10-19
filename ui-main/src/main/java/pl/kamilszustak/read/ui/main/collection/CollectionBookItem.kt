@@ -2,6 +2,7 @@ package pl.kamilszustak.read.ui.main.collection
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.mikepenz.fastadapter.binding.BindingViewHolder
 import com.mikepenz.fastadapter.binding.ModelAbstractBindingItem
 import pl.kamilszustak.read.model.domain.CollectionBook
 import pl.kamilszustak.read.ui.main.R
@@ -18,6 +19,9 @@ class CollectionBookItem(book: CollectionBook) : ModelAbstractBindingItem<Collec
     override fun createBinding(inflater: LayoutInflater, parent: ViewGroup?): ItemCollectionBookBinding =
         ItemCollectionBookBinding.inflate(inflater, parent, false)
 
+    override fun getViewHolder(viewBinding: ItemCollectionBookBinding): BindingViewHolder<ItemCollectionBookBinding> =
+        ViewHolder(viewBinding)
+
     override fun bindView(binding: ItemCollectionBookBinding, payloads: List<Any>) {
         binding.book = model
     }
@@ -28,4 +32,6 @@ class CollectionBookItem(book: CollectionBook) : ModelAbstractBindingItem<Collec
             executePendingBindings()
         }
     }
+
+    class ViewHolder(binding: ItemCollectionBookBinding) : BindingViewHolder<ItemCollectionBookBinding>(binding)
 }

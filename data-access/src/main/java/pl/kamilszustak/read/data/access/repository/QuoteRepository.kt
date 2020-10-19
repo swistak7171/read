@@ -5,5 +5,8 @@ import pl.kamilszustak.read.model.data.QuoteEntity
 
 interface QuoteRepository {
     suspend fun add(quote: QuoteEntity): Result<Unit>
+    suspend fun edit(quote: QuoteEntity): Result<Unit>
+    suspend fun deleteById(id: String): Result<Unit>
     fun getAll(): Flow<List<QuoteEntity>>
+    suspend fun getById(id: String): QuoteEntity?
 }

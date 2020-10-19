@@ -27,13 +27,22 @@ class CollectionBookRepositoryImpl @Inject constructor(
         }
     }.map { Unit }
 
-    override suspend fun update(book: CollectionBookEntity): Result<Unit> = withIOContext {
+    override suspend fun edit(book: CollectionBookEntity): Result<Unit> = withIOContext {
         runCatching {
             databaseReference.child(book.id)
                 .setValue(book)
                 .await()
         }
     }.map { Unit }
+
+    override suspend fun deleteById(id: String): Result<Unit> = withIOContext {
+        runCatching {
+            databaseReference.child(id)
+                .removeValue()
+                .await()
+        }
+    }.map { Unit }
+
 
     override fun getAll(): Flow<List<CollectionBookEntity>> = entityListFlow {
         val userId = getUser().uid
