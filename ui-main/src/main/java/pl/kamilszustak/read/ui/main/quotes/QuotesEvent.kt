@@ -5,6 +5,11 @@ import pl.kamilszustak.read.ui.base.view.ViewEvent
 
 sealed class QuotesEvent : ViewEvent {
     object OnAddQuoteButtonClicked : QuotesEvent()
+
+    data class OnDeleteQuoteButtonClicked(
+        val quoteId: QuoteId,
+    ) : QuotesEvent()
+
     data class OnEditQuoteButtonClicked(
         val quoteId: QuoteId,
     ) : QuotesEvent()

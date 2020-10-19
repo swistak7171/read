@@ -9,10 +9,7 @@ import com.mikepenz.fastadapter.listeners.ClickEventHook
 import pl.kamilszustak.model.common.id.QuoteId
 import pl.kamilszustak.read.model.domain.Quote
 import pl.kamilszustak.read.ui.base.binding.viewBinding
-import pl.kamilszustak.read.ui.base.util.navigate
-import pl.kamilszustak.read.ui.base.util.popupMenu
-import pl.kamilszustak.read.ui.base.util.updateModels
-import pl.kamilszustak.read.ui.base.util.viewModels
+import pl.kamilszustak.read.ui.base.util.*
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.FragmentQuotesBinding
@@ -56,6 +53,21 @@ class QuotesFragment @Inject constructor(
                                     true
                                 }
 
+                                R.id.deleteQuoteItem -> {
+                                    dialog {
+                                        title(R.string.delete_quote_dialog_title)
+                                        message(R.string.delete_quote_dialog_message)
+                                        positiveButton(R.string.yes) {
+                                            val event = QuotesEvent.OnDeleteQuoteButtonClicked(item.model.id)
+                                            viewModel.dispatchEvent(event)
+                                        }
+                                        negativeButton(R.string.no) { dialog ->
+                                            dialog.dismiss()
+                                        }
+                                    }
+                                    true
+                                }
+
                                 else -> {
                                     false
                                 }
@@ -82,6 +94,14 @@ class QuotesFragment @Inject constructor(
             when (state) {
                 is QuotesState.NavigateToQuoteEditFragment -> {
                     navigator.navigateToQuoteEditFragment(state.quoteId)
+                }
+
+                is QuotesState.QuoteDeleted -> {
+                    successToast(R.string.quote_deleted)
+                }
+
+                is QuotesState.Error -> {
+                    errorToast(state.messageResourceId)
                 }
             }
         }

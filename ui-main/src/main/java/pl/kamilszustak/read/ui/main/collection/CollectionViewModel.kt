@@ -13,8 +13,8 @@ import pl.kamilszustak.read.ui.main.R
 import javax.inject.Inject
 
 class CollectionViewModel @Inject constructor(
-    private val deleteCollectionBook: DeleteCollectionBookUseCase,
     private val getAllCollectionBooks: GetAllCollectionBooksUseCase,
+    private val deleteCollectionBook: DeleteCollectionBookUseCase,
 ) : BaseViewModel<CollectionEvent, CollectionState>() {
 
     val collectionBooks: LiveData<List<CollectionBook>> = getAllCollectionBooks()

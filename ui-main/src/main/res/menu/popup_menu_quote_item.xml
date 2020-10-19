@@ -7,4 +7,10 @@
         android:title="@string/edit"
         android:icon="@drawable/icon_edit"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/deleteQuoteItem"
+        android:title="@string/delete"
+        android:icon="@drawable/icon_delete"
+        app:showAsAction="never" />
 </menu>
