@@ -22,20 +22,20 @@ dependencies {
     implementation(project(Modules.COMMON))
 
     // Dagger
-    api(Dependencies.Google.Dagger.DAGGER_ANDROID)
+    implementation(Dependencies.Google.Dagger.DAGGER_ANDROID)
     kapt(Dependencies.Google.Dagger.DAGGER_ANDROID_PROCESSOR)
     kapt(Dependencies.Google.Dagger.DAGGER_COMPILER)
 
     // Retrofit
-    api(Dependencies.Retrofit.RETROFIT)
-    api(Dependencies.Retrofit.RETROFIT_CONVERTER_MOSHI)
+    implementation(Dependencies.Retrofit.RETROFIT)
+    implementation(Dependencies.Retrofit.RETROFIT_CONVERTER_MOSHI)
 
     // OkHttp
-    api(Dependencies.OkHttp.OK_HTTP)
-    api(Dependencies.OkHttp.OK_HTTP_LOGGING_INTERCEPTOR)
+    implementation(Dependencies.OkHttp.OK_HTTP)
+    implementation(Dependencies.OkHttp.OK_HTTP_LOGGING_INTERCEPTOR)
 
     // Moshi
-    api(Dependencies.Moshi.MOSHI)
-    api(Dependencies.Moshi.MOSHI_ADAPTERS)
+    implementation(Dependencies.Moshi.MOSHI)
+    implementation(Dependencies.Moshi.MOSHI_ADAPTERS)
     kapt(Dependencies.Moshi.MOSHI_KOTLIN_CODEGEN)
 }

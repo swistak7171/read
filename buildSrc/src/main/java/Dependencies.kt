@@ -1,6 +1,7 @@
 object Dependencies {
     object Kotlin {
         const val KOTLIN_STANDARD_LIBRARY: String = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.KOTLIN}"
+//        const val KOTLIN_GRADLE_PLUGIN: String = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.20-M1"
         const val KOTLIN_GRADLE_PLUGIN: String = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.KOTLIN}"
 
         object Coroutines {
