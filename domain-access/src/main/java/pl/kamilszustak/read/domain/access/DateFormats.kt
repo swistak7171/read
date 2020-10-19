@@ -17,6 +17,12 @@ class DateFormats @Inject constructor(
     val timeFormat: SimpleDateFormat
         get() = getFormat("HH:mm")
 
+    val yearFormat: SimpleDateFormat
+        get() = getFormat("yyyy")
+
+    val yearMonthFormat: SimpleDateFormat
+        get() = getFormat("yyyy-MM")
+
     val dateFormat: SimpleDateFormat
         get() = getFormat("yyyy-MM-dd")
 
