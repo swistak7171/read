@@ -21,13 +21,31 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/contentTextView"
                 android:text="@{quote.content}"
                 android:textStyle="italic"
                 tools:text="@tools:sample/lorem/random"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/menuButton"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/menuButton"
+                android:src="@drawable/icon_menu_vertical"
+                android:background="?selectableItemBackgroundBorderless"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/contentBarrier"
+                app:constraint_referenced_ids="contentTextView,menuButton"
+                app:barrierDirection="bottom" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -39,7 +57,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/contentTextView"
+                app:layout_constraintTop_toBottomOf="@id/contentBarrier"
                 app:layout_constraintHorizontal_bias="1.0"
                 android:layout_marginTop="@dimen/default_half_margin"/>
         </androidx.constraintlayout.widget.ConstraintLayout>

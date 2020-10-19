@@ -109,15 +109,6 @@ class BookEditViewModel(
             return
         }
 
-        val collectionBook = CollectionBook(
-            title = title,
-            author = author,
-            numberOfPages = pages,
-            publicationDate = date,
-            isbn = isbn,
-            description = description
-        )
-
         viewModelScope.launch(Dispatchers.Main) {
             val result = if (inEditMode) {
                 val id = CollectionBookId(arguments.collectionBookId ?: return@launch)
@@ -132,6 +123,15 @@ class BookEditViewModel(
                     )
                 }
             } else {
+                val collectionBook = CollectionBook(
+                    title = title,
+                    author = author,
+                    numberOfPages = pages,
+                    publicationDate = date,
+                    isbn = isbn,
+                    description = description
+                )
+
                 addCollectionBook(collectionBook)
             }
 
@@ -142,8 +142,10 @@ class BookEditViewModel(
                     R.string.book_added_successfully
                 }
 
-                _state.value = BookEditState.BookSaved(resourceId)
-                _state.value = BookEditState.NavigateUp
+                with(_state) {
+                    value = BookEditState.BookSaved(resourceId)
+                    value = BookEditState.NavigateUp
+                }
             }.onFailure {
                 val resourceId = if (inEditMode) {
                     R.string.editing_book_error_message

@@ -2,6 +2,7 @@ package pl.kamilszustak.read.ui.main.quotes
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.mikepenz.fastadapter.binding.BindingViewHolder
 import com.mikepenz.fastadapter.binding.ModelAbstractBindingItem
 import pl.kamilszustak.read.model.domain.Quote
 import pl.kamilszustak.read.ui.main.R
@@ -18,6 +19,9 @@ class QuoteItem(quote: Quote) : ModelAbstractBindingItem<Quote, ItemQuoteBinding
     override fun createBinding(inflater: LayoutInflater, parent: ViewGroup?): ItemQuoteBinding =
         ItemQuoteBinding.inflate(inflater, parent, false)
 
+    override fun getViewHolder(viewBinding: ItemQuoteBinding): BindingViewHolder<ItemQuoteBinding> =
+        ViewHolder(viewBinding)
+
     override fun bindView(binding: ItemQuoteBinding, payloads: List<Any>) {
         binding.quote = model
     }
@@ -28,4 +32,6 @@ class QuoteItem(quote: Quote) : ModelAbstractBindingItem<Quote, ItemQuoteBinding
             executePendingBindings()
         }
     }
+
+    class ViewHolder(binding: ItemQuoteBinding) : BindingViewHolder<ItemQuoteBinding>(binding)
 }
