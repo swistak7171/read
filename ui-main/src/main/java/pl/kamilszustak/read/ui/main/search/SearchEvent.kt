@@ -7,6 +7,7 @@ sealed class SearchEvent : ViewEvent {
     object OnResumed : SearchEvent()
     object OnPaused : SearchEvent()
     object OnSearchButtonClicked : SearchEvent()
+    object OnScanButtonClicked : SearchEvent()
 
     data class OnAddToCollectionButtonClicked(
         val volume: Volume,

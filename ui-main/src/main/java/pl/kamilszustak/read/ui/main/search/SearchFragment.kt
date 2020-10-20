@@ -12,6 +12,9 @@ import pl.kamilszustak.read.model.domain.Volume
 import pl.kamilszustak.read.ui.base.util.*
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.activity.MainDataBindingFragment
+import pl.kamilszustak.read.ui.main.activity.MainEvent
+import pl.kamilszustak.read.ui.main.activity.MainFragmentType
+import pl.kamilszustak.read.ui.main.activity.MainViewModel
 import pl.kamilszustak.read.ui.main.databinding.FragmentSearchBinding
 import javax.inject.Inject
 
@@ -20,6 +23,7 @@ class SearchFragment @Inject constructor(
 ) : MainDataBindingFragment<FragmentSearchBinding, SearchViewModel>(R.layout.fragment_search) {
 
     override val viewModel: SearchViewModel by viewModels(viewModelFactory)
+    private val mainViewModel: MainViewModel by activityViewModels(viewModelFactory)
     private val navigator: Navigator = Navigator()
     private val modelAdapter: ModelAdapter<Volume, VolumeItem> by lazy {
         ModelAdapter { VolumeItem(it) }
@@ -70,6 +74,10 @@ class SearchFragment @Inject constructor(
     }
 
     override fun setListeners() {
+        binding.scanButton.setOnClickListener {
+            viewModel.dispatchEvent(SearchEvent.OnScanButtonClicked)
+        }
+
         binding.searchButton.setOnClickListener {
             viewModel.dispatchEvent(SearchEvent.OnSearchButtonClicked)
         }
@@ -84,6 +92,11 @@ class SearchFragment @Inject constructor(
 
                 SearchAction.HideKeyboard -> {
                     binding.searchEditText.hideKeyboard()
+                }
+
+                SearchAction.NavigateToScannerFragment -> {
+                    val event = MainEvent.OnFragmentSelectionChanged(MainFragmentType.SCANNER_FRAGMENT)
+                    mainViewModel.dispatchEvent(event)
                 }
 
                 is SearchAction.NavigateToBookEditFragment -> {

@@ -34,6 +34,10 @@ class SearchViewModel @Inject constructor(
                 _action.value = SearchAction.HideKeyboard
             }
 
+            SearchEvent.OnScanButtonClicked -> {
+                _action.value = SearchAction.NavigateToScannerFragment
+            }
+
             SearchEvent.OnSearchButtonClicked -> {
                 handleSearchButtonClick()
             }

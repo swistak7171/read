@@ -18,7 +18,7 @@
             android:id="@+id/searchInputLayout"
             android:hint="@string/search_query"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/searchButton"
+            app:layout_constraintEnd_toStartOf="@id/scanButton"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_margin="@dimen/default_margin">
 
@@ -31,6 +31,17 @@
                 android:lines="1"
                 android:imeOptions="actionSearch" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/scanButton"
+            android:src="@drawable/icon_barcode_scan"
+            android:background="?selectableItemBackgroundBorderless"
+            app:layout_constraintEnd_toStartOf="@id/searchButton"
+            app:layout_constraintTop_toTopOf="@id/searchInputLayout"
+            app:layout_constraintBottom_toBottomOf="@id/searchInputLayout"
+            android:layout_marginEnd="@dimen/default_margin" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"

@@ -7,6 +7,7 @@ import pl.kamilszustak.read.ui.base.view.ViewAction
 sealed class SearchAction : ViewAction {
     object ShowKeyboard : SearchAction()
     object HideKeyboard : SearchAction()
+    object NavigateToScannerFragment : SearchAction()
 
     data class NavigateToBookEditFragment(
         val volume: Volume,
