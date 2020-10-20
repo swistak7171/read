@@ -15,7 +15,7 @@ import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.navigate
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
-import pl.kamilszustak.read.ui.main.MainActivity
+import pl.kamilszustak.read.ui.main.activity.MainActivity
 import javax.inject.Inject
 
 class MainMenuFragment @Inject constructor(
@@ -68,27 +68,27 @@ class MainMenuFragment @Inject constructor(
     }
 
     override fun observeViewModel() {
-        viewModel.state.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                MainMenuState.EmailAuthentication -> {
+        viewModel.action.observe(viewLifecycleOwner) { action ->
+            when (action) {
+                MainMenuAction.EmailAuthentication -> {
                     val direction = MainMenuFragmentDirections.actionMainMenuFragmentToEmailSignInFragment()
                     navigate(direction)
                 }
 
-                MainMenuState.PhoneAuthentication -> {
+                MainMenuAction.PhoneAuthentication -> {
                     val direction = MainMenuFragmentDirections.actionMainMenuFragmentToPhoneSignInFragment()
                     navigate(direction)
                 }
 
-                is MainMenuState.GoogleAuthentication -> {
-                    handleGoogleAuthentication(state)
+                is MainMenuAction.GoogleAuthentication -> {
+                    handleGoogleAuthentication(action)
                 }
 
-                is MainMenuState.Error -> {
-                    errorToast(state.messageResourceId)
+                is MainMenuAction.Error -> {
+                    errorToast(action.messageResourceId)
                 }
 
-                MainMenuState.Authenticated -> {
+                MainMenuAction.Authenticated -> {
                     startActivity<MainActivity>()
                     requireActivity().finish()
                 }
@@ -105,7 +105,7 @@ class MainMenuFragment @Inject constructor(
         }
     }
 
-    private fun handleGoogleAuthentication(state: MainMenuState.GoogleAuthentication) {
+    private fun handleGoogleAuthentication(state: MainMenuAction.GoogleAuthentication) {
         googleActivityLauncher?.launch(state.intent)
     }
 }

@@ -20,6 +20,7 @@ import javax.inject.Singleton
         AndroidInjectionModule::class,
         ApplicationModule::class,
         FirebaseAuthenticationModule::class,
+        NetworkModule::class,
         DataModule::class,
         DomainModule::class,
         SubcomponentsModule::class,

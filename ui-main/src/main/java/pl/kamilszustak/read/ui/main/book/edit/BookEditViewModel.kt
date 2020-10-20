@@ -13,17 +13,18 @@ import pl.kamilszustak.read.domain.access.usecase.collection.AddCollectionBookUs
 import pl.kamilszustak.read.domain.access.usecase.collection.EditCollectionBookUseCase
 import pl.kamilszustak.read.domain.access.usecase.collection.GetCollectionBookUseCase
 import pl.kamilszustak.read.model.domain.CollectionBook
+import pl.kamilszustak.read.model.domain.IsbnType
+import pl.kamilszustak.read.model.domain.Volume
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
 import java.util.*
 
 class BookEditViewModel(
     private val arguments: BookEditFragmentArgs,
-    private val dateFormats: DateFormats,
     private val getCollectionBook: GetCollectionBookUseCase,
     private val addCollectionBook: AddCollectionBookUseCase,
     private val editCollectionBook: EditCollectionBookUseCase,
-) : BaseViewModel<BookEditEvent, BookEditState>() {
+) : BaseViewModel<BookEditEvent, BookEditAction>() {
 
     private val inEditMode: Boolean = (arguments.collectionBookId != null)
 
@@ -33,15 +34,16 @@ class BookEditViewModel(
 
     val bookTitle: UniqueLiveData<String> = UniqueLiveData()
     val bookAuthor: UniqueLiveData<String> = UniqueLiveData()
-    val numberOfBookPages: UniqueLiveData<Int> = UniqueLiveData()
+    val bookPagesNumber: UniqueLiveData<Int> = UniqueLiveData()
     val bookReadPages: UniqueLiveData<Int> = UniqueLiveData(0)
     val bookIsbn: UniqueLiveData<String?> = UniqueLiveData()
     val bookDescription: UniqueLiveData<String?> = UniqueLiveData()
+    private var coverImageUrl: String? = null
 
     private val _bookPublicationDate: UniqueLiveData<Date?> = UniqueLiveData()
     val bookPublicationDate: LiveData<String?>
         get() = _bookPublicationDate.map { date ->
-            date.useOrNull { dateFormats.dateFormat.format(it)  }
+            date.useOrNull { DateFormats.dateFormat.format(it)  }
         }
 
     init {
@@ -51,13 +53,19 @@ class BookEditViewModel(
             R.string.add_book
         }
 
-        if (inEditMode) {
-            viewModelScope.launch(Dispatchers.Main) {
-                val id = CollectionBookId(arguments.collectionBookId ?: return@launch)
-                val book = getCollectionBook(id)
-                if (book != null) {
-                    assignBookDetails(book)
+        when {
+            inEditMode -> {
+                viewModelScope.launch(Dispatchers.Main) {
+                    val id = CollectionBookId(arguments.collectionBookId ?: return@launch)
+                    val book = getCollectionBook(id)
+                    if (book != null) {
+                        assignBookDetails(book)
+                    }
                 }
+            }
+
+            arguments.volume != null -> {
+                assignVolumeDetails(arguments.volume)
             }
         }
     }
@@ -65,7 +73,7 @@ class BookEditViewModel(
     override fun handleEvent(event: BookEditEvent) {
         when (event) {
             BookEditEvent.OnDateEditTextClicked -> {
-                _state.value = BookEditState.OpenDatePicker
+                _action.value = BookEditAction.OpenDatePicker
             }
 
             is BookEditEvent.OnPublicationDateSelected -> {
@@ -78,10 +86,25 @@ class BookEditViewModel(
         }
     }
 
+    private fun assignVolumeDetails(volume: Volume) {
+        var isbn = volume.isbns?.find { it.type == IsbnType.ISBN_13 }
+        if (isbn == null) {
+            isbn = volume.isbns?.firstOrNull()
+        }
+
+        bookTitle.value = volume.title
+        bookAuthor.value = volume.author
+        bookPagesNumber.value = volume.pagesNumber
+        bookIsbn.value = isbn?.value
+        _bookPublicationDate.value = volume.publicationDate
+        bookDescription.value = volume.description
+        coverImageUrl = volume.coverImageUrl
+    }
+
     private fun assignBookDetails(book: CollectionBook) {
         bookTitle.value = book.title
         bookAuthor.value = book.author
-        numberOfBookPages.value = book.numberOfPages
+        bookPagesNumber.value = book.pagesNumber
         bookReadPages.value = book.readPages
         bookIsbn.value = book.isbn
         _bookPublicationDate.value = book.publicationDate
@@ -91,29 +114,29 @@ class BookEditViewModel(
     private fun handleSaveButtonClick() {
         val title = bookTitle.value
         val author = bookAuthor.value
-        val pages = numberOfBookPages.value
+        val pages = bookPagesNumber.value
         val readPages = bookReadPages.value ?: 0
         val isbn = bookIsbn.value
         val date = _bookPublicationDate.value
         val description = bookDescription.value
 
         if (title.isNullOrBlank()) {
-            _state.value = BookEditState.Error(R.string.blank_book_title)
+            _action.value = BookEditAction.Error(R.string.blank_book_title)
             return
         }
 
         if (author.isNullOrBlank()) {
-            _state.value = BookEditState.Error(R.string.blank_book_author)
+            _action.value = BookEditAction.Error(R.string.blank_book_author)
             return
         }
 
         if (pages == null || pages == 0) {
-            _state.value = BookEditState.Error(R.string.blank_book_number_of_pages)
+            _action.value = BookEditAction.Error(R.string.blank_book_number_of_pages)
             return
         }
 
         if (readPages > pages) {
-            _state.value = BookEditState.Error(R.string.read_pages_over_number_of_pages)
+            _action.value = BookEditAction.Error(R.string.read_pages_over_number_of_pages)
             return
         }
 
@@ -124,7 +147,7 @@ class BookEditViewModel(
                     book.copy(
                         title = title,
                         author = author,
-                        numberOfPages = pages,
+                        pagesNumber = pages,
                         readPages = readPages,
                         publicationDate = date,
                         isbn = isbn,
@@ -133,13 +156,15 @@ class BookEditViewModel(
                 }
             } else {
                 val collectionBook = CollectionBook(
+                    volumeId = arguments.volume?.id,
                     title = title,
                     author = author,
-                    numberOfPages = pages,
+                    pagesNumber = pages,
                     readPages = readPages,
                     publicationDate = date,
                     isbn = isbn,
-                    description = description
+                    description = description,
+                    coverImageUrl = coverImageUrl
                 )
 
                 addCollectionBook(collectionBook)
@@ -152,9 +177,9 @@ class BookEditViewModel(
                     R.string.book_added_successfully
                 }
 
-                with(_state) {
-                    value = BookEditState.BookSaved(resourceId)
-                    value = BookEditState.NavigateUp
+                with(_action) {
+                    value = BookEditAction.BookSaved(resourceId)
+                    value = BookEditAction.NavigateUp
                 }
             }.onFailure {
                 val resourceId = if (inEditMode) {
@@ -163,7 +188,7 @@ class BookEditViewModel(
                     R.string.adding_book_error_message
                 }
 
-                _state.value = BookEditState.Error(resourceId)
+                _action.value = BookEditAction.Error(resourceId)
             }
         }
     }

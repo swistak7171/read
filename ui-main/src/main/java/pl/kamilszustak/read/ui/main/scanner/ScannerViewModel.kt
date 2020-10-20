@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 class ScannerViewModel @Inject constructor(
     private val readBarcode: ReadBarcodeUseCase,
-) : BaseViewModel<ScannerEvent, ScannerState>() {
+) : BaseViewModel<ScannerEvent, ScannerAction>() {
     private val barcodeDetected: AtomicBoolean = AtomicBoolean(false)
 
     override fun handleEvent(event: ScannerEvent) {
@@ -25,15 +25,15 @@ class ScannerViewModel @Inject constructor(
     }
 
     private fun handleOnResumed() {
-        _state.value = ScannerState.CameraPermissionState.Unknown
+        _action.value = ScannerAction.CameraPermissionAction.Unknown
     }
 
     private fun handleCameraPermissionResult(event: ScannerEvent.OnCameraPermissionResult) {
-        val state = event.result.getStateOf(Permission.CAMERA)
-        _state.value = when (state) {
-            PermissionState.GRANTED -> ScannerState.CameraPermissionState.Granted
-            PermissionState.DENIED -> ScannerState.CameraPermissionState.Denied
-            PermissionState.PERMANENTLY_DENIED -> ScannerState.CameraPermissionState.PermanentlyDenied
+        val action = event.result.getStateOf(Permission.CAMERA)
+        _action.value = when (action) {
+            PermissionState.GRANTED -> ScannerAction.CameraPermissionAction.Granted
+            PermissionState.DENIED -> ScannerAction.CameraPermissionAction.Denied
+            PermissionState.PERMANENTLY_DENIED -> ScannerAction.CameraPermissionAction.PermanentlyDenied
             else -> null
         }
     }
@@ -46,10 +46,10 @@ class ScannerViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.Main) {
             readBarcode(event.imageProxy)
                 .onSuccess { value ->
-                    _state.value = ScannerState.BarcodeDetected(value)
+                    _action.value = ScannerAction.BarcodeDetected(value)
                 }
                 .onFailure { throwable ->
-                    _state.value = ScannerState.Error(throwable)
+                    _action.value = ScannerAction.Error(throwable)
                 }
 
             barcodeDetected.set(true)

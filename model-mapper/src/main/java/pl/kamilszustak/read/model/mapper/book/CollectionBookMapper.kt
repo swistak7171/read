@@ -14,9 +14,10 @@ class CollectionBookMapper @Inject constructor(
 
     override fun map(model: CollectionBook): CollectionBookEntity =
         CollectionBookEntity(
+            volumeId = model.volumeId?.value,
             title = model.title,
             author = model.author,
-            numberOfPages = model.numberOfPages,
+            pagesNumber = model.pagesNumber,
             publicationDate = model.publicationDate,
             isbn = model.isbn,
             description = model.description,

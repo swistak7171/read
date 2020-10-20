@@ -15,7 +15,7 @@ import javax.inject.Inject
 class QuotesViewModel @Inject constructor(
     private val getAllQuotes: GetAllQuotesUseCase,
     private val deleteQuote: DeleteQuoteUseCase,
-) : BaseViewModel<QuotesEvent, QuotesState>() {
+) : BaseViewModel<QuotesEvent, QuotesAction>() {
 
     val quotes: LiveData<List<Quote>> = getAllQuotes()
         .asLiveData(viewModelScope.coroutineContext)
@@ -23,11 +23,11 @@ class QuotesViewModel @Inject constructor(
     override fun handleEvent(event: QuotesEvent) {
         when (event) {
             QuotesEvent.OnAddQuoteButtonClicked -> {
-                _state.value = QuotesState.NavigateToQuoteEditFragment()
+                _action.value = QuotesAction.NavigateToQuoteEditFragment()
             }
 
             is QuotesEvent.OnEditQuoteButtonClicked -> {
-                _state.value = QuotesState.NavigateToQuoteEditFragment(event.quoteId)
+                _action.value = QuotesAction.NavigateToQuoteEditFragment(event.quoteId)
             }
 
             is QuotesEvent.OnDeleteQuoteButtonClicked -> {
@@ -39,8 +39,8 @@ class QuotesViewModel @Inject constructor(
     private fun handleDeleteButtonClick(event: QuotesEvent.OnDeleteQuoteButtonClicked) {
         viewModelScope.launch(Dispatchers.Main) {
             deleteQuote(event.quoteId)
-                .onSuccess { _state.value = QuotesState.QuoteDeleted }
-                .onFailure { _state.value = QuotesState.Error(R.string.deleting_quote_error_message) }
+                .onSuccess { _action.value = QuotesAction.QuoteDeleted }
+                .onFailure { _action.value = QuotesAction.Error(R.string.deleting_quote_error_message) }
         }
     }
 }

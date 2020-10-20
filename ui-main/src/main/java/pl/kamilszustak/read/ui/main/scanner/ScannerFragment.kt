@@ -37,23 +37,23 @@ class ScannerFragment @Inject constructor(
     }
 
     override fun observeViewModel() {
-        viewModel.state.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                is ScannerState.CameraPermissionState -> {
-                    when (state) {
-                        ScannerState.CameraPermissionState.Unknown -> checkCameraPermission()
-                        ScannerState.CameraPermissionState.Granted -> initializaCameraProvider()
-                        ScannerState.CameraPermissionState.Denied -> errorToast(R.string.camera_permission_denied)
-                        ScannerState.CameraPermissionState.PermanentlyDenied -> errorToast(R.string.camera_permission_permanently_denied)
+        viewModel.action.observe(viewLifecycleOwner) { action ->
+            when (action) {
+                is ScannerAction.CameraPermissionAction -> {
+                    when (action) {
+                        ScannerAction.CameraPermissionAction.Unknown -> checkCameraPermission()
+                        ScannerAction.CameraPermissionAction.Granted -> initializaCameraProvider()
+                        ScannerAction.CameraPermissionAction.Denied -> errorToast(R.string.camera_permission_denied)
+                        ScannerAction.CameraPermissionAction.PermanentlyDenied -> errorToast(R.string.camera_permission_permanently_denied)
                     }
                 }
 
-                is ScannerState.Error -> {
-                    errorToast(state.throwable.message ?: "")
+                is ScannerAction.Error -> {
+                    errorToast(action.throwable.message ?: "")
                 }
 
-                is ScannerState.BarcodeDetected -> {
-                    Timber.i(state.value)
+                is ScannerAction.BarcodeDetected -> {
+                    Timber.i(action.value)
                 }
             }
         }

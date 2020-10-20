@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.annotation.IdRes
 import androidx.annotation.MainThread
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -18,6 +19,11 @@ import pl.kamilszustak.read.common.util.tryOrNull
 inline fun <reified VM : ViewModel> Fragment.viewModels(
     factory: ViewModelProvider.Factory
 ): Lazy<VM> = this.viewModels { factory }
+
+@MainThread
+inline fun <reified VM : ViewModel> Fragment.activityViewModels(
+    factory: ViewModelProvider.Factory
+): Lazy<VM> = this.activityViewModels { factory }
 
 @MainThread
 inline fun <reified VM : ViewModel> Fragment.navGraphViewModels(

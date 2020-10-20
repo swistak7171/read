@@ -24,7 +24,7 @@ class PhoneSignInViewModel @Inject constructor(
     private val formValidator: FormValidator,
     private val getAllCountries: GetAllCountriesUseCase,
     private val getDefaultCountry: GetDefaultCountryUseCase,
-) : BaseViewModel<PhoneSignInEvent, PhoneSignInState>() {
+) : BaseViewModel<PhoneSignInEvent, PhoneSignInAction>() {
 
     val phoneNumber: UniqueLiveData<String> = UniqueLiveData()
     private val _country: UniqueLiveData<Country> = UniqueLiveData()
@@ -54,7 +54,7 @@ class PhoneSignInViewModel @Inject constructor(
     }
 
     private fun handleCountryChoiceEvent() {
-        _state.value = PhoneSignInState.CountryPickerOpened(countries)
+        _action.value = PhoneSignInAction.CountryPickerOpened(countries)
     }
 
     private fun handleOnCountrySelectedEvent(event: PhoneSignInEvent.OnCountrySelected) {
@@ -66,12 +66,12 @@ class PhoneSignInViewModel @Inject constructor(
         val number = phoneNumber.value
 
         if (country == null) {
-            _state.value = PhoneSignInState.Error(R.string.not_selected_country_code)
+            _action.value = PhoneSignInAction.Error(R.string.not_selected_country_code)
             return
         }
 
         if (number.isNullOrBlank() || !formValidator.validatePhoneAddress(number)) {
-            _state.value = PhoneSignInState.Error(R.string.invalid_phone_number)
+            _action.value = PhoneSignInAction.Error(R.string.invalid_phone_number)
             return
         }
 
@@ -85,7 +85,7 @@ class PhoneSignInViewModel @Inject constructor(
 
                     override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                         Timber.i("onVerificationCompleted")
-                        _state.postValue(PhoneSignInState.Authenticated)
+                        _action.postValue(PhoneSignInAction.Authenticated)
                         // continuation.resume(PhoneAuthenticationResult.OnVerificationCompleted)
                     }
 

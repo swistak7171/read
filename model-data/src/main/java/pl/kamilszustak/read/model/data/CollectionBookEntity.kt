@@ -4,6 +4,10 @@ import com.google.firebase.database.PropertyName
 import java.util.*
 
 data class CollectionBookEntity(
+    @get:PropertyName(VOLUME_ID_PROPERTY)
+    @set:PropertyName(VOLUME_ID_PROPERTY)
+    var volumeId: String? = null,
+
     @get:PropertyName(TITLE_PROPERTY)
     @set:PropertyName(TITLE_PROPERTY)
     var title: String = "",
@@ -14,7 +18,7 @@ data class CollectionBookEntity(
 
     @get:PropertyName(NUMBER_OF_PAGES_PROPERTY)
     @set:PropertyName(NUMBER_OF_PAGES_PROPERTY)
-    var numberOfPages: Int = 0,
+    var pagesNumber: Int = 0,
 
     @get:PropertyName(PUBLICATION_DATE_PROPERTY)
     @set:PropertyName(PUBLICATION_DATE_PROPERTY)
@@ -42,6 +46,7 @@ data class CollectionBookEntity(
 ) : Entity() {
 
     companion object {
+        const val VOLUME_ID_PROPERTY: String = "volume_id"
         const val TABLE_NAME: String = "collection_books"
         const val TITLE_PROPERTY: String = "title"
         const val AUTHOR_PROPERTY: String = "author"
