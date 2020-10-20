@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="viewModel"
@@ -26,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/searchEditText"
-                android:text="@={viewModel.searchText}"
+                android:text="@={viewModel.searchQuery}"
                 android:inputType="text"
                 android:lines="1" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -38,5 +39,15 @@
             android:src="@drawable/icon_search"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/volumesRecyclerView"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/searchInputLayout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/default_margin"
+            tools:listitem="@layout/item_volume" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

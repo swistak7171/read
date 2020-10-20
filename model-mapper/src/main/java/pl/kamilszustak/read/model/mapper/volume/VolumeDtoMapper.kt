@@ -10,7 +10,6 @@ import pl.kamilszustak.read.model.mapper.Mapper
 import javax.inject.Inject
 
 class VolumeDtoMapper @Inject constructor(
-    private val dateFormats: DateFormats,
     private val isbnDtoMapper: IsbnDtoMapper,
 ) : Mapper<VolumeDto, Volume>() {
 
@@ -23,9 +22,9 @@ class VolumeDtoMapper @Inject constructor(
         val publicationDate = model.details.publicationDate.useOrNull { date ->
             val dashesNumber = date.count { it == '-' }
             val dateFormat = when (dashesNumber) {
-                0 -> dateFormats.yearFormat
-                1 -> dateFormats.yearMonthFormat
-                else -> dateFormats.dateFormat
+                0 -> DateFormats.yearFormat
+                1 -> DateFormats.yearMonthFormat
+                else -> DateFormats.dateFormat
             }
 
             tryOrNull { dateFormat.parse(date) }
@@ -45,7 +44,7 @@ class VolumeDtoMapper @Inject constructor(
             publicationDate = publicationDate,
             pagesNumber = model.details.pagesNumber,
             isbns = isbns,
-            coverImageUrl = model.details.coverImageUrl.thumbnailUrl
+            coverImageUrl = model.details.coverImageUrl?.thumbnailUrl
         )
     }
 }

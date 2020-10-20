@@ -30,5 +30,5 @@ data class VolumeDetailsDto(
     val isbns: List<IsbnDto>?,
 
     @Json(name = "imageLinks")
-    val coverImageUrl: CoverImageUrlDto
+    val coverImageUrl: CoverImageUrlDto?
 )

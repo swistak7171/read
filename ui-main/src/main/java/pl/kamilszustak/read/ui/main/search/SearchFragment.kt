@@ -1,17 +1,41 @@
 package pl.kamilszustak.read.ui.main.search
 
 import androidx.lifecycle.ViewModelProvider
-import pl.kamilszustak.read.ui.base.binding.viewBinding
+import com.mikepenz.fastadapter.FastAdapter
+import com.mikepenz.fastadapter.adapters.ModelAdapter
+import pl.kamilszustak.read.model.domain.Volume
+import pl.kamilszustak.read.ui.base.util.updateModels
 import pl.kamilszustak.read.ui.base.util.viewModels
-import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
 import pl.kamilszustak.read.ui.main.R
+import pl.kamilszustak.read.ui.main.activity.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.databinding.FragmentSearchBinding
 import javax.inject.Inject
 
 class SearchFragment @Inject constructor(
     viewModelFactory: ViewModelProvider.Factory,
-) : BaseFragment<FragmentSearchBinding, SearchViewModel>(R.layout.fragment_search) {
+) : MainDataBindingFragment<FragmentSearchBinding, SearchViewModel>(R.layout.fragment_search) {
 
     override val viewModel: SearchViewModel by viewModels(viewModelFactory)
-    override val binding: FragmentSearchBinding by viewBinding(FragmentSearchBinding::bind)
+    private val modelAdapter: ModelAdapter<Volume, VolumeItem> by lazy {
+        ModelAdapter { VolumeItem(it) }
+    }
+
+    override fun initializeRecyclerView() {
+        val fastAdapter = FastAdapter.with(modelAdapter)
+        binding.volumesRecyclerView.apply {
+            adapter = fastAdapter
+        }
+    }
+
+    override fun setListeners() {
+        binding.searchButton.setOnClickListener {
+            viewModel.dispatchEvent(SearchEvent.OnSearchButtonClicked)
+        }
+    }
+
+    override fun observeViewModel() {
+        viewModel.volumes.observe(viewLifecycleOwner) { volumes ->
+            modelAdapter.updateModels(volumes)
+        }
+    }
 }

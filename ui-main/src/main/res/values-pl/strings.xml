@@ -68,4 +68,5 @@
 
     <!-- SearchFragment -->
     <string name="search_query">Wyszukiwana fraza</string>
+    <string name="blank_search_query_error_message">Pusta fraza wyszukiwania</string>
 </resources>

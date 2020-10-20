@@ -19,7 +19,6 @@ import java.util.*
 
 class BookEditViewModel(
     private val arguments: BookEditFragmentArgs,
-    private val dateFormats: DateFormats,
     private val getCollectionBook: GetCollectionBookUseCase,
     private val addCollectionBook: AddCollectionBookUseCase,
     private val editCollectionBook: EditCollectionBookUseCase,
@@ -41,7 +40,7 @@ class BookEditViewModel(
     private val _bookPublicationDate: UniqueLiveData<Date?> = UniqueLiveData()
     val bookPublicationDate: LiveData<String?>
         get() = _bookPublicationDate.map { date ->
-            date.useOrNull { dateFormats.dateFormat.format(it)  }
+            date.useOrNull { DateFormats.dateFormat.format(it)  }
         }
 
     init {

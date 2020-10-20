@@ -69,4 +69,5 @@
 
     <!--- SearchFragment -->
     <string name="search_query">Search query</string>
+    <string name="blank_search_query_error_message">Blank search query</string>
 </resources>
