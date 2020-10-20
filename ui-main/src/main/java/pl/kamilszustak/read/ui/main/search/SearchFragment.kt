@@ -7,10 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ModelAdapter
 import pl.kamilszustak.read.model.domain.Volume
-import pl.kamilszustak.read.ui.base.util.hideKeyboard
-import pl.kamilszustak.read.ui.base.util.showKeyboard
-import pl.kamilszustak.read.ui.base.util.updateModels
-import pl.kamilszustak.read.ui.base.util.viewModels
+import pl.kamilszustak.read.ui.base.util.*
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.activity.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.databinding.FragmentSearchBinding
@@ -55,6 +52,11 @@ class SearchFragment @Inject constructor(
     }
 
     override fun observeViewModel() {
+        viewModel.action.observe(viewLifecycleOwner) { action ->
+            when (action) {
+                is SearchAction.Error -> errorToast(action.messageResourceId)
+            }
+        }
         viewModel.volumes.observe(viewLifecycleOwner) { volumes ->
             modelAdapter.updateModels(volumes)
         }
