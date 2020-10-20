@@ -1,21 +1,27 @@
-package pl.kamilszustak.read.ui.main
+package pl.kamilszustak.read.ui.main.main
 
 import android.os.Bundle
 import androidx.activity.addCallback
+import androidx.activity.viewModels
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import pl.kamilszustak.read.ui.base.binding.viewBinding
 import pl.kamilszustak.read.ui.base.util.setupActionBarWithNavController
 import pl.kamilszustak.read.ui.base.util.setupWithNavController
 import pl.kamilszustak.read.ui.base.view.activity.BaseActivity
+import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.ActivityMainBinding
 import pl.kamilszustak.read.ui.main.di.MainComponent
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(R.layout.activity_main) {
     @Inject override lateinit var fragmentFactory: FragmentFactory
+    @Inject protected lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val viewModel: MainViewModel by viewModels { viewModelFactory }
     private val binding: ActivityMainBinding by viewBinding(ActivityMainBinding::inflate)
     private var currentNavController: LiveData<NavController>? = null
     private val component: MainComponent by lazy {
@@ -40,6 +46,8 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
                 this.isEnabled = true
             }
         }
+
+        observeViewModel()
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
@@ -49,6 +57,9 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
         setupBottomNavigationBar()
     }
+
+    override fun onSupportNavigateUp(): Boolean =
+        currentNavController?.value?.navigateUp() ?: false
 
     private fun setupBottomNavigationBar() {
         val navGraphIds = listOf(
@@ -73,6 +84,13 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
         currentNavController = controller
     }
 
-    override fun onSupportNavigateUp(): Boolean =
-        currentNavController?.value?.navigateUp() ?: false
+    private fun observeViewModel() {
+        viewModel.state.observe(this) { state ->
+            when (state) {
+                is MainState.ChangeFragmentSelection -> {
+                    binding.mainBottomNavigationView.selectedItemId = state.idResource
+                }
+            }
+        }
+    }
 }

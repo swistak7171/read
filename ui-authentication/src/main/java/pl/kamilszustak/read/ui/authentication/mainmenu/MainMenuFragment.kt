@@ -15,7 +15,7 @@ import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.navigate
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
-import pl.kamilszustak.read.ui.main.MainActivity
+import pl.kamilszustak.read.ui.main.main.MainActivity
 import javax.inject.Inject
 
 class MainMenuFragment @Inject constructor(

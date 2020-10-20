@@ -12,8 +12,11 @@ import pl.kamilszustak.read.model.domain.CollectionBook
 import pl.kamilszustak.read.ui.base.binding.viewBinding
 import pl.kamilszustak.read.ui.base.util.*
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
+import pl.kamilszustak.read.ui.main.main.MainViewModel
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.FragmentCollectionBinding
+import pl.kamilszustak.read.ui.main.main.MainEvent
+import pl.kamilszustak.read.ui.main.main.MainFragmentType
 import javax.inject.Inject
 
 class CollectionFragment @Inject constructor(
@@ -21,6 +24,7 @@ class CollectionFragment @Inject constructor(
 ) : BaseFragment<FragmentCollectionBinding, CollectionViewModel>(R.layout.fragment_collection) {
 
     override val viewModel: CollectionViewModel by viewModels(viewModelFactory)
+    private val mainViewModel: MainViewModel by activityViewModels(viewModelFactory)
     override val binding: FragmentCollectionBinding by viewBinding(FragmentCollectionBinding::bind)
     private val navigator: Navigator = Navigator()
     private val modelAdapter: ModelAdapter<CollectionBook, CollectionBookItem> by lazy {
@@ -124,6 +128,11 @@ class CollectionFragment @Inject constructor(
 
                 is CollectionState.NavigateToReadingProgressDialogFragment -> {
                     navigator.navigateToReadingProgressDialogFragment(state.collectionBookId)
+                }
+
+                CollectionState.NavigateToSearchFragment -> {
+                    val event = MainEvent.OnFragmentSelectionChanged(MainFragmentType.SEARCH_FRAGMENT)
+                    mainViewModel.dispatchEvent(event)
                 }
 
                 CollectionState.BookDeleted -> {
