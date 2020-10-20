@@ -1,16 +1,16 @@
 package pl.kamilszustak.read.ui.main.quotes.edit
 
 import androidx.annotation.StringRes
-import pl.kamilszustak.read.ui.base.view.ViewState
+import pl.kamilszustak.read.ui.base.view.ViewAction
 
-sealed class QuoteEditState : ViewState {
-    object NavigateUp : QuoteEditState()
+sealed class QuoteEditAction : ViewAction {
+    object NavigateUp : QuoteEditAction()
 
     data class Error(
         @StringRes val messageResourceId: Int,
-    ) : QuoteEditState()
+    ) : QuoteEditAction()
 
     data class QuoteSaved(
         @StringRes val messageResourceId: Int,
-    ) : QuoteEditState()
+    ) : QuoteEditAction()
 }

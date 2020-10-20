@@ -7,7 +7,7 @@ import pl.kamilszustak.read.ui.authentication.R
 import pl.kamilszustak.read.ui.authentication.databinding.FragmentEmailSignInBinding
 import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.viewModels
-import pl.kamilszustak.read.ui.main.main.MainActivity
+import pl.kamilszustak.read.ui.main.activity.MainActivity
 import javax.inject.Inject
 
 class EmailSignInFragment @Inject constructor(
@@ -23,13 +23,13 @@ class EmailSignInFragment @Inject constructor(
     }
 
     override fun observeViewModel() {
-        viewModel.state.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                is EmailSignInState.Error -> {
-                    errorToast(state.messageResourceId)
+        viewModel.action.observe(viewLifecycleOwner) { action ->
+            when (action) {
+                is EmailSignInAction.Error -> {
+                    errorToast(action.messageResourceId)
                 }
 
-                EmailSignInState.Authenticated -> {
+                EmailSignInAction.Authenticated -> {
                     startActivity<MainActivity>()
                     requireActivity().finish()
                 }

@@ -82,18 +82,18 @@ class QuotesFragment @Inject constructor(
     }
 
     override fun observeViewModel() {
-        viewModel.state.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                is QuotesState.NavigateToQuoteEditFragment -> {
-                    navigator.navigateToQuoteEditFragment(state.quoteId)
+        viewModel.action.observe(viewLifecycleOwner) { action ->
+            when (action) {
+                is QuotesAction.NavigateToQuoteEditFragment -> {
+                    navigator.navigateToQuoteEditFragment(action.quoteId)
                 }
 
-                is QuotesState.QuoteDeleted -> {
+                is QuotesAction.QuoteDeleted -> {
                     successToast(R.string.quote_deleted)
                 }
 
-                is QuotesState.Error -> {
-                    errorToast(state.messageResourceId)
+                is QuotesAction.Error -> {
+                    errorToast(action.messageResourceId)
                 }
             }
         }

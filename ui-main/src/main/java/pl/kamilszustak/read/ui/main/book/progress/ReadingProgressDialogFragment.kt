@@ -5,8 +5,8 @@ import androidx.navigation.fragment.navArgs
 import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.navigateUp
 import pl.kamilszustak.read.ui.base.util.successToast
-import pl.kamilszustak.read.ui.main.main.MainDataBindingDialogFragment
 import pl.kamilszustak.read.ui.main.R
+import pl.kamilszustak.read.ui.main.activity.MainDataBindingDialogFragment
 import pl.kamilszustak.read.ui.main.databinding.DialogFragmentReadingProgressBinding
 import javax.inject.Inject
 
@@ -28,11 +28,11 @@ class ReadingProgressDialogFragment @Inject constructor(
     }
 
     override fun observeViewModel() {
-        viewModel.state.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                ReadingProgressState.ProgressUpdated -> successToast(R.string.reading_progress_updated)
-                ReadingProgressState.NavigateUp -> navigateUp()
-                is ReadingProgressState.Error -> errorToast(state.messageResourceId)
+        viewModel.action.observe(viewLifecycleOwner) { action ->
+            when (action) {
+                ReadingProgressAction.ProgressUpdated -> successToast(R.string.reading_progress_updated)
+                ReadingProgressAction.NavigateUp -> navigateUp()
+                is ReadingProgressAction.Error -> errorToast(action.messageResourceId)
             }
         }
     }

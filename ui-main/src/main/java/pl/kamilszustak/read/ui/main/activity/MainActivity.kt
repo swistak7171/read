@@ -1,4 +1,4 @@
-package pl.kamilszustak.read.ui.main.main
+package pl.kamilszustak.read.ui.main.activity
 
 import android.os.Bundle
 import androidx.activity.addCallback
@@ -85,10 +85,10 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
     }
 
     private fun observeViewModel() {
-        viewModel.state.observe(this) { state ->
-            when (state) {
-                is MainState.ChangeFragmentSelection -> {
-                    binding.mainBottomNavigationView.selectedItemId = state.idResource
+        viewModel.action.observe(this) { action ->
+            when (action) {
+                is MainAction.ChangeFragmentSelection -> {
+                    binding.mainBottomNavigationView.selectedItemId = action.idResource
                 }
             }
         }

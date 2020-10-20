@@ -3,25 +3,25 @@ package pl.kamilszustak.read.ui.main.collection
 import androidx.annotation.ArrayRes
 import androidx.annotation.StringRes
 import pl.kamilszustak.model.common.id.CollectionBookId
-import pl.kamilszustak.read.ui.base.view.ViewState
+import pl.kamilszustak.read.ui.base.view.ViewAction
 
-sealed class CollectionState : ViewState {
+sealed class CollectionAction : ViewAction {
     data class ShowAddBookDialog(
         @ArrayRes val itemsResourceId: Int,
-    ) : CollectionState()
+    ) : CollectionAction()
 
     data class NavigateToBookEditFragment(
         val collectionBookId: CollectionBookId? = null,
-    ) : CollectionState()
+    ) : CollectionAction()
 
     data class NavigateToReadingProgressDialogFragment(
         val collectionBookId: CollectionBookId,
-    ) : CollectionState()
+    ) : CollectionAction()
 
     data class Error(
         @StringRes val messageResourceId: Int,
-    ) : CollectionState()
+    ) : CollectionAction()
 
-    object BookDeleted : CollectionState()
-    object NavigateToSearchFragment : CollectionState()
+    object BookDeleted : CollectionAction()
+    object NavigateToSearchFragment : CollectionAction()
 }

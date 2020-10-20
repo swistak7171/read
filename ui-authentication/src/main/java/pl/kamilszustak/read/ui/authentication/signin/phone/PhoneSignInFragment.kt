@@ -9,7 +9,7 @@ import pl.kamilszustak.read.ui.authentication.databinding.FragmentPhoneSignInBin
 import pl.kamilszustak.read.ui.base.util.dialog
 import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.viewModels
-import pl.kamilszustak.read.ui.main.main.MainActivity
+import pl.kamilszustak.read.ui.main.activity.MainActivity
 import javax.inject.Inject
 
 class PhoneSignInFragment @Inject constructor(
@@ -29,10 +29,10 @@ class PhoneSignInFragment @Inject constructor(
     }
 
     override fun observeViewModel() {
-        viewModel.state.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                is PhoneSignInState.CountryPickerOpened -> {
-                    val namesAndCodes = state.countries.map { country ->
+        viewModel.action.observe(viewLifecycleOwner) { action ->
+            when (action) {
+                is PhoneSignInAction.CountryPickerOpened -> {
+                    val namesAndCodes = action.countries.map { country ->
                         "(+${country.extension}) ${country.name}"
                     }
 
@@ -48,11 +48,11 @@ class PhoneSignInFragment @Inject constructor(
                     }
                 }
 
-                is PhoneSignInState.Error -> {
-                    errorToast(state.messageResourceId)
+                is PhoneSignInAction.Error -> {
+                    errorToast(action.messageResourceId)
                 }
 
-                PhoneSignInState.Authenticated -> {
+                PhoneSignInAction.Authenticated -> {
                     startActivity<MainActivity>()
                     requireActivity().finish()
                 }

@@ -25,7 +25,7 @@ import javax.inject.Inject
 
 class MainMenuViewModel @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
-): BaseViewModel<MainMenuEvent, MainMenuState>() {
+): BaseViewModel<MainMenuEvent, MainMenuAction>() {
 
     private val facebookLoginManager: LoginManager = LoginManager.getInstance()
     private val facebookCallbackManager: CallbackManager = CallbackManager.Factory.create()
@@ -33,17 +33,17 @@ class MainMenuViewModel @Inject constructor(
     override fun handleEvent(event: MainMenuEvent) {
         when (event) {
             MainMenuEvent.OnEmailSignInButtonClicked -> {
-                _state.value = MainMenuState.EmailAuthentication
+                _action.value = MainMenuAction.EmailAuthentication
             }
 
             MainMenuEvent.OnPhoneSignInButtonClicked -> {
-                _state.value = MainMenuState.PhoneAuthentication
+                _action.value = MainMenuAction.PhoneAuthentication
             }
 
             is MainMenuEvent.OnGoogleSignInButtonClicked -> {
                 val intent = handleGoogleAuthentication(event)
                 intent.useOrNull {
-                    _state.value = MainMenuState.GoogleAuthentication(it)
+                    _action.value = MainMenuAction.GoogleAuthentication(it)
                 }
             }
 
@@ -85,7 +85,7 @@ class MainMenuViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val result = firebaseAuth.signInWithCredential(credential).await()
             if (result?.user != null) {
-                _state.postValue(MainMenuState.Authenticated)
+                _action.postValue(MainMenuAction.Authenticated)
             }
         }
     }
@@ -96,7 +96,7 @@ class MainMenuViewModel @Inject constructor(
         val facebookCallback = object : FacebookCallback<LoginResult> {
             override fun onSuccess(result: LoginResult?) {
                 Timber.i("onSuccess")
-                _state.value = MainMenuState.Authenticated
+                _action.value = MainMenuAction.Authenticated
             }
 
             override fun onError(error: FacebookException?) {
@@ -125,10 +125,10 @@ class MainMenuViewModel @Inject constructor(
             try {
                 val result = task.await()
                 if (result?.user != null) {
-                    _state.postValue(MainMenuState.Authenticated)
+                    _action.postValue(MainMenuAction.Authenticated)
                 }
             } catch (exception: FirebaseAuthWebException) {
-                _state.value = MainMenuState.Error(R.string.twitter_authentication_cancelled_by_user)
+                _action.value = MainMenuAction.Error(R.string.twitter_authentication_cancelled_by_user)
             }
         }
     }

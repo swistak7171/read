@@ -12,11 +12,11 @@ import pl.kamilszustak.read.model.domain.CollectionBook
 import pl.kamilszustak.read.ui.base.binding.viewBinding
 import pl.kamilszustak.read.ui.base.util.*
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
-import pl.kamilszustak.read.ui.main.main.MainViewModel
+import pl.kamilszustak.read.ui.main.activity.MainViewModel
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.FragmentCollectionBinding
-import pl.kamilszustak.read.ui.main.main.MainEvent
-import pl.kamilszustak.read.ui.main.main.MainFragmentType
+import pl.kamilszustak.read.ui.main.activity.MainEvent
+import pl.kamilszustak.read.ui.main.activity.MainFragmentType
 import javax.inject.Inject
 
 class CollectionFragment @Inject constructor(
@@ -107,12 +107,12 @@ class CollectionFragment @Inject constructor(
     }
 
     override fun observeViewModel() {
-        viewModel.state.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                is CollectionState.ShowAddBookDialog -> {
+        viewModel.action.observe(viewLifecycleOwner) { action ->
+            when (action) {
+                is CollectionAction.ShowAddBookDialog -> {
                     dialog {
                         listItems(
-                            res = state.itemsResourceId,
+                            res = action.itemsResourceId,
                             waitForPositiveButton = false,
                             selection = { dialog, index, text ->
                                 val event = CollectionEvent.OnDialogOptionSelected(index)
@@ -122,25 +122,25 @@ class CollectionFragment @Inject constructor(
                     }
                 }
 
-                is CollectionState.NavigateToBookEditFragment -> {
-                    navigator.navigateToBookEditFragment(state.collectionBookId)
+                is CollectionAction.NavigateToBookEditFragment -> {
+                    navigator.navigateToBookEditFragment(action.collectionBookId)
                 }
 
-                is CollectionState.NavigateToReadingProgressDialogFragment -> {
-                    navigator.navigateToReadingProgressDialogFragment(state.collectionBookId)
+                is CollectionAction.NavigateToReadingProgressDialogFragment -> {
+                    navigator.navigateToReadingProgressDialogFragment(action.collectionBookId)
                 }
 
-                CollectionState.NavigateToSearchFragment -> {
+                CollectionAction.NavigateToSearchFragment -> {
                     val event = MainEvent.OnFragmentSelectionChanged(MainFragmentType.SEARCH_FRAGMENT)
                     mainViewModel.dispatchEvent(event)
                 }
 
-                CollectionState.BookDeleted -> {
+                CollectionAction.BookDeleted -> {
                     successToast(R.string.book_deleted)
                 }
 
-                is CollectionState.Error -> {
-                    errorToast(state.messageResourceId)
+                is CollectionAction.Error -> {
+                    errorToast(action.messageResourceId)
                 }
             }
         }

@@ -16,7 +16,7 @@ class ReadingProgressViewModel(
     private val arguments: ReadingProgressDialogFragmentArgs,
     private val getCollectionBook: GetCollectionBookUseCase,
     private val editCollectionBook: EditCollectionBookUseCase,
-) : BaseViewModel<ReadingProgressEvent, ReadingProgressState>() {
+) : BaseViewModel<ReadingProgressEvent, ReadingProgressAction>() {
 
     private val _collectionBook: UniqueLiveData<CollectionBook> = UniqueLiveData()
     val collectionBook: LiveData<CollectionBook> = _collectionBook
@@ -37,7 +37,7 @@ class ReadingProgressViewModel(
     override fun handleEvent(event: ReadingProgressEvent) {
         when (event) {
             ReadingProgressEvent.OnCancelButtonClicked -> {
-                _state.value = ReadingProgressState.NavigateUp
+                _action.value = ReadingProgressAction.NavigateUp
             }
 
             ReadingProgressEvent.OnSaveButtonClicked -> {
@@ -50,7 +50,7 @@ class ReadingProgressViewModel(
         val pages = readPages.value
 
         if (pages == null || pages < 0) {
-            _state.value = ReadingProgressState.Error(R.string.invalid_read_pages_number_error_message)
+            _action.value = ReadingProgressAction.Error(R.string.invalid_read_pages_number_error_message)
             return
         }
 
@@ -58,12 +58,12 @@ class ReadingProgressViewModel(
         viewModelScope.launch(Dispatchers.Main) {
             editCollectionBook(id) { book -> book.copy(readPages = pages) }
                 .onSuccess {
-                    with(_state) {
-                        value = ReadingProgressState.ProgressUpdated
-                        value = ReadingProgressState.NavigateUp
+                    with(_action) {
+                        value = ReadingProgressAction.ProgressUpdated
+                        value = ReadingProgressAction.NavigateUp
                     }
                 }
-                .onFailure { _state.value = ReadingProgressState.Error(R.string.reading_progress_edit_error_message) }
+                .onFailure { _action.value = ReadingProgressAction.Error(R.string.reading_progress_edit_error_message) }
         }
     }
 }

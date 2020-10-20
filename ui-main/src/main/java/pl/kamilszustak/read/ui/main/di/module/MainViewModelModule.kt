@@ -5,7 +5,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import pl.kamilszustak.read.ui.base.di.key.ViewModelKey
-import pl.kamilszustak.read.ui.main.main.MainViewModel
+import pl.kamilszustak.read.ui.main.activity.MainViewModel
 import pl.kamilszustak.read.ui.main.collection.CollectionViewModel
 import pl.kamilszustak.read.ui.main.profile.ProfileViewModel
 import pl.kamilszustak.read.ui.main.quotes.QuotesViewModel

@@ -1,4 +1,4 @@
-package pl.kamilszustak.read.ui.main.main
+package pl.kamilszustak.read.ui.main.activity
 
 import pl.kamilszustak.read.ui.base.view.ViewEvent
 

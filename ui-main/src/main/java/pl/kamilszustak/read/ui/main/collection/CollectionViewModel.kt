@@ -15,7 +15,7 @@ import javax.inject.Inject
 class CollectionViewModel @Inject constructor(
     private val getAllCollectionBooks: GetAllCollectionBooksUseCase,
     private val deleteCollectionBook: DeleteCollectionBookUseCase,
-) : BaseViewModel<CollectionEvent, CollectionState>() {
+) : BaseViewModel<CollectionEvent, CollectionAction>() {
 
     val collectionBooks: LiveData<List<CollectionBook>> = getAllCollectionBooks()
         .asLiveData(viewModelScope.coroutineContext)
@@ -23,26 +23,26 @@ class CollectionViewModel @Inject constructor(
     override fun handleEvent(event: CollectionEvent) {
         when (event) {
             CollectionEvent.OnAddBookButtonClicked -> {
-                _state.value = CollectionState.ShowAddBookDialog(R.array.add_book_dialog_options)
+                _action.value = CollectionAction.ShowAddBookDialog(R.array.add_book_dialog_options)
             }
 
             is CollectionEvent.OnDialogOptionSelected -> {
                 when (event.index) {
-                    0 -> _state.value = CollectionState.NavigateToBookEditFragment()
-                    1 -> _state.value = CollectionState.NavigateToSearchFragment
+                    0 -> _action.value = CollectionAction.NavigateToBookEditFragment()
+                    1 -> _action.value = CollectionAction.NavigateToSearchFragment
                 }
             }
 
             is CollectionEvent.OnBookLongClicked -> {
-                _state.value = CollectionState.NavigateToReadingProgressDialogFragment(event.collectionBookId)
+                _action.value = CollectionAction.NavigateToReadingProgressDialogFragment(event.collectionBookId)
             }
 
             is CollectionEvent.OnUpdateReadingProgressButtonClicked -> {
-                _state.value = CollectionState.NavigateToReadingProgressDialogFragment(event.collectionBookId)
+                _action.value = CollectionAction.NavigateToReadingProgressDialogFragment(event.collectionBookId)
             }
 
             is CollectionEvent.OnEditBookButtonClicked -> {
-                _state.value = CollectionState.NavigateToBookEditFragment(event.collectionBookId)
+                _action.value = CollectionAction.NavigateToBookEditFragment(event.collectionBookId)
             }
 
             is CollectionEvent.OnDeleteBookButtonClicked -> {
@@ -54,8 +54,8 @@ class CollectionViewModel @Inject constructor(
     private fun handleDeleteBookButtonClick(event: CollectionEvent.OnDeleteBookButtonClicked) {
         viewModelScope.launch(Dispatchers.Main) {
             deleteCollectionBook(event.collectionBookId)
-                .onSuccess { _state.value = CollectionState.BookDeleted }
-                .onFailure { _state.value = CollectionState.Error(R.string.deleting_book_error_message) }
+                .onSuccess { _action.value = CollectionAction.BookDeleted }
+                .onFailure { _action.value = CollectionAction.Error(R.string.deleting_book_error_message) }
         }
     }
 }

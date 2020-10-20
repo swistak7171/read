@@ -66,4 +66,7 @@
     <string name="delete_quote_dialog_message">Do you want to delete this quote?</string>
     <string name="quote_deleted">Quote deleted</string>
     <string name="deleting_quote_error_message">An error occurred while deleting the quote</string>
+
+    <!--- SearchFragment -->
+    <string name="search_query">Search query</string>
 </resources>

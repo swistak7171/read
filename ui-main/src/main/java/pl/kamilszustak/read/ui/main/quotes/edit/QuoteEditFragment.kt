@@ -12,8 +12,8 @@ import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.navigateUp
 import pl.kamilszustak.read.ui.base.util.successToast
-import pl.kamilszustak.read.ui.main.main.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.R
+import pl.kamilszustak.read.ui.main.activity.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.databinding.FragmentQuoteEditBinding
 import javax.inject.Inject
 
@@ -55,11 +55,11 @@ class QuoteEditFragment @Inject constructor(
             }
         }
 
-        viewModel.state.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                is QuoteEditState.QuoteSaved -> successToast(state.messageResourceId)
-                is QuoteEditState.Error -> errorToast(state.messageResourceId)
-                QuoteEditState.NavigateUp -> navigateUp()
+        viewModel.action.observe(viewLifecycleOwner) { action ->
+            when (action) {
+                is QuoteEditAction.QuoteSaved -> successToast(action.messageResourceId)
+                is QuoteEditAction.Error -> errorToast(action.messageResourceId)
+                QuoteEditAction.NavigateUp -> navigateUp()
             }
         }
     }

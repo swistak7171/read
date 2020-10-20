@@ -23,7 +23,7 @@ class BookEditViewModel(
     private val getCollectionBook: GetCollectionBookUseCase,
     private val addCollectionBook: AddCollectionBookUseCase,
     private val editCollectionBook: EditCollectionBookUseCase,
-) : BaseViewModel<BookEditEvent, BookEditState>() {
+) : BaseViewModel<BookEditEvent, BookEditAction>() {
 
     private val inEditMode: Boolean = (arguments.collectionBookId != null)
 
@@ -65,7 +65,7 @@ class BookEditViewModel(
     override fun handleEvent(event: BookEditEvent) {
         when (event) {
             BookEditEvent.OnDateEditTextClicked -> {
-                _state.value = BookEditState.OpenDatePicker
+                _action.value = BookEditAction.OpenDatePicker
             }
 
             is BookEditEvent.OnPublicationDateSelected -> {
@@ -98,22 +98,22 @@ class BookEditViewModel(
         val description = bookDescription.value
 
         if (title.isNullOrBlank()) {
-            _state.value = BookEditState.Error(R.string.blank_book_title)
+            _action.value = BookEditAction.Error(R.string.blank_book_title)
             return
         }
 
         if (author.isNullOrBlank()) {
-            _state.value = BookEditState.Error(R.string.blank_book_author)
+            _action.value = BookEditAction.Error(R.string.blank_book_author)
             return
         }
 
         if (pages == null || pages == 0) {
-            _state.value = BookEditState.Error(R.string.blank_book_number_of_pages)
+            _action.value = BookEditAction.Error(R.string.blank_book_number_of_pages)
             return
         }
 
         if (readPages > pages) {
-            _state.value = BookEditState.Error(R.string.read_pages_over_number_of_pages)
+            _action.value = BookEditAction.Error(R.string.read_pages_over_number_of_pages)
             return
         }
 
@@ -152,9 +152,9 @@ class BookEditViewModel(
                     R.string.book_added_successfully
                 }
 
-                with(_state) {
-                    value = BookEditState.BookSaved(resourceId)
-                    value = BookEditState.NavigateUp
+                with(_action) {
+                    value = BookEditAction.BookSaved(resourceId)
+                    value = BookEditAction.NavigateUp
                 }
             }.onFailure {
                 val resourceId = if (inEditMode) {
@@ -163,7 +163,7 @@ class BookEditViewModel(
                     R.string.adding_book_error_message
                 }
 
-                _state.value = BookEditState.Error(resourceId)
+                _action.value = BookEditAction.Error(resourceId)
             }
         }
     }
