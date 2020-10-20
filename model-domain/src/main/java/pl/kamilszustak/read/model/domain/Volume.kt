@@ -15,5 +15,5 @@ data class Volume(
     val publicationDate: Date?,
     val pagesNumber: Int?,
     val isbns: List<Isbn>?,
-    val coverImageUrl: String? = CollectionBook.COVER_IMAGE_PLACEHOLDER_URL,
+    val coverImageUrl: String?,
 ) : IdentifiedModel()

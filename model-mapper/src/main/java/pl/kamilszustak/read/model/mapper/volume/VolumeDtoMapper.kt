@@ -5,6 +5,7 @@ import pl.kamilszustak.model.network.VolumeDto
 import pl.kamilszustak.read.common.util.tryOrNull
 import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.domain.access.DateFormats
+import pl.kamilszustak.read.model.domain.CollectionBook
 import pl.kamilszustak.read.model.domain.Volume
 import pl.kamilszustak.read.model.mapper.Mapper
 import javax.inject.Inject
@@ -44,7 +45,7 @@ class VolumeDtoMapper @Inject constructor(
             publicationDate = publicationDate,
             pagesNumber = model.details.pagesNumber,
             isbns = isbns,
-            coverImageUrl = model.details.coverImageUrl?.thumbnailUrl
+            coverImageUrl = model.details.coverImageUrl?.thumbnailUrl ?: CollectionBook.COVER_IMAGE_PLACEHOLDER_URL
         )
     }
 }

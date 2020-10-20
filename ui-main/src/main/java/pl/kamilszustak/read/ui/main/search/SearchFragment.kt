@@ -1,9 +1,14 @@
 package pl.kamilszustak.read.ui.main.search
 
+import android.os.Bundle
+import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.ViewModelProvider
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ModelAdapter
 import pl.kamilszustak.read.model.domain.Volume
+import pl.kamilszustak.read.ui.base.util.hideKeyboard
+import pl.kamilszustak.read.ui.base.util.showKeyboard
 import pl.kamilszustak.read.ui.base.util.updateModels
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.main.R
@@ -18,6 +23,22 @@ class SearchFragment @Inject constructor(
     override val viewModel: SearchViewModel by viewModels(viewModelFactory)
     private val modelAdapter: ModelAdapter<Volume, VolumeItem> by lazy {
         ModelAdapter { VolumeItem(it) }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.searchEditText.showKeyboard()
+    }
+
+    override fun onPause() {
+        binding.searchEditText.hideKeyboard()
+        super.onPause()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initializeEditText()
     }
 
     override fun initializeRecyclerView() {
@@ -36,6 +57,17 @@ class SearchFragment @Inject constructor(
     override fun observeViewModel() {
         viewModel.volumes.observe(viewLifecycleOwner) { volumes ->
             modelAdapter.updateModels(volumes)
+        }
+    }
+
+    private fun initializeEditText() {
+        binding.searchEditText.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                viewModel.dispatchEvent(SearchEvent.OnSearchButtonClicked)
+                true
+            } else {
+                false
+            }
         }
     }
 }
