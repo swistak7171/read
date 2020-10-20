@@ -15,7 +15,7 @@ import javax.inject.Inject
 class EmailSignInViewModel @Inject constructor(
     private val formValidator: FormValidator,
     private val firebaseAuth: FirebaseAuth,
-) : BaseViewModel<EmailSignInEvent, EmailSignInState>() {
+) : BaseViewModel<EmailSignInEvent, EmailSignInAction>() {
 
     val userEmailAddress: UniqueLiveData<String> = UniqueLiveData()
     val userPassword: UniqueLiveData<String> = UniqueLiveData()
@@ -33,17 +33,17 @@ class EmailSignInViewModel @Inject constructor(
         val confirmedPassword = confirmedUserPassword.value
 
         if (email == null || !formValidator.validateEmailAddress(email)) {
-            _state.value = EmailSignInState.Error(R.string.invalid_email_address)
+            _action.value = EmailSignInAction.Error(R.string.invalid_email_address)
             return
         }
 
         if (password.isNullOrBlank()) {
-            _state.value = EmailSignInState.Error(R.string.invalid_password)
+            _action.value = EmailSignInAction.Error(R.string.invalid_password)
             return
         }
 
         if (confirmedPassword != password) {
-            _state.value = EmailSignInState.Error(R.string.not_equal_passwords)
+            _action.value = EmailSignInAction.Error(R.string.not_equal_passwords)
             return
         }
 
@@ -51,8 +51,8 @@ class EmailSignInViewModel @Inject constructor(
             var result = try {
                 firebaseAuth.createUserWithEmailAndPassword(email, password).await()
             } catch (exception: FirebaseAuthUserCollisionException) {
-                val errorState = EmailSignInState.Error(R.string.user_with_email_exists)
-                _state.postValue(errorState)
+                val errorAction = EmailSignInAction.Error(R.string.user_with_email_exists)
+                _action.postValue(errorAction)
                 null
             }
 
@@ -61,7 +61,7 @@ class EmailSignInViewModel @Inject constructor(
             }
 
             if (result?.user != null) {
-                _state.postValue(EmailSignInState.Authenticated)
+                _action.postValue(EmailSignInAction.Authenticated)
             }
         }
     }

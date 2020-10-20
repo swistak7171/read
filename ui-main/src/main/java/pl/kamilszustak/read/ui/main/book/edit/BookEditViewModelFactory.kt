@@ -4,14 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
-import pl.kamilszustak.read.domain.access.DateFormats
 import pl.kamilszustak.read.domain.access.usecase.collection.AddCollectionBookUseCase
 import pl.kamilszustak.read.domain.access.usecase.collection.EditCollectionBookUseCase
 import pl.kamilszustak.read.domain.access.usecase.collection.GetCollectionBookUseCase
 
 class BookEditViewModelFactory @AssistedInject constructor(
     @Assisted private val arguments: BookEditFragmentArgs,
-    private val dateFormats: DateFormats,
     private val getCollectionBookUseCase: GetCollectionBookUseCase,
     private val addCollectionBookUseCase: AddCollectionBookUseCase,
     private val editCollectionBookUseCase: EditCollectionBookUseCase,
@@ -20,7 +18,6 @@ class BookEditViewModelFactory @AssistedInject constructor(
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
         BookEditViewModel(
             arguments = arguments,
-            dateFormats = dateFormats,
             getCollectionBook = getCollectionBookUseCase,
             addCollectionBook = addCollectionBookUseCase,
             editCollectionBook = editCollectionBookUseCase

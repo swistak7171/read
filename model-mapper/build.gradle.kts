@@ -20,9 +20,11 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
+    implementation(project(Modules.COMMON))
     implementation(project(Modules.MODEL_COMMON))
     implementation(project(Modules.MODEL_DOMAIN))
     implementation(project(Modules.MODEL_DATA))
+    implementation(project(Modules.MODEL_NETWORK))
     implementation(project(Modules.DOMAIN_ACCESS))
 
     // Dagger
@@ -31,5 +33,5 @@ dependencies {
     kapt(Dependencies.Google.Dagger.DAGGER_COMPILER)
 
     // Firebase Authentication
-    api(Dependencies.Google.Firebase.Authentication.AUTH_KTX)
+    implementation(Dependencies.Google.Firebase.Authentication.AUTH_KTX)
 }

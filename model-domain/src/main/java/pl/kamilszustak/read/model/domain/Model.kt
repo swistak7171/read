@@ -1,11 +1,8 @@
 package pl.kamilszustak.read.model.domain
 
-import android.os.Parcelable
-import pl.kamilszustak.model.common.id.ModelId
-import java.util.Date
+import java.util.*
 
-abstract class Model : Parcelable {
-    abstract val id: ModelId
+abstract class Model : IdentifiedModel() {
     abstract val creationDate: Date
     abstract val modificationDate: Date
 }

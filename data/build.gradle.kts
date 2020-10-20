@@ -35,6 +35,7 @@ dependencies {
     implementation(project(Modules.DATA_ACCESS))
     implementation(project(Modules.MODEL_DOMAIN))
     implementation(project(Modules.MODEL_DATA))
+    implementation(project(Modules.MODEL_NETWORK))
     implementation(project(Modules.DOMAIN_ACCESS))
 
     // Dagger
@@ -52,4 +53,7 @@ dependencies {
 
     // Firebase Database
     implementation(Dependencies.Google.Firebase.Database.DATABASE_KTX)
+
+    // Retrofit
+    implementation(Dependencies.Retrofit.RETROFIT)
 }

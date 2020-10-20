@@ -16,7 +16,7 @@ class CollectionBookMapper @Inject constructor(
         CollectionBookEntity(
             title = model.title,
             author = model.author,
-            numberOfPages = model.numberOfPages,
+            pagesNumber = model.pagesNumber,
             publicationDate = model.publicationDate,
             isbn = model.isbn,
             description = model.description,

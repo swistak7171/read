@@ -13,8 +13,8 @@ import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.navigateUp
 import pl.kamilszustak.read.ui.base.util.successToast
-import pl.kamilszustak.read.ui.main.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.R
+import pl.kamilszustak.read.ui.main.activity.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.databinding.FragmentBookEditBinding
 import java.util.*
 import javax.inject.Inject
@@ -63,21 +63,21 @@ class BookEditFragment @Inject constructor(
             }
         }
 
-        viewModel.state.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                BookEditState.OpenDatePicker -> {
+        viewModel.action.observe(viewLifecycleOwner) { action ->
+            when (action) {
+                BookEditAction.OpenDatePicker -> {
                     openDatePicker()
                 }
 
-                is BookEditState.Error -> {
-                    errorToast(state.messageResourceId)
+                is BookEditAction.Error -> {
+                    errorToast(action.messageResourceId)
                 }
 
-                is BookEditState.BookSaved -> {
-                    successToast(state.messageResourceId)
+                is BookEditAction.BookSaved -> {
+                    successToast(action.messageResourceId)
                 }
 
-                BookEditState.NavigateUp -> {
+                BookEditAction.NavigateUp -> {
                     navigateUp()
                 }
             }

@@ -113,4 +113,15 @@ dependencies {
 
     // Firebase Database
     implementation(Dependencies.Google.Firebase.Database.DATABASE_KTX)
+
+    // Retrofit
+    implementation(Dependencies.Retrofit.RETROFIT)
+    implementation(Dependencies.Retrofit.RETROFIT_CONVERTER_MOSHI)
+
+    // OkHttp
+    implementation(Dependencies.OkHttp.OK_HTTP)
+    implementation(Dependencies.OkHttp.OK_HTTP_LOGGING_INTERCEPTOR)
+
+    // Moshi
+    implementation(Dependencies.Moshi.MOSHI)
 }

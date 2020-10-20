@@ -18,7 +18,7 @@ class QuoteEditViewModel(
     private val getQuote: GetQuoteUseCase,
     private val addQuote: AddQuoteUseCase,
     private val editQuote: EditQuoteUseCase,
-) : BaseViewModel<QuoteEditEvent, QuoteEditState>() {
+) : BaseViewModel<QuoteEditEvent, QuoteEditAction>() {
 
     private val inEditMode: Boolean = (arguments.quoteId != null)
 
@@ -62,12 +62,12 @@ class QuoteEditViewModel(
         val book = quoteBook.value
 
         if (content.isNullOrBlank()) {
-            _state.value = QuoteEditState.Error(R.string.blank_quote_content)
+            _action.value = QuoteEditAction.Error(R.string.blank_quote_content)
             return
         }
 
         if (author.isNullOrBlank()) {
-            _state.value = QuoteEditState.Error(R.string.blank_quote_author)
+            _action.value = QuoteEditAction.Error(R.string.blank_quote_author)
             return
         }
 
@@ -98,9 +98,9 @@ class QuoteEditViewModel(
                     R.string.quote_added_successfully
                 }
 
-                with(_state) {
-                    value = QuoteEditState.QuoteSaved(resourceId)
-                    value = QuoteEditState.NavigateUp
+                with(_action) {
+                    value = QuoteEditAction.QuoteSaved(resourceId)
+                    value = QuoteEditAction.NavigateUp
                 }
             }.onFailure {
                 val resourceId = if (inEditMode) {
@@ -109,7 +109,7 @@ class QuoteEditViewModel(
                     R.string.adding_quote_error_message
                 }
 
-                _state.value = QuoteEditState.Error(resourceId)
+                _action.value = QuoteEditAction.Error(resourceId)
             }
         }
     }
