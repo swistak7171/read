@@ -11,15 +11,18 @@ import androidx.annotation.StringRes
 import pl.kamilszustak.read.common.util.getSystemService
 
 fun View.showKeyboard() {
-    requestFocus()
-    val inputMethodManager = context.getSystemService<InputMethodManager>()
-    inputMethodManager?.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
-
+    post {
+        requestFocus()
+        val inputMethodManager = context.getSystemService<InputMethodManager>()
+        inputMethodManager?.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+    }
 }
 
 fun View.hideKeyboard() {
-    val inputMethodManager = context.getSystemService<InputMethodManager>()
-    inputMethodManager?.hideSoftInputFromWindow(windowToken, 0)
+    post {
+        val inputMethodManager = context.getSystemService<InputMethodManager>()
+        inputMethodManager?.hideSoftInputFromWindow(windowToken, 0)
+    }
 }
 
 inline fun View.setVisible() {

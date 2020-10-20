@@ -3,6 +3,7 @@ package pl.kamilszustak.read.ui.main.search
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import com.mikepenz.fastadapter.binding.BindingViewHolder
 import com.mikepenz.fastadapter.binding.ModelAbstractBindingItem
 import pl.kamilszustak.read.model.domain.Volume
 import pl.kamilszustak.read.ui.base.util.load
@@ -19,6 +20,9 @@ class VolumeItem(volume: Volume) : ModelAbstractBindingItem<Volume, ItemVolumeBi
 
     override fun createBinding(inflater: LayoutInflater, parent: ViewGroup?): ItemVolumeBinding =
         ItemVolumeBinding.inflate(inflater, parent, false)
+
+    override fun getViewHolder(viewBinding: ItemVolumeBinding): BindingViewHolder<ItemVolumeBinding> =
+        ViewHolder(viewBinding)
 
     override fun bindView(binding: ItemVolumeBinding, payloads: List<Any>) {
         with(binding) {
@@ -47,4 +51,6 @@ class VolumeItem(volume: Volume) : ModelAbstractBindingItem<Volume, ItemVolumeBi
             }
         }
     }
+
+    class ViewHolder(binding: ItemVolumeBinding) : BindingViewHolder<ItemVolumeBinding>(binding)
 }

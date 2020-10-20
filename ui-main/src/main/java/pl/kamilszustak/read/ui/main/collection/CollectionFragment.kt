@@ -152,7 +152,9 @@ class CollectionFragment @Inject constructor(
 
     private inner class Navigator {
         fun navigateToBookEditFragment(collectionBookId: CollectionBookId? = null) {
-            val direction = CollectionFragmentDirections.actionCollectionFragmentToBookEditFragment(collectionBookId?.value)
+            val direction = CollectionFragmentDirections.actionCollectionFragmentToNavigationBookEdit(
+                collectionBookId = collectionBookId?.value
+            )
             navigate(direction)
         }
 

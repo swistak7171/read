@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     app:contentPadding="@dimen/default_padding"
     app:cardUseCompatPadding="true"
-    app:cardCornerRadius="@dimen/default_radius">
+    app:cardCornerRadius="@dimen/default_radius"
+    app:cardElevation="@dimen/default_elevation">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -26,9 +27,10 @@
             tools:text="@tools:sample/lorem"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             app:layout_constraintStart_toEndOf="@id/coverImageView"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/addToCollectionButton"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="@dimen/default_half_margin" />
+            android:layout_marginStart="@dimen/default_half_margin"
+            android:layout_marginEnd="@dimen/default_half_margin" />
 
         <TextView
             android:layout_width="0dp"
@@ -37,7 +39,17 @@
             tools:text="@tools:sample/lorem"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_constraintStart_toStartOf="@id/titleTextView"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/titleTextView"
             app:layout_constraintTop_toBottomOf="@id/titleTextView" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addToCollectionButton"
+            android:src="@drawable/icon_plus"
+            android:background="?selectableItemBackgroundBorderless"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

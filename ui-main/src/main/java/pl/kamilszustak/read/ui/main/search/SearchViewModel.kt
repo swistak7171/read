@@ -26,7 +26,25 @@ class SearchViewModel @Inject constructor(
 
     override fun handleEvent(event: SearchEvent) {
         when (event) {
-            SearchEvent.OnSearchButtonClicked -> handleSearchButtonClick()
+            SearchEvent.OnResumed -> {
+                _action.value = SearchAction.ShowKeyboard
+            }
+
+            SearchEvent.OnPaused -> {
+                _action.value = SearchAction.HideKeyboard
+            }
+
+            SearchEvent.OnScanButtonClicked -> {
+                _action.value = SearchAction.NavigateToScannerFragment
+            }
+
+            SearchEvent.OnSearchButtonClicked -> {
+                handleSearchButtonClick()
+            }
+
+            is SearchEvent.OnAddToCollectionButtonClicked -> {
+                _action.value = SearchAction.NavigateToBookEditFragment(event.volume)
+            }
         }
     }
 
