@@ -1,18 +1,9 @@
-include(
-    ":app",
-    ":common",
-    ":data",
-    ":data-access",
-    ":domain",
-    ":domain-access",
-    ":network",
-    ":model-common",
-    ":model-domain",
-    ":model-data",
-    ":model-network",
-    ":model-mapper",
-    ":ui-base",
-    ":ui-authentication",
-    ":ui-main"
-)
 rootProject.name = "read"
+rootDir.walk()
+    .maxDepth(1)
+    .filter { file ->
+        file.name != "buildSrc" && file.isDirectory && file("${file.absolutePath}/build.gradle.kts").exists()
+    }
+    .forEach { file ->
+        include(":${file.name}")
+    }
