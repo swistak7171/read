@@ -14,7 +14,8 @@
         android:layout_height="wrap_content"
         app:contentPadding="@dimen/default_padding"
         app:cardUseCompatPadding="true"
-        app:cardCornerRadius="@dimen/default_radius">
+        app:cardCornerRadius="@dimen/default_radius"
+        app:cardElevation="@dimen/default_elevation">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

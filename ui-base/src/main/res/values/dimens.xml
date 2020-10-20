@@ -8,4 +8,7 @@
 
     <dimen name="default_radius">12dp</dimen>
     <dimen name="default_half_radius">6dp</dimen>
+
+    <dimen name="default_elevation">4dp</dimen>
+    <dimen name="default_half_elevation">2dp</dimen>
 </resources>
