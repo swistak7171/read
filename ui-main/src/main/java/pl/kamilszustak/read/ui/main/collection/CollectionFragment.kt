@@ -3,6 +3,7 @@ package pl.kamilszustak.read.ui.main.collection
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.afollestad.materialdialogs.list.listItems
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ModelAdapter
 import com.mikepenz.fastadapter.listeners.ClickEventHook
@@ -104,6 +105,19 @@ class CollectionFragment @Inject constructor(
     override fun observeViewModel() {
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when (state) {
+                is CollectionState.ShowAddBookDialog -> {
+                    dialog {
+                        listItems(
+                            res = state.itemsResourceId,
+                            waitForPositiveButton = false,
+                            selection = { dialog, index, text ->
+                                val event = CollectionEvent.OnDialogOptionSelected(index)
+                                viewModel.dispatchEvent(event)
+                            }
+                        )
+                    }
+                }
+
                 is CollectionState.NavigateToBookEditFragment -> {
                     navigator.navigateToBookEditFragment(state.collectionBookId)
                 }

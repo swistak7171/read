@@ -50,6 +50,11 @@
     <string name="book_deleted">Book deleted</string>
     <string name="deleting_book_error_message">An error occurred while deleting the book</string>
 
+    <string-array name="add_book_dialog_options">
+        <item>Add manually</item>
+        <item>Search in Google Books</item>
+    </string-array>
+
     <!-- ReadingProgressDialogFragment -->
     <string name="update_reading_progress">Update reading progress</string>
     <string name="invalid_read_pages_number_error_message">Invalid read pages number</string>

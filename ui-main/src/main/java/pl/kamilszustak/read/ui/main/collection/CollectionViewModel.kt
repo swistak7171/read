@@ -23,7 +23,14 @@ class CollectionViewModel @Inject constructor(
     override fun handleEvent(event: CollectionEvent) {
         when (event) {
             CollectionEvent.OnAddBookButtonClicked -> {
-                _state.value = CollectionState.NavigateToBookEditFragment()
+                _state.value = CollectionState.ShowAddBookDialog(R.array.add_book_dialog_options)
+            }
+
+            is CollectionEvent.OnDialogOptionSelected -> {
+                when (event.index) {
+                    0 -> _state.value = CollectionState.NavigateToBookEditFragment()
+                    1 -> _state.value = CollectionState.NavigateToSearchFragment
+                }
             }
 
             is CollectionEvent.OnBookLongClicked -> {

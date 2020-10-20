@@ -45,6 +45,11 @@
     <string name="book_deleted">Książka została usunięta</string>
     <string name="deleting_book_error_message">Wystąpił błąd podczas usuwania książki</string>
 
+    <string-array name="add_book_dialog_options">
+        <item>Dodaj ręcznie</item>
+        <item>Szukaj w Google Books</item>
+    </string-array>
+
     <!-- ScannerFragment -->
     <string name="camera_permission_denied">Dostęp do kamery został odrzucony</string>
     <string name="camera_permission_permanently_denied">Dostęp do kamery został odrzucony na stałe</string>
