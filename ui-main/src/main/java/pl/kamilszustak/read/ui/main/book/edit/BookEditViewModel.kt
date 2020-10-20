@@ -13,6 +13,8 @@ import pl.kamilszustak.read.domain.access.usecase.collection.AddCollectionBookUs
 import pl.kamilszustak.read.domain.access.usecase.collection.EditCollectionBookUseCase
 import pl.kamilszustak.read.domain.access.usecase.collection.GetCollectionBookUseCase
 import pl.kamilszustak.read.model.domain.CollectionBook
+import pl.kamilszustak.read.model.domain.IsbnType
+import pl.kamilszustak.read.model.domain.Volume
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
 import java.util.*
@@ -32,10 +34,11 @@ class BookEditViewModel(
 
     val bookTitle: UniqueLiveData<String> = UniqueLiveData()
     val bookAuthor: UniqueLiveData<String> = UniqueLiveData()
-    val numberOfBookPages: UniqueLiveData<Int> = UniqueLiveData()
+    val bookPagesNumber: UniqueLiveData<Int> = UniqueLiveData()
     val bookReadPages: UniqueLiveData<Int> = UniqueLiveData(0)
     val bookIsbn: UniqueLiveData<String?> = UniqueLiveData()
     val bookDescription: UniqueLiveData<String?> = UniqueLiveData()
+    private var coverImageUrl: String? = null
 
     private val _bookPublicationDate: UniqueLiveData<Date?> = UniqueLiveData()
     val bookPublicationDate: LiveData<String?>
@@ -50,13 +53,19 @@ class BookEditViewModel(
             R.string.add_book
         }
 
-        if (inEditMode) {
-            viewModelScope.launch(Dispatchers.Main) {
-                val id = CollectionBookId(arguments.collectionBookId ?: return@launch)
-                val book = getCollectionBook(id)
-                if (book != null) {
-                    assignBookDetails(book)
+        when {
+            inEditMode -> {
+                viewModelScope.launch(Dispatchers.Main) {
+                    val id = CollectionBookId(arguments.collectionBookId ?: return@launch)
+                    val book = getCollectionBook(id)
+                    if (book != null) {
+                        assignBookDetails(book)
+                    }
                 }
+            }
+
+            arguments.volume != null -> {
+                assignVolumeDetails(arguments.volume)
             }
         }
     }
@@ -77,10 +86,25 @@ class BookEditViewModel(
         }
     }
 
+    private fun assignVolumeDetails(volume: Volume) {
+        var isbn = volume.isbns?.find { it.type == IsbnType.ISBN_13 }
+        if (isbn == null) {
+            isbn = volume.isbns?.firstOrNull()
+        }
+
+        bookTitle.value = volume.title
+        bookAuthor.value = volume.author
+        bookPagesNumber.value = volume.pagesNumber
+        bookIsbn.value = isbn?.value
+        _bookPublicationDate.value = volume.publicationDate
+        bookDescription.value = volume.description
+        coverImageUrl = volume.coverImageUrl
+    }
+
     private fun assignBookDetails(book: CollectionBook) {
         bookTitle.value = book.title
         bookAuthor.value = book.author
-        numberOfBookPages.value = book.pagesNumber
+        bookPagesNumber.value = book.pagesNumber
         bookReadPages.value = book.readPages
         bookIsbn.value = book.isbn
         _bookPublicationDate.value = book.publicationDate
@@ -90,7 +114,7 @@ class BookEditViewModel(
     private fun handleSaveButtonClick() {
         val title = bookTitle.value
         val author = bookAuthor.value
-        val pages = numberOfBookPages.value
+        val pages = bookPagesNumber.value
         val readPages = bookReadPages.value ?: 0
         val isbn = bookIsbn.value
         val date = _bookPublicationDate.value
@@ -132,13 +156,15 @@ class BookEditViewModel(
                 }
             } else {
                 val collectionBook = CollectionBook(
+                    volumeId = arguments.volume?.id,
                     title = title,
                     author = author,
                     pagesNumber = pages,
                     readPages = readPages,
                     publicationDate = date,
                     isbn = isbn,
-                    description = description
+                    description = description,
+                    coverImageUrl = coverImageUrl
                 )
 
                 addCollectionBook(collectionBook)
