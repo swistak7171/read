@@ -14,10 +14,10 @@ import timber.log.Timber
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
-inline fun <reified T> valueEventFlow(
+inline fun <reified E> valueEventFlow(
     query: Query,
-    noinline onDataChange: (snapshot: DataSnapshot) -> T?
-) = callbackFlow<T> {
+    noinline onDataChange: (snapshot: DataSnapshot) -> E?
+) = callbackFlow<E> {
         val listener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 try {
@@ -42,10 +42,10 @@ inline fun <reified T> valueEventFlow(
         }
     }
 
-inline fun <reified T : Entity> entityFlow(query: Query): Flow<T> = valueEventFlow<T>(
+inline fun <reified E : Entity> entityFlow(query: Query): Flow<E> = valueEventFlow<E>(
     query = query,
     onDataChange = { snapshot ->
-        val value = snapshot.getValue<T>()
+        val value = snapshot.getValue<E>()
         val key = snapshot.key
         if (key != null) {
             value?.id = key
@@ -55,16 +55,21 @@ inline fun <reified T : Entity> entityFlow(query: Query): Flow<T> = valueEventFl
     }
 )
 
-inline fun <reified T : Entity> entityFlow(crossinline block: () -> Query): Flow<T> =
+inline fun <reified E : Entity> entityFlow(crossinline block: () -> Query): Flow<E> =
     entityFlow(block())
 
 @OptIn(ExperimentalStdlibApi::class)
-inline fun <reified T : Entity> entityListFlow(query: Query): Flow<List<T>> = valueEventFlow(
+inline fun <reified E : Entity> entityListFlow(query: Query): Flow<List<E>> = valueEventFlow(
     query = query,
     onDataChange = { snapshot ->
-        buildList<T> {
+        buildList<E> {
             snapshot.children.forEach { child ->
-                val value = child?.getValue<T>()
+                val value = try {
+                    child?.getValue<E>() as E
+                } catch (throwable: Throwable) {
+                    Timber.e("BLAD: ${throwable.message}")
+                    null
+                }
                 val key = child?.key
 
                 if (value != null && key != null) {
@@ -76,14 +81,14 @@ inline fun <reified T : Entity> entityListFlow(query: Query): Flow<List<T>> = va
     }
 )
 
-inline fun <reified T : Entity> entityListFlow(crossinline block: () -> Query): Flow<List<T>> =
+inline fun <reified E : Entity> entityListFlow(crossinline block: () -> Query): Flow<List<E>> =
     entityListFlow(block())
 
-suspend inline fun <reified T : Entity> readEntity(query: Query): T? = suspendCancellableCoroutine { continuation ->
+suspend inline fun <reified E : Entity> readEntity(query: Query): E? = suspendCancellableCoroutine { continuation ->
     val listener = object : ValueEventListener {
         override fun onDataChange(snapshot: DataSnapshot) {
             try {
-                val value = snapshot.getValue<T>()
+                val value = snapshot.getValue<E>()
                 val key = snapshot.key
                 if (key != null) {
                     value?.id = key
@@ -106,15 +111,15 @@ suspend inline fun <reified T : Entity> readEntity(query: Query): T? = suspendCa
     }
 }
 
-suspend inline fun <reified T : Entity> readEntity(crossinline block: () -> Query): T? =
+suspend inline fun <reified E : Entity> readEntity(crossinline block: () -> Query): E? =
     readEntity(block())
 
 @OptIn(ExperimentalStdlibApi::class)
-suspend inline fun <reified T : Entity> readEntityList(query: Query): List<T> = suspendCancellableCoroutine { continuation ->
+suspend inline fun <reified E : Entity> readEntityList(query: Query): List<E> = suspendCancellableCoroutine { continuation ->
     val listener = object : ValueEventListener {
         override fun onDataChange(snapshot: DataSnapshot) {
             try {
-                val values = buildEntityList<T>(snapshot)
+                val values = buildEntityList<E>(snapshot)
                 continuation.resume(values)
             } catch (throwable: Throwable) {
                 continuation.resumeWithException(throwable)
@@ -132,14 +137,14 @@ suspend inline fun <reified T : Entity> readEntityList(query: Query): List<T> = 
     }
 }
 
-suspend inline fun <reified T : Entity> readEntityList(crossinline block: () -> Query): List<T> =
+suspend inline fun <reified E : Entity> readEntityList(crossinline block: () -> Query): List<E> =
     readEntityList(block())
 
 @OptIn(ExperimentalStdlibApi::class)
-inline fun <reified T : Entity> buildEntityList(snapshot: DataSnapshot): List<T> =
+inline fun <reified E : Entity> buildEntityList(snapshot: DataSnapshot): List<E> =
     buildList {
         snapshot.children.forEach { child ->
-            val value = child?.getValue<T>()
+            val value = child?.getValue<E>()
             val key = child?.key
 
             if (value != null && key != null) {
