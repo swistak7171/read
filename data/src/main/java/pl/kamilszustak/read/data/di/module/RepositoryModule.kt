@@ -2,14 +2,8 @@ package pl.kamilszustak.read.data.di.module
 
 import dagger.Binds
 import dagger.Module
-import pl.kamilszustak.read.data.access.repository.BookRepository
-import pl.kamilszustak.read.data.access.repository.CountryRepository
-import pl.kamilszustak.read.data.access.repository.QuoteRepository
-import pl.kamilszustak.read.data.access.repository.VolumeRepository
-import pl.kamilszustak.read.data.repository.BookRepositoryImpl
-import pl.kamilszustak.read.data.repository.CountryRepositoryImpl
-import pl.kamilszustak.read.data.repository.QuoteRepositoryImpl
-import pl.kamilszustak.read.data.repository.VolumeRepositoryImpl
+import pl.kamilszustak.read.data.access.repository.*
+import pl.kamilszustak.read.data.repository.*
 
 @Module
 interface RepositoryModule {
@@ -24,4 +18,7 @@ interface RepositoryModule {
 
     @Binds
     fun bindVolumeRepository(repositoryImpl: VolumeRepositoryImpl): VolumeRepository
+
+    @Binds
+    fun bindReadingLogRepository(repositoryImpl: ReadingLogRepositoryImpl): ReadingLogRepository
 }

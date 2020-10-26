@@ -4,12 +4,12 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.tasks.await
 import pl.kamilszustak.read.common.util.withIOContext
 import pl.kamilszustak.read.data.access.repository.QuoteRepository
-import pl.kamilszustak.read.model.data.DatabaseCollection
 import pl.kamilszustak.read.data.di.qualifier.QuoteCollection
 import pl.kamilszustak.read.data.util.entityListFlow
 import pl.kamilszustak.read.data.util.readEntity
 import pl.kamilszustak.read.data.util.readEntityList
 import pl.kamilszustak.read.domain.access.usecase.user.GetUserUseCase
+import pl.kamilszustak.read.model.data.DatabaseCollection
 import pl.kamilszustak.read.model.data.QuoteEntity
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -46,8 +46,8 @@ class QuoteRepositoryImpl @Inject constructor(
         }
     }.map { Unit }
 
-    override suspend fun getAll(): Result<List<QuoteEntity>> = withIOContext {
-        runCatching { readEntityList(collection.query) }
+    override suspend fun getAll(): List<QuoteEntity> = withIOContext {
+        readEntityList(collection.query)
     }
     override fun observeAll(): Flow<List<QuoteEntity>> = entityListFlow(collection.query)
 

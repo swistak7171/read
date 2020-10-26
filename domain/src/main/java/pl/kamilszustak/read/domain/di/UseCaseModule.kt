@@ -59,7 +59,7 @@ interface UseCaseModule {
     fun bindDeleteQuoteUseCase(useCaseImpl: DeleteQuoteUseCaseImpl): DeleteQuoteUseCase
 
     @Binds
-    fun bindGetAllQuotesUseCase(useCaseImpl: GetAllQuotesUseCaseImpl): GetAllQuotesUseCase
+    fun bindObserveAllQuotesUseCase(useCaseImpl: ObserveAllQuotesUseCaseImpl): ObserveAllQuotesUseCase
 
     @Binds
     fun bindGetQuoteUseCase(useCaseImpl: GetQuoteUseCaseImpl): GetQuoteUseCase
