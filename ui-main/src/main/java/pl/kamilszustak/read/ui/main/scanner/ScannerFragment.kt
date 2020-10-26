@@ -1,9 +1,6 @@
 package pl.kamilszustak.read.ui.main.scanner
 
-import androidx.camera.core.Camera
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.Preview
+import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -31,10 +28,33 @@ class ScannerFragment @Inject constructor(
 
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
     private lateinit var camera: Camera
+    private lateinit var imageCapture: ImageCapture
 
     override fun onResume() {
         super.onResume()
         viewModel.dispatchEvent(ScannerEvent.OnResumed)
+    }
+
+    override fun setListeners() {
+        binding.scannerImageView.setOnClickListener { view ->
+            view.isEnabled = false
+            imageCapture.takePicture(Executors.newSingleThreadExecutor(), object : ImageCapture.OnImageCapturedCallback() {
+                override fun onCaptureSuccess(image: ImageProxy) {
+                    ContextCompat.getMainExecutor(context)
+                        .execute { view.isEnabled = true }
+
+                    val event = ScannerEvent.OnImageCaptured(image)
+                    viewModel.dispatchEvent(event)
+                }
+
+                override fun onError(exception: ImageCaptureException) {
+                    ContextCompat.getMainExecutor(context)
+                        .execute { view.isEnabled = true }
+
+                    Timber.e(exception)
+                }
+            })
+        }
     }
 
     override fun observeViewModel() {
@@ -61,7 +81,6 @@ class ScannerFragment @Inject constructor(
     }
 
     private fun checkCameraPermission() {
-        Timber.i("check permission")
         lifecycleScope.launchWhenResumed {
             askForPermissions(Permission.CAMERA) { result ->
                 val event = ScannerEvent.OnCameraPermissionResult(result)
@@ -82,22 +101,16 @@ class ScannerFragment @Inject constructor(
         val preview = Preview.Builder()
             .build()
 
+        imageCapture = ImageCapture.Builder()
+            .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
+            .build()
+
         val cameraSelector = CameraSelector.Builder()
             .requireLensFacing(CameraSelector.LENS_FACING_BACK)
             .build()
 
-        val imageAnalysis = ImageAnalysis.Builder()
-            .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-            .build()
-
-        val executor = Executors.newSingleThreadExecutor()
-        imageAnalysis.setAnalyzer(executor) { image ->
-            val event = ScannerEvent.OnImageCaptured(image)
-            viewModel.dispatchEvent(event)
-        }
-
         cameraProvider.unbindAll()
-        camera = cameraProvider.bindToLifecycle(this, cameraSelector, imageAnalysis, preview)
+        camera = cameraProvider.bindToLifecycle(this, cameraSelector, imageCapture, preview)
         preview.setSurfaceProvider(binding.previewView.surfaceProvider)
     }
 

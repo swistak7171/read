@@ -52,33 +52,31 @@ class ScannerViewModel @Inject constructor(
         }
 
         viewModelScope.launch(Dispatchers.Main) {
+            _isLoading.value = true
+            barcodeDetected.set(true)
             readBarcode(event.imageProxy)
                 .onSuccess { value ->
                     if (value != null) {
-                        barcodeDetected.set(true)
-                        _isLoading.value = true
                         getVolumeUseCase(value)
                             .onSuccess { volume ->
                                 if (volume != null) {
                                     _action.value = ScannerAction.NavigateToBookEditFragment(volume)
+                                } else {
+                                    barcodeDetected.set(false)
                                 }
-
-                                barcodeDetected.set(false)
-                                event.imageProxy.close()
                             }
                             .onFailure {
-                                event.imageProxy.close()
                                 setScanningError(it)
                             }
-                        _isLoading.value = false
-                    } else {
-                        event.imageProxy.close()
                     }
                 }
                 .onFailure {
                     event.imageProxy.close()
                     setScanningError(it)
                 }
+
+            _isLoading.value = false
+            barcodeDetected.set(false)
         }
     }
 
