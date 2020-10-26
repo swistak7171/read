@@ -36,7 +36,7 @@ class ScannerFragment @Inject constructor(
     }
 
     override fun setListeners() {
-        binding.scannerImageView.setOnClickListener { view ->
+        binding.scanButton.setOnClickListener { view ->
             view.isEnabled = false
             val executor = Executors.newSingleThreadExecutor()
             imageCapture.takePicture(executor, object : ImageCapture.OnImageCapturedCallback() {
