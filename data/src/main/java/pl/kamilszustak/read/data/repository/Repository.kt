@@ -13,15 +13,15 @@ import pl.kamilszustak.read.model.data.Entity
 abstract class Repository(
     protected val collection: DatabaseCollection,
 ) {
-    protected suspend inline fun <reified E : Entity> getEntityById(id: String): E? = withIOContext {
+    protected suspend inline fun <reified T : Entity> getEntityById(id: String): T? = withIOContext {
         readEntity { collection.reference.child(id) }
     }
 
-    protected suspend inline fun <reified E : Entity> getAllEntities(): List<E> = withIOContext {
+    protected suspend inline fun <reified T : Entity> getAllEntities(): List<T> = withIOContext {
         readEntityList(collection.query)
     }
 
-    protected inline fun <reified E : Entity> observeEntityById(id: String): Flow<E> = entityFlow {
+    protected inline fun <reified T : Entity> observeEntityById(id: String): Flow<T> = entityFlow {
         collection.reference.child(id)
     }
 

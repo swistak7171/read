@@ -10,14 +10,14 @@ import javax.inject.Singleton
 
 @Singleton
 class ReadingLogRepositoryImpl @Inject constructor(
-    @ReadingLogCollection collection: DatabaseCollection,
-) : Repository(collection), ReadingLogRepository {
+    @ReadingLogCollection private val collection: DatabaseCollection,
+) : ReadingLogRepository {
 
-    override suspend fun getAll(): List<ReadingLogEntity> = getAllEntities()
+    override suspend fun getAll(): List<ReadingLogEntity> = TODO()
 
-    override suspend fun getById(id: String): ReadingLogEntity? = getEntityById(id)
+    override suspend fun getById(id: String): ReadingLogEntity? = TODO()
 
-    override fun observeAll(): Flow<List<ReadingLogEntity>> = observeAllEntities()
+    override fun observeAll(): Flow<List<ReadingLogEntity>> = TODO()
 
-    override fun observeById(id: String): Flow<ReadingLogEntity> = observeEntityById(id)
+    override fun observeById(id: String): Flow<ReadingLogEntity> = TODO()
 }
