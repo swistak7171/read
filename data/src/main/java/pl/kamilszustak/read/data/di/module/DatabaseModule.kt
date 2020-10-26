@@ -8,10 +8,12 @@ import dagger.Module
 import dagger.Provides
 import pl.kamilszustak.read.data.di.qualifier.BookCollection
 import pl.kamilszustak.read.data.di.qualifier.QuoteCollection
+import pl.kamilszustak.read.data.di.qualifier.ReadingLogCollection
 import pl.kamilszustak.read.data.di.qualifier.RootDatabaseReference
 import pl.kamilszustak.read.model.data.BookEntity
 import pl.kamilszustak.read.model.data.DatabaseCollection
 import pl.kamilszustak.read.model.data.QuoteEntity
+import pl.kamilszustak.read.model.data.ReadingLogEntity
 import javax.inject.Singleton
 
 @Module
@@ -20,7 +22,7 @@ class DatabaseModule {
         Firebase.auth.currentUser?.uid ?: throw IllegalStateException("User is not signed in")
     }
 
-    private fun getUserDatabaseCollection(
+    private fun createUserDatabaseCollection(
         databaseReference: DatabaseReference,
         collectionName: String,
         userIdProperty: String
@@ -54,11 +56,17 @@ class DatabaseModule {
     @Singleton
     @BookCollection
     fun provideBookCollection(@RootDatabaseReference reference: DatabaseReference): DatabaseCollection =
-        getUserDatabaseCollection(reference, BookEntity.COLLECTION_NAME, BookEntity.USER_ID_PROPERTY)
+        createUserDatabaseCollection(reference, BookEntity.COLLECTION_NAME, BookEntity.USER_ID_PROPERTY)
 
     @Provides
     @Singleton
     @QuoteCollection
     fun provideQuoteCollection(@RootDatabaseReference reference: DatabaseReference): DatabaseCollection =
-        getUserDatabaseCollection(reference, QuoteEntity.COLLECTION_NAME, QuoteEntity.USER_ID_PROPERTY)
+        createUserDatabaseCollection(reference, QuoteEntity.COLLECTION_NAME, QuoteEntity.USER_ID_PROPERTY)
+
+    @Provides
+    @Singleton
+    @ReadingLogCollection
+    fun provideReadingLogCollection(@RootDatabaseReference reference: DatabaseReference): DatabaseCollection =
+        createUserDatabaseCollection(reference, ReadingLogEntity.COLLECTION_NAME, ReadingLogEntity.USER_ID_PROPERTY)
 }
