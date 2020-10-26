@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.tasks.await
 import pl.kamilszustak.read.common.util.withIOContext
 import pl.kamilszustak.read.data.access.repository.BookRepository
-import pl.kamilszustak.read.data.di.DatabaseCollection
+import pl.kamilszustak.read.model.data.DatabaseCollection
 import pl.kamilszustak.read.data.di.qualifier.BookCollection
 import pl.kamilszustak.read.data.util.entityListFlow
 import pl.kamilszustak.read.data.util.readEntity

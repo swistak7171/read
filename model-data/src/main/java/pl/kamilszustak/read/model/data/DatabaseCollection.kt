@@ -1,4 +1,4 @@
-package pl.kamilszustak.read.data.di
+package pl.kamilszustak.read.model.data
 
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.Query

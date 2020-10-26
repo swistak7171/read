@@ -6,11 +6,11 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import dagger.Module
 import dagger.Provides
-import pl.kamilszustak.read.data.di.DatabaseCollection
 import pl.kamilszustak.read.data.di.qualifier.BookCollection
 import pl.kamilszustak.read.data.di.qualifier.QuoteCollection
 import pl.kamilszustak.read.data.di.qualifier.RootDatabaseReference
 import pl.kamilszustak.read.model.data.BookEntity
+import pl.kamilszustak.read.model.data.DatabaseCollection
 import pl.kamilszustak.read.model.data.QuoteEntity
 import javax.inject.Singleton
 
@@ -53,12 +53,12 @@ class DatabaseModule {
     @Provides
     @Singleton
     @BookCollection
-    fun provideBookQuery(@RootDatabaseReference reference: DatabaseReference): DatabaseCollection =
+    fun provideBookCollection(@RootDatabaseReference reference: DatabaseReference): DatabaseCollection =
         getUserDatabaseCollection(reference, BookEntity.COLLECTION_NAME, BookEntity.USER_ID_PROPERTY)
 
     @Provides
     @Singleton
     @QuoteCollection
-    fun provideQuoteQuery(@RootDatabaseReference reference: DatabaseReference): DatabaseCollection =
+    fun provideQuoteCollection(@RootDatabaseReference reference: DatabaseReference): DatabaseCollection =
         getUserDatabaseCollection(reference, QuoteEntity.COLLECTION_NAME, QuoteEntity.USER_ID_PROPERTY)
 }
