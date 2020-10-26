@@ -9,7 +9,6 @@ import pl.kamilszustak.read.domain.access.usecase.volume.GetVolumeUseCase
 import pl.kamilszustak.read.ui.base.util.PermissionState
 import pl.kamilszustak.read.ui.base.util.getStateOf
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
-import timber.log.Timber
 import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
 
@@ -18,6 +17,7 @@ class ScannerViewModel @Inject constructor(
     private val readBarcode: ReadBarcodeUseCase,
 ) : BaseViewModel<ScannerEvent, ScannerAction>() {
 
+    private var permissionState: PermissionState = PermissionState.UNKNOWN
     private val barcodeDetected: AtomicBoolean = AtomicBoolean(false)
 
     override fun handleEvent(event: ScannerEvent) {
@@ -29,17 +29,21 @@ class ScannerViewModel @Inject constructor(
     }
 
     private fun handleOnResumed() {
-        _action.value = ScannerAction.CameraPermissionAction.Unknown
+        setPermissionState(permissionState)
     }
 
-    private fun handleCameraPermissionResult(event: ScannerEvent.OnCameraPermissionResult) {
-        val action = event.result.getStateOf(Permission.CAMERA)
-        _action.value = when (action) {
+    private fun setPermissionState(state: PermissionState) {
+        _action.value = when (permissionState) {
+            PermissionState.UNKNOWN -> ScannerAction.CameraPermissionAction.Unknown
             PermissionState.GRANTED -> ScannerAction.CameraPermissionAction.Granted
             PermissionState.DENIED -> ScannerAction.CameraPermissionAction.Denied
             PermissionState.PERMANENTLY_DENIED -> ScannerAction.CameraPermissionAction.PermanentlyDenied
-            else -> null
         }
+    }
+
+    private fun handleCameraPermissionResult(event: ScannerEvent.OnCameraPermissionResult) {
+        permissionState = event.result.getStateOf(Permission.CAMERA)
+        setPermissionState(permissionState)
     }
 
     private fun handleOnImageCaptured(event: ScannerEvent.OnImageCaptured) {
@@ -52,14 +56,34 @@ class ScannerViewModel @Inject constructor(
                 .onSuccess { value ->
                     if (value != null) {
                         barcodeDetected.set(true)
-                        val result = getVolumeUseCase(value)
-                        Timber.i(result.toString())
-//                        _action.value = ScannerAction.BarcodeDetected(value)
+                        _isLoading.value = true
+                        getVolumeUseCase(value)
+                            .onSuccess { volume ->
+                                if (volume != null) {
+                                    _action.value = ScannerAction.NavigateToBookEditFragment(volume)
+                                }
+
+                                barcodeDetected.set(false)
+                                event.imageProxy.close()
+                            }
+                            .onFailure {
+                                event.imageProxy.close()
+                                setScanningError(it)
+                            }
+                        _isLoading.value = false
+                    } else {
+                        event.imageProxy.close()
                     }
                 }
-                .onFailure { throwable ->
-                    _action.value = ScannerAction.Error(throwable)
+                .onFailure {
+                    event.imageProxy.close()
+                    setScanningError(it)
                 }
         }
+    }
+
+    private fun setScanningError(throwable: Throwable) {
+        _action.value = ScannerAction.Error(throwable)
+        barcodeDetected.set(false)
     }
 }

@@ -11,21 +11,23 @@ import androidx.lifecycle.lifecycleScope
 import com.afollestad.assent.Permission
 import com.afollestad.assent.askForPermissions
 import com.google.common.util.concurrent.ListenableFuture
-import pl.kamilszustak.read.ui.base.binding.viewBinding
+import pl.kamilszustak.read.model.domain.Volume
 import pl.kamilszustak.read.ui.base.util.errorToast
+import pl.kamilszustak.read.ui.base.util.navigate
 import pl.kamilszustak.read.ui.base.util.viewModels
-import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
 import pl.kamilszustak.read.ui.main.R
+import pl.kamilszustak.read.ui.main.activity.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.databinding.FragmentScannerBinding
+import timber.log.Timber
 import java.util.concurrent.Executors
 import javax.inject.Inject
 
 class ScannerFragment @Inject constructor(
     viewModelFactory: ViewModelProvider.Factory,
-) : BaseFragment<FragmentScannerBinding, ScannerViewModel>(R.layout.fragment_scanner) {
+) : MainDataBindingFragment<FragmentScannerBinding, ScannerViewModel>(R.layout.fragment_scanner) {
 
     override val viewModel: ScannerViewModel by viewModels(viewModelFactory)
-    override val binding: FragmentScannerBinding by viewBinding(FragmentScannerBinding::bind)
+    private val navigator: Navigator = Navigator()
 
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
     private lateinit var camera: Camera
@@ -51,13 +53,15 @@ class ScannerFragment @Inject constructor(
                     errorToast(action.throwable.message ?: "")
                 }
 
-                is ScannerAction.BarcodeDetected -> {
+                is ScannerAction.NavigateToBookEditFragment -> {
+                    navigator.navigateToBookEditFragment(action.volume)
                 }
             }
         }
     }
 
     private fun checkCameraPermission() {
+        Timber.i("check permission")
         lifecycleScope.launchWhenResumed {
             askForPermissions(Permission.CAMERA) { result ->
                 val event = ScannerEvent.OnCameraPermissionResult(result)
@@ -95,5 +99,12 @@ class ScannerFragment @Inject constructor(
         cameraProvider.unbindAll()
         camera = cameraProvider.bindToLifecycle(this, cameraSelector, imageAnalysis, preview)
         preview.setSurfaceProvider(binding.previewView.surfaceProvider)
+    }
+
+    private inner class Navigator {
+        fun navigateToBookEditFragment(volume: Volume) {
+            val direction = ScannerFragmentDirections.actionScannerFragmentToNavigationBookEdit(volume = volume)
+            navigate(direction)
+        }
     }
 }

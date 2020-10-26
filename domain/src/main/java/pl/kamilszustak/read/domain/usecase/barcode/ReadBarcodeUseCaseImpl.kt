@@ -23,7 +23,6 @@ class ReadBarcodeUseCaseImpl @Inject constructor() : ReadBarcodeUseCase {
     override suspend fun invoke(input: ImageProxy): Result<String?> {
         val image = input.image
         if (image == null) {
-            input.close()
             val exception = Exception("Image is not present in ImageProxy object")
             return Result.failure(exception)
         }
@@ -33,10 +32,7 @@ class ReadBarcodeUseCaseImpl @Inject constructor() : ReadBarcodeUseCase {
 
         return withDefaultContext {
             runCatching {
-                val barcodes = scanner.process(inputImage).addOnCompleteListener {
-                    input.close()
-                }.await()
-
+                val barcodes = scanner.process(inputImage).await()
                 barcodes.firstOrNull()?.displayValue
             }
         }
