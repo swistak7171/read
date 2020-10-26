@@ -6,7 +6,7 @@
     app:startDestination="@id/bookEditFragment">
 
     <argument
-        android:name="collectionBookId"
+        android:name="bookId"
         app:argType="string"
         app:nullable="true"
         android:defaultValue="@null" />
@@ -22,7 +22,7 @@
         android:name="pl.kamilszustak.read.ui.main.book.edit.BookEditFragment"
         tools:layout="@layout/fragment_book_edit">
         <argument
-            android:name="collectionBookId"
+            android:name="bookId"
             app:argType="string"
             app:nullable="true"
             android:defaultValue="@null" />

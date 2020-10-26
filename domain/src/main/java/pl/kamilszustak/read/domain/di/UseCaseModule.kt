@@ -3,7 +3,7 @@ package pl.kamilszustak.read.domain.di
 import dagger.Binds
 import dagger.Module
 import pl.kamilszustak.read.domain.access.usecase.barcode.ReadBarcodeUseCase
-import pl.kamilszustak.read.domain.access.usecase.collection.*
+import pl.kamilszustak.read.domain.access.usecase.book.*
 import pl.kamilszustak.read.domain.access.usecase.country.GetAllCountriesUseCase
 import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryCodeUseCase
 import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryUseCase
@@ -13,7 +13,7 @@ import pl.kamilszustak.read.domain.access.usecase.user.SignOutUseCase
 import pl.kamilszustak.read.domain.access.usecase.volume.GetVolumeUseCase
 import pl.kamilszustak.read.domain.access.usecase.volume.ObserveVolumesUseCase
 import pl.kamilszustak.read.domain.usecase.barcode.ReadBarcodeUseCaseImpl
-import pl.kamilszustak.read.domain.usecase.collection.*
+import pl.kamilszustak.read.domain.usecase.book.*
 import pl.kamilszustak.read.domain.usecase.country.GetAllCountriesUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryCodeUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryUseCaseImpl
@@ -35,19 +35,19 @@ interface UseCaseModule {
     fun bindGetDefaultCountryCodeUseCase(useCaseImpl: GetDefaultCountryCodeUseCaseImpl): GetDefaultCountryCodeUseCase
 
     @Binds
-    fun bindAddCollectionBookUseCase(useCaseImpl: AddCollectionBookUseCaseImpl): AddCollectionBookUseCase
+    fun bindAddBookUseCase(useCaseImpl: AddBookUseCaseImpl): AddBookUseCase
 
     @Binds
-    fun bindGetAllCollectionBooksUseCase(useCaseImpl: GetAllCollectionBooksUseCaseImpl): GetAllCollectionBooksUseCase
+    fun bindObserveAllBooksUseCase(useCaseImpl: ObserveAllBooksUseCaseImpl): ObserveAllBooksUseCase
 
     @Binds
-    fun bindGetCollectionBookUseCase(useCaseimpl: GetCollectionBookUseCaseImpl): GetCollectionBookUseCase
+    fun bindObserveBookUseCase(useCaseimpl: ObserveBookUseCaseImpl): ObserveBookUseCase
 
     @Binds
-    fun bindEditCollectionBookUseCase(useCaseImpl: EditCollectionBookUseCaseImpl): EditCollectionBookUseCase
+    fun bindEditBookUseCase(useCaseImpl: EditBookUseCaseImpl): EditBookUseCase
 
     @Binds
-    fun bindDeleteCollectionBookUseCase(useCaseImpl: DeleteCollectionBookUseCaseImpl): DeleteCollectionBookUseCase
+    fun bindDeleteBookUseCase(useCaseImpl: DeleteBookUseCaseImpl): DeleteBookUseCase
 
     @Binds
     fun bindAddQuoteUseCase(useCaseImpl: AddQuoteUseCaseImpl): AddQuoteUseCase

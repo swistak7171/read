@@ -7,8 +7,8 @@ import com.afollestad.materialdialogs.list.listItems
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ModelAdapter
 import com.mikepenz.fastadapter.listeners.ClickEventHook
-import pl.kamilszustak.model.common.id.CollectionBookId
-import pl.kamilszustak.read.model.domain.CollectionBook
+import pl.kamilszustak.model.common.id.BookId
+import pl.kamilszustak.read.model.domain.Book
 import pl.kamilszustak.read.ui.base.binding.viewBinding
 import pl.kamilszustak.read.ui.base.util.*
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
@@ -27,8 +27,8 @@ class CollectionFragment @Inject constructor(
     private val mainViewModel: MainViewModel by activityViewModels(viewModelFactory)
     override val binding: FragmentCollectionBinding by viewBinding(FragmentCollectionBinding::bind)
     private val navigator: Navigator = Navigator()
-    private val modelAdapter: ModelAdapter<CollectionBook, CollectionBookItem> by lazy {
-        ModelAdapter { CollectionBookItem(it) }
+    private val modelAdapter: ModelAdapter<Book, BookItem> by lazy {
+        ModelAdapter { BookItem(it) }
     }
 
     override fun initializeRecyclerView() {
@@ -39,9 +39,9 @@ class CollectionFragment @Inject constructor(
                 true
             }
 
-            addEventHook(object : ClickEventHook<CollectionBookItem>() {
+            addEventHook(object : ClickEventHook<BookItem>() {
                 override fun onBind(viewHolder: RecyclerView.ViewHolder): View? {
-                    return if (viewHolder is CollectionBookItem.ViewHolder) {
+                    return if (viewHolder is BookItem.ViewHolder) {
                         viewHolder.binding.menuButton
                     } else {
                         null
@@ -51,8 +51,8 @@ class CollectionFragment @Inject constructor(
                 override fun onClick(
                     v: View,
                     position: Int,
-                    fastAdapter: FastAdapter<CollectionBookItem>,
-                    item: CollectionBookItem
+                    fastAdapter: FastAdapter<BookItem>,
+                    item: BookItem
                 ) {
                     popupMenu(v, R.menu.popup_menu_collection_book_item) {
                         setForceShowIcon(true)
@@ -123,11 +123,11 @@ class CollectionFragment @Inject constructor(
                 }
 
                 is CollectionAction.NavigateToBookEditFragment -> {
-                    navigator.navigateToBookEditFragment(action.collectionBookId)
+                    navigator.navigateToBookEditFragment(action.bookId)
                 }
 
                 is CollectionAction.NavigateToReadingProgressDialogFragment -> {
-                    navigator.navigateToReadingProgressDialogFragment(action.collectionBookId)
+                    navigator.navigateToReadingProgressDialogFragment(action.bookId)
                 }
 
                 CollectionAction.NavigateToSearchFragment -> {
@@ -145,21 +145,21 @@ class CollectionFragment @Inject constructor(
             }
         }
 
-        viewModel.collectionBooks.observe(viewLifecycleOwner) { books ->
+        viewModel.books.observe(viewLifecycleOwner) { books ->
             modelAdapter.updateModels(books)
         }
     }
 
     private inner class Navigator {
-        fun navigateToBookEditFragment(collectionBookId: CollectionBookId? = null) {
+        fun navigateToBookEditFragment(bookId: BookId? = null) {
             val direction = CollectionFragmentDirections.actionCollectionFragmentToNavigationBookEdit(
-                collectionBookId = collectionBookId?.value
+                bookId = bookId?.value
             )
             navigate(direction)
         }
 
-        fun navigateToReadingProgressDialogFragment(collectionBookId: CollectionBookId) {
-            val direction = CollectionFragmentDirections.actionCollectionFragmentToReadingProgressDialogFragment(collectionBookId.value)
+        fun navigateToReadingProgressDialogFragment(bookId: BookId) {
+            val direction = CollectionFragmentDirections.actionCollectionFragmentToReadingProgressDialogFragment(bookId.value)
             navigate(direction)
         }
     }

@@ -1,19 +1,19 @@
 package pl.kamilszustak.read.model.mapper.book
 
-import pl.kamilszustak.model.common.id.CollectionBookId
+import pl.kamilszustak.model.common.id.BookId
 import pl.kamilszustak.model.common.id.VolumeId
-import pl.kamilszustak.read.model.data.CollectionBookEntity
-import pl.kamilszustak.read.model.domain.CollectionBook
+import pl.kamilszustak.read.model.data.BookEntity
+import pl.kamilszustak.read.model.domain.Book
 import pl.kamilszustak.read.model.mapper.Mapper
 import javax.inject.Inject
 
-class CollectionBookEntityMapper @Inject constructor() : Mapper<CollectionBookEntity, CollectionBook>() {
-    override fun map(model: CollectionBookEntity): CollectionBook {
+class BookEntityMapper @Inject constructor() : Mapper<BookEntity, Book>() {
+    override fun map(model: BookEntity): Book {
         val entityVolumeId = model.volumeId
         val volumeId = if (entityVolumeId != null) VolumeId(entityVolumeId) else null
 
-        return CollectionBook(
-            id = CollectionBookId(model.id),
+        return Book(
+            id = BookId(model.id),
             creationDate = model.creationDate,
             modificationDate = model.modificationDate,
             volumeId = volumeId,

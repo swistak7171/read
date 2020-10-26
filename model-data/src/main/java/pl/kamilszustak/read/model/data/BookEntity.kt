@@ -3,7 +3,7 @@ package pl.kamilszustak.read.model.data
 import com.google.firebase.database.PropertyName
 import java.util.*
 
-data class CollectionBookEntity(
+data class BookEntity(
     @get:PropertyName(VOLUME_ID_PROPERTY)
     @set:PropertyName(VOLUME_ID_PROPERTY)
     var volumeId: String? = null,
@@ -46,8 +46,8 @@ data class CollectionBookEntity(
 ) : Entity() {
 
     companion object {
+        const val COLLECTION_NAME: String = "books"
         const val VOLUME_ID_PROPERTY: String = "volume_id"
-        const val TABLE_NAME: String = "collection_books"
         const val TITLE_PROPERTY: String = "title"
         const val AUTHOR_PROPERTY: String = "author"
         const val NUMBER_OF_PAGES_PROPERTY: String = "number_of_pages"

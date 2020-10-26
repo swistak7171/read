@@ -21,7 +21,7 @@
             app:popEnterAnim="@anim/zoom_in_pop_enter"
             app:popExitAnim="@anim/zoom_out_pop_exit">
             <argument
-                android:name="collectionBookId"
+                android:name="bookId"
                 android:defaultValue="@null"
                 app:argType="string"
                 app:nullable="true" />
@@ -38,7 +38,7 @@
         android:name="pl.kamilszustak.read.ui.main.book.progress.ReadingProgressDialogFragment"
         tools:layout="@layout/dialog_fragment_reading_progress">
         <argument
-            android:name="collectionBookId"
+            android:name="bookId"
             app:argType="string" />
     </dialog>
     <include app:graph="@navigation/navigation_book_edit" />

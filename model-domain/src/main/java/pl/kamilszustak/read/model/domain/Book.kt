@@ -1,14 +1,14 @@
 package pl.kamilszustak.read.model.domain
 
 import kotlinx.android.parcel.Parcelize
-import pl.kamilszustak.model.common.id.CollectionBookId
+import pl.kamilszustak.model.common.id.BookId
 import pl.kamilszustak.model.common.id.VolumeId
 import java.util.*
 import kotlin.math.roundToInt
 
 @Parcelize
-data class CollectionBook(
-    override val id: CollectionBookId = CollectionBookId(),
+data class Book(
+    override val id: BookId = BookId(),
     override val creationDate: Date = Date(),
     override val modificationDate: Date = Date(),
     val volumeId: VolumeId? = null,

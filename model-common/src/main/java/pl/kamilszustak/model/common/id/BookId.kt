@@ -1,5 +1,5 @@
 package pl.kamilszustak.model.common.id
 
-inline class CollectionBookId(
+inline class BookId(
     override val value: String = "",
 ) : ModelId
