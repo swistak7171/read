@@ -7,6 +7,7 @@ import pl.kamilszustak.read.domain.access.usecase.book.EditBookUseCase
 import pl.kamilszustak.read.domain.access.usecase.book.ObserveBookUseCase
 import pl.kamilszustak.read.model.domain.Book
 import pl.kamilszustak.read.model.mapper.book.BookMapper
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -25,7 +26,10 @@ class EditBookUseCaseImpl @Inject constructor(
 
         return runNotNull(book) {
             val edited = edit(it)
-            val mapped = mapper.map(edited)
+            val mapped = mapper.map(edited).apply {
+                modificationDate = Date()
+            }
+
             repository.edit(mapped)
         }
     }
