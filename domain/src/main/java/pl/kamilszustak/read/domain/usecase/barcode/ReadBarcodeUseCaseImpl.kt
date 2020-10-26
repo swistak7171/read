@@ -9,20 +9,19 @@ import com.google.mlkit.vision.common.InputImage
 import kotlinx.coroutines.tasks.await
 import pl.kamilszustak.read.common.util.withDefaultContext
 import pl.kamilszustak.read.domain.access.usecase.barcode.ReadBarcodeUseCase
+import timber.log.Timber
 import javax.inject.Inject
 
 class ReadBarcodeUseCaseImpl @Inject constructor() : ReadBarcodeUseCase {
-    private val scannerOptions: BarcodeScannerOptions by lazy {
-        BarcodeScannerOptions.Builder()
-            .setBarcodeFormats(Barcode.EAN_13)
-            .build()
-    }
-
     private val scanner: BarcodeScanner by lazy {
-        BarcodeScanning.getClient(scannerOptions)
+        val options = BarcodeScannerOptions.Builder()
+            .setBarcodeFormats(Barcode.ISBN, Barcode.EAN_13)
+            .build()
+
+        BarcodeScanning.getClient(options)
     }
 
-    override suspend fun invoke(input: ImageProxy): Result<String> {
+    override suspend fun invoke(input: ImageProxy): Result<String?> {
         val image = input.image
         if (image == null) {
             input.close()
@@ -35,13 +34,11 @@ class ReadBarcodeUseCaseImpl @Inject constructor() : ReadBarcodeUseCase {
 
         return withDefaultContext {
             runCatching {
-                val barcodes = scanner.process(inputImage).await()
-                input.close()
-                if (barcodes.isNullOrEmpty()) {
-                    throw Exception("Error occurred during image processing")
-                } else {
-                    barcodes.firstOrNull()?.displayValue ?: throw Exception("No barcodes detected")
-                }
+                val barcodes = scanner.process(inputImage).addOnCompleteListener {
+                    input.close()
+                }.await()
+
+                barcodes.firstOrNull()?.displayValue
             }
         }
     }

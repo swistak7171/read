@@ -46,13 +46,14 @@ class ScannerViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.Main) {
             readBarcode(event.imageProxy)
                 .onSuccess { value ->
-                    _action.value = ScannerAction.BarcodeDetected(value)
+                    if (value != null) {
+                        barcodeDetected.set(true)
+                        _action.value = ScannerAction.BarcodeDetected(value)
+                    }
                 }
                 .onFailure { throwable ->
                     _action.value = ScannerAction.Error(throwable)
                 }
-
-            barcodeDetected.set(true)
         }
     }
 }

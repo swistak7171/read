@@ -17,7 +17,6 @@ import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.FragmentScannerBinding
-import timber.log.Timber
 import java.util.concurrent.Executors
 import javax.inject.Inject
 
@@ -53,7 +52,6 @@ class ScannerFragment @Inject constructor(
                 }
 
                 is ScannerAction.BarcodeDetected -> {
-                    Timber.i(action.value)
                 }
             }
         }
