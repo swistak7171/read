@@ -5,14 +5,14 @@ import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import pl.kamilszustak.model.common.id.CollectionBookId
+import pl.kamilszustak.model.common.id.BookId
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.domain.access.DateFormats
-import pl.kamilszustak.read.domain.access.usecase.collection.AddCollectionBookUseCase
-import pl.kamilszustak.read.domain.access.usecase.collection.EditCollectionBookUseCase
-import pl.kamilszustak.read.domain.access.usecase.collection.GetCollectionBookUseCase
-import pl.kamilszustak.read.model.domain.CollectionBook
+import pl.kamilszustak.read.domain.access.usecase.book.AddBookUseCase
+import pl.kamilszustak.read.domain.access.usecase.book.EditBookUseCase
+import pl.kamilszustak.read.domain.access.usecase.book.ObserveBookUseCase
+import pl.kamilszustak.read.model.domain.Book
 import pl.kamilszustak.read.model.domain.IsbnType
 import pl.kamilszustak.read.model.domain.Volume
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
@@ -21,12 +21,12 @@ import java.util.*
 
 class BookEditViewModel(
     private val arguments: BookEditFragmentArgs,
-    private val getCollectionBook: GetCollectionBookUseCase,
-    private val addCollectionBook: AddCollectionBookUseCase,
-    private val editCollectionBook: EditCollectionBookUseCase,
+    private val observeBook: ObserveBookUseCase,
+    private val addBook: AddBookUseCase,
+    private val editBook: EditBookUseCase,
 ) : BaseViewModel<BookEditEvent, BookEditAction>() {
 
-    private val inEditMode: Boolean = (arguments.collectionBookId != null)
+    private val inEditMode: Boolean = (arguments.bookId != null)
 
     private val _actionBarTitle: UniqueLiveData<Int> = UniqueLiveData()
     val actionBarTitle: LiveData<Int>
@@ -56,8 +56,8 @@ class BookEditViewModel(
         when {
             inEditMode -> {
                 viewModelScope.launch(Dispatchers.Main) {
-                    val id = CollectionBookId(arguments.collectionBookId ?: return@launch)
-                    val book = getCollectionBook(id)
+                    val id = BookId(arguments.bookId ?: return@launch)
+                    val book = observeBook(id)
                     if (book != null) {
                         assignBookDetails(book)
                     }
@@ -101,7 +101,7 @@ class BookEditViewModel(
         coverImageUrl = volume.coverImageUrl
     }
 
-    private fun assignBookDetails(book: CollectionBook) {
+    private fun assignBookDetails(book: Book) {
         bookTitle.value = book.title
         bookAuthor.value = book.author
         bookPagesNumber.value = book.pagesNumber
@@ -142,8 +142,8 @@ class BookEditViewModel(
 
         viewModelScope.launch(Dispatchers.Main) {
             val result = if (inEditMode) {
-                val id = CollectionBookId(arguments.collectionBookId ?: return@launch)
-                editCollectionBook(id) { book ->
+                val id = BookId(arguments.bookId ?: return@launch)
+                editBook(id) { book ->
                     book.copy(
                         title = title,
                         author = author,
@@ -155,7 +155,7 @@ class BookEditViewModel(
                     )
                 }
             } else {
-                val collectionBook = CollectionBook(
+                val book = Book(
                     volumeId = arguments.volume?.id,
                     title = title,
                     author = author,
@@ -167,7 +167,7 @@ class BookEditViewModel(
                     coverImageUrl = coverImageUrl
                 )
 
-                addCollectionBook(collectionBook)
+                addBook(book)
             }
 
             result.onSuccess {

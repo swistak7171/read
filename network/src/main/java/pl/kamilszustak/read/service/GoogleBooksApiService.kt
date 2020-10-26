@@ -14,6 +14,9 @@ interface GoogleBooksApiService {
     @GET("$BOOKS_V1_PREFIX/volumes/{id}")
     suspend fun getById(@Path("id") id: String): Response<VolumeDto>
 
+    @GET("$BOOKS_V1_PREFIX/volumes?q=isbn:{isbn}")
+    suspend fun getByIsbn(@Path("isbn") isbn: String): Response<VolumeDto>
+
     companion object {
         private const val BOOKS_V1_PREFIX: String = "/books/v1"
         const val BASE_URL: String = "https://www.googleapis.com"

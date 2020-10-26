@@ -2,7 +2,7 @@ package pl.kamilszustak.read.ui.main.collection
 
 import androidx.annotation.ArrayRes
 import androidx.annotation.StringRes
-import pl.kamilszustak.model.common.id.CollectionBookId
+import pl.kamilszustak.model.common.id.BookId
 import pl.kamilszustak.read.ui.base.view.ViewAction
 
 sealed class CollectionAction : ViewAction {
@@ -11,11 +11,11 @@ sealed class CollectionAction : ViewAction {
     ) : CollectionAction()
 
     data class NavigateToBookEditFragment(
-        val collectionBookId: CollectionBookId? = null,
+        val bookId: BookId? = null,
     ) : CollectionAction()
 
     data class NavigateToReadingProgressDialogFragment(
-        val collectionBookId: CollectionBookId,
+        val bookId: BookId,
     ) : CollectionAction()
 
     data class Error(

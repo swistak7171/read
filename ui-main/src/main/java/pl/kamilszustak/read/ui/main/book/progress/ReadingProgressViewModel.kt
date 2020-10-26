@@ -4,29 +4,29 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import pl.kamilszustak.model.common.id.CollectionBookId
+import pl.kamilszustak.model.common.id.BookId
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
-import pl.kamilszustak.read.domain.access.usecase.collection.GetCollectionBookUseCase
-import pl.kamilszustak.read.domain.access.usecase.collection.EditCollectionBookUseCase
-import pl.kamilszustak.read.model.domain.CollectionBook
+import pl.kamilszustak.read.domain.access.usecase.book.ObserveBookUseCase
+import pl.kamilszustak.read.domain.access.usecase.book.EditBookUseCase
+import pl.kamilszustak.read.model.domain.Book
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
 
 class ReadingProgressViewModel(
     private val arguments: ReadingProgressDialogFragmentArgs,
-    private val getCollectionBook: GetCollectionBookUseCase,
-    private val editCollectionBook: EditCollectionBookUseCase,
+    private val observeBook: ObserveBookUseCase,
+    private val editBook: EditBookUseCase,
 ) : BaseViewModel<ReadingProgressEvent, ReadingProgressAction>() {
 
-    private val _collectionBook: UniqueLiveData<CollectionBook> = UniqueLiveData()
-    val collectionBook: LiveData<CollectionBook> = _collectionBook
+    private val _book: UniqueLiveData<Book> = UniqueLiveData()
+    val book: LiveData<Book> = _book
 
     val readPages: UniqueLiveData<Int> = UniqueLiveData(0)
 
     init {
-        val id = CollectionBookId(arguments.collectionBookId)
+        val id = BookId(arguments.bookId)
         viewModelScope.launch(Dispatchers.Main) {
-            _collectionBook.value = getCollectionBook(id).also { book ->
+            _book.value = observeBook(id).also { book ->
                 if (book != null) {
                     readPages.value = book.readPages
                 }
@@ -54,9 +54,9 @@ class ReadingProgressViewModel(
             return
         }
 
-        val id = CollectionBookId(arguments.collectionBookId)
+        val id = BookId(arguments.bookId)
         viewModelScope.launch(Dispatchers.Main) {
-            editCollectionBook(id) { book -> book.copy(readPages = pages) }
+            editBook(id) { book -> book.copy(readPages = pages) }
                 .onSuccess {
                     with(_action) {
                         value = ReadingProgressAction.ProgressUpdated

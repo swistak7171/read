@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:id="@+id/booksRecyclerView"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_collection_book" />
+        tools:listitem="@layout/item_book" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"

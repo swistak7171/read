@@ -6,7 +6,7 @@
     <data>
         <variable
             name="book"
-            type="pl.kamilszustak.read.model.domain.CollectionBook" />
+            type="pl.kamilszustak.read.model.domain.Book" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

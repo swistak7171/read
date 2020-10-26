@@ -110,7 +110,9 @@ class SearchFragment @Inject constructor(
         }
 
         viewModel.volumes.observe(viewLifecycleOwner) { volumes ->
-            modelAdapter.updateModels(volumes)
+            if (volumes != null) {
+                modelAdapter.updateModels(volumes)
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package pl.kamilszustak.read.ui.main.scanner
 
+import pl.kamilszustak.read.model.domain.Volume
 import pl.kamilszustak.read.ui.base.view.ViewAction
 
 sealed class ScannerAction : ViewAction {
@@ -14,7 +15,7 @@ sealed class ScannerAction : ViewAction {
         val throwable: Throwable,
     ) : ScannerAction()
 
-    data class BarcodeDetected(
-        val value: String,
+    data class NavigateToBookEditFragment(
+        val volume: Volume,
     ) : ScannerAction()
 }
