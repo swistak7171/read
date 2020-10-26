@@ -16,6 +16,6 @@ class GetAllCollectionBooksUseCaseImpl @Inject constructor(
 ) : GetAllCollectionBooksUseCase {
 
     override fun invoke(): Flow<List<CollectionBook>> =
-        collectionBookRepository.getAll()
+        collectionBookRepository.observeAll()
             .map { mapper.mapAll(it) }
 }

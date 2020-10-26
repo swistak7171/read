@@ -10,7 +10,8 @@ import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryUseCa
 import pl.kamilszustak.read.domain.access.usecase.quote.*
 import pl.kamilszustak.read.domain.access.usecase.user.GetUserUseCase
 import pl.kamilszustak.read.domain.access.usecase.user.SignOutUseCase
-import pl.kamilszustak.read.domain.access.usecase.volume.SearchForVolumesUseCase
+import pl.kamilszustak.read.domain.access.usecase.volume.GetVolumeUseCase
+import pl.kamilszustak.read.domain.access.usecase.volume.ObserveVolumesUseCase
 import pl.kamilszustak.read.domain.usecase.barcode.ReadBarcodeUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.collection.*
 import pl.kamilszustak.read.domain.usecase.country.GetAllCountriesUseCaseImpl
@@ -19,7 +20,8 @@ import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.quote.*
 import pl.kamilszustak.read.domain.usecase.user.GetUserUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.user.SignOutUseCaseImpl
-import pl.kamilszustak.read.domain.usecase.volume.SearchForVolumesUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.volume.GetVolumeUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.volume.ObserveVolumesUseCaseImpl
 
 @Module
 interface UseCaseModule {
@@ -72,5 +74,8 @@ interface UseCaseModule {
     fun bindSignOutUseCase(useCaseImpl: SignOutUseCaseImpl): SignOutUseCase
 
     @Binds
-    fun bindSearchForVolumesUseCase(useCaseImpl: SearchForVolumesUseCaseImpl): SearchForVolumesUseCase
+    fun bindObserveVolumesUseCase(useCaseImpl: ObserveVolumesUseCaseImpl): ObserveVolumesUseCase
+
+    @Binds
+    fun bindGetVolumeUseCase(useCaseImpl: GetVolumeUseCaseImpl): GetVolumeUseCase
 }

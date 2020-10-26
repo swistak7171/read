@@ -16,6 +16,6 @@ class GetAllQuotesUseCaseImpl @Inject constructor(
 ) : GetAllQuotesUseCase {
 
     override fun invoke(): Flow<List<Quote>> =
-        quoteRepository.getAll()
+        quoteRepository.observeAll()
             .map { mapper.mapAll(it) }
 }

@@ -9,5 +9,5 @@ data class VolumeListWrapper(
     val volumesNumber: Int,
 
     @Json(name = "items")
-    val volumes: List<VolumeDto>,
+    val volumes: List<VolumeDto>?,
 )

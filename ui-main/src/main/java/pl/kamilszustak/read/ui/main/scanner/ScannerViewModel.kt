@@ -5,15 +5,19 @@ import com.afollestad.assent.Permission
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pl.kamilszustak.read.domain.access.usecase.barcode.ReadBarcodeUseCase
+import pl.kamilszustak.read.domain.access.usecase.volume.GetVolumeUseCase
 import pl.kamilszustak.read.ui.base.util.PermissionState
 import pl.kamilszustak.read.ui.base.util.getStateOf
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
+import timber.log.Timber
 import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
 
 class ScannerViewModel @Inject constructor(
+    private val getVolumeUseCase: GetVolumeUseCase,
     private val readBarcode: ReadBarcodeUseCase,
 ) : BaseViewModel<ScannerEvent, ScannerAction>() {
+
     private val barcodeDetected: AtomicBoolean = AtomicBoolean(false)
 
     override fun handleEvent(event: ScannerEvent) {
@@ -48,7 +52,9 @@ class ScannerViewModel @Inject constructor(
                 .onSuccess { value ->
                     if (value != null) {
                         barcodeDetected.set(true)
-                        _action.value = ScannerAction.BarcodeDetected(value)
+                        val result = getVolumeUseCase(value)
+                        Timber.i(result.toString())
+//                        _action.value = ScannerAction.BarcodeDetected(value)
                     }
                 }
                 .onFailure { throwable ->

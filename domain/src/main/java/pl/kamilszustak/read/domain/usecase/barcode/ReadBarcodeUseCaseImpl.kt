@@ -9,7 +9,6 @@ import com.google.mlkit.vision.common.InputImage
 import kotlinx.coroutines.tasks.await
 import pl.kamilszustak.read.common.util.withDefaultContext
 import pl.kamilszustak.read.domain.access.usecase.barcode.ReadBarcodeUseCase
-import timber.log.Timber
 import javax.inject.Inject
 
 class ReadBarcodeUseCaseImpl @Inject constructor() : ReadBarcodeUseCase {

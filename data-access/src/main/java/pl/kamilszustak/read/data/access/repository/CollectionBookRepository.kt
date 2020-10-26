@@ -7,6 +7,7 @@ interface CollectionBookRepository {
     suspend fun add(book: CollectionBookEntity): Result<Unit>
     suspend fun edit(book: CollectionBookEntity): Result<Unit>
     suspend fun deleteById(id: String): Result<Unit>
-    fun getAll(): Flow<List<CollectionBookEntity>>
+    suspend fun getAll(): Result<List<CollectionBookEntity>>
+    fun observeAll(): Flow<List<CollectionBookEntity>>
     suspend fun getById(id: String): CollectionBookEntity?
 }
