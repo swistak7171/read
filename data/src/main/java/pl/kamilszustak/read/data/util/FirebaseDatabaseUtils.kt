@@ -64,12 +64,7 @@ inline fun <reified E : Entity> entityListFlow(query: Query): Flow<List<E>> = va
     onDataChange = { snapshot ->
         buildList<E> {
             snapshot.children.forEach { child ->
-                val value = try {
-                    child?.getValue<E>() as E
-                } catch (throwable: Throwable) {
-                    Timber.e("BLAD: ${throwable.message}")
-                    null
-                }
+                val value = child?.getValue<E>()
                 val key = child?.key
 
                 if (value != null && key != null) {

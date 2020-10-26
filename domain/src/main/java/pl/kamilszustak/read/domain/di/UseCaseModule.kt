@@ -44,6 +44,9 @@ interface UseCaseModule {
     fun bindObserveBookUseCase(useCaseimpl: ObserveBookUseCaseImpl): ObserveBookUseCase
 
     @Binds
+    fun bindGetBookUseCase(useCaseImpl: GetBookUseCaseImpl): GetBookUseCase
+
+    @Binds
     fun bindEditBookUseCase(useCaseImpl: EditBookUseCaseImpl): EditBookUseCase
 
     @Binds
