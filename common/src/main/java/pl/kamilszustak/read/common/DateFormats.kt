@@ -1,4 +1,4 @@
-package pl.kamilszustak.read.domain.access
+package pl.kamilszustak.read.common
 
 import java.text.SimpleDateFormat
 import java.util.*
