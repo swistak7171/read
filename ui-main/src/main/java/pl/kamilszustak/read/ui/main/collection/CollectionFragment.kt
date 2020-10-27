@@ -1,5 +1,6 @@
 package pl.kamilszustak.read.ui.main.collection
 
+import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -50,6 +51,12 @@ class CollectionFragment @Inject constructor(
                 super.onOptionsItemSelected(item)
             }
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setHasOptionsMenu(true)
     }
 
     override fun initializeRecyclerView() {

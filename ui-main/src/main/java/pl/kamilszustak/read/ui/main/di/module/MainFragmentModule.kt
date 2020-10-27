@@ -8,6 +8,7 @@ import pl.kamilszustak.read.ui.base.di.key.FragmentKey
 import pl.kamilszustak.read.ui.main.book.edit.BookEditFragment
 import pl.kamilszustak.read.ui.main.book.progress.ReadingProgressDialogFragment
 import pl.kamilszustak.read.ui.main.collection.CollectionFragment
+import pl.kamilszustak.read.ui.main.collection.log.ReadingLogFragment
 import pl.kamilszustak.read.ui.main.profile.ProfileFragment
 import pl.kamilszustak.read.ui.main.quotes.QuotesFragment
 import pl.kamilszustak.read.ui.main.quotes.edit.QuoteEditFragment
@@ -55,4 +56,9 @@ interface MainFragmentModule {
     @IntoMap
     @FragmentKey(QuoteEditFragment::class)
     fun bindQuoteEditFragment(fragment: QuoteEditFragment): Fragment
+
+    @Binds
+    @IntoMap
+    @FragmentKey(ReadingLogFragment::class)
+    fun bindReadingLogFragment(fragment: ReadingLogFragment): Fragment
 }
