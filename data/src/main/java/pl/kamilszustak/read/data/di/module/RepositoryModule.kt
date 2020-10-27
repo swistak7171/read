@@ -20,5 +20,5 @@ interface RepositoryModule {
     fun bindVolumeRepository(repositoryImpl: VolumeRepositoryImpl): VolumeRepository
 
     @Binds
-    fun bindLogEntryRepository(repositoryImpl: LogEntryRepositoryImpl): LogEntryRepository
+    fun bindReadingLogRepository(repositoryImpl: ReadingLogRepositoryImpl): ReadingLogRepository
 }

@@ -1,7 +1,7 @@
 package pl.kamilszustak.read.model.mapper.log
 
 import pl.kamilszustak.model.common.id.BookId
-import pl.kamilszustak.model.common.id.ReadingLogId
+import pl.kamilszustak.model.common.id.LogEntryId
 import pl.kamilszustak.read.domain.access.usecase.book.GetBookUseCase
 import pl.kamilszustak.read.model.data.LogEntryEntity
 import pl.kamilszustak.read.model.domain.LogEntry
@@ -15,7 +15,7 @@ class LogEntryEntityMapper @Inject constructor(
     override suspend fun mapInternal(model: LogEntryEntity): LogEntry {
         val bookId = BookId(model.bookId)
         val book = getBook(bookId) ?: throw IllegalStateException("There is a reading log (${model.id}) of non-existent book (${model.bookId})")
-        val readingLogId = ReadingLogId(model.id)
+        val readingLogId = LogEntryId(model.id)
 
         return LogEntry(
             id = readingLogId,
