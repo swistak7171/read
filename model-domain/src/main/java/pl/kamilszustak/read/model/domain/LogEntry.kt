@@ -5,7 +5,7 @@ import pl.kamilszustak.model.common.id.ReadingLogId
 import java.util.*
 
 @Parcelize
-data class ReadingLog(
+data class LogEntry(
     override val id: ReadingLogId,
     override val creationDate: Date,
     override val modificationDate: Date,

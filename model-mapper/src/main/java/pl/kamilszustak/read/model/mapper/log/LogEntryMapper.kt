@@ -1,19 +1,19 @@
 package pl.kamilszustak.read.model.mapper.log
 
 import pl.kamilszustak.read.domain.access.usecase.user.GetUserUseCase
-import pl.kamilszustak.read.model.data.ReadingLogEntity
-import pl.kamilszustak.read.model.domain.ReadingLog
+import pl.kamilszustak.read.model.data.LogEntryEntity
+import pl.kamilszustak.read.model.domain.LogEntry
 import pl.kamilszustak.read.model.mapper.Mapper
 import javax.inject.Inject
 
-class ReadingLogMapper @Inject constructor(
+class LogEntryMapper @Inject constructor(
     getUser: GetUserUseCase,
-) : Mapper<ReadingLog, ReadingLogEntity>() {
+) : Mapper<LogEntry, LogEntryEntity>() {
 
     private val userId: String by lazy { getUser().uid }
 
-    override fun map(model: ReadingLog): ReadingLogEntity =
-        ReadingLogEntity(
+    override fun map(model: LogEntry): LogEntryEntity =
+        LogEntryEntity(
             userId = userId,
             bookId = model.book.id.value,
             readPages = model.readPages

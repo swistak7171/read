@@ -13,7 +13,7 @@ import pl.kamilszustak.read.data.di.qualifier.RootDatabaseReference
 import pl.kamilszustak.read.model.data.BookEntity
 import pl.kamilszustak.read.model.data.DatabaseCollection
 import pl.kamilszustak.read.model.data.QuoteEntity
-import pl.kamilszustak.read.model.data.ReadingLogEntity
+import pl.kamilszustak.read.model.data.LogEntryEntity
 import javax.inject.Singleton
 
 @Module
@@ -68,5 +68,5 @@ class DatabaseModule {
     @Singleton
     @ReadingLogCollection
     fun provideReadingLogCollection(@RootDatabaseReference reference: DatabaseReference): DatabaseCollection =
-        createUserDatabaseCollection(reference, ReadingLogEntity.COLLECTION_NAME, ReadingLogEntity.USER_ID_PROPERTY)
+        createUserDatabaseCollection(reference, LogEntryEntity.COLLECTION_NAME, LogEntryEntity.USER_ID_PROPERTY)
 }
