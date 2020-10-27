@@ -6,11 +6,11 @@ import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import pl.kamilszustak.read.domain.access.usecase.book.AddBookUseCase
 import pl.kamilszustak.read.domain.access.usecase.book.EditBookUseCase
-import pl.kamilszustak.read.domain.access.usecase.book.ObserveBookUseCase
+import pl.kamilszustak.read.domain.access.usecase.book.GetBookUseCase
 
 class BookEditViewModelFactory @AssistedInject constructor(
     @Assisted private val arguments: BookEditFragmentArgs,
-    private val observeBookUseCase: ObserveBookUseCase,
+    private val getBookUseCase: GetBookUseCase,
     private val addBookUseCase: AddBookUseCase,
     private val editBookUseCase: EditBookUseCase,
 ) : ViewModelProvider.Factory {
@@ -18,7 +18,7 @@ class BookEditViewModelFactory @AssistedInject constructor(
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
         BookEditViewModel(
             arguments = arguments,
-            observeBook = observeBookUseCase,
+            getBook = getBookUseCase,
             addBook = addBookUseCase,
             editBook = editBookUseCase
         ) as T

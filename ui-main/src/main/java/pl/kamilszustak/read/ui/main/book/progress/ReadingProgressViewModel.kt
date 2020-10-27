@@ -6,15 +6,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pl.kamilszustak.model.common.id.BookId
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
-import pl.kamilszustak.read.domain.access.usecase.book.ObserveBookUseCase
 import pl.kamilszustak.read.domain.access.usecase.book.EditBookUseCase
+import pl.kamilszustak.read.domain.access.usecase.book.GetBookUseCase
 import pl.kamilszustak.read.model.domain.Book
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
 
 class ReadingProgressViewModel(
     private val arguments: ReadingProgressDialogFragmentArgs,
-    private val observeBook: ObserveBookUseCase,
+    private val getBook: GetBookUseCase,
     private val editBook: EditBookUseCase,
 ) : BaseViewModel<ReadingProgressEvent, ReadingProgressAction>() {
 
@@ -26,7 +26,7 @@ class ReadingProgressViewModel(
     init {
         val id = BookId(arguments.bookId)
         viewModelScope.launch(Dispatchers.Main) {
-            _book.value = observeBook(id).also { book ->
+            _book.value = getBook(id).also { book ->
                 if (book != null) {
                     readPages.value = book.readPages
                 }

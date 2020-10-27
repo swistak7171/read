@@ -9,5 +9,6 @@ interface BookRepository {
     suspend fun deleteById(id: String): Result<Unit>
     suspend fun getAll(): List<BookEntity>
     fun observeAll(): Flow<List<BookEntity>>
+    fun observeById(id: String): Flow<BookEntity>
     suspend fun getById(id: String): BookEntity?
 }

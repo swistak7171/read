@@ -5,18 +5,18 @@ import androidx.lifecycle.ViewModelProvider
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import pl.kamilszustak.read.domain.access.usecase.book.EditBookUseCase
-import pl.kamilszustak.read.domain.access.usecase.book.ObserveBookUseCase
+import pl.kamilszustak.read.domain.access.usecase.book.GetBookUseCase
 
 class ReadingProgressViewModelFactory @AssistedInject constructor(
     @Assisted private val arguments: ReadingProgressDialogFragmentArgs,
-    private val observeBookUseCase: ObserveBookUseCase,
+    private val getBookUseCase: GetBookUseCase,
     private val editBookUseCase: EditBookUseCase,
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
         ReadingProgressViewModel(
             arguments = arguments,
-            observeBook = observeBookUseCase,
+            getBook = getBookUseCase,
             editBook = editBookUseCase
         ) as T
 

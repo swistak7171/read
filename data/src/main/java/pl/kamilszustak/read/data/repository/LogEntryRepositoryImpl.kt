@@ -1,8 +1,9 @@
 package pl.kamilszustak.read.data.repository
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.tasks.await
 import pl.kamilszustak.read.common.util.withIOContext
-import pl.kamilszustak.read.data.access.repository.ReadingLogRepository
+import pl.kamilszustak.read.data.access.repository.LogEntryRepository
 import pl.kamilszustak.read.data.di.qualifier.ReadingLogCollection
 import pl.kamilszustak.read.data.util.entityFlow
 import pl.kamilszustak.read.data.util.entityListFlow
@@ -14,9 +15,33 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ReadingLogRepositoryImpl @Inject constructor(
+class LogEntryRepositoryImpl @Inject constructor(
     @ReadingLogCollection private val collection: DatabaseCollection,
-) : ReadingLogRepository {
+) : LogEntryRepository {
+
+    override suspend fun add(entry: LogEntryEntity): Result<Unit> = withIOContext {
+        runCatching {
+            collection.reference.push()
+                .setValue(entry)
+                .await()
+        }
+    }.map { Unit }
+
+    override suspend fun edit(entry: LogEntryEntity): Result<Unit> = withIOContext {
+        runCatching {
+            collection.reference.child(entry.id)
+                .setValue(entry)
+                .await()
+        }
+    }.map { Unit }
+
+    override suspend fun deleteById(id: String): Result<Unit> = withIOContext {
+        runCatching {
+            collection.reference.child(id)
+                .removeValue()
+                .await()
+        }
+    }.map { Unit }
 
     override suspend fun getAll(): List<LogEntryEntity> = withIOContext {
         readEntityList(collection.query)

@@ -7,10 +7,7 @@ import pl.kamilszustak.read.domain.access.usecase.book.*
 import pl.kamilszustak.read.domain.access.usecase.country.GetAllCountriesUseCase
 import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryCodeUseCase
 import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryUseCase
-import pl.kamilszustak.read.domain.access.usecase.log.GetLogEntryUseCase
-import pl.kamilszustak.read.domain.access.usecase.log.GetReadingLogUseCase
-import pl.kamilszustak.read.domain.access.usecase.log.ObserveLogEntryUseCase
-import pl.kamilszustak.read.domain.access.usecase.log.ObserveReadingLogUseCase
+import pl.kamilszustak.read.domain.access.usecase.log.*
 import pl.kamilszustak.read.domain.access.usecase.quote.*
 import pl.kamilszustak.read.domain.access.usecase.user.GetUserUseCase
 import pl.kamilszustak.read.domain.access.usecase.user.SignOutUseCase
@@ -21,10 +18,7 @@ import pl.kamilszustak.read.domain.usecase.book.*
 import pl.kamilszustak.read.domain.usecase.country.GetAllCountriesUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryCodeUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryUseCaseImpl
-import pl.kamilszustak.read.domain.usecase.log.GetLogEntryUseCaseImpl
-import pl.kamilszustak.read.domain.usecase.log.GetReadingLogUseCaseImpl
-import pl.kamilszustak.read.domain.usecase.log.ObserveLogEntryUseCaseImpl
-import pl.kamilszustak.read.domain.usecase.log.ObserveReadingLogUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.log.*
 import pl.kamilszustak.read.domain.usecase.quote.*
 import pl.kamilszustak.read.domain.usecase.user.GetUserUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.user.SignOutUseCaseImpl
@@ -89,6 +83,15 @@ interface UseCaseModule {
 
     @Binds
     fun bindGetVolumeUseCase(useCaseImpl: GetVolumeUseCaseImpl): GetVolumeUseCase
+
+    @Binds
+    fun bindAddLogEntryUseCase(useCaseImpl: AddLogEntryUseCaseImpl): AddLogEntryUseCase
+
+    @Binds
+    fun bindEditLogEntryUseCase(useCaseImpl: EditLogEntryUseCaseImpl): EditLogEntryUseCase
+
+    @Binds
+    fun bindDeleteLogEntryUseCase(useCaseImpl: DeleteLogEntryUseCaseImpl): DeleteLogEntryUseCase
 
     @Binds
     fun bindGetLogEntryUseCase(useCaseImpl: GetLogEntryUseCaseImpl): GetLogEntryUseCase
