@@ -24,4 +24,5 @@ sealed class CollectionAction : ViewAction {
 
     object BookDeleted : CollectionAction()
     object NavigateToSearchFragment : CollectionAction()
+    object NavigateToReadingLogFragment : CollectionAction()
 }

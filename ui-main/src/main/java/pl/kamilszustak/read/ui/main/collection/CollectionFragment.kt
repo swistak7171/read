@@ -1,5 +1,8 @@
 package pl.kamilszustak.read.ui.main.collection
 
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +32,24 @@ class CollectionFragment @Inject constructor(
     private val navigator: Navigator = Navigator()
     private val modelAdapter: ModelAdapter<Book, BookItem> by lazy {
         ModelAdapter { BookItem(it) }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_collection_fragment, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.readingLogItem -> {
+                viewModel.dispatchEvent(CollectionEvent.OnReadingLogButtonClicked)
+                true
+            }
+
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
     }
 
     override fun initializeRecyclerView() {
@@ -126,6 +147,10 @@ class CollectionFragment @Inject constructor(
                     navigator.navigateToBookEditFragment(action.bookId)
                 }
 
+                CollectionAction.NavigateToReadingLogFragment -> {
+                    navigator.navigateToReadingLogFragment()
+                }
+
                 is CollectionAction.NavigateToReadingProgressDialogFragment -> {
                     navigator.navigateToReadingProgressDialogFragment(action.bookId)
                 }
@@ -155,6 +180,11 @@ class CollectionFragment @Inject constructor(
             val direction = CollectionFragmentDirections.actionCollectionFragmentToNavigationBookEdit(
                 bookId = bookId?.value
             )
+            navigate(direction)
+        }
+
+        fun navigateToReadingLogFragment() {
+            val direction = CollectionFragmentDirections.actionCollectionFragmentToReadingLogFragment()
             navigate(direction)
         }
 
