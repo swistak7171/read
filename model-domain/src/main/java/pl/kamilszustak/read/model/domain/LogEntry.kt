@@ -10,5 +10,10 @@ data class LogEntry(
     override val creationDate: Date = Date(),
     override val modificationDate: Date = Date(),
     val book: Book,
-    val readPages: Int,
-) : Model()
+    val startPage: Int,
+    val endPage: Int,
+) : Model() {
+
+    val readPages: Int
+        get() = (endPage - startPage)
+}

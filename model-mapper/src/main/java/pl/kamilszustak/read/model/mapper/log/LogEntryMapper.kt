@@ -16,7 +16,8 @@ class LogEntryMapper @Inject constructor(
         LogEntryEntity(
             userId = userId,
             bookId = model.book.id.value,
-            readPages = model.readPages
+            startPage = model.startPage,
+            endPage = model.endPage
         ).apply {
             id = model.id.value
             creationDate = model.creationDate

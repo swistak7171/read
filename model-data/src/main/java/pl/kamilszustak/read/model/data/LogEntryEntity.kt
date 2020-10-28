@@ -11,15 +11,20 @@ data class LogEntryEntity(
     @set:PropertyName(BOOK_ID_PROPERTY)
     var bookId: String = "",
 
-    @get:PropertyName(READ_PAGES_PROPERTY)
-    @set:PropertyName(READ_PAGES_PROPERTY)
-    var readPages: Int = 0,
+    @get:PropertyName(START_PAGE_PROPERTY)
+    @set:PropertyName(START_PAGE_PROPERTY)
+    var startPage: Int = 0,
+
+    @get:PropertyName(END_PAGE_PROPERTY)
+    @set:PropertyName(END_PAGE_PROPERTY)
+    var endPage: Int = 0,
 ) : Entity() {
 
     companion object {
         const val COLLECTION_NAME: String = "reading_log"
         const val USER_ID_PROPERTY: String = "user_id"
         const val BOOK_ID_PROPERTY: String = "book_id"
-        const val READ_PAGES_PROPERTY: String = "read_pages"
+        const val START_PAGE_PROPERTY: String = "start_page"
+        const val END_PAGE_PROPERTY: String = "end_page"
     }
 }

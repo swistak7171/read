@@ -22,7 +22,8 @@ class LogEntryEntityMapper @Inject constructor(
             creationDate = model.creationDate,
             modificationDate = model.modificationDate,
             book = book,
-            readPages = model.readPages
+            startPage = model.startPage,
+            endPage = model.endPage
         )
     }
 }

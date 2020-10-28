@@ -39,7 +39,8 @@ class EditBookUseCaseImpl @Inject constructor(
                 if (editedBook.readPages > originalBook.readPages) {
                     val entry = LogEntry(
                         book = editedBook,
-                        readPages = (editedBook.readPages - originalBook.readPages)
+                        startPage = originalBook.readPages,
+                        endPage = editedBook.readPages
                     )
 
                     coroutineScope {
