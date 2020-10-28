@@ -6,9 +6,9 @@ import java.util.*
 
 @Parcelize
 data class LogEntry(
-    override val id: LogEntryId,
-    override val creationDate: Date,
-    override val modificationDate: Date,
+    override val id: LogEntryId = LogEntryId(),
+    override val creationDate: Date = Date(),
+    override val modificationDate: Date = Date(),
     val book: Book,
     val readPages: Int,
 ) : Model()

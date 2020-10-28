@@ -72,4 +72,9 @@
 
     <!-- ReadingLogFragment -->
     <string name="reading_log">Dziennik czytania</string>
+    <plurals name="reading_log_entry_content">
+        <item quantity="one">Przeczytano %1$d stronę</item>
+        <item quantity="few">Przeczytano %1$d strony</item>
+        <item quantity="other">Przeczytano %1$d stron</item>
+    </plurals>
 </resources>
