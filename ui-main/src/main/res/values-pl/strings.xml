@@ -69,4 +69,16 @@
     <!-- SearchFragment -->
     <string name="search_query">Wyszukiwana fraza</string>
     <string name="blank_search_query_error_message">Pusta fraza wyszukiwania</string>
+
+    <!-- ReadingLogFragment -->
+    <string name="reading_log">Dziennik czytania</string>
+    <plurals name="reading_log_entry_content">
+        <item quantity="one">Przeczytano %1$d stronę</item>
+        <item quantity="few">Przeczytano %1$d strony</item>
+        <item quantity="other">Przeczytano %1$d stron</item>
+    </plurals>
+
+    <!-- LogEntryDetailsDialogFragment -->
+    <string name="start_page_number">Strona początkowa: %1$d</string>
+    <string name="end_page_number">Strona końcowa: %1$d</string>
 </resources>

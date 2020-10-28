@@ -5,6 +5,7 @@ import com.afollestad.assent.Permission
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pl.kamilszustak.read.domain.access.usecase.barcode.ReadBarcodeUseCase
+import pl.kamilszustak.read.domain.access.usecase.volume.GetVolumeUseCase
 import pl.kamilszustak.read.ui.base.util.PermissionState
 import pl.kamilszustak.read.ui.base.util.getStateOf
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
@@ -12,8 +13,11 @@ import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
 
 class ScannerViewModel @Inject constructor(
+    private val getVolumeUseCase: GetVolumeUseCase,
     private val readBarcode: ReadBarcodeUseCase,
 ) : BaseViewModel<ScannerEvent, ScannerAction>() {
+
+    private var permissionState: PermissionState = PermissionState.UNKNOWN
     private val barcodeDetected: AtomicBoolean = AtomicBoolean(false)
 
     override fun handleEvent(event: ScannerEvent) {
@@ -25,17 +29,21 @@ class ScannerViewModel @Inject constructor(
     }
 
     private fun handleOnResumed() {
-        _action.value = ScannerAction.CameraPermissionAction.Unknown
+        setPermissionState(permissionState)
     }
 
-    private fun handleCameraPermissionResult(event: ScannerEvent.OnCameraPermissionResult) {
-        val action = event.result.getStateOf(Permission.CAMERA)
-        _action.value = when (action) {
+    private fun setPermissionState(state: PermissionState) {
+        _action.value = when (permissionState) {
+            PermissionState.UNKNOWN -> ScannerAction.CameraPermissionAction.Unknown
             PermissionState.GRANTED -> ScannerAction.CameraPermissionAction.Granted
             PermissionState.DENIED -> ScannerAction.CameraPermissionAction.Denied
             PermissionState.PERMANENTLY_DENIED -> ScannerAction.CameraPermissionAction.PermanentlyDenied
-            else -> null
         }
+    }
+
+    private fun handleCameraPermissionResult(event: ScannerEvent.OnCameraPermissionResult) {
+        permissionState = event.result.getStateOf(Permission.CAMERA)
+        setPermissionState(permissionState)
     }
 
     private fun handleOnImageCaptured(event: ScannerEvent.OnImageCaptured) {
@@ -44,15 +52,36 @@ class ScannerViewModel @Inject constructor(
         }
 
         viewModelScope.launch(Dispatchers.Main) {
+            _isLoading.value = true
+            barcodeDetected.set(true)
             readBarcode(event.imageProxy)
                 .onSuccess { value ->
-                    _action.value = ScannerAction.BarcodeDetected(value)
+                    if (value != null) {
+                        getVolumeUseCase(value)
+                            .onSuccess { volume ->
+                                if (volume != null) {
+                                    _action.value = ScannerAction.NavigateToBookEditFragment(volume)
+                                } else {
+                                    barcodeDetected.set(false)
+                                }
+                            }
+                            .onFailure {
+                                setScanningError(it)
+                            }
+                    }
                 }
-                .onFailure { throwable ->
-                    _action.value = ScannerAction.Error(throwable)
+                .onFailure {
+                    event.imageProxy.close()
+                    setScanningError(it)
                 }
 
-            barcodeDetected.set(true)
+            _isLoading.value = false
+            barcodeDetected.set(false)
         }
+    }
+
+    private fun setScanningError(throwable: Throwable) {
+        _action.value = ScannerAction.Error(throwable)
+        barcodeDetected.set(false)
     }
 }

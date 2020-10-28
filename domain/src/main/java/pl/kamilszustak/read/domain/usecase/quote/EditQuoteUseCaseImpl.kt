@@ -7,6 +7,7 @@ import pl.kamilszustak.read.domain.access.usecase.quote.EditQuoteUseCase
 import pl.kamilszustak.read.domain.access.usecase.quote.GetQuoteUseCase
 import pl.kamilszustak.read.model.domain.Quote
 import pl.kamilszustak.read.model.mapper.quote.QuoteMapper
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -22,7 +23,10 @@ class EditQuoteUseCaseImpl @Inject constructor(
 
         return runNotNull(quote) {
             val edited = edit(it)
-            val mapped = mapper.map(edited)
+            val mapped = mapper.map(edited).apply {
+                modificationDate = Date()
+            }
+
             repository.edit(mapped)
         }
     }

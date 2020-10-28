@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/readingLogItem"
+        android:title="@string/reading_log"
+        android:icon="@drawable/icon_history"
+        app:showAsAction="ifRoom" />
+</menu>

@@ -12,20 +12,17 @@ import pl.kamilszustak.read.domain.access.usecase.barcode.ReadBarcodeUseCase
 import javax.inject.Inject
 
 class ReadBarcodeUseCaseImpl @Inject constructor() : ReadBarcodeUseCase {
-    private val scannerOptions: BarcodeScannerOptions by lazy {
-        BarcodeScannerOptions.Builder()
-            .setBarcodeFormats(Barcode.EAN_13)
-            .build()
-    }
-
     private val scanner: BarcodeScanner by lazy {
-        BarcodeScanning.getClient(scannerOptions)
+        val options = BarcodeScannerOptions.Builder()
+            .setBarcodeFormats(Barcode.ISBN, Barcode.EAN_13)
+            .build()
+
+        BarcodeScanning.getClient(options)
     }
 
-    override suspend fun invoke(input: ImageProxy): Result<String> {
+    override suspend fun invoke(input: ImageProxy): Result<String?> {
         val image = input.image
         if (image == null) {
-            input.close()
             val exception = Exception("Image is not present in ImageProxy object")
             return Result.failure(exception)
         }
@@ -36,12 +33,7 @@ class ReadBarcodeUseCaseImpl @Inject constructor() : ReadBarcodeUseCase {
         return withDefaultContext {
             runCatching {
                 val barcodes = scanner.process(inputImage).await()
-                input.close()
-                if (barcodes.isNullOrEmpty()) {
-                    throw Exception("Error occurred during image processing")
-                } else {
-                    barcodes.firstOrNull()?.displayValue ?: throw Exception("No barcodes detected")
-                }
+                barcodes.firstOrNull()?.displayValue
             }
         }
     }

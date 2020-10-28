@@ -3,23 +3,27 @@ package pl.kamilszustak.read.domain.di
 import dagger.Binds
 import dagger.Module
 import pl.kamilszustak.read.domain.access.usecase.barcode.ReadBarcodeUseCase
-import pl.kamilszustak.read.domain.access.usecase.collection.*
+import pl.kamilszustak.read.domain.access.usecase.book.*
 import pl.kamilszustak.read.domain.access.usecase.country.GetAllCountriesUseCase
 import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryCodeUseCase
 import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryUseCase
+import pl.kamilszustak.read.domain.access.usecase.log.*
 import pl.kamilszustak.read.domain.access.usecase.quote.*
 import pl.kamilszustak.read.domain.access.usecase.user.GetUserUseCase
 import pl.kamilszustak.read.domain.access.usecase.user.SignOutUseCase
-import pl.kamilszustak.read.domain.access.usecase.volume.SearchForVolumesUseCase
+import pl.kamilszustak.read.domain.access.usecase.volume.GetVolumeUseCase
+import pl.kamilszustak.read.domain.access.usecase.volume.ObserveVolumesUseCase
 import pl.kamilszustak.read.domain.usecase.barcode.ReadBarcodeUseCaseImpl
-import pl.kamilszustak.read.domain.usecase.collection.*
+import pl.kamilszustak.read.domain.usecase.book.*
 import pl.kamilszustak.read.domain.usecase.country.GetAllCountriesUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryCodeUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.log.*
 import pl.kamilszustak.read.domain.usecase.quote.*
 import pl.kamilszustak.read.domain.usecase.user.GetUserUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.user.SignOutUseCaseImpl
-import pl.kamilszustak.read.domain.usecase.volume.SearchForVolumesUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.volume.GetVolumeUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.volume.ObserveVolumesUseCaseImpl
 
 @Module
 interface UseCaseModule {
@@ -33,19 +37,22 @@ interface UseCaseModule {
     fun bindGetDefaultCountryCodeUseCase(useCaseImpl: GetDefaultCountryCodeUseCaseImpl): GetDefaultCountryCodeUseCase
 
     @Binds
-    fun bindAddCollectionBookUseCase(useCaseImpl: AddCollectionBookUseCaseImpl): AddCollectionBookUseCase
+    fun bindAddBookUseCase(useCaseImpl: AddBookUseCaseImpl): AddBookUseCase
 
     @Binds
-    fun bindGetAllCollectionBooksUseCase(useCaseImpl: GetAllCollectionBooksUseCaseImpl): GetAllCollectionBooksUseCase
+    fun bindObserveAllBooksUseCase(useCaseImpl: ObserveAllBooksUseCaseImpl): ObserveAllBooksUseCase
 
     @Binds
-    fun bindGetCollectionBookUseCase(useCaseimpl: GetCollectionBookUseCaseImpl): GetCollectionBookUseCase
+    fun bindObserveBookUseCase(useCaseimpl: ObserveBookUseCaseImpl): ObserveBookUseCase
 
     @Binds
-    fun bindEditCollectionBookUseCase(useCaseImpl: EditCollectionBookUseCaseImpl): EditCollectionBookUseCase
+    fun bindGetBookUseCase(useCaseImpl: GetBookUseCaseImpl): GetBookUseCase
 
     @Binds
-    fun bindDeleteCollectionBookUseCase(useCaseImpl: DeleteCollectionBookUseCaseImpl): DeleteCollectionBookUseCase
+    fun bindEditBookUseCase(useCaseImpl: EditBookUseCaseImpl): EditBookUseCase
+
+    @Binds
+    fun bindDeleteBookUseCase(useCaseImpl: DeleteBookUseCaseImpl): DeleteBookUseCase
 
     @Binds
     fun bindAddQuoteUseCase(useCaseImpl: AddQuoteUseCaseImpl): AddQuoteUseCase
@@ -57,7 +64,7 @@ interface UseCaseModule {
     fun bindDeleteQuoteUseCase(useCaseImpl: DeleteQuoteUseCaseImpl): DeleteQuoteUseCase
 
     @Binds
-    fun bindGetAllQuotesUseCase(useCaseImpl: GetAllQuotesUseCaseImpl): GetAllQuotesUseCase
+    fun bindObserveAllQuotesUseCase(useCaseImpl: ObserveAllQuotesUseCaseImpl): ObserveAllQuotesUseCase
 
     @Binds
     fun bindGetQuoteUseCase(useCaseImpl: GetQuoteUseCaseImpl): GetQuoteUseCase
@@ -72,5 +79,29 @@ interface UseCaseModule {
     fun bindSignOutUseCase(useCaseImpl: SignOutUseCaseImpl): SignOutUseCase
 
     @Binds
-    fun bindSearchForVolumesUseCase(useCaseImpl: SearchForVolumesUseCaseImpl): SearchForVolumesUseCase
+    fun bindObserveVolumesUseCase(useCaseImpl: ObserveVolumesUseCaseImpl): ObserveVolumesUseCase
+
+    @Binds
+    fun bindGetVolumeUseCase(useCaseImpl: GetVolumeUseCaseImpl): GetVolumeUseCase
+
+    @Binds
+    fun bindAddLogEntryUseCase(useCaseImpl: AddLogEntryUseCaseImpl): AddLogEntryUseCase
+
+    @Binds
+    fun bindEditLogEntryUseCase(useCaseImpl: EditLogEntryUseCaseImpl): EditLogEntryUseCase
+
+    @Binds
+    fun bindDeleteLogEntryUseCase(useCaseImpl: DeleteLogEntryUseCaseImpl): DeleteLogEntryUseCase
+
+    @Binds
+    fun bindGetLogEntryUseCase(useCaseImpl: GetLogEntryUseCaseImpl): GetLogEntryUseCase
+
+    @Binds
+    fun bindGetReadingLogUseCase(useCaseImpl: GetReadingLogUseCaseImpl): GetReadingLogUseCase
+
+    @Binds
+    fun bindObserveLogEntryUseCase(useCaseImpl: ObserveLogEntryUseCaseImpl): ObserveLogEntryUseCase
+
+    @Binds
+    fun bindObserveReadingLogUseCase(useCaseImpl: ObserveReadingLogUseCaseImpl): ObserveReadingLogUseCase
 }

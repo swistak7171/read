@@ -21,7 +21,7 @@ data class QuoteEntity(
 ) : Entity() {
 
     companion object {
-        const val TABLE_NAME: String = "quotes"
+        const val COLLECTION_NAME: String = "quotes"
         const val CONTENT_PROPERTY: String = "content"
         const val AUTHOR_PROPERTY: String = "author"
         const val BOOK_PROPERTY: String = "book"

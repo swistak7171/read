@@ -6,18 +6,18 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pl.kamilszustak.read.domain.access.usecase.quote.DeleteQuoteUseCase
-import pl.kamilszustak.read.domain.access.usecase.quote.GetAllQuotesUseCase
+import pl.kamilszustak.read.domain.access.usecase.quote.ObserveAllQuotesUseCase
 import pl.kamilszustak.read.model.domain.Quote
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
 import javax.inject.Inject
 
 class QuotesViewModel @Inject constructor(
-    private val getAllQuotes: GetAllQuotesUseCase,
+    private val observeAllQuotes: ObserveAllQuotesUseCase,
     private val deleteQuote: DeleteQuoteUseCase,
 ) : BaseViewModel<QuotesEvent, QuotesAction>() {
 
-    val quotes: LiveData<List<Quote>> = getAllQuotes()
+    val quotes: LiveData<List<Quote>> = observeAllQuotes()
         .asLiveData(viewModelScope.coroutineContext)
 
     override fun handleEvent(event: QuotesEvent) {
