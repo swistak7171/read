@@ -60,8 +60,9 @@ class ScannerViewModel @Inject constructor(
                         getVolumeUseCase(value)
                             .onSuccess { volume ->
                                 if (volume != null) {
-                                    _action.value = ScannerAction.NavigateToBookEditFragment(volume)
+                                    _action.value = ScannerAction.NavigateToBookEditFragment(volume = volume)
                                 } else {
+                                    _action.value = ScannerAction.NavigateToBookEditFragment(isbn = value)
                                     barcodeDetected.set(false)
                                 }
                             }

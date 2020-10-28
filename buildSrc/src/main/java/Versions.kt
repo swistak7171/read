@@ -1,6 +1,6 @@
 object Versions {
-//    const val KOTLIN: String = "1.4.20-RC-227"
-    const val KOTLIN: String = "1.4.0"
+    const val KOTLIN: String = "1.4.20-RC-227"
+//    const val KOTLIN: String = "1.4.0"
     const val ANDROID_STUDIO: String = "4.1.0"
     const val KOTLINX_COROUTINES: String = "1.4.0"
     const val MATERIAL_COMPONENTS: String = "1.3.0-alpha03"
@@ -16,7 +16,7 @@ object Versions {
     const val CAMERA_X: String = "1.0.0-beta11"
     const val CAMERA_X_VIEW: String = "1.0.0-alpha18"
     const val SWIPE_REFRESH_LAYOUT: String = "1.1.0"
-    const val WORK: String = "2.4.0"
+    const val WORK: String = "2.5.0-beta01"
     const val TIMBER: String = "4.7.1"
     const val ANKO: String = "0.10.8"
     const val ROOM: String = "2.2.5"
