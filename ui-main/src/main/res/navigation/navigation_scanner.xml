@@ -28,6 +28,12 @@
                 android:defaultValue="@null"
                 app:argType="pl.kamilszustak.read.model.domain.Volume"
                 app:nullable="true" />
+
+            <argument
+                android:name="isbn"
+                app:argType="string"
+                app:nullable="true"
+                android:defaultValue="@null" />
         </action>
     </fragment>
     <include app:graph="@navigation/navigation_book_edit" />

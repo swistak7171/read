@@ -31,6 +31,12 @@
                 android:defaultValue="@null"
                 app:argType="pl.kamilszustak.read.model.domain.Volume"
                 app:nullable="true" />
+
+            <argument
+                android:name="isbn"
+                app:argType="string"
+                app:nullable="true"
+                android:defaultValue="@null" />
         </action>
         <action
             android:id="@+id/action_collectionFragment_to_readingLogFragment"

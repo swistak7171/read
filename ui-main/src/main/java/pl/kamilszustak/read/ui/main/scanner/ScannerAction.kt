@@ -16,6 +16,7 @@ sealed class ScannerAction : ViewAction {
     ) : ScannerAction()
 
     data class NavigateToBookEditFragment(
-        val volume: Volume,
+        val volume: Volume? = null,
+        val isbn: String? = null,
     ) : ScannerAction()
 }

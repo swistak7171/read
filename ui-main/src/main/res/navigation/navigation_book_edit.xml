@@ -17,6 +17,12 @@
         app:nullable="true"
         android:defaultValue="@null" />
 
+    <argument
+        android:name="isbn"
+        app:argType="string"
+        app:nullable="true"
+        android:defaultValue="@null" />
+
     <fragment
         android:id="@+id/bookEditFragment"
         android:name="pl.kamilszustak.read.ui.main.book.edit.BookEditFragment"
@@ -30,6 +36,12 @@
         <argument
             android:name="volume"
             app:argType="pl.kamilszustak.read.model.domain.Volume"
+            app:nullable="true"
+            android:defaultValue="@null" />
+
+        <argument
+            android:name="isbn"
+            app:argType="string"
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>

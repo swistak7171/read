@@ -75,7 +75,7 @@ class ScannerFragment @Inject constructor(
                 }
 
                 is ScannerAction.NavigateToBookEditFragment -> {
-                    navigator.navigateToBookEditFragment(action.volume)
+                    navigator.navigateToBookEditFragment(action.volume, action.isbn)
                 }
             }
         }
@@ -116,8 +116,11 @@ class ScannerFragment @Inject constructor(
     }
 
     private inner class Navigator {
-        fun navigateToBookEditFragment(volume: Volume) {
-            val direction = ScannerFragmentDirections.actionScannerFragmentToNavigationBookEdit(volume = volume)
+        fun navigateToBookEditFragment(volume: Volume? = null, isbn: String? = null) {
+            val direction = ScannerFragmentDirections.actionScannerFragmentToNavigationBookEdit(
+                volume = volume,
+                isbn = isbn
+            )
             navigate(direction)
         }
     }
