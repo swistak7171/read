@@ -77,4 +77,8 @@
         <item quantity="few">Przeczytano %1$d strony</item>
         <item quantity="other">Przeczytano %1$d stron</item>
     </plurals>
+
+    <!-- LogEntryDetailsDialogFragment -->
+    <string name="start_page_number">Strona początkowa: %1$d</string>
+    <string name="end_page_number">Strona końcowa: %1$d</string>
 </resources>

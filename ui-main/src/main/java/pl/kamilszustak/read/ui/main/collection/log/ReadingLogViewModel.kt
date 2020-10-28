@@ -16,5 +16,10 @@ class ReadingLogViewModel @Inject constructor(
         .asLiveData(viewModelScope.coroutineContext)
 
     override fun handleEvent(event: ReadingLogEvent) {
+        when (event) {
+            is ReadingLogEvent.OnLogEntryClicked -> {
+                _action.value = ReadingLogAction.NavigateToLogEntryDetailsFragment(event.logEntryId)
+            }
+        }
     }
 }

@@ -77,4 +77,8 @@
         <item quantity="one">You read %1$d page</item>
         <item quantity="other">You read %1$d pages</item>
     </plurals>
+
+    <!-- LogEntryDetailsDialogFragment -->
+    <string name="start_page_number">Start page: %1$d</string>
+    <string name="end_page_number">End page: %1$d</string>
 </resources>

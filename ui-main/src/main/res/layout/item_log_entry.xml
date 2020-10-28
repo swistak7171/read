@@ -17,7 +17,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/titleTextView"
-        android:textAppearance="?textAppearanceOverline"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
         android:lines="1"
         android:ellipsize="end"
         app:layout_constraintStart_toEndOf="@id/coverImageView"

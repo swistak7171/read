@@ -9,6 +9,7 @@ import pl.kamilszustak.read.ui.main.book.edit.BookEditFragment
 import pl.kamilszustak.read.ui.main.book.progress.ReadingProgressDialogFragment
 import pl.kamilszustak.read.ui.main.collection.CollectionFragment
 import pl.kamilszustak.read.ui.main.collection.log.ReadingLogFragment
+import pl.kamilszustak.read.ui.main.collection.log.details.LogEntryDetailsFragment
 import pl.kamilszustak.read.ui.main.profile.ProfileFragment
 import pl.kamilszustak.read.ui.main.quotes.QuotesFragment
 import pl.kamilszustak.read.ui.main.quotes.edit.QuoteEditFragment
@@ -61,4 +62,9 @@ interface MainFragmentModule {
     @IntoMap
     @FragmentKey(ReadingLogFragment::class)
     fun bindReadingLogFragment(fragment: ReadingLogFragment): Fragment
+
+    @Binds
+    @IntoMap
+    @FragmentKey(LogEntryDetailsFragment::class)
+    fun bindLogEntryDetailsFragment(fragment: LogEntryDetailsFragment): Fragment
 }
