@@ -4,19 +4,20 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.tasks.await
 import pl.kamilszustak.read.common.util.withIOContext
 import pl.kamilszustak.read.data.access.repository.BookRepository
-import pl.kamilszustak.read.model.data.DatabaseCollection
 import pl.kamilszustak.read.data.di.qualifier.BookCollection
+import pl.kamilszustak.read.data.util.entityFlow
 import pl.kamilszustak.read.data.util.entityListFlow
 import pl.kamilszustak.read.data.util.readEntity
 import pl.kamilszustak.read.data.util.readEntityList
 import pl.kamilszustak.read.model.data.BookEntity
+import pl.kamilszustak.read.model.data.DatabaseCollection
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class BookRepositoryImpl @Inject constructor(
-    @BookCollection private val collection: DatabaseCollection,
-) : BookRepository {
+    @BookCollection collection: DatabaseCollection,
+) : Repository(collection), BookRepository {
 
     override suspend fun add(book: BookEntity): Result<Unit> = withIOContext {
         runCatching {
@@ -42,13 +43,17 @@ class BookRepositoryImpl @Inject constructor(
         }
     }.map { Unit }
 
-    override suspend fun getAll(): Result<List<BookEntity>> = withIOContext {
-        runCatching { readEntityList(collection.query) }
+    override suspend fun getAll(): List<BookEntity> = withIOContext {
+        readEntityList(collection.query)
     }
-
-    override fun observeAll(): Flow<List<BookEntity>> = entityListFlow(collection.query)
 
     override suspend fun getById(id: String): BookEntity? = withIOContext {
         readEntity { collection.reference.child(id) }
     }
+
+    override fun observeAll(): Flow<List<BookEntity>> =
+        entityListFlow(collection.query)
+
+    override fun observeById(id: String): Flow<BookEntity> =
+        entityFlow { collection.reference.child(id) }
 }

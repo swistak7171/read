@@ -22,8 +22,8 @@ class MainMenuFragment @Inject constructor(
     viewModelFactory: ViewModelProvider.Factory,
 ) : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel>(R.layout.fragment_main_menu) {
 
-    override val binding: FragmentMainMenuBinding by viewBinding(FragmentMainMenuBinding::bind)
     override val viewModel: MainMenuViewModel by viewModels(viewModelFactory)
+    override val binding: FragmentMainMenuBinding by viewBinding(FragmentMainMenuBinding::bind)
     private var googleActivityLauncher: ActivityResultLauncher<Intent>? = null
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

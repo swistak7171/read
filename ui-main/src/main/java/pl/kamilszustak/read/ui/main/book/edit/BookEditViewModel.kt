@@ -8,10 +8,10 @@ import kotlinx.coroutines.launch
 import pl.kamilszustak.model.common.id.BookId
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.common.util.useOrNull
-import pl.kamilszustak.read.domain.access.DateFormats
+import pl.kamilszustak.read.common.DateFormats
 import pl.kamilszustak.read.domain.access.usecase.book.AddBookUseCase
 import pl.kamilszustak.read.domain.access.usecase.book.EditBookUseCase
-import pl.kamilszustak.read.domain.access.usecase.book.ObserveBookUseCase
+import pl.kamilszustak.read.domain.access.usecase.book.GetBookUseCase
 import pl.kamilszustak.read.model.domain.Book
 import pl.kamilszustak.read.model.domain.IsbnType
 import pl.kamilszustak.read.model.domain.Volume
@@ -21,7 +21,7 @@ import java.util.*
 
 class BookEditViewModel(
     private val arguments: BookEditFragmentArgs,
-    private val observeBook: ObserveBookUseCase,
+    private val getBook: GetBookUseCase,
     private val addBook: AddBookUseCase,
     private val editBook: EditBookUseCase,
 ) : BaseViewModel<BookEditEvent, BookEditAction>() {
@@ -57,7 +57,7 @@ class BookEditViewModel(
             inEditMode -> {
                 viewModelScope.launch(Dispatchers.Main) {
                     val id = BookId(arguments.bookId ?: return@launch)
-                    val book = observeBook(id)
+                    val book = getBook(id)
                     if (book != null) {
                         assignBookDetails(book)
                     }

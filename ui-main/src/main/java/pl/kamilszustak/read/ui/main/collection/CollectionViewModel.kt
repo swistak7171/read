@@ -26,6 +26,10 @@ class CollectionViewModel @Inject constructor(
                 _action.value = CollectionAction.ShowAddBookDialog(R.array.add_book_dialog_options)
             }
 
+            CollectionEvent.OnReadingLogButtonClicked -> {
+                _action.value = CollectionAction.NavigateToReadingLogFragment
+            }
+
             is CollectionEvent.OnDialogOptionSelected -> {
                 when (event.index) {
                     0 -> _action.value = CollectionAction.NavigateToBookEditFragment()
