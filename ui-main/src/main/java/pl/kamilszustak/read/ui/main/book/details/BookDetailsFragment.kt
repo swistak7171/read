@@ -7,7 +7,8 @@ import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import pl.kamilszustak.read.ui.base.util.dialog
+import pl.kamilszustak.model.common.id.BookId
+import pl.kamilszustak.read.ui.base.util.*
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.activity.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.databinding.FragmentBookDetailsBinding
@@ -19,6 +20,7 @@ class BookDetailsFragment @Inject constructor(
 
     override val viewModel: BookDetailsViewModel by viewModels { viewModelFactory.create(args) }
     private val args: BookDetailsFragmentArgs by navArgs()
+    private val navigator: Navigator = Navigator()
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_book_details_fragment, menu)
@@ -65,7 +67,19 @@ class BookDetailsFragment @Inject constructor(
 
     override fun observeViewModel() {
         viewModel.action.observe(viewLifecycleOwner) { action ->
+            when (action) {
+                is BookDetailsAction.NavigateToBookEditFragment -> navigator.navigateToBookEditFragment(action.bookId)
+                BookDetailsAction.BookDeleted -> successToast(R.string.book_deleted)
+                is BookDetailsAction.Error -> errorToast(action.messageResourceId)
+                BookDetailsAction.NavigateUp -> navigateUp()
+            }
+        }
+    }
 
+    private inner class Navigator {
+        fun navigateToBookEditFragment(bookId: BookId) {
+            val direction = BookDetailsFragmentDirections.actionBookDetailsFragmentToNavigationBookEdit(bookId.value)
+            navigate(direction)
         }
     }
 }
