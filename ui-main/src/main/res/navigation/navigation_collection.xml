@@ -82,7 +82,8 @@
     <fragment
         android:id="@+id/bookDetailsFragment"
         android:name="pl.kamilszustak.read.ui.main.book.details.BookDetailsFragment"
-        android:label="BookDetailsFragment" >
+        android:label="@string/book_details"
+        tools:layout="@layout/fragment_book_details">
         <action
             android:id="@+id/action_bookDetailsFragment_to_navigation_book_edit"
             app:destination="@id/navigation_book_edit"
@@ -99,5 +100,8 @@
         <action
             android:id="@+id/action_bookDetailsFragment_to_readingProgressDialogFragment"
             app:destination="@id/readingProgressDialogFragment" />
+        <argument
+            android:name="bookId"
+            app:argType="string" />
     </fragment>
 </navigation>
