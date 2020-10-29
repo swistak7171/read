@@ -18,6 +18,7 @@ class BookDetailsViewModel(
     private val deleteBook: DeleteBookUseCase,
 ) : BaseViewModel<BookDetailsEvent, BookDetailsAction>() {
 
+    private val bookId: BookId = BookId(arguments.bookId)
     val book: LiveData<Book> = observeBook(BookId(arguments.bookId))
         .asLiveData(viewModelScope.coroutineContext)
 
@@ -32,15 +33,14 @@ class BookDetailsViewModel(
                 handleDeleteButtonClick()
             }
 
-            BookDetailsEvent.OnUpdateReadingProgressButtonClicked -> {
-
+            BookDetailsEvent.OnUpdateReadingProgressButtonClicked, BookDetailsEvent.OnProgressBarClicked -> {
+                _action.value = BookDetailsAction.NavigateToReadingProgressDialogFragment(bookId)
             }
         }
     }
 
     private fun handleDeleteButtonClick() {
         viewModelScope.launch(Dispatchers.Main) {
-            val bookId = BookId(arguments.bookId)
             deleteBook(bookId)
                 .onSuccess {
                     with(_action) {

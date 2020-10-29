@@ -44,4 +44,5 @@ object Versions {
     const val ANDROID_FLAGS: String = "1.0.4"
     const val FIREBASE_DATABASE: String = "19.5.0"
     const val ML_KIT_BARCODE_SCANNING: String = "16.0.3"
+    const val CIRCULAR_PROGRESS_BAR: String = "3.0.3"
 }

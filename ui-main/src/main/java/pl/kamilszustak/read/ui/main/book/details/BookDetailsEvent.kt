@@ -6,4 +6,5 @@ sealed class BookDetailsEvent : ViewEvent {
     object OnEditBookButtonClicked : BookDetailsEvent()
     object OnDeleteBookButtonClicked : BookDetailsEvent()
     object OnUpdateReadingProgressButtonClicked : BookDetailsEvent()
+    object OnProgressBarClicked : BookDetailsEvent()
 }

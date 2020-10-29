@@ -65,13 +65,34 @@ class BookDetailsFragment @Inject constructor(
         setHasOptionsMenu(true)
     }
 
+    override fun setListeners() {
+        binding.progressBar.setOnClickListener {
+            viewModel.dispatchEvent(BookDetailsEvent.OnProgressBarClicked)
+        }
+    }
+
     override fun observeViewModel() {
         viewModel.action.observe(viewLifecycleOwner) { action ->
             when (action) {
-                is BookDetailsAction.NavigateToBookEditFragment -> navigator.navigateToBookEditFragment(action.bookId)
-                BookDetailsAction.BookDeleted -> successToast(R.string.book_deleted)
-                is BookDetailsAction.Error -> errorToast(action.messageResourceId)
-                BookDetailsAction.NavigateUp -> navigateUp()
+                is BookDetailsAction.NavigateToBookEditFragment -> {
+                    navigator.navigateToBookEditFragment(action.bookId)
+                }
+
+                is BookDetailsAction.NavigateToReadingProgressDialogFragment -> {
+                    navigator.navigateToReadingProgressDialogFragment(action.bookId)
+                }
+
+                BookDetailsAction.BookDeleted -> {
+                    successToast(R.string.book_deleted)
+                }
+
+                is BookDetailsAction.Error -> {
+                    errorToast(action.messageResourceId)
+                }
+
+                BookDetailsAction.NavigateUp -> {
+                    navigateUp()
+                }
             }
         }
     }
@@ -79,6 +100,11 @@ class BookDetailsFragment @Inject constructor(
     private inner class Navigator {
         fun navigateToBookEditFragment(bookId: BookId) {
             val direction = BookDetailsFragmentDirections.actionBookDetailsFragmentToNavigationBookEdit(bookId.value)
+            navigate(direction)
+        }
+
+        fun navigateToReadingProgressDialogFragment(bookId: BookId) {
+            val direction = BookDetailsFragmentDirections.actionBookDetailsFragmentToReadingProgressDialogFragment(bookId.value)
             navigate(direction)
         }
     }

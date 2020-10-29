@@ -9,6 +9,10 @@ sealed class BookDetailsAction : ViewAction {
         val bookId: BookId,
     ) : BookDetailsAction()
 
+    data class NavigateToReadingProgressDialogFragment(
+        val bookId: BookId,
+    ) : BookDetailsAction()
+
     data class Error(
         @StringRes val messageResourceId: Int,
     ) : BookDetailsAction()
