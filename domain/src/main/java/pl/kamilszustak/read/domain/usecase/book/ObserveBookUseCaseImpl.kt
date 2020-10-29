@@ -14,7 +14,7 @@ class ObserveBookUseCaseImpl @Inject constructor(
     private val mapper: BookEntityMapper,
 ) : ObserveBookUseCase {
 
-    override suspend fun invoke(input: BookId): Flow<Book> =
+    override fun invoke(input: BookId): Flow<Book> =
         repository.observeById(input.value)
             .map { mapper.map(it) }
 }

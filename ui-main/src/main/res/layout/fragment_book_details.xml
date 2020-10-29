@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="pl.kamilszustak.read.common.DateFormats" />
+
+        <variable
+            name="viewModel"
+            type="pl.kamilszustak.read.ui.main.book.details.BookDetailsViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_padding">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="256dp"
+                android:id="@+id/coverImageView"
+                app:imageUrl="@{viewModel.book.coverImageUrl}"
+                tools:src="@tools:sample/avatars"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:id="@+id/progressBar"
+                app:cpb_progress_max="@{viewModel.book.pagesNumber}"
+                tools:cpb_progress_max="100"
+                app:cpb_progress="@{viewModel.book.readPages}"
+                tools:cpb_progress="75"
+                app:cpb_round_border="true"
+                app:layout_constraintStart_toEndOf="@id/coverImageView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/coverImageView"
+                app:layout_constraintBottom_toBottomOf="@id/coverImageView" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/readPagesTextView"
+                android:text="@{@string/read_pages_all_pages(viewModel.book.readPages, viewModel.book.pagesNumber)}"
+                tools:text="75/100"
+                app:layout_constraintStart_toStartOf="@id/progressBar"
+                app:layout_constraintEnd_toEndOf="@id/progressBar"
+                app:layout_constraintTop_toBottomOf="@id/progressBar"
+                android:layout_marginTop="@dimen/default_half_margin" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/coverImageView"
+                android:layout_marginTop="@dimen/default_margin">
+
+                <include layout="@layout/form_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/titleFormField"
+                    app:header="@{@string/title}"
+                    app:content="@{viewModel.book.title}" />
+
+                <include layout="@layout/form_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/authorFormField"
+                    app:header="@{@string/author}"
+                    app:content="@{viewModel.book.author}"
+                    goneIfNullOrBlank="@{viewModel.book.author}"
+                    android:layout_marginTop="@dimen/default_margin" />
+
+                <include layout="@layout/form_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/publicationDateFormField"
+                    app:header="@{@string/publication_date}"
+                    app:content="@{viewModel.book.publicationDate != null ? DateFormats.dateFormat.format(viewModel.book.publicationDate) : null}"
+                    visibleIfNotNull="@{viewModel.book.publicationDate}"
+                    android:layout_marginTop="@dimen/default_margin" />
+
+                <include layout="@layout/form_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/isbnFormField"
+                    app:header="@{@string/isbn}"
+                    app:content="@{viewModel.book.isbn}"
+                    goneIfNullOrBlank="@{viewModel.book.isbn}"
+                    android:layout_marginTop="@dimen/default_margin" />
+
+                <include layout="@layout/form_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/descriptionFormField"
+                    app:header="@{@string/description}"
+                    app:content="@{viewModel.book.description}"
+                    goneIfNullOrBlank="@{viewModel.book.description}"
+                    android:layout_marginTop="@dimen/default_margin" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

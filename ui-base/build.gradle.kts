@@ -125,4 +125,7 @@ dependencies {
     // Glide
     api(Dependencies.Glide.GLIDE)
     kapt(Dependencies.Glide.GLIDE_COMPILER)
+
+    // CircularProgressBar
+    api(Dependencies.CIRCULAR_PROGRESS_BAR)
 }

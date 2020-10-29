@@ -81,4 +81,8 @@
     <!-- LogEntryDetailsDialogFragment -->
     <string name="start_page_number">Start page: %1$d</string>
     <string name="end_page_number">End page: %1$d</string>
+
+    <!-- BookDetailsFragment -->
+    <string name="book_details">Book details</string>
+    <string name="read_pages_all_pages" translatable="false">%1$d/%2$d</string>
 </resources>

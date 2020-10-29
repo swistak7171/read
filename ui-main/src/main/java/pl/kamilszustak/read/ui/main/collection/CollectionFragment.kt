@@ -61,6 +61,12 @@ class CollectionFragment @Inject constructor(
 
     override fun initializeRecyclerView() {
         val fastAdapter = FastAdapter.with(modelAdapter).apply {
+            onClickListener = { view, adapter, item, position ->
+                val event = CollectionEvent.OnBookClicked(item.model.id)
+                viewModel.dispatchEvent(event)
+                true
+            }
+
             onLongClickListener = { view, adapter, item, position ->
                 val event = CollectionEvent.OnBookLongClicked(item.model.id)
                 viewModel.dispatchEvent(event)
@@ -154,6 +160,10 @@ class CollectionFragment @Inject constructor(
                     navigator.navigateToBookEditFragment(action.bookId)
                 }
 
+                is CollectionAction.NavigateToBookDetailsFragment -> {
+                    navigator.navigateToBookDetailsFragment(action.bookId)
+                }
+
                 CollectionAction.NavigateToReadingLogFragment -> {
                     navigator.navigateToReadingLogFragment()
                 }
@@ -187,6 +197,11 @@ class CollectionFragment @Inject constructor(
             val direction = CollectionFragmentDirections.actionCollectionFragmentToNavigationBookEdit(
                 bookId = bookId?.value
             )
+            navigate(direction)
+        }
+
+        fun navigateToBookDetailsFragment(bookId: BookId) {
+            val direction = CollectionFragmentDirections.actionCollectionFragmentToBookDetailsFragment(bookId.value)
             navigate(direction)
         }
 
