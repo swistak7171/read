@@ -1,32 +1,71 @@
 package pl.kamilszustak.read.ui.main.book.details
 
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import pl.kamilszustak.read.ui.base.binding.viewBinding
-import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
+import pl.kamilszustak.read.ui.base.util.dialog
 import pl.kamilszustak.read.ui.main.R
+import pl.kamilszustak.read.ui.main.activity.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.databinding.FragmentBookDetailsBinding
 import javax.inject.Inject
 
 class BookDetailsFragment @Inject constructor(
     private val viewModelFactory: BookDetailsViewModelFactory.Factory
-) : BaseFragment<FragmentBookDetailsBinding, BookDetailsViewModel>(R.layout.fragment_book_details) {
+) : MainDataBindingFragment<FragmentBookDetailsBinding, BookDetailsViewModel>(R.layout.fragment_book_details) {
 
     override val viewModel: BookDetailsViewModel by viewModels { viewModelFactory.create(args) }
-    override val binding: FragmentBookDetailsBinding by viewBinding(FragmentBookDetailsBinding::bind)
     private val args: BookDetailsFragmentArgs by navArgs()
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_book_details_fragment, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.updateReadingProgressItem -> {
+                viewModel.dispatchEvent(BookDetailsEvent.OnUpdateReadingProgressButtonClicked)
+                true
+            }
+
+            R.id.editBookItem -> {
+                viewModel.dispatchEvent(BookDetailsEvent.OnEditBookButtonClicked)
+                true
+            }
+
+            R.id.deleteBookItem -> {
+                dialog {
+                    title(R.string.delete_book_dialog_title)
+                    message(R.string.delete_book_dialog_message)
+                    positiveButton(R.string.yes) {
+                        viewModel.dispatchEvent(BookDetailsEvent.OnDeleteBookButtonClicked)
+                    }
+                    negativeButton(R.string.no) { dialog ->
+                        dialog.dismiss()
+                    }
+                }
+
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setHasOptionsMenu(true)
+    }
 
     override fun observeViewModel() {
         viewModel.action.observe(viewLifecycleOwner) { action ->
 
-        }
-
-        viewModel.book.observe(viewLifecycleOwner) { book ->
-            if (book == null) {
-                return@observe
-            }
-
-            
         }
     }
 }

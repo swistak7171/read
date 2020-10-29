@@ -47,7 +47,11 @@
             app:popExitAnim="@anim/zoom_out_pop_exit" />
         <action
             android:id="@+id/action_collectionFragment_to_bookDetailsFragment"
-            app:destination="@id/bookDetailsFragment" />
+            app:destination="@id/bookDetailsFragment"
+            app:enterAnim="@anim/zoom_in_enter"
+            app:exitAnim="@anim/zoom_out_exit"
+            app:popEnterAnim="@anim/zoom_in_pop_enter"
+            app:popExitAnim="@anim/zoom_out_pop_exit" />
     </fragment>
     <dialog
         android:id="@+id/readingProgressDialogFragment"
