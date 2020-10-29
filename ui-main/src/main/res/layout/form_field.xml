@@ -5,11 +5,11 @@
     <data>
         <variable
             name="header"
-            type="java.lang.String" />
+            type="String" />
 
         <variable
             name="content"
-            type="java.lang.String" />
+            type="String" />
     </data>
 
     <LinearLayout
