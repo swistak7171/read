@@ -18,10 +18,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.camera.view.PreviewView
+            <androidx.camera.view.CameraView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/previewView" />
+                android:id="@+id/cameraView"
+                app:lensFacing="back"
+                app:captureMode="image"
+                app:pinchToZoomEnabled="true" />
 
             <ImageView
                 android:layout_width="match_parent"
