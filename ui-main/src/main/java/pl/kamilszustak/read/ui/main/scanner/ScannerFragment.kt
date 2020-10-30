@@ -1,11 +1,8 @@
 package pl.kamilszustak.read.ui.main.scanner
 
-import android.os.Bundle
-import android.view.View
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.ImageProxy
-import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.afollestad.assent.Permission
@@ -47,6 +44,10 @@ class ScannerFragment @Inject constructor(
                 }
             })
         }
+
+        binding.torchButton.setOnClickListener {
+            viewModel.dispatchEvent(ScannerEvent.OnTorchButtonClicked)
+        }
     }
 
     override fun observeViewModel() {
@@ -59,6 +60,10 @@ class ScannerFragment @Inject constructor(
                         ScannerAction.CameraPermissionAction.Denied -> errorToast(R.string.camera_permission_denied)
                         ScannerAction.CameraPermissionAction.PermanentlyDenied -> errorToast(R.string.camera_permission_permanently_denied)
                     }
+                }
+
+                is ScannerAction.ChangeTorchState -> {
+                    binding.cameraView.enableTorch(action.isEnabled)
                 }
 
                 is ScannerAction.Error -> {

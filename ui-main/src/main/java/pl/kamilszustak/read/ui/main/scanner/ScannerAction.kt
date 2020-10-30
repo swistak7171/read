@@ -11,6 +11,10 @@ sealed class ScannerAction : ViewAction {
         object PermanentlyDenied : CameraPermissionAction()
     }
 
+    data class ChangeTorchState(
+        val isEnabled: Boolean,
+    ) : ScannerAction()
+
     data class Error(
         val throwable: Throwable,
     ) : ScannerAction()

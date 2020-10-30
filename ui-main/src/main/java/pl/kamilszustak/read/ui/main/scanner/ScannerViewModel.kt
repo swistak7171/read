@@ -1,14 +1,19 @@
 package pl.kamilszustak.read.ui.main.scanner
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.afollestad.assent.Permission
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
+import pl.kamilszustak.read.common.resource.DrawableResource
 import pl.kamilszustak.read.domain.access.usecase.barcode.ReadBarcodeUseCase
 import pl.kamilszustak.read.domain.access.usecase.volume.GetVolumeUseCase
 import pl.kamilszustak.read.ui.base.util.PermissionState
 import pl.kamilszustak.read.ui.base.util.getStateOf
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
+import pl.kamilszustak.read.ui.main.R
 import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
 
@@ -20,9 +25,22 @@ class ScannerViewModel @Inject constructor(
     private var permissionState: PermissionState = PermissionState.UNKNOWN
     private val barcodeDetected: AtomicBoolean = AtomicBoolean(false)
 
+    private val isTorchEnabled: UniqueLiveData<Boolean> = UniqueLiveData(false)
+    val torchButtonDrawable: LiveData<DrawableResource>
+        get() = isTorchEnabled.map { isEnabled ->
+            val resourceId = if (isEnabled) {
+                R.drawable.icon_flash_on
+            } else {
+                R.drawable.icon_flash_off
+            }
+
+            DrawableResource(resourceId)
+        }
+
     override fun handleEvent(event: ScannerEvent) {
         when (event) {
             ScannerEvent.OnResumed -> handleOnResumed()
+            ScannerEvent.OnTorchButtonClicked -> handleFlashButtonClick()
             is ScannerEvent.OnCameraPermissionResult -> handleCameraPermissionResult(event)
             is ScannerEvent.OnImageCaptured -> handleOnImageCaptured(event)
         }
@@ -30,6 +48,12 @@ class ScannerViewModel @Inject constructor(
 
     private fun handleOnResumed() {
         setPermissionState(permissionState)
+    }
+
+    private fun handleFlashButtonClick() {
+        val state = !(isTorchEnabled.value ?: true)
+        isTorchEnabled.value = state
+        _action.value = ScannerAction.ChangeTorchState(state)
     }
 
     private fun setPermissionState(state: PermissionState) {
