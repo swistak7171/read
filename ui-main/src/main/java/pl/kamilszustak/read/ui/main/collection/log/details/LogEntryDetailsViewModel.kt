@@ -17,7 +17,4 @@ class LogEntryDetailsViewModel(
 
     val logEntry: LiveData<LogEntry> = observeLogEntry(LogEntryId(arguments.logEntryId))
         .asLiveData(viewModelScope.coroutineContext )
-
-    override fun handleEvent(event: ViewEvent) {
-    }
 }

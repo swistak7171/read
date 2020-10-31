@@ -108,7 +108,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
             val intent = Intent().apply {
                 setClassName(
                     "pl.kamilszustak.read",
-                    "pl.kamilszustak.read.ui.authentication.AuthenticationActivity"
+                    "pl.kamilszustak.read.ui.authentication.activity.AuthenticationActivity"
                 )
             }
 

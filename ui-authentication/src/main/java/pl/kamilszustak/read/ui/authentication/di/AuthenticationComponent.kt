@@ -1,7 +1,7 @@
 package pl.kamilszustak.read.ui.authentication.di
 
 import dagger.Subcomponent
-import pl.kamilszustak.read.ui.authentication.AuthenticationActivity
+import pl.kamilszustak.read.ui.authentication.activity.AuthenticationActivity
 import pl.kamilszustak.read.ui.authentication.di.module.AuthenticationActivityModule
 import pl.kamilszustak.read.ui.authentication.di.module.AuthenticationFragmentModule
 import pl.kamilszustak.read.ui.authentication.di.module.AuthenticationViewModelModule

@@ -6,7 +6,7 @@ import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.navigateUp
 import pl.kamilszustak.read.ui.base.util.successToast
 import pl.kamilszustak.read.ui.main.R
-import pl.kamilszustak.read.ui.main.activity.MainDataBindingDialogFragment
+import pl.kamilszustak.read.ui.main.MainDataBindingDialogFragment
 import pl.kamilszustak.read.ui.main.databinding.DialogFragmentReadingProgressBinding
 import javax.inject.Inject
 

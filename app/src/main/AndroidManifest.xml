@@ -21,7 +21,7 @@
             android:value="barcode" />
 
         <activity
-            android:name="pl.kamilszustak.read.ui.authentication.AuthenticationActivity"
+            android:name="pl.kamilszustak.read.ui.authentication.activity.AuthenticationActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
             <intent-filter>

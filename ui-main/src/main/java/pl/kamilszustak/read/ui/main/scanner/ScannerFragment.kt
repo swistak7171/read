@@ -12,7 +12,7 @@ import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.navigate
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.main.R
-import pl.kamilszustak.read.ui.main.activity.MainDataBindingFragment
+import pl.kamilszustak.read.ui.main.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.databinding.FragmentScannerBinding
 import timber.log.Timber
 import java.util.concurrent.Executors
