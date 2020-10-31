@@ -1,5 +1,6 @@
 package pl.kamilszustak.read.ui.main.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.addCallback
 import androidx.activity.viewModels
@@ -8,6 +9,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.google.firebase.auth.FirebaseAuth
 import pl.kamilszustak.read.ui.base.binding.viewBinding
 import pl.kamilszustak.read.ui.base.util.setupActionBarWithNavController
 import pl.kamilszustak.read.ui.base.util.setupWithNavController
@@ -20,10 +22,12 @@ import javax.inject.Inject
 class MainActivity : BaseActivity(R.layout.activity_main) {
     @Inject override lateinit var fragmentFactory: FragmentFactory
     @Inject protected lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject protected lateinit var firebaseAuth: FirebaseAuth
 
     private val viewModel: MainViewModel by viewModels { viewModelFactory }
     private val binding: ActivityMainBinding by viewBinding(ActivityMainBinding::inflate)
     private var currentNavController: LiveData<NavController>? = null
+    private val navigator: Navigator = Navigator()
     private val component: MainComponent by lazy {
         (application as MainComponent.ComponentProvider).provideMainComponent()
     }
@@ -90,7 +94,25 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
                 is MainAction.ChangeFragmentSelection -> {
                     binding.mainBottomNavigationView.selectedItemId = action.idResource
                 }
+
+                MainAction.NavigateToAuthenticationActivity -> {
+                    navigator.navigateToAuthenticationActivity()
+                }
             }
+        }
+    }
+
+    private inner class Navigator {
+        fun navigateToAuthenticationActivity() {
+            finish()
+            val intent = Intent().apply {
+                setClassName(
+                    "pl.kamilszustak.read",
+                    "pl.kamilszustak.read.ui.authentication.AuthenticationActivity"
+                )
+            }
+
+            startActivity(intent)
         }
     }
 }

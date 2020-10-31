@@ -84,4 +84,8 @@
 
     <!-- BookDetailsFragment -->
     <string name="book_details">Szczegóły książki</string>
+
+    <!-- ProfileFragment -->
+    <string name="sign_out">Wyloguj</string>
+    <string name="sign_out_dialog_message">Czy na pewno chcesz się wylogować?</string>
 </resources>
