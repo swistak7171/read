@@ -7,6 +7,7 @@ import pl.kamilszustak.read.domain.access.usecase.book.*
 import pl.kamilszustak.read.domain.access.usecase.country.GetAllCountriesUseCase
 import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryCodeUseCase
 import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryUseCase
+import pl.kamilszustak.read.domain.access.usecase.device.GetPhoneNumberUseCase
 import pl.kamilszustak.read.domain.access.usecase.log.*
 import pl.kamilszustak.read.domain.access.usecase.quote.*
 import pl.kamilszustak.read.domain.access.usecase.user.GetUserUseCase
@@ -18,6 +19,7 @@ import pl.kamilszustak.read.domain.usecase.book.*
 import pl.kamilszustak.read.domain.usecase.country.GetAllCountriesUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryCodeUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.device.GetPhoneNumberUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.log.*
 import pl.kamilszustak.read.domain.usecase.quote.*
 import pl.kamilszustak.read.domain.usecase.user.GetUserUseCaseImpl
@@ -27,6 +29,9 @@ import pl.kamilszustak.read.domain.usecase.volume.ObserveVolumesUseCaseImpl
 
 @Module
 interface UseCaseModule {
+    @Binds
+    fun bindGetPhoneNumberUseCase(useCaseImpl: GetPhoneNumberUseCaseImpl): GetPhoneNumberUseCase
+
     @Binds
     fun bindGetAllCountriesUseCase(useCaseImpl: GetAllCountriesUseCaseImpl): GetAllCountriesUseCase
 

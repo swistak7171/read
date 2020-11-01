@@ -9,6 +9,7 @@
     <string name="facebook_account_sign_in">Sign in with Facebook account</string>
     <string name="twitter_account_sign_in">Sign in with Twitter account</string>
 
+    <!-- EmailSignInFragment -->
     <string name="email_address">Email address</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm password</string>
@@ -17,10 +18,19 @@
     <string name="user_with_email_exists">User with this email already exists</string>
     <string name="invalid_credentials">Invalid credentials</string>
 
+    <!-- PhoneSignInFragment -->
     <string name="country_code">Country code</string>
     <string name="phone_number">Phone number</string>
+    <string name="enter_verification_code">Enter verification code</string>
+    <string name="send_verification_code">Send verification code</string>
+    <string name="verification_code">Verification code</string>
     <string name="not_selected_country_code">Country code not selected</string>
     <string name="invalid_phone_number">Invalid phone number</string>
+    <string name="verification_code_sent">Verification code sent</string>
+    <string name="invalid_verification_code_format">Invalid verification code format</string>
+    <string name="code_verification_error_message">An error occurred while verifying the entered code</string>
+    <string name="verification_code_not_sent">Verification code not sent</string>
+    <string name="authentication_error_message">An error occurred while authenticating</string>
 
     <string name="twitter_authentication_cancelled_by_user">Authentication was cancelled by the user</string>
 </resources>
