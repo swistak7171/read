@@ -14,8 +14,8 @@
     <string name="confirm_password">Potwierdź hasło</string>
     <string name="invalid_email_address">Nieprawidłowy adres email</string>
     <string name="invalid_password">Nieprawidłowe hasło</string>
-    <string name="not_equal_passwords">Nieidentyczne hasła</string>
     <string name="user_with_email_exists">Użytkownik z tym adresem email już istnieje</string>
+    <string name="invalid_credentials">Nieprawidłowe dane logowania</string>
 
     <string name="country_code">Kod kraju</string>
     <string name="phone_number">Numer telefonu</string>

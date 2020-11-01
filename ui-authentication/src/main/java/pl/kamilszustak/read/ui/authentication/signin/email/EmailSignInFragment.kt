@@ -9,7 +9,7 @@ import pl.kamilszustak.read.ui.base.util.viewModels
 import javax.inject.Inject
 
 class EmailSignInFragment @Inject constructor(
-    viewModelFactory: ViewModelProvider.Factory
+    viewModelFactory: ViewModelProvider.Factory,
 ) : AuthenticationDataBindingFragment<FragmentEmailSignInBinding, EmailSignInViewModel>(R.layout.fragment_email_sign_in) {
 
     override val viewModel: EmailSignInViewModel by viewModels(viewModelFactory)
@@ -23,9 +23,7 @@ class EmailSignInFragment @Inject constructor(
     override fun observeViewModel() {
         viewModel.action.observe(viewLifecycleOwner) { action ->
             when (action) {
-                is EmailSignInAction.Error -> {
-                    errorToast(action.messageResourceId)
-                }
+                is EmailSignInAction.Error -> errorToast(action.messageResourceId)
             }
         }
     }

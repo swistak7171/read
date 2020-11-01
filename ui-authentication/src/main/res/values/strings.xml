@@ -14,8 +14,8 @@
     <string name="confirm_password">Confirm password</string>
     <string name="invalid_email_address">Invalid email address</string>
     <string name="invalid_password">Invalid password</string>
-    <string name="not_equal_passwords">Not equal passwords</string>
     <string name="user_with_email_exists">User with this email already exists</string>
+    <string name="invalid_credentials">Invalid credentials</string>
 
     <string name="country_code">Country code</string>
     <string name="phone_number">Phone number</string>
