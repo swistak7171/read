@@ -38,6 +38,7 @@ class CollectionViewModel @Inject constructor(
                 when (event.index) {
                     0 -> _action.value = CollectionAction.NavigateToBookEditFragment()
                     1 -> _action.value = CollectionAction.NavigateToSearchFragment
+                    2 -> _action.value = CollectionAction.NavigateToScannerFragment
                 }
             }
 

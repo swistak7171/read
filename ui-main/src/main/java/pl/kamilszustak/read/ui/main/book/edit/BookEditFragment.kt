@@ -65,21 +65,10 @@ class BookEditFragment @Inject constructor(
 
         viewModel.action.observe(viewLifecycleOwner) { action ->
             when (action) {
-                is BookEditAction.OpenDatePicker -> {
-                    openDatePicker(action)
-                }
-
-                is BookEditAction.Error -> {
-                    errorToast(action.messageResourceId)
-                }
-
-                is BookEditAction.BookSaved -> {
-                    successToast(action.messageResourceId)
-                }
-
-                BookEditAction.NavigateUp -> {
-                    navigateUp()
-                }
+                is BookEditAction.OpenDatePicker -> openDatePicker(action)
+                is BookEditAction.Error -> errorToast(action.messageResourceId)
+                is BookEditAction.BookSaved -> successToast(action.messageResourceId)
+                BookEditAction.NavigateUp -> navigateUp()
             }
         }
     }

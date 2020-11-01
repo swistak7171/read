@@ -48,6 +48,7 @@
     <string-array name="add_book_dialog_options">
         <item>Dodaj ręcznie</item>
         <item>Szukaj w Google Books</item>
+        <item>Skanuj ISBN</item>
     </string-array>
 
     <!-- ScannerFragment -->

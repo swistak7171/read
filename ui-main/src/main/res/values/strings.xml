@@ -53,6 +53,7 @@
     <string-array name="add_book_dialog_options">
         <item>Add manually</item>
         <item>Search in Google Books</item>
+        <item>Scan ISBN</item>
     </string-array>
 
     <!-- ReadingProgressDialogFragment -->
