@@ -30,8 +30,8 @@ class ProfileFragment @Inject constructor(
         return when (item.itemId) {
             R.id.signOutItem -> {
                 dialog {
-                    title(R.string.sign_out)
-                    message(R.string.sign_out_dialog_message)
+                    title(R.string.sign_out_and_exit)
+                    message(R.string.sign_out_and_exit_dialog_message)
                     positiveButton(R.string.yes) { viewModel.dispatchEvent(ProfileEvent.OnSignOutButtonClicked) }
                     negativeButton(R.string.no) { it.dismiss() }
                 }

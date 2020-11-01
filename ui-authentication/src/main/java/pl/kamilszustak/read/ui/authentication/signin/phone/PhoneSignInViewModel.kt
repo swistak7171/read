@@ -2,7 +2,6 @@ package pl.kamilszustak.read.ui.authentication.signin.phone
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.google.android.gms.tasks.TaskExecutors
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
@@ -16,7 +15,6 @@ import pl.kamilszustak.read.model.domain.Country
 import pl.kamilszustak.read.ui.authentication.R
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import timber.log.Timber
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import kotlin.coroutines.suspendCoroutine
 
@@ -96,13 +94,13 @@ class PhoneSignInViewModel @Inject constructor(
                 }
 
                 val fullNumber = "+${country.extension}$number"
-                PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                    fullNumber,
-                    60,
-                    TimeUnit.SECONDS,
-                    TaskExecutors.MAIN_THREAD,
-                    callbacks
-                )
+//                PhoneAuthProvider.getInstance().verifyPhoneNumber(
+//                    fullNumber,
+//                    60,
+//                    TimeUnit.SECONDS,
+//                    TaskExecutors.MAIN_THREAD,
+//                    callbacks
+//                )
             }
         }
     }

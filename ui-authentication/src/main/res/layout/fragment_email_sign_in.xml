@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="viewModel"
@@ -29,6 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"
+            app:passwordToggleEnabled="true"
             android:layout_marginTop="@dimen/default_margin">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -43,6 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/confirm_password"
+            app:passwordToggleEnabled="true"
             android:layout_marginTop="@dimen/default_margin">
 
             <com.google.android.material.textfield.TextInputEditText

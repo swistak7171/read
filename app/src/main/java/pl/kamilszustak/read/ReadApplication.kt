@@ -14,7 +14,7 @@ class ReadApplication : DaggerApplication(),
     AuthenticationComponent.ComponentProvider,
     MainComponent.ComponentProvider
 {
-    val applicationComponent: ApplicationComponent by lazy {
+    private val applicationComponent: ApplicationComponent by lazy {
         DaggerApplicationComponent.builder()
             .application(this)
             .build()
@@ -35,8 +35,8 @@ class ReadApplication : DaggerApplication(),
     override fun onCreate() {
         super.onCreate()
 
-        initializeDagger()
         initializeTimber()
+        initializeDagger()
     }
 
     private fun initializeDagger() {

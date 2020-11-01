@@ -8,7 +8,7 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.annotation.MenuRes
 import androidx.annotation.StringRes
-import pl.kamilszustak.read.common.util.getSystemService
+import androidx.core.content.getSystemService
 
 fun View.showKeyboard() {
     post {
