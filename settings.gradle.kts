@@ -1,4 +1,3 @@
-include(":ui-splashscreen")
 rootProject.name = "read"
 rootDir.walk()
     .maxDepth(1)

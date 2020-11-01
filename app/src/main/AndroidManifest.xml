@@ -21,14 +21,19 @@
             android:value="barcode" />
 
         <activity
-            android:name="pl.kamilszustak.read.ui.authentication.activity.AuthenticationActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ui.splashscreen.activity.SplashScreenActivity"
+            android:theme="@style/SplashScreenTheme">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="pl.kamilszustak.read.ui.authentication.activity.AuthenticationActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="true" />
 
         <activity
             android:name=".ui.main.activity.MainActivity"
