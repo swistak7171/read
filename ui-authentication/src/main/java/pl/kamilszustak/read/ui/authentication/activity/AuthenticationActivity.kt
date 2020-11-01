@@ -38,8 +38,8 @@ class AuthenticationActivity : BaseActivity(R.layout.activity_authentication) {
 
     private inner class Navigator {
         fun navigateToMainActivity() {
-            finish()
             startActivity<MainActivity>()
+            finish()
         }
     }
 }

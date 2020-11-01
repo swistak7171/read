@@ -104,7 +104,6 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
     private inner class Navigator {
         fun navigateToAuthenticationActivity() {
-            finish()
             val intent = Intent().apply {
                 setClassName(
                     "pl.kamilszustak.read",
@@ -113,6 +112,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
             }
 
             startActivity(intent)
+            finish()
         }
     }
 }

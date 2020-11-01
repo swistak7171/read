@@ -26,17 +26,18 @@ android {
     }
 }
 
-androidExtensions {
-    features = setOf("parcelize")
-}
-
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     implementation(project(Modules.UI_BASE))
+    implementation(project(Modules.UI_AUTHENTICATION))
+    implementation(project(Modules.UI_MAIN))
 
     // Dagger
     implementation(Dependencies.Google.Dagger.DAGGER_ANDROID)
     kapt(Dependencies.Google.Dagger.DAGGER_ANDROID_PROCESSOR)
     kapt(Dependencies.Google.Dagger.DAGGER_COMPILER)
+
+    // Firebase Authentication
+    implementation(Dependencies.Google.Firebase.Authentication.AUTH_UI)
 }

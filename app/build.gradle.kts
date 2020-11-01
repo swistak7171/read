@@ -98,6 +98,7 @@ dependencies {
     implementation(project(Modules.MODEL_DOMAIN))
     implementation(project(Modules.MODEL_MAPPER))
     implementation(project(Modules.UI_BASE))
+    implementation(project(Modules.UI_SPLASHSCREEN))
     implementation(project(Modules.UI_AUTHENTICATION))
     implementation(project(Modules.UI_MAIN))
 
