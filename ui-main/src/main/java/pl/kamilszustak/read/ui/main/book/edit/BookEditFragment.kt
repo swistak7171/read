@@ -13,8 +13,8 @@ import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.navigateUp
 import pl.kamilszustak.read.ui.base.util.successToast
-import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.MainDataBindingFragment
+import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.FragmentBookEditBinding
 import java.util.*
 import javax.inject.Inject
@@ -65,8 +65,8 @@ class BookEditFragment @Inject constructor(
 
         viewModel.action.observe(viewLifecycleOwner) { action ->
             when (action) {
-                BookEditAction.OpenDatePicker -> {
-                    openDatePicker()
+                is BookEditAction.OpenDatePicker -> {
+                    openDatePicker(action)
                 }
 
                 is BookEditAction.Error -> {
@@ -84,9 +84,9 @@ class BookEditFragment @Inject constructor(
         }
     }
 
-    private fun openDatePicker() {
+    private fun openDatePicker(action: BookEditAction.OpenDatePicker) {
         val datePicker = MaterialDatePicker.Builder.datePicker()
-            .setSelection(System.currentTimeMillis())
+            .setSelection(action.selectedDate.time)
             .setTitleText(R.string.select_a_publication_date)
             .build()
 
