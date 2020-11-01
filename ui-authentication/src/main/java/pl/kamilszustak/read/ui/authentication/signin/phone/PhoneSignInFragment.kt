@@ -2,14 +2,12 @@ package pl.kamilszustak.read.ui.authentication.signin.phone
 
 import androidx.lifecycle.ViewModelProvider
 import com.afollestad.materialdialogs.list.listItems
-import org.jetbrains.anko.support.v4.startActivity
 import pl.kamilszustak.read.ui.authentication.AuthenticationDataBindingFragment
 import pl.kamilszustak.read.ui.authentication.R
 import pl.kamilszustak.read.ui.authentication.databinding.FragmentPhoneSignInBinding
 import pl.kamilszustak.read.ui.base.util.dialog
 import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.viewModels
-import pl.kamilszustak.read.ui.main.activity.MainActivity
 import javax.inject.Inject
 
 class PhoneSignInFragment @Inject constructor(
@@ -50,11 +48,6 @@ class PhoneSignInFragment @Inject constructor(
 
                 is PhoneSignInAction.Error -> {
                     errorToast(action.messageResourceId)
-                }
-
-                PhoneSignInAction.Authenticated -> {
-                    startActivity<MainActivity>()
-                    requireActivity().finish()
                 }
             }
         }
