@@ -9,7 +9,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.google.firebase.auth.FirebaseAuth
 import pl.kamilszustak.read.ui.base.binding.viewBinding
 import pl.kamilszustak.read.ui.base.util.setupActionBarWithNavController
 import pl.kamilszustak.read.ui.base.util.setupWithNavController
@@ -22,7 +21,6 @@ import javax.inject.Inject
 class MainActivity : BaseActivity(R.layout.activity_main) {
     @Inject override lateinit var fragmentFactory: FragmentFactory
     @Inject protected lateinit var viewModelFactory: ViewModelProvider.Factory
-    @Inject protected lateinit var firebaseAuth: FirebaseAuth
 
     private val viewModel: MainViewModel by viewModels { viewModelFactory }
     private val binding: ActivityMainBinding by viewBinding(ActivityMainBinding::inflate)

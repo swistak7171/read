@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import org.jetbrains.anko.startActivity
 import pl.kamilszustak.read.ui.authentication.activity.AuthenticationActivity
 import pl.kamilszustak.read.ui.main.activity.MainActivity
+import pl.kamilszustak.read.ui.splashscreen.di.SplashScreenComponent
 import javax.inject.Inject
 
 class SplashScreenActivity : AppCompatActivity() {
@@ -14,8 +15,12 @@ class SplashScreenActivity : AppCompatActivity() {
 
     private val viewModel: SplashScreenViewModel by viewModels { viewModelFactory }
     private val navigator: Navigator = Navigator()
+    private val component: SplashScreenComponent by lazy {
+        (application as SplashScreenComponent.ComponentProvider).provideSplashScreenComponent()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        component.inject(this)
         super.onCreate(savedInstanceState)
 
         observeViewModel()

@@ -51,6 +51,7 @@ dependencies {
     kapt(Dependencies.Google.Dagger.DAGGER_COMPILER)
 
     // Firebase Authentication
+    implementation(Dependencies.Google.Firebase.Authentication.AUTH_KTX)
     implementation(Dependencies.Google.Firebase.Authentication.AUTH_UI)
 
     // Facebok Android SDK

@@ -13,6 +13,7 @@ import pl.kamilszustak.read.di.module.SubcomponentsModule
 import pl.kamilszustak.read.domain.di.DomainModule
 import pl.kamilszustak.read.ui.authentication.di.AuthenticationComponent
 import pl.kamilszustak.read.ui.main.di.MainComponent
+import pl.kamilszustak.read.ui.splashscreen.di.SplashScreenComponent
 import javax.inject.Singleton
 
 @Component(
@@ -28,6 +29,7 @@ import javax.inject.Singleton
 )
 @Singleton
 interface ApplicationComponent : AndroidInjector<ReadApplication> {
+    fun splashScreenComponent(): SplashScreenComponent.Factory
     fun authenticationComponent(): AuthenticationComponent.Factory
     fun mainComponent(): MainComponent.Factory
 

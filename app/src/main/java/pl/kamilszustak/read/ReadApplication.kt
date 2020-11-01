@@ -6,9 +6,11 @@ import pl.kamilszustak.read.di.ApplicationComponent
 import pl.kamilszustak.read.di.DaggerApplicationComponent
 import pl.kamilszustak.read.ui.authentication.di.AuthenticationComponent
 import pl.kamilszustak.read.ui.main.di.MainComponent
+import pl.kamilszustak.read.ui.splashscreen.di.SplashScreenComponent
 import timber.log.Timber
 
 class ReadApplication : DaggerApplication(),
+    SplashScreenComponent.ComponentProvider,
     AuthenticationComponent.ComponentProvider,
     MainComponent.ComponentProvider
 {
@@ -20,6 +22,9 @@ class ReadApplication : DaggerApplication(),
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> =
         applicationComponent
+
+    override fun provideSplashScreenComponent(): SplashScreenComponent =
+        applicationComponent.splashScreenComponent().create()
 
     override fun provideAuthenticationComponent(): AuthenticationComponent =
         applicationComponent.authenticationComponent().create()
