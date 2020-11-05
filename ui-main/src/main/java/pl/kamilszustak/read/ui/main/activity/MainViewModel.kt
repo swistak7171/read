@@ -1,15 +1,11 @@
 package pl.kamilszustak.read.ui.main.activity
 
 import android.app.Application
-import android.content.Intent
 import android.content.pm.ShortcutManager
-import android.graphics.drawable.Icon
 import android.os.Build
 import androidx.core.content.getSystemService
 import com.google.firebase.auth.FirebaseAuth
-import pl.kamilszustak.read.common.util.shortcutInfoBuilder
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
-import pl.kamilszustak.read.ui.main.R
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
@@ -49,13 +45,7 @@ class MainViewModel @Inject constructor(
         }
 
         val shortcutManager = application.getSystemService<ShortcutManager>() ?: return
-        shortcutManager.dynamicShortcuts = listOf(
-            shortcutInfoBuilder(application, "scan") {
-                setIcon(Icon.createWithResource(application, R.drawable.icon_capture))
-                setShortLabel("Scan")
-                setIntent(Intent(Intent.ACTION_VIEW))
-            },
-        )
+        shortcutManager.dynamicShortcuts = listOf()
     }
 
     private fun deleteShortcuts() {

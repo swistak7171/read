@@ -28,6 +28,7 @@
     <string name="book_edited_successfully">Book edited successfully</string>
 
     <!-- QuoteEditFragment -->
+    <string name="quote">Quote</string>
     <string name="add_quote">Add quote</string>
     <string name="edit_quote">Edit quote</string>
     <string name="content">Content</string>

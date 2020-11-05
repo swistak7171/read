@@ -28,6 +28,7 @@
     <string name="book_edited_successfully">Książka została edytowana pomyślnie</string>
 
     <!-- QuoteEditFragment -->
+    <string name="quote">Cytat</string>
     <string name="add_quote">Dodaj cytat</string>
     <string name="edit_quote">Edytuj cytat</string>
     <string name="content">Treść</string>
