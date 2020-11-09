@@ -5,11 +5,10 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.yarolegovich.discretescrollview.DiscreteScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/booksRecyclerView"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_book" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

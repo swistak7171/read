@@ -6,22 +6,23 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.list.listItems
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ModelAdapter
-import com.mikepenz.fastadapter.listeners.ClickEventHook
+import com.yarolegovich.discretescrollview.transform.Pivot
+import com.yarolegovich.discretescrollview.transform.ScaleTransformer
 import pl.kamilszustak.model.common.id.BookId
 import pl.kamilszustak.read.model.domain.Book
 import pl.kamilszustak.read.ui.base.binding.viewBinding
 import pl.kamilszustak.read.ui.base.util.*
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
-import pl.kamilszustak.read.ui.main.activity.MainViewModel
 import pl.kamilszustak.read.ui.main.R
-import pl.kamilszustak.read.ui.main.databinding.FragmentCollectionBinding
 import pl.kamilszustak.read.ui.main.activity.MainEvent
 import pl.kamilszustak.read.ui.main.activity.MainFragmentType
+import pl.kamilszustak.read.ui.main.activity.MainViewModel
+import pl.kamilszustak.read.ui.main.databinding.FragmentCollectionBinding
 import javax.inject.Inject
+
 
 class CollectionFragment @Inject constructor(
     viewModelFactory: ViewModelProvider.Factory,
@@ -62,8 +63,14 @@ class CollectionFragment @Inject constructor(
     override fun initializeRecyclerView() {
         val fastAdapter = FastAdapter.with(modelAdapter).apply {
             onClickListener = { view, adapter, item, position ->
-                val event = CollectionEvent.OnBookClicked(item.model.id)
-                viewModel.dispatchEvent(event)
+                val currentPosition = binding.booksRecyclerView.currentItem
+                if (position != currentPosition) {
+                    binding.booksRecyclerView.smoothScrollToPosition(position)
+                } else {
+                    val event = CollectionEvent.OnBookClicked(item.model.id)
+                    viewModel.dispatchEvent(event)
+                }
+
                 true
             }
 
@@ -73,63 +80,79 @@ class CollectionFragment @Inject constructor(
                 true
             }
 
-            addEventHook(object : ClickEventHook<BookItem>() {
-                override fun onBind(viewHolder: RecyclerView.ViewHolder): View? {
-                    return if (viewHolder is BookItem.ViewHolder) {
-                        viewHolder.binding.menuButton
-                    } else {
-                        null
-                    }
-                }
 
-                override fun onClick(
-                    v: View,
-                    position: Int,
-                    fastAdapter: FastAdapter<BookItem>,
-                    item: BookItem
-                ) {
-                    popupMenu(v, R.menu.popup_menu_collection_book_item) {
-                        setForceShowIcon(true)
-                        setOnMenuItemClickListener { menuItem ->
-                            when (menuItem.itemId) {
-                                R.id.updateReadingProgressItem -> {
-                                    val event = CollectionEvent.OnUpdateReadingProgressButtonClicked(item.model.id)
-                                    viewModel.dispatchEvent(event)
-                                    true
-                                }
-
-                                R.id.editBookItem -> {
-                                    val event = CollectionEvent.OnEditBookButtonClicked(item.model.id)
-                                    viewModel.dispatchEvent(event)
-                                    true
-                                }
-
-                                R.id.deleteBookItem -> {
-                                    dialog {
-                                        title(R.string.delete_book_dialog_title)
-                                        message(R.string.delete_book_dialog_message)
-                                        positiveButton(R.string.yes) {
-                                            val event = CollectionEvent.OnDeleteBookButtonClicked(item.model.id)
-                                            viewModel.dispatchEvent(event)
-                                        }
-                                        negativeButton(R.string.no) { dialog ->
-                                            dialog.dismiss()
-                                        }
-                                    }
-                                    true
-                                }
-
-                                else -> {
-                                    false
-                                }
-                            }
-                        }
-                    }
-                }
-            })
+//            addEventHook(object : ClickEventHook<BookItem>() {
+//                override fun onBind(viewHolder: RecyclerView.ViewHolder): View? {
+//                    return if (viewHolder is BookItem.ViewHolder) {
+//                        viewHolder.binding.menuButton
+//                    } else {
+//                        null
+//                    }
+//                }
+//
+//                override fun onClick(
+//                    v: View,
+//                    position: Int,
+//                    fastAdapter: FastAdapter<BookItem>,
+//                    item: BookItem
+//                ) {
+//                    popupMenu(v, R.menu.popup_menu_collection_book_item) {
+//                        setForceShowIcon(true)
+//                        setOnMenuItemClickListener { menuItem ->
+//                            when (menuItem.itemId) {
+//                                R.id.updateReadingProgressItem -> {
+//                                    val event = CollectionEvent.OnUpdateReadingProgressButtonClicked(item.model.id)
+//                                    viewModel.dispatchEvent(event)
+//                                    true
+//                                }
+//
+//                                R.id.editBookItem -> {
+//                                    val event = CollectionEvent.OnEditBookButtonClicked(item.model.id)
+//                                    viewModel.dispatchEvent(event)
+//                                    true
+//                                }
+//
+//                                R.id.deleteBookItem -> {
+//                                    dialog {
+//                                        title(R.string.delete_book_dialog_title)
+//                                        message(R.string.delete_book_dialog_message)
+//                                        positiveButton(R.string.yes) {
+//                                            val event = CollectionEvent.OnDeleteBookButtonClicked(item.model.id)
+//                                            viewModel.dispatchEvent(event)
+//                                        }
+//                                        negativeButton(R.string.no) { dialog ->
+//                                            dialog.dismiss()
+//                                        }
+//                                    }
+//                                    true
+//                                }
+//
+//                                else -> {
+//                                    false
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            })
         }
 
         binding.booksRecyclerView.apply {
+//            layoutManager = CenterZoomLayoutManager(context, RecyclerView.HORIZONTAL)
+//            setHasFixedSize(true)
+//            layoutManager = CarouselLayoutManager(CarouselLayoutManager.HORIZONTAL).apply {
+//                setPostLayoutListener(CarouselZoomPostLayoutListener())
+//            }
+//            addOnScrollListener(CenterScrollListener())
+            setSlideOnFling(true)
+            setItemTransformer(ScaleTransformer.Builder()
+                .setMaxScale(1.20F)
+                .setMinScale(0.8F)
+                .setPivotX(Pivot.X.CENTER)
+                .setPivotY(Pivot.Y.CENTER)
+                .build()
+            )
+            setItemTransitionTimeMillis(150)
             adapter = fastAdapter
         }
     }
@@ -173,12 +196,14 @@ class CollectionFragment @Inject constructor(
                 }
 
                 CollectionAction.NavigateToSearchFragment -> {
-                    val event = MainEvent.OnFragmentSelectionChanged(MainFragmentType.SEARCH_FRAGMENT)
+                    val event =
+                        MainEvent.OnFragmentSelectionChanged(MainFragmentType.SEARCH_FRAGMENT)
                     mainViewModel.dispatchEvent(event)
                 }
 
                 CollectionAction.NavigateToScannerFragment -> {
-                    val event = MainEvent.OnFragmentSelectionChanged(MainFragmentType.SCANNER_FRAGMENT)
+                    val event =
+                        MainEvent.OnFragmentSelectionChanged(MainFragmentType.SCANNER_FRAGMENT)
                     mainViewModel.dispatchEvent(event)
                 }
 
@@ -206,7 +231,9 @@ class CollectionFragment @Inject constructor(
         }
 
         fun navigateToBookDetailsFragment(bookId: BookId) {
-            val direction = CollectionFragmentDirections.actionCollectionFragmentToBookDetailsFragment(bookId.value)
+            val direction = CollectionFragmentDirections.actionCollectionFragmentToBookDetailsFragment(
+                bookId.value
+            )
             navigate(direction)
         }
 
@@ -216,7 +243,9 @@ class CollectionFragment @Inject constructor(
         }
 
         fun navigateToReadingProgressDialogFragment(bookId: BookId) {
-            val direction = CollectionFragmentDirections.actionCollectionFragmentToReadingProgressDialogFragment(bookId.value)
+            val direction = CollectionFragmentDirections.actionCollectionFragmentToReadingProgressDialogFragment(
+                bookId.value
+            )
             navigate(direction)
         }
     }

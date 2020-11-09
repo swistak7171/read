@@ -60,4 +60,7 @@ dependencies {
     implementation(Dependencies.AndroidX.CameraX.CAMERA_2)
     implementation(Dependencies.AndroidX.CameraX.CAMERA_LIFECYCLE)
     implementation(Dependencies.AndroidX.CameraX.CAMERA_VIEW)
+
+    // DiscreteScrollView
+    implementation(Dependencies.DISCRETE_SCROLL_VIEW)
 }
