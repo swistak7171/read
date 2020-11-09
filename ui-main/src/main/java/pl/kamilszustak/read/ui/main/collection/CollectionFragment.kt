@@ -1,10 +1,12 @@
 package pl.kamilszustak.read.ui.main.collection
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.animation.DecelerateInterpolator
 import androidx.lifecycle.ViewModelProvider
 import com.afollestad.materialdialogs.list.listItems
 import com.mikepenz.fastadapter.FastAdapter
@@ -36,6 +38,10 @@ class CollectionFragment @Inject constructor(
         ModelAdapter { BookItem(it) }
     }
 
+    private val ITEM_MAX_SCALE: Float = 1.2F
+    private val ITEM_MIN_SCALE: Float = 0.8F
+    private val ITEM_TRANSITION_TIME_MILLIS: Int = 150
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_collection_fragment, menu)
         super.onCreateOptionsMenu(menu, inflater)
@@ -43,6 +49,11 @@ class CollectionFragment @Inject constructor(
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            R.id.addBookItem -> {
+                viewModel.dispatchEvent(CollectionEvent.OnAddBookButtonClicked)
+                true
+            }
+
             R.id.readingLogItem -> {
                 viewModel.dispatchEvent(CollectionEvent.OnReadingLogButtonClicked)
                 true
@@ -75,8 +86,14 @@ class CollectionFragment @Inject constructor(
             }
 
             onLongClickListener = { view, adapter, item, position ->
-                val event = CollectionEvent.OnBookLongClicked(item.model.id)
-                viewModel.dispatchEvent(event)
+                val currentPosition = binding.booksRecyclerView.currentItem
+                if (position != currentPosition) {
+                    binding.booksRecyclerView.smoothScrollToPosition(position)
+                } else {
+                    val event = CollectionEvent.OnBookLongClicked(item.model.id)
+                    viewModel.dispatchEvent(event)
+                }
+
                 true
             }
 
@@ -138,28 +155,20 @@ class CollectionFragment @Inject constructor(
         }
 
         binding.booksRecyclerView.apply {
-//            layoutManager = CenterZoomLayoutManager(context, RecyclerView.HORIZONTAL)
-//            setHasFixedSize(true)
-//            layoutManager = CarouselLayoutManager(CarouselLayoutManager.HORIZONTAL).apply {
-//                setPostLayoutListener(CarouselZoomPostLayoutListener())
-//            }
-//            addOnScrollListener(CenterScrollListener())
             setSlideOnFling(true)
             setItemTransformer(ScaleTransformer.Builder()
-                .setMaxScale(1.20F)
-                .setMinScale(0.8F)
+                .setMaxScale(ITEM_MAX_SCALE)
+                .setMinScale(ITEM_MIN_SCALE)
                 .setPivotX(Pivot.X.CENTER)
                 .setPivotY(Pivot.Y.CENTER)
                 .build()
             )
-            setItemTransitionTimeMillis(150)
+            setItemTransitionTimeMillis(ITEM_TRANSITION_TIME_MILLIS)
+            addScrollListener { scrollPosition, currentPosition, newPosition, currentHolder, newCurrent ->
+                val event = CollectionEvent.OnScrolled(newPosition)
+                viewModel.dispatchEvent(event)
+            }
             adapter = fastAdapter
-        }
-    }
-
-    override fun setListeners() {
-        binding.addBookButton.setOnClickListener {
-            viewModel.dispatchEvent(CollectionEvent.OnAddBookButtonClicked)
         }
     }
 
@@ -196,14 +205,12 @@ class CollectionFragment @Inject constructor(
                 }
 
                 CollectionAction.NavigateToSearchFragment -> {
-                    val event =
-                        MainEvent.OnFragmentSelectionChanged(MainFragmentType.SEARCH_FRAGMENT)
+                    val event = MainEvent.OnFragmentSelectionChanged(MainFragmentType.SEARCH_FRAGMENT)
                     mainViewModel.dispatchEvent(event)
                 }
 
                 CollectionAction.NavigateToScannerFragment -> {
-                    val event =
-                        MainEvent.OnFragmentSelectionChanged(MainFragmentType.SCANNER_FRAGMENT)
+                    val event = MainEvent.OnFragmentSelectionChanged(MainFragmentType.SCANNER_FRAGMENT)
                     mainViewModel.dispatchEvent(event)
                 }
 
@@ -220,6 +227,30 @@ class CollectionFragment @Inject constructor(
         viewModel.books.observe(viewLifecycleOwner) { books ->
             modelAdapter.updateModels(books)
         }
+
+        viewModel.currentBook.observe(viewLifecycleOwner) { book ->
+            updateProgress(book.progressPercentage)
+            updateDescription(book.description)
+        }
+    }
+
+    private fun updateProgress(progress: Int) {
+        val lastProgress = binding.progressBar.progress
+        val animator = ObjectAnimator.ofInt(
+            binding.progressBar,
+            "progress",
+            lastProgress,
+            progress
+        ).apply {
+            interpolator = DecelerateInterpolator()
+            duration = ITEM_TRANSITION_TIME_MILLIS.toLong()
+        }
+
+        animator.start()
+    }
+
+    private fun updateDescription(description: String?) {
+        binding.descriptionTextView.text = description
     }
 
     private inner class Navigator {
