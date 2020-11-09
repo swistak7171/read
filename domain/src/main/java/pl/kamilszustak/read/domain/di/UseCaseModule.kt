@@ -109,4 +109,7 @@ interface UseCaseModule {
 
     @Binds
     fun bindObserveReadingLogUseCase(useCaseImpl: ObserveReadingLogUseCaseImpl): ObserveReadingLogUseCase
+
+    @Binds
+    fun bindDeleteBookReadingLogUseCase(useCaseImpl: DeleteBookReadingLogUseCaseImpl): DeleteBookReadingLogUseCase
 }
