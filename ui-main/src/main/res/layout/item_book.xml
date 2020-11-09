@@ -28,7 +28,7 @@
             android:id="@+id/titleTextView"
             android:text="@{book.title}"
             tools:text="@tools:sample/lorem/random"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             android:ellipsize="end"
             android:lines="2"
             android:textAlignment="center" />

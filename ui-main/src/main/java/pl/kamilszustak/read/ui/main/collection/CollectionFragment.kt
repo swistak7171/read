@@ -1,12 +1,11 @@
 package pl.kamilszustak.read.ui.main.collection
 
-import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.animation.DecelerateInterpolator
 import androidx.lifecycle.ViewModelProvider
 import com.afollestad.materialdialogs.list.listItems
 import com.mikepenz.fastadapter.FastAdapter
@@ -235,22 +234,35 @@ class CollectionFragment @Inject constructor(
     }
 
     private fun updateProgress(progress: Int) {
-        val lastProgress = binding.progressBar.progress
-        val animator = ObjectAnimator.ofInt(
-            binding.progressBar,
-            "progress",
-            lastProgress,
-            progress
-        ).apply {
-            interpolator = DecelerateInterpolator()
-            duration = ITEM_TRANSITION_TIME_MILLIS.toLong()
-        }
+        binding.progressBar.setProgress(progress, true)
 
-        animator.start()
+        val lastPercentageProgress = binding.progressPercentageTextView.text.toString()
+            .substringBefore('%', "0")
+            .toIntOrNull() ?: 0
+
+        ValueAnimator.ofInt(lastPercentageProgress, progress).apply {
+            duration = ITEM_TRANSITION_TIME_MILLIS.toLong() * 2
+            addUpdateListener { animator ->
+                val value = (animator.animatedValue as? Int) ?: return@addUpdateListener
+                binding.progressPercentageTextView.text = getString(R.string.progress_percentage, value)
+            }
+        }.start()
     }
 
     private fun updateDescription(description: String?) {
-        binding.descriptionTextView.text = description
+        with(binding.descriptionTextView) {
+            animate()
+                .alpha(0.0F)
+                .setDuration(ITEM_TRANSITION_TIME_MILLIS.toLong())
+                .withEndAction {
+                    text = description
+                    animate()
+                        .alpha(1.0F)
+                        .setDuration(ITEM_TRANSITION_TIME_MILLIS.toLong())
+                        .start()
+                }
+                .start()
+        }
     }
 
     private inner class Navigator {
