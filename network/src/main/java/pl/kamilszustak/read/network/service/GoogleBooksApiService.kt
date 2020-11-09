@@ -1,4 +1,4 @@
-package pl.kamilszustak.read.service
+package pl.kamilszustak.read.network.service
 
 import pl.kamilszustak.model.network.VolumeDto
 import pl.kamilszustak.model.network.VolumeListWrapper

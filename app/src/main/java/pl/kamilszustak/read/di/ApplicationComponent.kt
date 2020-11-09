@@ -12,6 +12,7 @@ import pl.kamilszustak.read.di.module.ApplicationModule
 import pl.kamilszustak.read.di.module.FirebaseAuthenticationModule
 import pl.kamilszustak.read.di.module.SubcomponentsModule
 import pl.kamilszustak.read.domain.di.DomainModule
+import pl.kamilszustak.read.network.di.NetworkModule
 import pl.kamilszustak.read.ui.authentication.di.AuthenticationComponent
 import pl.kamilszustak.read.ui.authentication.di.scope.AuthenticationScope
 import pl.kamilszustak.read.ui.main.di.MainComponent

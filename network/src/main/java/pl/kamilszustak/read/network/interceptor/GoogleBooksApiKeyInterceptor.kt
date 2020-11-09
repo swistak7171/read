@@ -1,8 +1,8 @@
-package pl.kamilszustak.read.interceptor
+package pl.kamilszustak.read.network.interceptor
 
 import okhttp3.Interceptor
 import okhttp3.Response
-import pl.kamilszustak.read.GoogleBooksApiHelper
+import pl.kamilszustak.read.network.GoogleBooksApiHelper
 import javax.inject.Inject
 
 class GoogleBooksApiKeyInterceptor @Inject constructor(

@@ -1,7 +1,6 @@
-package pl.kamilszustak.read
+package pl.kamilszustak.read.network
 
 import android.app.Application
-import pl.kamilszustak.read.network.R
 import javax.inject.Inject
 
 class GoogleBooksApiHelper @Inject constructor(

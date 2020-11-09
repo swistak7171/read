@@ -1,4 +1,4 @@
-package pl.kamilszustak.read.di
+package pl.kamilszustak.read.network.di
 
 import dagger.Module
 

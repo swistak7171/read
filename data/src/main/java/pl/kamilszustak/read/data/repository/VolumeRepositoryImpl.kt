@@ -4,9 +4,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import pl.kamilszustak.model.common.VolumeSearchParameterType
 import pl.kamilszustak.model.network.VolumeDto
-import pl.kamilszustak.read.VolumeSearchParameterFactory
+import pl.kamilszustak.read.network.VolumeSearchParameterFactory
 import pl.kamilszustak.read.data.access.repository.VolumeRepository
-import pl.kamilszustak.read.service.GoogleBooksApiService
+import pl.kamilszustak.read.network.service.GoogleBooksApiService
 import retrofit2.HttpException
 import javax.inject.Inject
 import javax.inject.Singleton

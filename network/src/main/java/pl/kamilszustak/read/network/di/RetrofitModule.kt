@@ -1,12 +1,12 @@
-package pl.kamilszustak.read.di
+package pl.kamilszustak.read.network.di
 
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import pl.kamilszustak.read.interceptor.GoogleBooksApiKeyInterceptor
-import pl.kamilszustak.read.service.GoogleBooksApiService
+import pl.kamilszustak.read.network.interceptor.GoogleBooksApiKeyInterceptor
+import pl.kamilszustak.read.network.service.GoogleBooksApiService
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.create

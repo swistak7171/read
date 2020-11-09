@@ -1,4 +1,4 @@
-package pl.kamilszustak.read
+package pl.kamilszustak.read.network
 
 import pl.kamilszustak.model.common.VolumeSearchParameterType
 import javax.inject.Inject
