@@ -5,6 +5,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.domain.access.usecase.book.DeleteBookUseCase
@@ -28,6 +29,7 @@ class CollectionViewModel @Inject constructor(
                 }
             }
         }
+        .map { it.sortedByDescending(Book::modificationDate) }
         .asLiveData(viewModelScope.coroutineContext)
 
     private val _currentBook: UniqueLiveData<Book> = UniqueLiveData()

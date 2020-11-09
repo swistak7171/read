@@ -89,68 +89,47 @@ class CollectionFragment @Inject constructor(
                 if (position != currentPosition) {
                     binding.booksRecyclerView.smoothScrollToPosition(position)
                 } else {
-                    val event = CollectionEvent.OnBookLongClicked(item.model.id)
-                    viewModel.dispatchEvent(event)
+                    popupMenu(view, R.menu.popup_menu_collection_book_item) {
+                        setForceShowIcon(true)
+                        setOnMenuItemClickListener { menuItem ->
+                            when (menuItem.itemId) {
+                                R.id.updateReadingProgressItem -> {
+                                    val event = CollectionEvent.OnUpdateReadingProgressButtonClicked(item.model.id)
+                                    viewModel.dispatchEvent(event)
+                                    true
+                                }
+
+                                R.id.editBookItem -> {
+                                    val event = CollectionEvent.OnEditBookButtonClicked(item.model.id)
+                                    viewModel.dispatchEvent(event)
+                                    true
+                                }
+
+                                R.id.deleteBookItem -> {
+                                    dialog {
+                                        title(R.string.delete_book_dialog_title)
+                                        message(R.string.delete_book_dialog_message)
+                                        positiveButton(R.string.yes) {
+                                            val event = CollectionEvent.OnDeleteBookButtonClicked(item.model.id)
+                                            viewModel.dispatchEvent(event)
+                                        }
+                                        negativeButton(R.string.no) { dialog ->
+                                            dialog.dismiss()
+                                        }
+                                    }
+                                    true
+                                }
+
+                                else -> {
+                                    false
+                                }
+                            }
+                        }
+                    }
                 }
 
                 true
             }
-
-
-//            addEventHook(object : ClickEventHook<BookItem>() {
-//                override fun onBind(viewHolder: RecyclerView.ViewHolder): View? {
-//                    return if (viewHolder is BookItem.ViewHolder) {
-//                        viewHolder.binding.menuButton
-//                    } else {
-//                        null
-//                    }
-//                }
-//
-//                override fun onClick(
-//                    v: View,
-//                    position: Int,
-//                    fastAdapter: FastAdapter<BookItem>,
-//                    item: BookItem
-//                ) {
-//                    popupMenu(v, R.menu.popup_menu_collection_book_item) {
-//                        setForceShowIcon(true)
-//                        setOnMenuItemClickListener { menuItem ->
-//                            when (menuItem.itemId) {
-//                                R.id.updateReadingProgressItem -> {
-//                                    val event = CollectionEvent.OnUpdateReadingProgressButtonClicked(item.model.id)
-//                                    viewModel.dispatchEvent(event)
-//                                    true
-//                                }
-//
-//                                R.id.editBookItem -> {
-//                                    val event = CollectionEvent.OnEditBookButtonClicked(item.model.id)
-//                                    viewModel.dispatchEvent(event)
-//                                    true
-//                                }
-//
-//                                R.id.deleteBookItem -> {
-//                                    dialog {
-//                                        title(R.string.delete_book_dialog_title)
-//                                        message(R.string.delete_book_dialog_message)
-//                                        positiveButton(R.string.yes) {
-//                                            val event = CollectionEvent.OnDeleteBookButtonClicked(item.model.id)
-//                                            viewModel.dispatchEvent(event)
-//                                        }
-//                                        negativeButton(R.string.no) { dialog ->
-//                                            dialog.dismiss()
-//                                        }
-//                                    }
-//                                    true
-//                                }
-//
-//                                else -> {
-//                                    false
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            })
         }
 
         binding.booksRecyclerView.apply {
@@ -234,13 +213,10 @@ class CollectionFragment @Inject constructor(
     }
 
     private fun updateProgress(progress: Int) {
+        val lastProgress = binding.progressBar.progress
         binding.progressBar.setProgress(progress, true)
 
-        val lastPercentageProgress = binding.progressPercentageTextView.text.toString()
-            .substringBefore('%', "0")
-            .toIntOrNull() ?: 0
-
-        ValueAnimator.ofInt(lastPercentageProgress, progress).apply {
+        ValueAnimator.ofInt(lastProgress, progress).apply {
             duration = ITEM_TRANSITION_TIME_MILLIS.toLong() * 2
             addUpdateListener { animator ->
                 val value = (animator.animatedValue as? Int) ?: return@addUpdateListener
