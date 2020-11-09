@@ -77,7 +77,8 @@ class BookEditViewModel(
     override fun handleEvent(event: BookEditEvent) {
         when (event) {
             BookEditEvent.OnDateEditTextClicked -> {
-                _action.value = BookEditAction.OpenDatePicker
+                val date = _bookPublicationDate.value ?: Date()
+                _action.value = BookEditAction.OpenDatePicker(date)
             }
 
             is BookEditEvent.OnPublicationDateSelected -> {

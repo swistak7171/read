@@ -11,7 +11,7 @@ import com.mikepenz.fastadapter.listeners.ClickEventHook
 import pl.kamilszustak.read.model.domain.Volume
 import pl.kamilszustak.read.ui.base.util.*
 import pl.kamilszustak.read.ui.main.R
-import pl.kamilszustak.read.ui.main.activity.MainDataBindingFragment
+import pl.kamilszustak.read.ui.main.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.activity.MainEvent
 import pl.kamilszustak.read.ui.main.activity.MainFragmentType
 import pl.kamilszustak.read.ui.main.activity.MainViewModel

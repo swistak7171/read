@@ -2,12 +2,11 @@ package pl.kamilszustak.read.data.repository
 
 import android.app.Application
 import android.content.res.Resources
-import androidx.core.content.ContextCompat
 import pl.kamilszustak.read.common.util.tryOrNull
 import pl.kamilszustak.read.data.R
 import pl.kamilszustak.read.data.access.repository.CountryRepository
 import pl.kamilszustak.read.model.domain.Country
-import java.util.Locale
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -67,7 +66,7 @@ class CountryRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getByCode(code: String): Country? {
+    override fun getByCode(countryCode: String): Country? {
         return with(application.resources) {
             val names = getStringArray(R.array.country_names_by_code)
             val codes = getStringArray(R.array.country_codes_a_z)
@@ -83,8 +82,9 @@ class CountryRepositoryImpl @Inject constructor(
                 throw Resources.NotFoundException("Countries resources not found")
             }
 
+            var country: Country? = null
             codes.forEachIndexed { index, code ->
-                if (code.toLowerCase(Locale.getDefault()) != code.toLowerCase(Locale.getDefault())) {
+                if (code.toLowerCase(Locale.getDefault()) != countryCode.toLowerCase(Locale.getDefault())) {
                     return@forEachIndexed
                 }
 
@@ -107,7 +107,7 @@ class CountryRepositoryImpl @Inject constructor(
                     application.getDrawable(identifier)
                 }
 
-                return Country(
+                country = Country(
                     name = name,
                     code = longCode,
                     extension = extension,
@@ -115,7 +115,7 @@ class CountryRepositoryImpl @Inject constructor(
                 )
             }
 
-            return null
+            country
         }
     }
 }

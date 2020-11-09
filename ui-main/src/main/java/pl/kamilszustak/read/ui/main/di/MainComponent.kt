@@ -1,13 +1,13 @@
 package pl.kamilszustak.read.ui.main.di
 
 import dagger.Subcomponent
+import pl.kamilszustak.read.ui.main.di.scope.MainScope
 import pl.kamilszustak.read.ui.base.di.module.BaseUiModule
 import pl.kamilszustak.read.ui.main.activity.MainActivity
 import pl.kamilszustak.read.ui.main.di.module.MainActivityModule
 import pl.kamilszustak.read.ui.main.di.module.MainAssistedInjectModule
 import pl.kamilszustak.read.ui.main.di.module.MainFragmentModule
 import pl.kamilszustak.read.ui.main.di.module.MainViewModelModule
-import pl.kamilszustak.read.ui.main.di.scope.MainScope
 
 @Subcomponent(
     modules = [

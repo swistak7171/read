@@ -53,7 +53,7 @@ dependencies {
     kapt(Dependencies.AssistedInject.ASSISTED_INJECT_PROCESSOR_DAGGER_2)
 
     // Firebase Authentication
-    implementation(Dependencies.Google.Firebase.Authentication.AUTH_UI)
+    implementation(Dependencies.Google.Firebase.Authentication.AUTH_KTX)
 
     // CameraX
     implementation(Dependencies.AndroidX.CameraX.CAMERA_CORE)

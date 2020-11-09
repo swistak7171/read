@@ -62,9 +62,11 @@ class SearchViewModel @Inject constructor(
         }
 
         viewModelScope.launch(Dispatchers.Main) {
+            _isLoading.value = true
             val parameters = mapOf(VolumeSearchParameterType.GENERAL to query)
             observeVolumes(parameters)
                 .collect { _volumes.value = it }
+            _isLoading.value = false
         }
     }
 }

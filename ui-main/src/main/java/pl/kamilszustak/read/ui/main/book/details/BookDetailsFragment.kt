@@ -10,7 +10,7 @@ import androidx.navigation.fragment.navArgs
 import pl.kamilszustak.model.common.id.BookId
 import pl.kamilszustak.read.ui.base.util.*
 import pl.kamilszustak.read.ui.main.R
-import pl.kamilszustak.read.ui.main.activity.MainDataBindingFragment
+import pl.kamilszustak.read.ui.main.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.databinding.FragmentBookDetailsBinding
 import javax.inject.Inject
 

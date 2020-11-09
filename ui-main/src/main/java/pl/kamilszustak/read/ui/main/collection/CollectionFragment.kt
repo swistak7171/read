@@ -177,6 +177,11 @@ class CollectionFragment @Inject constructor(
                     mainViewModel.dispatchEvent(event)
                 }
 
+                CollectionAction.NavigateToScannerFragment -> {
+                    val event = MainEvent.OnFragmentSelectionChanged(MainFragmentType.SCANNER_FRAGMENT)
+                    mainViewModel.dispatchEvent(event)
+                }
+
                 CollectionAction.BookDeleted -> {
                     successToast(R.string.book_deleted)
                 }

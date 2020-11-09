@@ -28,6 +28,7 @@
     <string name="book_edited_successfully">Book edited successfully</string>
 
     <!-- QuoteEditFragment -->
+    <string name="quote">Quote</string>
     <string name="add_quote">Add quote</string>
     <string name="edit_quote">Edit quote</string>
     <string name="content">Content</string>
@@ -53,6 +54,7 @@
     <string-array name="add_book_dialog_options">
         <item>Add manually</item>
         <item>Search in Google Books</item>
+        <item>Scan ISBN</item>
     </string-array>
 
     <!-- ReadingProgressDialogFragment -->
@@ -85,4 +87,8 @@
     <!-- BookDetailsFragment -->
     <string name="book_details">Book details</string>
     <string name="read_pages_all_pages" translatable="false">%1$d/%2$d</string>
+
+    <!-- ProfileFragment -->
+    <string name="sign_out_and_exit">Sign out and exit</string>
+    <string name="sign_out_and_exit_dialog_message">Do you want to sign out and exit?</string>
 </resources>

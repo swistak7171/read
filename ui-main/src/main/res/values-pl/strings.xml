@@ -28,6 +28,7 @@
     <string name="book_edited_successfully">Książka została edytowana pomyślnie</string>
 
     <!-- QuoteEditFragment -->
+    <string name="quote">Cytat</string>
     <string name="add_quote">Dodaj cytat</string>
     <string name="edit_quote">Edytuj cytat</string>
     <string name="content">Treść</string>
@@ -48,6 +49,7 @@
     <string-array name="add_book_dialog_options">
         <item>Dodaj ręcznie</item>
         <item>Szukaj w Google Books</item>
+        <item>Skanuj ISBN</item>
     </string-array>
 
     <!-- ScannerFragment -->
@@ -84,4 +86,8 @@
 
     <!-- BookDetailsFragment -->
     <string name="book_details">Szczegóły książki</string>
+
+    <!-- ProfileFragment -->
+    <string name="sign_out_and_exit">Wyloguj i wyjdź</string>
+    <string name="sign_out_and_exit_dialog_message">Czy na pewno chcesz się wylogować i wyjść?</string>
 </resources>

@@ -12,6 +12,7 @@ object Modules {
     const val MODEL_NETWORK: String = ":model-network"
     const val MODEL_MAPPER: String = ":model-mapper"
     const val UI_BASE: String = ":ui-base"
+    const val UI_SPLASHSCREEN: String = ":ui-splashscreen"
     const val UI_AUTHENTICATION: String = ":ui-authentication"
     const val UI_MAIN: String = ":ui-main"
 }

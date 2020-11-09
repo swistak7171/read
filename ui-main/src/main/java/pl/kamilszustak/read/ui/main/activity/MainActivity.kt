@@ -1,13 +1,19 @@
 package pl.kamilszustak.read.ui.main.activity
 
+import android.os.Build
 import android.os.Bundle
+import android.os.Process
 import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import pl.kamilszustak.read.ui.base.binding.viewBinding
 import pl.kamilszustak.read.ui.base.util.setupActionBarWithNavController
 import pl.kamilszustak.read.ui.base.util.setupWithNavController
@@ -17,13 +23,16 @@ import pl.kamilszustak.read.ui.main.databinding.ActivityMainBinding
 import pl.kamilszustak.read.ui.main.di.MainComponent
 import javax.inject.Inject
 
+
 class MainActivity : BaseActivity(R.layout.activity_main) {
     @Inject override lateinit var fragmentFactory: FragmentFactory
     @Inject protected lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject protected lateinit var firebaseAuth: FirebaseAuth
 
     private val viewModel: MainViewModel by viewModels { viewModelFactory }
     private val binding: ActivityMainBinding by viewBinding(ActivityMainBinding::inflate)
     private var currentNavController: LiveData<NavController>? = null
+    private val navigator: Navigator = Navigator()
     private val component: MainComponent by lazy {
         (application as MainComponent.ComponentProvider).provideMainComponent()
     }
@@ -90,7 +99,18 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
                 is MainAction.ChangeFragmentSelection -> {
                     binding.mainBottomNavigationView.selectedItemId = action.idResource
                 }
+
+                MainAction.NavigateToAuthenticationActivity -> {
+                    finishAndRemoveTask()
+                    lifecycleScope.launch {
+                        delay(100)
+                        Process.killProcess(Process.myPid())
+                    }
+                }
             }
         }
+    }
+
+    private inner class Navigator {
     }
 }

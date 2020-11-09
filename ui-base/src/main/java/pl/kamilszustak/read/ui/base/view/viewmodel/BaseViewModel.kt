@@ -16,7 +16,8 @@ abstract class BaseViewModel<E : ViewEvent, A : ViewAction> : ViewModel() {
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
-    protected abstract fun handleEvent(event: E)
+    protected open fun handleEvent(event: E) {
+    }
 
     fun dispatchEvent(event: E) {
         handleEvent(event)

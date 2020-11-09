@@ -1,15 +1,17 @@
 package pl.kamilszustak.read.ui.authentication.signin.phone
 
+import android.text.InputType
 import androidx.lifecycle.ViewModelProvider
+import com.afollestad.materialdialogs.input.input
 import com.afollestad.materialdialogs.list.listItems
-import org.jetbrains.anko.support.v4.startActivity
+import pl.kamilszustak.read.common.util.asWeakReference
 import pl.kamilszustak.read.ui.authentication.AuthenticationDataBindingFragment
 import pl.kamilszustak.read.ui.authentication.R
 import pl.kamilszustak.read.ui.authentication.databinding.FragmentPhoneSignInBinding
 import pl.kamilszustak.read.ui.base.util.dialog
 import pl.kamilszustak.read.ui.base.util.errorToast
+import pl.kamilszustak.read.ui.base.util.normalToast
 import pl.kamilszustak.read.ui.base.util.viewModels
-import pl.kamilszustak.read.ui.main.activity.MainActivity
 import javax.inject.Inject
 
 class PhoneSignInFragment @Inject constructor(
@@ -23,8 +25,14 @@ class PhoneSignInFragment @Inject constructor(
             viewModel.dispatchEvent(PhoneSignInEvent.OnCountryEditTextClicked)
         }
 
+        binding.verificationCodeButton.setOnClickListener {
+            viewModel.dispatchEvent(PhoneSignInEvent.OnVerificationCodeButtonClicked)
+        }
+
         binding.signInButton.setOnClickListener {
-            viewModel.dispatchEvent(PhoneSignInEvent.OnSignInButtonClicked)
+            val reference = requireActivity().asWeakReference()
+            val event = PhoneSignInEvent.OnSignInButtonClicked(reference)
+            viewModel.dispatchEvent(event)
         }
     }
 
@@ -52,9 +60,22 @@ class PhoneSignInFragment @Inject constructor(
                     errorToast(action.messageResourceId)
                 }
 
-                PhoneSignInAction.Authenticated -> {
-                    startActivity<MainActivity>()
-                    requireActivity().finish()
+                PhoneSignInAction.OnVerificationCodeSent -> {
+                    normalToast(R.string.verification_code_sent)
+                }
+
+                PhoneSignInAction.ShowVerificationCodeDialog -> {
+                    dialog {
+                        title(R.string.enter_verification_code)
+                        input(
+                            hintRes = R.string.verification_code,
+                            inputType = InputType.TYPE_NUMBER_FLAG_SIGNED,
+                            maxLength = 6
+                        ) { dialog, text ->
+                            val event = PhoneSignInEvent.OnVerificationCodeEntered(text.toString())
+                            viewModel.dispatchEvent(event)
+                        }
+                    }
                 }
             }
         }

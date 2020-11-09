@@ -37,4 +37,7 @@ dependencies {
 
     // ML Kit Barcode Scanning
     implementation(Dependencies.Google.MLKit.BARCODE_SCANNING)
+
+    // Firebase Authentication
+    implementation(Dependencies.Google.Firebase.Authentication.AUTH_UI)
 }
