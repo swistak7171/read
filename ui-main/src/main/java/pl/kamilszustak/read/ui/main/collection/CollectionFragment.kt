@@ -1,6 +1,7 @@
 package pl.kamilszustak.read.ui.main.collection
 
 import android.animation.ValueAnimator
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -91,7 +92,10 @@ class CollectionFragment @Inject constructor(
                     binding.booksRecyclerView.smoothScrollToPosition(position)
                 } else {
                     popupMenu(view, R.menu.popup_menu_collection_book_item) {
-                        setForceShowIcon(true)
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            setForceShowIcon(true)
+                        }
+
                         setOnMenuItemClickListener { menuItem ->
                             when (menuItem.itemId) {
                                 R.id.updateReadingProgressItem -> {

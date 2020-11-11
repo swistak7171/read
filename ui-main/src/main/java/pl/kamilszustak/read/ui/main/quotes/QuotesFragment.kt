@@ -1,5 +1,6 @@
 package pl.kamilszustak.read.ui.main.quotes
 
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ModelAdapter
 import com.mikepenz.fastadapter.listeners.LongClickEventHook
+import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import pl.kamilszustak.model.common.id.QuoteId
 import pl.kamilszustak.read.model.domain.Quote
 import pl.kamilszustak.read.ui.base.binding.viewBinding
@@ -18,7 +20,6 @@ import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.FragmentQuotesBinding
 import javax.inject.Inject
-import jp.wasabeef.recyclerview.animators.FadeInAnimator
 
 class QuotesFragment @Inject constructor(
     viewModelFactory: ViewModelProvider.Factory,
@@ -109,7 +110,10 @@ class QuotesFragment @Inject constructor(
 
     private fun openQuoteItemPopupMenu(view: View, quote: Quote) {
         popupMenu(view, R.menu.popup_menu_quote_item) {
-            setForceShowIcon(true)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                setForceShowIcon(true)
+            }
+
             setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.editQuoteItem -> {
