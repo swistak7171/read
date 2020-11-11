@@ -4,8 +4,13 @@ import android.app.Application
 import android.content.Context
 import dagger.Binds
 import dagger.Module
+import pl.kamilszustak.read.common.di.ResourceModule
 
-@Module
+@Module(
+    includes = [
+        ResourceModule::class,
+    ]
+)
 interface ApplicationModule {
     @Binds
     fun provideApplicationContext(application: Application): Context

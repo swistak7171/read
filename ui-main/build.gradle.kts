@@ -63,7 +63,4 @@ dependencies {
 
     // DiscreteScrollView
     implementation(Dependencies.DISCRETE_SCROLL_VIEW)
-
-    // pastelPlaceholders
-    implementation(Dependencies.PASTEL_PLACEHOLDERS)
 }

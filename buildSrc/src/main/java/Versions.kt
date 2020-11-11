@@ -1,6 +1,6 @@
 object Versions {
-    const val KOTLIN: String = "1.4.20-RC"
-//    const val KOTLIN: String = "1.4.0"
+//    const val KOTLIN: String = "1.4.20-RC"
+    const val KOTLIN: String = "1.4.0"
     const val ANDROID_STUDIO: String = "4.1.0"
     const val KOTLINX_COROUTINES: String = "1.4.1"
     const val MATERIAL_COMPONENTS: String = "1.3.0-alpha03"
@@ -23,7 +23,7 @@ object Versions {
     const val RETROFIT: String = "2.9.0"
     const val OK_HTTP: String = "4.9.0"
     const val RECYCLER_VIEW: String = "1.2.0-alpha06"
-    const val DAGGER: String = "2.29"
+    const val DAGGER: String = "2.29.1"
     const val ASSISTED_INJECT: String = "0.6.0"
     const val LEAK_CANARY: String = "2.5"
     const val MOSHI: String = "1.11.0"

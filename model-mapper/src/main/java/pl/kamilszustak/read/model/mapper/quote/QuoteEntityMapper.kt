@@ -14,6 +14,7 @@ class QuoteEntityMapper @Inject constructor() : Mapper<QuoteEntity, Quote>() {
             modificationDate = model.modificationDate,
             content = model.content,
             author = model.author,
-            book = model.book
+            book = model.book,
+            backgroundColorValue = model.backgroundColorValue
         )
 }

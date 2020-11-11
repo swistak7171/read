@@ -1,14 +1,14 @@
 package pl.kamilszustak.read.network
 
-import android.app.Application
+import pl.kamilszustak.read.common.resource.ResourceProvider
 import javax.inject.Inject
 
 class GoogleBooksApiHelper @Inject constructor(
-    private val application: Application,
+    private val resourceProvider: ResourceProvider,
 ) {
     val requiredParameters: Map<String, String>
         get() {
-            val apiKey = application.getString(R.string.google_api_key)
+            val apiKey = resourceProvider.getString(R.string.google_api_key)
 
             return mapOf(
                 "key" to apiKey,

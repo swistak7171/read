@@ -17,6 +17,7 @@ class QuoteMapper @Inject constructor(
             content = model.content,
             author = model.author,
             book = model.book,
+            backgroundColorValue = model.backgroundColorValue,
             userId = userId
         ).apply {
             id = model.id.value

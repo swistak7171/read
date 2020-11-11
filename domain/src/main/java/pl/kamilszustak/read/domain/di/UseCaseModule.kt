@@ -75,6 +75,9 @@ interface UseCaseModule {
     fun bindGetQuoteUseCase(useCaseImpl: GetQuoteUseCaseImpl): GetQuoteUseCase
 
     @Binds
+    fun bindGetQuoteColorsUseCase(useCaseImpl: GetQuoteColorsUseCaseImpl): GetQuoteColorsUseCase
+
+    @Binds
     fun bindReadBarcodeUseCase(useCaseImpl: ReadBarcodeUseCaseImpl): ReadBarcodeUseCase
 
     @Binds
