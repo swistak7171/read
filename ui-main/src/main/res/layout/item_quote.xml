@@ -15,52 +15,60 @@
         app:contentPadding="@dimen/default_padding"
         app:cardUseCompatPadding="true"
         app:cardCornerRadius="@dimen/default_radius"
-        app:cardElevation="@dimen/default_elevation">
+        app:cardElevation="@dimen/default_elevation"
+        app:cardBackgroundColor="@{quote.backgroundColorValue}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/leftQuoteSignImageView"
+                android:src="@drawable/icon_quote"
+                android:scaleY="-1"
+                android:scaleX="-1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
+                android:id="@+id/contentTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/contentTextView"
                 android:text="@{quote.content}"
-                android:textStyle="italic"
                 tools:text="@tools:sample/lorem/random"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/menuButton"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/menuButton"
-                android:src="@drawable/icon_menu_vertical"
-                android:background="?selectableItemBackgroundBorderless"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.constraintlayout.widget.Barrier
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/contentBarrier"
-                app:constraint_referenced_ids="contentTextView,menuButton"
-                app:barrierDirection="bottom" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@android:color/black"
+                android:fontFamily="@font/pacifico"
+                app:layout_constraintStart_toEndOf="@id/leftQuoteSignImageView"
+                app:layout_constraintEnd_toStartOf="@id/rightQuoteSignImageView"
+                app:layout_constraintTop_toBottomOf="@id/leftQuoteSignImageView"
+                app:layout_constraintBottom_toTopOf="@id/authorTextView" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/authorTextView"
-                android:text="@{quote.author}"
+                android:text="@{`~` + quote.author}"
                 tools:text="@tools:sample/lorem"
-                android:textStyle="bold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/contentBarrier"
+                android:textColor="@android:color/black"
+                android:fontFamily="sans-serif-light"
+                app:layout_constraintStart_toStartOf="@id/contentTextView"
+                app:layout_constraintEnd_toStartOf="@id/rightQuoteSignImageView"
+                app:layout_constraintTop_toBottomOf="@id/contentTextView"
+                app:layout_constraintBottom_toTopOf="@id/rightQuoteSignImageView"
                 app:layout_constraintHorizontal_bias="1.0"
                 android:layout_marginTop="@dimen/default_half_margin"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rightQuoteSignImageView"
+                android:src="@drawable/icon_quote"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

@@ -6,6 +6,7 @@ import pl.kamilszustak.read.ui.base.view.ViewEvent
 
 sealed class ScannerEvent : ViewEvent {
     object OnResumed : ScannerEvent()
+    object OnTorchButtonClicked : ScannerEvent()
 
     data class OnCameraPermissionResult(
         val result: AssentResult,

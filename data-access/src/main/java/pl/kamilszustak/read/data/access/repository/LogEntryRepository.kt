@@ -7,6 +7,7 @@ interface LogEntryRepository {
     suspend fun add(entry: LogEntryEntity): Result<Unit>
     suspend fun edit(entry: LogEntryEntity): Result<Unit>
     suspend fun deleteById(id: String): Result<Unit>
+    suspend fun deleteAllByBookId(id: String): Result<Unit>
     suspend fun getAll(): List<LogEntryEntity>
     suspend fun getById(id: String): LogEntryEntity?
     fun observeAll(): Flow<List<LogEntryEntity>>

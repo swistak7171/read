@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
+import pl.kamilszustak.read.ui.authentication.activity.AuthenticationViewModel
 import pl.kamilszustak.read.ui.authentication.mainmenu.MainMenuViewModel
 import pl.kamilszustak.read.ui.authentication.signin.email.EmailSignInViewModel
 import pl.kamilszustak.read.ui.authentication.signin.phone.PhoneSignInViewModel
@@ -11,6 +12,11 @@ import pl.kamilszustak.read.ui.base.di.key.ViewModelKey
 
 @Module
 interface AuthenticationViewModelModule {
+    @Binds
+    @IntoMap
+    @ViewModelKey(AuthenticationViewModel::class)
+    fun bindAuthenticationViewModel(viewModel: AuthenticationViewModel): ViewModel
+
     @Binds
     @IntoMap
     @ViewModelKey(MainMenuViewModel::class)

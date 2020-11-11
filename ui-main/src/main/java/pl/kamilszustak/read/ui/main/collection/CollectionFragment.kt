@@ -1,27 +1,30 @@
 package pl.kamilszustak.read.ui.main.collection
 
+import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.list.listItems
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ModelAdapter
-import com.mikepenz.fastadapter.listeners.ClickEventHook
+import com.yarolegovich.discretescrollview.transform.Pivot
+import com.yarolegovich.discretescrollview.transform.ScaleTransformer
+import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import pl.kamilszustak.model.common.id.BookId
 import pl.kamilszustak.read.model.domain.Book
 import pl.kamilszustak.read.ui.base.binding.viewBinding
 import pl.kamilszustak.read.ui.base.util.*
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
-import pl.kamilszustak.read.ui.main.activity.MainViewModel
 import pl.kamilszustak.read.ui.main.R
-import pl.kamilszustak.read.ui.main.databinding.FragmentCollectionBinding
 import pl.kamilszustak.read.ui.main.activity.MainEvent
 import pl.kamilszustak.read.ui.main.activity.MainFragmentType
+import pl.kamilszustak.read.ui.main.activity.MainViewModel
+import pl.kamilszustak.read.ui.main.databinding.FragmentCollectionBinding
 import javax.inject.Inject
+
 
 class CollectionFragment @Inject constructor(
     viewModelFactory: ViewModelProvider.Factory,
@@ -35,6 +38,10 @@ class CollectionFragment @Inject constructor(
         ModelAdapter { BookItem(it) }
     }
 
+    private val ITEM_MAX_SCALE: Float = 1.2F
+    private val ITEM_MIN_SCALE: Float = 0.8F
+    private val ITEM_TRANSITION_TIME_MILLIS: Int = 150
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_collection_fragment, menu)
         super.onCreateOptionsMenu(menu, inflater)
@@ -42,6 +49,11 @@ class CollectionFragment @Inject constructor(
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            R.id.addBookItem -> {
+                viewModel.dispatchEvent(CollectionEvent.OnAddBookButtonClicked)
+                true
+            }
+
             R.id.readingLogItem -> {
                 viewModel.dispatchEvent(CollectionEvent.OnReadingLogButtonClicked)
                 true
@@ -61,28 +73,24 @@ class CollectionFragment @Inject constructor(
 
     override fun initializeRecyclerView() {
         val fastAdapter = FastAdapter.with(modelAdapter).apply {
-            onLongClickListener = { view, adapter, item, position ->
-                val event = CollectionEvent.OnBookLongClicked(item.model.id)
-                viewModel.dispatchEvent(event)
+            onClickListener = { view, adapter, item, position ->
+                val currentPosition = binding.booksRecyclerView.currentItem
+                if (position != currentPosition) {
+                    binding.booksRecyclerView.smoothScrollToPosition(position)
+                } else {
+                    val event = CollectionEvent.OnBookClicked(item.model.id)
+                    viewModel.dispatchEvent(event)
+                }
+
                 true
             }
 
-            addEventHook(object : ClickEventHook<BookItem>() {
-                override fun onBind(viewHolder: RecyclerView.ViewHolder): View? {
-                    return if (viewHolder is BookItem.ViewHolder) {
-                        viewHolder.binding.menuButton
-                    } else {
-                        null
-                    }
-                }
-
-                override fun onClick(
-                    v: View,
-                    position: Int,
-                    fastAdapter: FastAdapter<BookItem>,
-                    item: BookItem
-                ) {
-                    popupMenu(v, R.menu.popup_menu_collection_book_item) {
+            onLongClickListener = { view, adapter, item, position ->
+                val currentPosition = binding.booksRecyclerView.currentItem
+                if (position != currentPosition) {
+                    binding.booksRecyclerView.smoothScrollToPosition(position)
+                } else {
+                    popupMenu(view, R.menu.popup_menu_collection_book_item) {
                         setForceShowIcon(true)
                         setOnMenuItemClickListener { menuItem ->
                             when (menuItem.itemId) {
@@ -120,17 +128,27 @@ class CollectionFragment @Inject constructor(
                         }
                     }
                 }
-            })
+
+                true
+            }
         }
 
         binding.booksRecyclerView.apply {
+            setSlideOnFling(true)
+            setItemTransformer(ScaleTransformer.Builder()
+                .setMaxScale(ITEM_MAX_SCALE)
+                .setMinScale(ITEM_MIN_SCALE)
+                .setPivotX(Pivot.X.CENTER)
+                .setPivotY(Pivot.Y.CENTER)
+                .build()
+            )
+            setItemTransitionTimeMillis(ITEM_TRANSITION_TIME_MILLIS)
+            addScrollListener { scrollPosition, currentPosition, newPosition, currentHolder, newCurrent ->
+                val event = CollectionEvent.OnScrolled(newPosition)
+                viewModel.dispatchEvent(event)
+            }
+            itemAnimator = FadeInAnimator()
             adapter = fastAdapter
-        }
-    }
-
-    override fun setListeners() {
-        binding.addBookButton.setOnClickListener {
-            viewModel.dispatchEvent(CollectionEvent.OnAddBookButtonClicked)
         }
     }
 
@@ -154,6 +172,10 @@ class CollectionFragment @Inject constructor(
                     navigator.navigateToBookEditFragment(action.bookId)
                 }
 
+                is CollectionAction.NavigateToBookDetailsFragment -> {
+                    navigator.navigateToBookDetailsFragment(action.bookId)
+                }
+
                 CollectionAction.NavigateToReadingLogFragment -> {
                     navigator.navigateToReadingLogFragment()
                 }
@@ -164,6 +186,11 @@ class CollectionFragment @Inject constructor(
 
                 CollectionAction.NavigateToSearchFragment -> {
                     val event = MainEvent.OnFragmentSelectionChanged(MainFragmentType.SEARCH_FRAGMENT)
+                    mainViewModel.dispatchEvent(event)
+                }
+
+                CollectionAction.NavigateToScannerFragment -> {
+                    val event = MainEvent.OnFragmentSelectionChanged(MainFragmentType.SCANNER_FRAGMENT)
                     mainViewModel.dispatchEvent(event)
                 }
 
@@ -180,6 +207,40 @@ class CollectionFragment @Inject constructor(
         viewModel.books.observe(viewLifecycleOwner) { books ->
             modelAdapter.updateModels(books)
         }
+
+        viewModel.currentBook.observe(viewLifecycleOwner) { book ->
+            updateProgress(book.progressPercentage)
+            updateDescription(book.description)
+        }
+    }
+
+    private fun updateProgress(progress: Int) {
+        val lastProgress = binding.progressBar.progress
+        binding.progressBar.setProgress(progress, true)
+
+        ValueAnimator.ofInt(lastProgress, progress).apply {
+            duration = ITEM_TRANSITION_TIME_MILLIS.toLong() * 2
+            addUpdateListener { animator ->
+                val value = (animator.animatedValue as? Int) ?: return@addUpdateListener
+                binding.progressPercentageTextView.text = getString(R.string.progress_percentage, value)
+            }
+        }.start()
+    }
+
+    private fun updateDescription(description: String?) {
+        with(binding.descriptionTextView) {
+            animate()
+                .alpha(0.0F)
+                .setDuration(ITEM_TRANSITION_TIME_MILLIS.toLong())
+                .withEndAction {
+                    text = description
+                    animate()
+                        .alpha(1.0F)
+                        .setDuration(ITEM_TRANSITION_TIME_MILLIS.toLong())
+                        .start()
+                }
+                .start()
+        }
     }
 
     private inner class Navigator {
@@ -190,13 +251,22 @@ class CollectionFragment @Inject constructor(
             navigate(direction)
         }
 
+        fun navigateToBookDetailsFragment(bookId: BookId) {
+            val direction = CollectionFragmentDirections.actionCollectionFragmentToBookDetailsFragment(
+                bookId.value
+            )
+            navigate(direction)
+        }
+
         fun navigateToReadingLogFragment() {
             val direction = CollectionFragmentDirections.actionCollectionFragmentToReadingLogFragment()
             navigate(direction)
         }
 
         fun navigateToReadingProgressDialogFragment(bookId: BookId) {
-            val direction = CollectionFragmentDirections.actionCollectionFragmentToReadingProgressDialogFragment(bookId.value)
+            val direction = CollectionFragmentDirections.actionCollectionFragmentToReadingProgressDialogFragment(
+                bookId.value
+            )
             navigate(direction)
         }
     }

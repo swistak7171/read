@@ -4,6 +4,8 @@ import androidx.annotation.IdRes
 import pl.kamilszustak.read.ui.base.view.ViewAction
 
 sealed class MainAction : ViewAction {
+    object NavigateToAuthenticationActivity : MainAction()
+
     class ChangeFragmentSelection(
         @IdRes val idResource: Int,
     ) : MainAction()

@@ -6,7 +6,6 @@ import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
-import org.jetbrains.anko.support.v4.startActivity
 import pl.kamilszustak.read.common.util.asWeakReference
 import pl.kamilszustak.read.ui.authentication.R
 import pl.kamilszustak.read.ui.authentication.databinding.FragmentMainMenuBinding
@@ -15,7 +14,6 @@ import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.navigate
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
-import pl.kamilszustak.read.ui.main.activity.MainActivity
 import javax.inject.Inject
 
 class MainMenuFragment @Inject constructor(
@@ -86,11 +84,6 @@ class MainMenuFragment @Inject constructor(
 
                 is MainMenuAction.Error -> {
                     errorToast(action.messageResourceId)
-                }
-
-                MainMenuAction.Authenticated -> {
-                    startActivity<MainActivity>()
-                    requireActivity().finish()
                 }
             }
         }

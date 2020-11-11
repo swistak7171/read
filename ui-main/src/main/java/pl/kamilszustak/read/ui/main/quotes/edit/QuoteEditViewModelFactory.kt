@@ -6,6 +6,7 @@ import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import pl.kamilszustak.read.domain.access.usecase.quote.AddQuoteUseCase
 import pl.kamilszustak.read.domain.access.usecase.quote.EditQuoteUseCase
+import pl.kamilszustak.read.domain.access.usecase.quote.GetQuoteColorsUseCase
 import pl.kamilszustak.read.domain.access.usecase.quote.GetQuoteUseCase
 
 class QuoteEditViewModelFactory @AssistedInject constructor(
@@ -13,6 +14,7 @@ class QuoteEditViewModelFactory @AssistedInject constructor(
     private val getQuoteUseCase: GetQuoteUseCase,
     private val addQuoteUseCase: AddQuoteUseCase,
     private val editQuoteUseCase: EditQuoteUseCase,
+    private val getQuoteColorsUseCase: GetQuoteColorsUseCase,
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
@@ -20,7 +22,8 @@ class QuoteEditViewModelFactory @AssistedInject constructor(
             arguments = arguments,
             getQuote = getQuoteUseCase,
             addQuote = addQuoteUseCase,
-            editQuote = editQuoteUseCase
+            editQuote = editQuoteUseCase,
+            getQuoteColors = getQuoteColorsUseCase
         ) as T
 
     @AssistedInject.Factory

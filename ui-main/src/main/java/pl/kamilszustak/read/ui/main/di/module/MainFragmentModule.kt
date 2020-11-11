@@ -5,6 +5,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import pl.kamilszustak.read.ui.base.di.key.FragmentKey
+import pl.kamilszustak.read.ui.main.book.details.BookDetailsFragment
 import pl.kamilszustak.read.ui.main.book.edit.BookEditFragment
 import pl.kamilszustak.read.ui.main.book.progress.ReadingProgressDialogFragment
 import pl.kamilszustak.read.ui.main.collection.CollectionFragment
@@ -67,4 +68,9 @@ interface MainFragmentModule {
     @IntoMap
     @FragmentKey(LogEntryDetailsFragment::class)
     fun bindLogEntryDetailsFragment(fragment: LogEntryDetailsFragment): Fragment
+
+    @Binds
+    @IntoMap
+    @FragmentKey(BookDetailsFragment::class)
+    fun bindBookDetailsFragment(fragment: BookDetailsFragment): Fragment
 }

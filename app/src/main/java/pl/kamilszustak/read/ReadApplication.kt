@@ -6,13 +6,15 @@ import pl.kamilszustak.read.di.ApplicationComponent
 import pl.kamilszustak.read.di.DaggerApplicationComponent
 import pl.kamilszustak.read.ui.authentication.di.AuthenticationComponent
 import pl.kamilszustak.read.ui.main.di.MainComponent
+import pl.kamilszustak.read.ui.splashscreen.di.SplashScreenComponent
 import timber.log.Timber
 
 class ReadApplication : DaggerApplication(),
+    SplashScreenComponent.ComponentProvider,
     AuthenticationComponent.ComponentProvider,
     MainComponent.ComponentProvider
 {
-    val applicationComponent: ApplicationComponent by lazy {
+    private val applicationComponent: ApplicationComponent by lazy {
         DaggerApplicationComponent.builder()
             .application(this)
             .build()
@@ -20,6 +22,9 @@ class ReadApplication : DaggerApplication(),
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> =
         applicationComponent
+
+    override fun provideSplashScreenComponent(): SplashScreenComponent =
+        applicationComponent.splashScreenComponent().create()
 
     override fun provideAuthenticationComponent(): AuthenticationComponent =
         applicationComponent.authenticationComponent().create()
@@ -30,8 +35,8 @@ class ReadApplication : DaggerApplication(),
     override fun onCreate() {
         super.onCreate()
 
-        initializeDagger()
         initializeTimber()
+        initializeDagger()
     }
 
     private fun initializeDagger() {

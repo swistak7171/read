@@ -182,4 +182,8 @@ object Dependencies {
     const val FACEBOOK_ANDROID_SDK: String = "com.facebook.android:facebook-android-sdk:${Versions.FACEBOOK_ANDROID_SDK}"
     const val TWITTER_ANDROID_SDK: String = "com.twitter.sdk.android:twitter-core:${Versions.TWITTER_ANDROID_SDK}"
     const val ANDROID_FLAGS: String = "com.github.Shusshu:android-flags:${Versions.ANDROID_FLAGS}"
+    const val CIRCULAR_PROGRESS_BAR: String = "com.mikhaellopez:circularprogressbar:${Versions.CIRCULAR_PROGRESS_BAR}"
+    const val DISCRETE_SCROLL_VIEW: String = "com.yarolegovich:discrete-scrollview:${Versions.DISCRETE_SCROLL_VIEW}"
+    const val PASTEL_PLACEHOLDERS: String = "com.github.zedlabs:pastelPlaceholders:${Versions.PASTEL_PLACEHOLDERS}"
+    const val RECYCLER_VIEW_ANIMATORS: String = "jp.wasabeef:recyclerview-animators:${Versions.RECYCLER_VIEW_ANIMATORS}"
 }

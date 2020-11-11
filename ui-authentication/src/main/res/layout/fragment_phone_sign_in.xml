@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/countryCodeEditText"
-                android:text="@{`+` + viewModel.country.extension}"
+                android:text="@{`+` + (viewModel.country.extension ?? ``)}"
                 android:focusable="false"
                 android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -50,12 +50,22 @@
                 android:inputType="phone" />
         </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/signInButton"
-        android:text="@string/sign_in"
-        app:layout_constraintTop_toBottomOf="@id/phoneNumberInputLayout"
-        android:layout_marginTop="@dimen/default_margin" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/verificationCodeButton"
+            android:text="@string/enter_verification_code"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/phoneNumberInputLayout"
+            app:layout_constraintHorizontal_bias="1.0" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/signInButton"
+            android:text="@string/send_verification_code"
+            app:layout_constraintTop_toBottomOf="@id/verificationCodeButton" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

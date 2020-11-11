@@ -7,6 +7,14 @@ sealed class CollectionEvent : ViewEvent {
     object OnAddBookButtonClicked : CollectionEvent()
     object OnReadingLogButtonClicked : CollectionEvent()
 
+    data class OnScrolled(
+        val position: Int,
+    ) : CollectionEvent()
+
+    data class OnBookClicked(
+        val bookId: BookId,
+    ) : CollectionEvent()
+
     data class OnDialogOptionSelected(
         val index: Int,
     ) : CollectionEvent()

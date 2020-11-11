@@ -10,6 +10,10 @@ sealed class CollectionAction : ViewAction {
         @ArrayRes val itemsResourceId: Int,
     ) : CollectionAction()
 
+    data class NavigateToBookDetailsFragment(
+        val bookId: BookId,
+    ) : CollectionAction()
+
     data class NavigateToBookEditFragment(
         val bookId: BookId? = null,
     ) : CollectionAction()
@@ -24,5 +28,6 @@ sealed class CollectionAction : ViewAction {
 
     object BookDeleted : CollectionAction()
     object NavigateToSearchFragment : CollectionAction()
+    object NavigateToScannerFragment : CollectionAction()
     object NavigateToReadingLogFragment : CollectionAction()
 }

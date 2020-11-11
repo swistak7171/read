@@ -28,12 +28,14 @@
     <string name="book_edited_successfully">Książka została edytowana pomyślnie</string>
 
     <!-- QuoteEditFragment -->
+    <string name="quote">Cytat</string>
     <string name="add_quote">Dodaj cytat</string>
     <string name="edit_quote">Edytuj cytat</string>
     <string name="content">Treść</string>
     <string name="book_title">Tytuł książki</string>
     <string name="blank_quote_content">Pusta treść</string>
     <string name="blank_quote_author">Brak autora</string>
+    <string name="quote_color_not_selected">Kolor nie został wybrany</string>
     <string name="adding_quote_error_message">Wystąpił błąd podczas dodawania cytatu</string>
     <string name="quote_added_successfully">Cytat został dodany pomyślnie</string>
     <string name="editing_quote_error_message">Wystąpił błąd podczas edytowania cytatu</string>
@@ -48,6 +50,7 @@
     <string-array name="add_book_dialog_options">
         <item>Dodaj ręcznie</item>
         <item>Szukaj w Google Books</item>
+        <item>Skanuj ISBN</item>
     </string-array>
 
     <!-- ScannerFragment -->
@@ -81,4 +84,11 @@
     <!-- LogEntryDetailsDialogFragment -->
     <string name="start_page_number">Strona początkowa: %1$d</string>
     <string name="end_page_number">Strona końcowa: %1$d</string>
+
+    <!-- BookDetailsFragment -->
+    <string name="book_details">Szczegóły książki</string>
+
+    <!-- ProfileFragment -->
+    <string name="sign_out_and_exit">Wyloguj i wyjdź</string>
+    <string name="sign_out_and_exit_dialog_message">Czy na pewno chcesz się wylogować i wyjść?</string>
 </resources>

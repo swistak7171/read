@@ -13,5 +13,7 @@ sealed class PhoneSignInAction : ViewAction {
         @StringRes val messageResourceId: Int,
     ) : PhoneSignInAction()
 
+    object ShowVerificationCodeDialog : PhoneSignInAction()
+    object OnVerificationCodeSent : PhoneSignInAction()
     object Authenticated : PhoneSignInAction()
 }

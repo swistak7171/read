@@ -75,4 +75,7 @@ dependencies {
 
     // android-flags
     api(Dependencies.ANDROID_FLAGS)
+
+    // pastelPlaceholders
+    api(Dependencies.PASTEL_PLACEHOLDERS)
 }
