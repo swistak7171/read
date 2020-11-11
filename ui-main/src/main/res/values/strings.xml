@@ -78,6 +78,7 @@
 
     <!-- ReadingLogFragment -->
     <string name="reading_log">Reading log</string>
+    <string name="empty_reading_log_message">Your reading log is empty</string>
     <plurals name="reading_log_entry_content">
         <item quantity="one">You read %1$d page</item>
         <item quantity="other">You read %1$d pages</item>

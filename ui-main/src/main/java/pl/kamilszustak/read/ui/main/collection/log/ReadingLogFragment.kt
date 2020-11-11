@@ -1,5 +1,6 @@
 package pl.kamilszustak.read.ui.main.collection.log
 
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ModelAdapter
@@ -49,6 +50,8 @@ class ReadingLogFragment @Inject constructor(
         }
 
         viewModel.readingLog.observe(viewLifecycleOwner) { entries ->
+            binding.readingLogRecyclerView.isVisible = entries.isNotEmpty()
+            binding.emptyReadingLogView.root.isVisible = entries.isEmpty()
             modelAdapter.updateModels(entries)
         }
     }

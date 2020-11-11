@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/readingLogRecyclerView"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_log_entry" />
-</FrameLayout>
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/readingLogRecyclerView"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_log_entry" />
+
+        <include layout="@layout/empty_list_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/emptyReadingLogView"
+            app:iconDrawable="@{@drawable/icon_history}"
+            app:message="@{@string/empty_collection_message}"
+            android:padding="@dimen/default_padding"
+            android:visibility="gone"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+</layout>
