@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.afollestad.materialdialogs.list.listItems
 import com.mikepenz.fastadapter.FastAdapter
@@ -16,9 +17,8 @@ import com.yarolegovich.discretescrollview.transform.ScaleTransformer
 import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import pl.kamilszustak.model.common.id.BookId
 import pl.kamilszustak.read.model.domain.Book
-import pl.kamilszustak.read.ui.base.binding.viewBinding
 import pl.kamilszustak.read.ui.base.util.*
-import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
+import pl.kamilszustak.read.ui.main.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.activity.MainEvent
 import pl.kamilszustak.read.ui.main.activity.MainFragmentType
@@ -26,14 +26,12 @@ import pl.kamilszustak.read.ui.main.activity.MainViewModel
 import pl.kamilszustak.read.ui.main.databinding.FragmentCollectionBinding
 import javax.inject.Inject
 
-
 class CollectionFragment @Inject constructor(
     viewModelFactory: ViewModelProvider.Factory,
-) : BaseFragment<FragmentCollectionBinding, CollectionViewModel>(R.layout.fragment_collection) {
+) : MainDataBindingFragment<FragmentCollectionBinding, CollectionViewModel>(R.layout.fragment_collection) {
 
     override val viewModel: CollectionViewModel by viewModels(viewModelFactory)
     private val mainViewModel: MainViewModel by activityViewModels(viewModelFactory)
-    override val binding: FragmentCollectionBinding by viewBinding(FragmentCollectionBinding::bind)
     private val navigator: Navigator = Navigator()
     private val modelAdapter: ModelAdapter<Book, BookItem> by lazy {
         ModelAdapter { BookItem(it) }
@@ -209,15 +207,9 @@ class CollectionFragment @Inject constructor(
         }
 
         viewModel.books.observe(viewLifecycleOwner) { books ->
+            binding.emptyCollectionView.root.isVisible = books.isEmpty()
+            binding.collectionGroup.isVisible = books.isNotEmpty()
             modelAdapter.updateModels(books)
-
-            if (books.isEmpty()) {
-                binding.emptyCollectionView.root.setVisible()
-                binding.collectionGroup.setGone()
-            } else {
-                binding.emptyCollectionView.root.setGone()
-                binding.collectionGroup.setVisible()
-            }
         }
 
         viewModel.currentBook.observe(viewLifecycleOwner) { book ->

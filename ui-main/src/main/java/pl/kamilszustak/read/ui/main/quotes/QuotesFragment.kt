@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.mikepenz.fastadapter.FastAdapter
@@ -14,19 +15,17 @@ import com.mikepenz.fastadapter.listeners.LongClickEventHook
 import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import pl.kamilszustak.model.common.id.QuoteId
 import pl.kamilszustak.read.model.domain.Quote
-import pl.kamilszustak.read.ui.base.binding.viewBinding
 import pl.kamilszustak.read.ui.base.util.*
-import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
+import pl.kamilszustak.read.ui.main.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.FragmentQuotesBinding
 import javax.inject.Inject
 
 class QuotesFragment @Inject constructor(
     viewModelFactory: ViewModelProvider.Factory,
-) : BaseFragment<FragmentQuotesBinding, QuotesViewModel>(R.layout.fragment_quotes) {
+) : MainDataBindingFragment<FragmentQuotesBinding, QuotesViewModel>(R.layout.fragment_quotes) {
 
     override val viewModel: QuotesViewModel by viewModels(viewModelFactory)
-    override val binding: FragmentQuotesBinding by viewBinding(FragmentQuotesBinding::bind)
     private val navigator: Navigator = Navigator()
     private val modelAdapter: ModelAdapter<Quote, QuoteItem> by lazy {
         ModelAdapter { QuoteItem(it) }
@@ -104,6 +103,8 @@ class QuotesFragment @Inject constructor(
         }
 
         viewModel.quotes.observe(viewLifecycleOwner) { quotes ->
+            binding.quotesRecyclerView.isVisible = quotes.isNotEmpty()
+            binding.emptyQuotesListView.root.isVisible = quotes.isEmpty()
             modelAdapter.updateModels(quotes)
         }
     }
