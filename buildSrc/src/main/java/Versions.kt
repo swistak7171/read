@@ -47,4 +47,5 @@ object Versions {
     const val CIRCULAR_PROGRESS_BAR: String = "3.0.3"
     const val DISCRETE_SCROLL_VIEW: String = "1.5.1"
     const val PASTEL_PLACEHOLDERS: String = "1.0.4"
+    const val RECYCLER_VIEW_ANIMATORS: String = "4.0.1"
 }

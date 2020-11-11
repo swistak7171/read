@@ -18,6 +18,7 @@ import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.FragmentQuotesBinding
 import javax.inject.Inject
+import jp.wasabeef.recyclerview.animators.FadeInAnimator
 
 class QuotesFragment @Inject constructor(
     viewModelFactory: ViewModelProvider.Factory,
@@ -79,6 +80,7 @@ class QuotesFragment @Inject constructor(
         }
 
         binding.quotesRecyclerView.apply {
+            itemAnimator = FadeInAnimator()
             adapter = fastAdapter
         }
     }

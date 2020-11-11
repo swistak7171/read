@@ -12,6 +12,7 @@ import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ModelAdapter
 import com.yarolegovich.discretescrollview.transform.Pivot
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer
+import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import pl.kamilszustak.model.common.id.BookId
 import pl.kamilszustak.read.model.domain.Book
 import pl.kamilszustak.read.ui.base.binding.viewBinding
@@ -146,6 +147,7 @@ class CollectionFragment @Inject constructor(
                 val event = CollectionEvent.OnScrolled(newPosition)
                 viewModel.dispatchEvent(event)
             }
+            itemAnimator = FadeInAnimator()
             adapter = fastAdapter
         }
     }

@@ -185,4 +185,5 @@ object Dependencies {
     const val CIRCULAR_PROGRESS_BAR: String = "com.mikhaellopez:circularprogressbar:${Versions.CIRCULAR_PROGRESS_BAR}"
     const val DISCRETE_SCROLL_VIEW: String = "com.yarolegovich:discrete-scrollview:${Versions.DISCRETE_SCROLL_VIEW}"
     const val PASTEL_PLACEHOLDERS: String = "com.github.zedlabs:pastelPlaceholders:${Versions.PASTEL_PLACEHOLDERS}"
+    const val RECYCLER_VIEW_ANIMATORS: String = "jp.wasabeef:recyclerview-animators:${Versions.RECYCLER_VIEW_ANIMATORS}"
 }

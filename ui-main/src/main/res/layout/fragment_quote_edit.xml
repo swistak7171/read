@@ -84,14 +84,14 @@
                         android:layout_height="@dimen/quote_color_view_size"
                         colorDrawable="@{viewModel.colors[0]}"
                         tools:src="@android:color/holo_blue_bright"
-                        android:background="@android:color/black" />
+                        android:background="@color/quote_color_selection" />
 
                     <ImageView
                         android:layout_width="@dimen/quote_color_view_size"
                         android:layout_height="@dimen/quote_color_view_size"
                         colorDrawable="@{viewModel.colors[1]}"
                         tools:src="@android:color/holo_red_light"
-                        android:background="@android:color/black"
+                        android:background="@color/quote_color_selection"
                         android:layout_marginStart="@dimen/default_margin" />
 
                     <ImageView
@@ -99,7 +99,7 @@
                         android:layout_height="@dimen/quote_color_view_size"
                         colorDrawable="@{viewModel.colors[2]}"
                         tools:src="@android:color/holo_green_light"
-                        android:background="@android:color/black"
+                        android:background="@color/quote_color_selection"
                         android:layout_marginStart="@dimen/default_margin" />
 
                     <ImageView
@@ -107,7 +107,7 @@
                         android:layout_height="@dimen/quote_color_view_size"
                         colorDrawable="@{viewModel.colors[3]}"
                         tools:src="@android:color/holo_orange_light"
-                        android:background="@android:color/black"
+                        android:background="@color/quote_color_selection"
                         android:layout_marginStart="@dimen/default_margin" />
 
                     <ImageView
@@ -115,7 +115,7 @@
                         android:layout_height="@dimen/quote_color_view_size"
                         colorDrawable="@{viewModel.colors[4]}"
                         tools:src="@android:color/holo_blue_light"
-                        android:background="@android:color/black"
+                        android:background="@color/quote_color_selection"
                         android:layout_marginStart="@dimen/default_margin" />
 
                     <ImageView
@@ -123,7 +123,7 @@
                         android:layout_height="@dimen/quote_color_view_size"
                         colorDrawable="@{viewModel.colors[5]}"
                         tools:src="@android:color/holo_red_light"
-                        android:background="@android:color/black"
+                        android:background="@color/quote_color_selection"
                         android:layout_marginStart="@dimen/default_margin" />
 
                     <ImageView
@@ -131,7 +131,7 @@
                         android:layout_height="@dimen/quote_color_view_size"
                         colorDrawable="@{viewModel.colors[6]}"
                         tools:src="@android:color/holo_green_light"
-                        android:background="@android:color/black"
+                        android:background="@color/quote_color_selection"
                         android:layout_marginStart="@dimen/default_margin" />
 
                     <ImageView
@@ -139,7 +139,7 @@
                         android:layout_height="@dimen/quote_color_view_size"
                         colorDrawable="@{viewModel.colors[7]}"
                         tools:src="@android:color/holo_orange_light"
-                        android:background="@android:color/black"
+                        android:background="@color/quote_color_selection"
                         android:layout_marginStart="@dimen/default_margin" />
 
                     <ImageView
@@ -147,7 +147,7 @@
                         android:layout_height="@dimen/quote_color_view_size"
                         colorDrawable="@{viewModel.colors[8]}"
                         tools:src="@android:color/holo_blue_bright"
-                        android:background="@android:color/black"
+                        android:background="@color/quote_color_selection"
                         android:layout_marginStart="@dimen/default_margin" />
                 </LinearLayout>
             </HorizontalScrollView>
