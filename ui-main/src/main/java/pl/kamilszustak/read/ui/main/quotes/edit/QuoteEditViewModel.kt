@@ -2,10 +2,12 @@ package pl.kamilszustak.read.ui.main.quotes.edit
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.zedlabs.pastelplaceholder.LightColors
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pl.kamilszustak.model.common.id.QuoteId
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
+import pl.kamilszustak.read.common.resource.DrawableResource
 import pl.kamilszustak.read.domain.access.usecase.quote.AddQuoteUseCase
 import pl.kamilszustak.read.domain.access.usecase.quote.EditQuoteUseCase
 import pl.kamilszustak.read.domain.access.usecase.quote.GetQuoteUseCase
@@ -29,6 +31,8 @@ class QuoteEditViewModel(
     val quoteContent: UniqueLiveData<String> = UniqueLiveData()
     val quoteAuthor: UniqueLiveData<String> = UniqueLiveData()
     val quoteBook: UniqueLiveData<String> = UniqueLiveData()
+
+    val colors: List<DrawableResource> = LightColors.list.map { DrawableResource(it) }
 
     init {
         _actionBarTitle.value = R.string.add_quote

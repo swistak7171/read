@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -7,21 +8,22 @@
             type="pl.kamilszustak.read.ui.main.quotes.edit.QuoteEditViewModel" />
     </data>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/default_padding">
+            android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/authorInputLayout"
-                android:hint="@string/author">
+                android:hint="@string/author"
+                android:layout_marginHorizontal="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin" >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -36,6 +38,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/bookTitleInputLayout"
                 android:hint="@string/book_title"
+                android:layout_marginHorizontal="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -51,6 +54,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/contentInputLayout"
                 android:hint="@string/content"
+                android:layout_marginHorizontal="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -62,6 +66,80 @@
                     android:lines="5"
                     android:gravity="start|top" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/default_padding">
+
+                    <ImageView
+                        android:layout_width="@dimen/quote_color_view_size"
+                        android:layout_height="@dimen/quote_color_view_size"
+                        android:src="@{viewModel.colors[0]}"
+                        tools:src="@android:color/holo_blue_bright" />
+
+                    <ImageView
+                        android:layout_width="@dimen/quote_color_view_size"
+                        android:layout_height="@dimen/quote_color_view_size"
+                        android:src="@{viewModel.colors[1]}"
+                        tools:src="@android:color/holo_red_light"
+                        android:layout_marginStart="@dimen/default_margin" />
+
+                    <ImageView
+                        android:layout_width="@dimen/quote_color_view_size"
+                        android:layout_height="@dimen/quote_color_view_size"
+                        android:src="@{viewModel.colors[2]}"
+                        tools:src="@android:color/holo_green_light"
+                        android:layout_marginStart="@dimen/default_margin" />
+
+                    <ImageView
+                        android:layout_width="@dimen/quote_color_view_size"
+                        android:layout_height="@dimen/quote_color_view_size"
+                        android:src="@{viewModel.colors[3]}"
+                        tools:src="@android:color/holo_orange_light"
+                        android:layout_marginStart="@dimen/default_margin" />
+
+                    <ImageView
+                        android:layout_width="@dimen/quote_color_view_size"
+                        android:layout_height="@dimen/quote_color_view_size"
+                        android:src="@{viewModel.colors[4]}"
+                        tools:src="@android:color/holo_blue_light"
+                        android:layout_marginStart="@dimen/default_margin" />
+
+                    <ImageView
+                        android:layout_width="@dimen/quote_color_view_size"
+                        android:layout_height="@dimen/quote_color_view_size"
+                        android:src="@{viewModel.colors[5]}"
+                        tools:src="@android:color/holo_red_light"
+                        android:layout_marginStart="@dimen/default_margin" />
+
+                    <ImageView
+                        android:layout_width="@dimen/quote_color_view_size"
+                        android:layout_height="@dimen/quote_color_view_size"
+                        android:src="@{viewModel.colors[6]}"
+                        tools:src="@android:color/holo_green_light"
+                        android:layout_marginStart="@dimen/default_margin" />
+
+                    <ImageView
+                        android:layout_width="@dimen/quote_color_view_size"
+                        android:layout_height="@dimen/quote_color_view_size"
+                        android:src="@{viewModel.colors[7]}"
+                        tools:src="@android:color/holo_orange_light"
+                        android:layout_marginStart="@dimen/default_margin" />
+
+                    <ImageView
+                        android:layout_width="@dimen/quote_color_view_size"
+                        android:layout_height="@dimen/quote_color_view_size"
+                        android:src="@{viewModel.colors[8]}"
+                        tools:src="@android:color/holo_blue_bright"
+                        android:layout_marginStart="@dimen/default_margin" />
+                </LinearLayout>
+            </HorizontalScrollView>
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </layout>

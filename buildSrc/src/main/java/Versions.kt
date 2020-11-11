@@ -46,4 +46,5 @@ object Versions {
     const val ML_KIT_BARCODE_SCANNING: String = "16.0.3"
     const val CIRCULAR_PROGRESS_BAR: String = "3.0.3"
     const val DISCRETE_SCROLL_VIEW: String = "1.5.1"
+    const val PASTEL_PLACEHOLDERS: String = "1.0.4"
 }

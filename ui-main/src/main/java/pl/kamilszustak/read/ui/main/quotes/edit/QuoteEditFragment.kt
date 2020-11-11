@@ -1,19 +1,17 @@
 package pl.kamilszustak.read.ui.main.quotes.edit
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.zedlabs.pastelplaceholder.Pastel
 import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.navigateUp
 import pl.kamilszustak.read.ui.base.util.successToast
-import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.MainDataBindingFragment
+import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.FragmentQuoteEditBinding
 import javax.inject.Inject
 
@@ -46,6 +44,7 @@ class QuoteEditFragment @Inject constructor(
         super.onViewCreated(view, savedInstanceState)
 
         setHasOptionsMenu(true)
+        Pastel.getColorLight()
     }
 
     override fun observeViewModel() {
