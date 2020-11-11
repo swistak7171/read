@@ -75,6 +75,9 @@ interface UseCaseModule {
     fun bindGetQuoteUseCase(useCaseImpl: GetQuoteUseCaseImpl): GetQuoteUseCase
 
     @Binds
+    fun bindGetQuoteColorsUseCase(useCaseImpl: GetQuoteColorsUseCaseImpl): GetQuoteColorsUseCase
+
+    @Binds
     fun bindReadBarcodeUseCase(useCaseImpl: ReadBarcodeUseCaseImpl): ReadBarcodeUseCase
 
     @Binds
@@ -109,4 +112,7 @@ interface UseCaseModule {
 
     @Binds
     fun bindObserveReadingLogUseCase(useCaseImpl: ObserveReadingLogUseCaseImpl): ObserveReadingLogUseCase
+
+    @Binds
+    fun bindDeleteBookReadingLogUseCase(useCaseImpl: DeleteBookReadingLogUseCaseImpl): DeleteBookReadingLogUseCase
 }

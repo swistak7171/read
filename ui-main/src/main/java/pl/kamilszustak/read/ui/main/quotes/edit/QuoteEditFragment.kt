@@ -5,17 +5,21 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.children
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import org.jetbrains.anko.padding
 import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.navigateUp
 import pl.kamilszustak.read.ui.base.util.successToast
-import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.MainDataBindingFragment
+import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.FragmentQuoteEditBinding
 import javax.inject.Inject
+import kotlin.properties.Delegates
 
 class QuoteEditFragment @Inject constructor(
     viewModelFactory: QuoteEditViewModelFactory.Factory,
@@ -23,6 +27,7 @@ class QuoteEditFragment @Inject constructor(
 
     override val viewModel: QuoteEditViewModel by viewModels { viewModelFactory.create(args) }
     private val args: QuoteEditFragmentArgs by navArgs()
+    private var densityScale: Float by Delegates.notNull()
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_quote_edit_fragment, menu)
@@ -46,6 +51,16 @@ class QuoteEditFragment @Inject constructor(
         super.onViewCreated(view, savedInstanceState)
 
         setHasOptionsMenu(true)
+        densityScale = resources.displayMetrics.density
+    }
+
+    override fun setListeners() {
+        binding.colorLayout.children.forEachIndexed { index, view ->
+            (view as? ImageView)?.setOnClickListener {
+                val event = QuoteEditEvent.OnColorSelected(index)
+                viewModel.dispatchEvent(event)
+            }
+        }
     }
 
     override fun observeViewModel() {
@@ -53,6 +68,17 @@ class QuoteEditFragment @Inject constructor(
             titleResourceId.useOrNull { resourceId ->
                 (activity as? AppCompatActivity)?.supportActionBar?.title = getString(resourceId)
             }
+        }
+
+        viewModel.selectedColorIndex.observe(viewLifecycleOwner) { index ->
+            binding.colorLayout.children.filter { it is ImageView }
+                .forEachIndexed { elementIndex, view ->
+                    view.padding = if (elementIndex != index) {
+                        0
+                    } else {
+                        ((2 * densityScale) + 0.5F).toInt()
+                    }
+                }
         }
 
         viewModel.action.observe(viewLifecycleOwner) { action ->

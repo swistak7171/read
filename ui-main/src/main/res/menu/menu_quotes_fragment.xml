@@ -3,14 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/addBookItem"
-        android:title="@string/add_book"
+        android:id="@+id/addQuoteItem"
+        android:title="@string/add_quote"
         android:icon="@drawable/icon_plus"
-        app:showAsAction="always" />
-
-    <item
-        android:id="@+id/readingLogItem"
-        android:title="@string/reading_log"
-        android:icon="@drawable/icon_history"
         app:showAsAction="ifRoom" />
 </menu>

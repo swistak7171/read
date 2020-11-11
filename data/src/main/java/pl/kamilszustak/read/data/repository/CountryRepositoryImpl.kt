@@ -1,7 +1,7 @@
 package pl.kamilszustak.read.data.repository
 
-import android.app.Application
 import android.content.res.Resources
+import pl.kamilszustak.read.common.resource.ResourceProvider
 import pl.kamilszustak.read.common.util.tryOrNull
 import pl.kamilszustak.read.data.R
 import pl.kamilszustak.read.data.access.repository.CountryRepository
@@ -12,83 +12,28 @@ import javax.inject.Singleton
 
 @Singleton
 class CountryRepositoryImpl @Inject constructor(
-    private val application: Application,
+    private val resourceProvider: ResourceProvider,
 ) : CountryRepository {
 
     @OptIn(ExperimentalStdlibApi::class)
     override fun getAll(): List<Country> {
-        return with(application.resources) {
-            val names = getStringArray(R.array.country_names_by_code)
-            val codes = getStringArray(R.array.country_codes_a_z)
-            val longCodes = getStringArray(R.array.country_codes_3_a_z)
-            val extensions = getStringArray(R.array.country_extensions_by_country_code)
+        val names = resourceProvider.getStringArray(R.array.country_names_by_code)
+        val codes = resourceProvider.getStringArray(R.array.country_codes_a_z)
+        val longCodes = resourceProvider.getStringArray(R.array.country_codes_3_a_z)
+        val extensions = resourceProvider.getStringArray(R.array.country_extensions_by_country_code)
 
-            if (
-                names.isNullOrEmpty() ||
-                codes.isNullOrEmpty() ||
-                longCodes.isNullOrEmpty() ||
-                extensions.isNullOrEmpty()
-            ) {
-                throw Resources.NotFoundException("Countries resources not found")
-            }
-
-            buildList {
-                names.forEachIndexed { index, name ->
-                    val code = codes.getOrNull(index)
-                    val longCode = longCodes.getOrNull(index)
-                    val extension = extensions.getOrNull(index)
-
-                    if (
-                        name.isNullOrBlank() ||
-                        code.isNullOrBlank() ||
-                        longCode.isNullOrBlank() ||
-                        extension.isNullOrBlank()
-                    ) {
-                        throw Resources.NotFoundException("Countries resources are not consistent")
-                    }
-
-                    val lowerCaseCode = code.toLowerCase(Locale.getDefault())
-                    val identifier = getIdentifier("flag_$lowerCaseCode", "drawable", application.packageName)
-                    val flagDrawable = tryOrNull {
-                        application.getDrawable(identifier)
-                    }
-
-                    val country = Country(
-                        name = name,
-                        code = longCode,
-                        extension = extension,
-                        flagDrawable = flagDrawable
-                    )
-
-                    add(country)
-                }
-            }
+        if (
+            names.isNullOrEmpty() ||
+            codes.isNullOrEmpty() ||
+            longCodes.isNullOrEmpty() ||
+            extensions.isNullOrEmpty()
+        ) {
+            throw Resources.NotFoundException("Countries resources not found")
         }
-    }
 
-    override fun getByCode(countryCode: String): Country? {
-        return with(application.resources) {
-            val names = getStringArray(R.array.country_names_by_code)
-            val codes = getStringArray(R.array.country_codes_a_z)
-            val longCodes = getStringArray(R.array.country_codes_3_a_z)
-            val extensions = getStringArray(R.array.country_extensions_by_country_code)
-
-            if (
-                names.isNullOrEmpty() ||
-                codes.isNullOrEmpty() ||
-                longCodes.isNullOrEmpty() ||
-                extensions.isNullOrEmpty()
-            ) {
-                throw Resources.NotFoundException("Countries resources not found")
-            }
-
-            var country: Country? = null
-            codes.forEachIndexed { index, code ->
-                if (code.toLowerCase(Locale.getDefault()) != countryCode.toLowerCase(Locale.getDefault())) {
-                    return@forEachIndexed
-                }
-
-                val name = names.getOrNull(index)
+        return buildList {
+            names.forEachIndexed { index, name ->
+                val code = codes.getOrNull(index)
                 val longCode = longCodes.getOrNull(index)
                 val extension = extensions.getOrNull(index)
 
@@ -102,20 +47,71 @@ class CountryRepositoryImpl @Inject constructor(
                 }
 
                 val lowerCaseCode = code.toLowerCase(Locale.getDefault())
-                val identifier = getIdentifier("flag_$lowerCaseCode", "drawable", application.packageName)
+                val identifier = resourceProvider.getId("flag_$lowerCaseCode", "drawable")
                 val flagDrawable = tryOrNull {
-                    application.getDrawable(identifier)
+                    resourceProvider.getDrawable(identifier)
                 }
 
-                country = Country(
+                val country = Country(
                     name = name,
                     code = longCode,
                     extension = extension,
                     flagDrawable = flagDrawable
                 )
+
+                add(country)
+            }
+        }
+    }
+
+    override fun getByCode(countryCode: String): Country? {
+        val names = resourceProvider.getStringArray(R.array.country_names_by_code)
+        val codes = resourceProvider.getStringArray(R.array.country_codes_a_z)
+        val longCodes = resourceProvider.getStringArray(R.array.country_codes_3_a_z)
+        val extensions = resourceProvider.getStringArray(R.array.country_extensions_by_country_code)
+
+        if (
+            names.isNullOrEmpty() ||
+            codes.isNullOrEmpty() ||
+            longCodes.isNullOrEmpty() ||
+            extensions.isNullOrEmpty()
+        ) {
+            throw Resources.NotFoundException("Countries resources not found")
+        }
+
+        var country: Country? = null
+        codes.forEachIndexed { index, code ->
+            if (code.toLowerCase(Locale.getDefault()) != countryCode.toLowerCase(Locale.getDefault())) {
+                return@forEachIndexed
             }
 
-            country
+            val name = names.getOrNull(index)
+            val longCode = longCodes.getOrNull(index)
+            val extension = extensions.getOrNull(index)
+
+            if (
+                name.isNullOrBlank() ||
+                code.isNullOrBlank() ||
+                longCode.isNullOrBlank() ||
+                extension.isNullOrBlank()
+            ) {
+                throw Resources.NotFoundException("Countries resources are not consistent")
+            }
+
+            val lowerCaseCode = code.toLowerCase(Locale.getDefault())
+            val identifier = resourceProvider.getId("flag_$lowerCaseCode", "drawable")
+            val flagDrawable = tryOrNull {
+                resourceProvider.getDrawable(identifier)
+            }
+
+            country = Country(
+                name = name,
+                code = longCode,
+                extension = extension,
+                flagDrawable = flagDrawable
+            )
         }
+
+        return country
     }
 }

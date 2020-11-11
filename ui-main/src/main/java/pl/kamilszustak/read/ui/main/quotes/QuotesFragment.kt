@@ -1,11 +1,14 @@
 package pl.kamilszustak.read.ui.main.quotes
 
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ModelAdapter
-import com.mikepenz.fastadapter.listeners.ClickEventHook
 import com.mikepenz.fastadapter.listeners.LongClickEventHook
 import pl.kamilszustak.model.common.id.QuoteId
 import pl.kamilszustak.read.model.domain.Quote
@@ -15,6 +18,7 @@ import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.FragmentQuotesBinding
 import javax.inject.Inject
+import jp.wasabeef.recyclerview.animators.FadeInAnimator
 
 class QuotesFragment @Inject constructor(
     viewModelFactory: ViewModelProvider.Factory,
@@ -27,27 +31,32 @@ class QuotesFragment @Inject constructor(
         ModelAdapter { QuoteItem(it) }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_quotes_fragment, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.addQuoteItem -> {
+                viewModel.dispatchEvent(QuotesEvent.OnAddQuoteButtonClicked)
+                true
+            }
+
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setHasOptionsMenu(true)
+    }
+
     override fun initializeRecyclerView() {
         val fastAdapter = FastAdapter.with(modelAdapter).apply {
-            addEventHook(object : ClickEventHook<QuoteItem>() {
-                override fun onBind(viewHolder: RecyclerView.ViewHolder): View? {
-                    return if (viewHolder is QuoteItem.ViewHolder) {
-                        viewHolder.binding.menuButton
-                    } else {
-                        null
-                    }
-                }
-
-                override fun onClick(
-                    v: View,
-                    position: Int,
-                    fastAdapter: FastAdapter<QuoteItem>,
-                    item: QuoteItem
-                ) {
-                    openQuoteItemPopupMenu(v, item.model)
-                }
-            })
-
             addEventHook(object : LongClickEventHook<QuoteItem>() {
                 override fun onBind(viewHolder: RecyclerView.ViewHolder): View? {
                     return if (viewHolder is QuoteItem.ViewHolder) {
@@ -71,13 +80,8 @@ class QuotesFragment @Inject constructor(
         }
 
         binding.quotesRecyclerView.apply {
+            itemAnimator = FadeInAnimator()
             adapter = fastAdapter
-        }
-    }
-
-    override fun setListeners() {
-        binding.addQuoteButton.setOnClickListener {
-            viewModel.dispatchEvent(QuotesEvent.OnAddQuoteButtonClicked)
         }
     }
 

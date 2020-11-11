@@ -43,6 +43,20 @@ class LogEntryRepositoryImpl @Inject constructor(
         }
     }.map { Unit }
 
+    override suspend fun deleteAllByBookId(id: String): Result<Unit> = withIOContext {
+        runCatching {
+            val entries = readEntityList<LogEntryEntity> {
+                collection.query.orderByChild(LogEntryEntity.BOOK_ID_PROPERTY)
+                    .equalTo(id)
+            }
+
+            entries.forEach { entry ->
+                collection.reference.child(entry.id)
+                    .removeValue()
+            }
+        }
+    }
+
     override suspend fun getAll(): List<LogEntryEntity> = withIOContext {
         readEntityList(collection.query)
     }
