@@ -210,6 +210,14 @@ class CollectionFragment @Inject constructor(
 
         viewModel.books.observe(viewLifecycleOwner) { books ->
             modelAdapter.updateModels(books)
+
+            if (books.isEmpty()) {
+                binding.emptyCollectionView.root.setVisible()
+                binding.collectionGroup.setGone()
+            } else {
+                binding.emptyCollectionView.root.setGone()
+                binding.collectionGroup.setVisible()
+            }
         }
 
         viewModel.currentBook.observe(viewLifecycleOwner) { book ->
@@ -220,7 +228,11 @@ class CollectionFragment @Inject constructor(
 
     private fun updateProgress(progress: Int) {
         val lastProgress = binding.progressBar.progress
-        binding.progressBar.setProgress(progress, true)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            binding.progressBar.setProgress(progress, true)
+        } else {
+            binding.progressBar.progress = progress
+        }
 
         ValueAnimator.ofInt(lastProgress, progress).apply {
             duration = ITEM_TRANSITION_TIME_MILLIS.toLong() * 2

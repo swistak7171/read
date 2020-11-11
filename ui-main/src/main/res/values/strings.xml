@@ -51,6 +51,7 @@
     <string name="delete_book_dialog_message">Do you want to delete this book?</string>
     <string name="book_deleted">Book deleted</string>
     <string name="deleting_book_error_message">An error occurred while deleting the book</string>
+    <string name="empty_collection_message">You haven\'t got any books in your collection yet</string>
 
     <string-array name="add_book_dialog_options">
         <item>Add manually</item>
