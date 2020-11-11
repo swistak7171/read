@@ -1,12 +1,15 @@
 package pl.kamilszustak.read.ui.main.quotes
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ModelAdapter
 import com.mikepenz.fastadapter.listeners.ClickEventHook
@@ -79,7 +82,13 @@ class QuotesFragment @Inject constructor(
             })
         }
 
+        val orientation = resources.configuration.orientation
         binding.quotesRecyclerView.apply {
+            layoutManager = if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                LinearLayoutManager(context)
+            } else {
+                StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            }
             adapter = fastAdapter
         }
     }
