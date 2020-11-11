@@ -31,8 +31,11 @@ class QuoteEditViewModel(
     val quoteContent: UniqueLiveData<String> = UniqueLiveData()
     val quoteAuthor: UniqueLiveData<String> = UniqueLiveData()
     val quoteBook: UniqueLiveData<String> = UniqueLiveData()
-
     val colors: List<DrawableResource> = LightColors.list.map { DrawableResource(it) }
+
+    private val _selectedColorIndex: UniqueLiveData<Int> = UniqueLiveData(0)
+    val selectedColorIndex: LiveData<Int>
+        get() = _selectedColorIndex
 
     init {
         _actionBarTitle.value = R.string.add_quote
@@ -50,7 +53,8 @@ class QuoteEditViewModel(
 
     override fun handleEvent(event: QuoteEditEvent) {
         when (event) {
-            QuoteEditEvent.OnSaveQuoteButtonClicked -> handleSaveButtonClick()
+            is QuoteEditEvent.OnColorSelected -> handleColorSelection(event)
+            QuoteEditEvent.OnSaveQuoteButtonClicked-> handleSaveButtonClick()
         }
     }
 
@@ -58,6 +62,10 @@ class QuoteEditViewModel(
         quoteContent.value = quote.content
         quoteAuthor.value = quote.author
         quoteBook.value = quote.book
+    }
+
+    private fun handleColorSelection(event: QuoteEditEvent.OnColorSelected) {
+        _selectedColorIndex.value = event.index
     }
 
     private fun handleSaveButtonClick() {
