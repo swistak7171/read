@@ -39,6 +39,7 @@ object Dependencies {
 
         object MLKit {
             const val BARCODE_SCANNING: String = "com.google.mlkit:barcode-scanning:${Versions.ML_KIT_BARCODE_SCANNING}"
+            const val TEXT_RECOGNITION: String = "com.google.android.gms:play-services-mlkit-text-recognition:${Versions.ML_KIT_TEXT_RECOGNITION}"
         }
     }
 

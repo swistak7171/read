@@ -35,8 +35,9 @@ dependencies {
     // CameraX
     implementation(Dependencies.AndroidX.CameraX.CAMERA_CORE)
 
-    // ML Kit Barcode Scanning
+    // ML Kit
     implementation(Dependencies.Google.MLKit.BARCODE_SCANNING)
+    implementation(Dependencies.Google.MLKit.TEXT_RECOGNITION)
 
     // Firebase Authentication
     implementation(Dependencies.Google.Firebase.Authentication.AUTH_UI)
