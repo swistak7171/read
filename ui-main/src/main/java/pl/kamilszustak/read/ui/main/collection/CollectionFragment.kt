@@ -207,7 +207,7 @@ class CollectionFragment @Inject constructor(
         }
 
         viewModel.books.observe(viewLifecycleOwner) { books ->
-            binding.emptyCollectionView.root.isVisible = books.isEmpty()
+            binding.emptyCollectionLayout.root.isVisible = books.isEmpty()
             binding.collectionGroup.isVisible = books.isNotEmpty()
             modelAdapter.updateModels(books)
         }

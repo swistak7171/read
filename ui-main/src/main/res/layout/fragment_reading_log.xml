@@ -17,9 +17,9 @@
         <include layout="@layout/empty_list_indicator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/emptyReadingLogView"
+            android:id="@+id/emptyReadingLogLayout"
             app:iconDrawable="@{@drawable/icon_history}"
-            app:message="@{@string/empty_collection_message}"
+            app:message="@{@string/empty_reading_log_message}"
             android:padding="@dimen/default_padding"
             android:visibility="gone"
             android:layout_centerInParent="true" />

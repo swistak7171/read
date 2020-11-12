@@ -104,7 +104,7 @@ class QuotesFragment @Inject constructor(
 
         viewModel.quotes.observe(viewLifecycleOwner) { quotes ->
             binding.quotesRecyclerView.isVisible = quotes.isNotEmpty()
-            binding.emptyQuotesListView.root.isVisible = quotes.isEmpty()
+            binding.emptyQuotesListLayout.root.isVisible = quotes.isEmpty()
             modelAdapter.updateModels(quotes)
         }
     }

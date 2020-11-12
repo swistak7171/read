@@ -18,7 +18,7 @@
         <include layout="@layout/empty_list_indicator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/emptyCollectionView"
+            android:id="@+id/emptyCollectionLayout"
             app:iconDrawable="@{@drawable/icon_open_book}"
             app:message="@{@string/empty_collection_message}"
             android:padding="@dimen/default_padding"

@@ -19,7 +19,7 @@
         <include layout="@layout/empty_list_indicator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/emptyQuotesListView"
+            android:id="@+id/emptyQuotesListLayout"
             app:iconDrawable="@{@drawable/icon_quote}"
             app:message="@{@string/empty_quotes_list_message}"
             android:padding="@dimen/default_padding"

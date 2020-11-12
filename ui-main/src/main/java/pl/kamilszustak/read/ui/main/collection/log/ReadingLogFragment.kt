@@ -51,7 +51,7 @@ class ReadingLogFragment @Inject constructor(
 
         viewModel.readingLog.observe(viewLifecycleOwner) { entries ->
             binding.readingLogRecyclerView.isVisible = entries.isNotEmpty()
-            binding.emptyReadingLogView.root.isVisible = entries.isEmpty()
+            binding.emptyReadingLogLayout.root.isVisible = entries.isEmpty()
             modelAdapter.updateModels(entries)
         }
     }
