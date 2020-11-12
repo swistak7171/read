@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.afollestad.assent.Permission
+import com.google.mlkit.vision.text.Text
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
@@ -156,6 +157,7 @@ class ScannerViewModel @Inject constructor(
 
         readText(imageProxy)
             .onSuccess { text ->
+                Text
                 text.textBlocks.forEach {
                     it.lines.forEach {
                         it.elements.forEach {
