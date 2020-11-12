@@ -3,6 +3,7 @@ package pl.kamilszustak.read.model.domain.text
 import android.graphics.Point
 import android.graphics.Rect
 import android.os.Parcelable
+import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -11,8 +12,10 @@ data class TextElement(
     override val value: String,
     override val boundingBox: Rect,
     override val cornerPoints: Array<Point>,
-    override val components: List<BaseText>,
 ) : BaseText, Parcelable {
+
+    @IgnoredOnParcel
+    override val components: List<BaseText> = listOf()
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

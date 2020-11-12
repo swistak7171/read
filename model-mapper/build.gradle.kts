@@ -34,4 +34,7 @@ dependencies {
 
     // Firebase Authentication
     implementation(Dependencies.Google.Firebase.Authentication.AUTH_KTX)
+
+    // ML Kit
+    implementation(Dependencies.Google.MLKit.TEXT_RECOGNITION)
 }
