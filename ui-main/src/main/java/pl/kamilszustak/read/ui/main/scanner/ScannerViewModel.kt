@@ -25,6 +25,10 @@ class ScannerViewModel @Inject constructor(
     private var permissionState: PermissionState = PermissionState.UNKNOWN
     private val barcodeDetected: AtomicBoolean = AtomicBoolean(false)
 
+    private val _selectedMode: UniqueLiveData<ScannerMode> = UniqueLiveData(ScannerMode.ISBN)
+    val selectedMode: LiveData<ScannerMode>
+        get() = _selectedMode
+
     private val isTorchEnabled: UniqueLiveData<Boolean> = UniqueLiveData(false)
     val torchButtonDrawable: LiveData<DrawableResource>
         get() = isTorchEnabled.map { isEnabled ->

@@ -1,12 +1,16 @@
 package pl.kamilszustak.read.ui.main.scanner
 
+import android.os.Bundle
+import android.view.View
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.ImageProxy
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewTreeLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import com.afollestad.assent.Permission
 import com.afollestad.assent.askForPermissions
+import com.google.android.material.tabs.TabLayout
 import pl.kamilszustak.read.model.domain.Volume
 import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.navigate
@@ -73,6 +77,22 @@ class ScannerFragment @Inject constructor(
                 is ScannerAction.NavigateToBookEditFragment -> {
                     navigator.navigateToBookEditFragment(action.volume, action.isbn)
                 }
+            }
+        }
+
+        viewModel.selectedMode.observe(viewLifecycleOwner) { mode ->
+            if (mode == null) {
+                return@observe
+            }
+
+            val index = when (mode) {
+                ScannerMode.ISBN -> 0
+                ScannerMode.QUOTE -> 1
+            }
+
+            val tab = binding.tabLayout.getTabAt(index)
+            if (tab != null) {
+                binding.tabLayout.selectTab(tab)
             }
         }
     }
