@@ -57,6 +57,7 @@
     <!-- ScannerFragment -->
     <string name="camera_permission_denied">Dostęp do kamery został odrzucony</string>
     <string name="camera_permission_permanently_denied">Dostęp do kamery został odrzucony na stałe</string>
+    <string name="image_file_saving_error_message">Wystąpił błąd podczas zapisywania obrazu do pliku</string>
 
     <!-- ReadingProgressDialogFragment -->
     <string name="update_reading_progress">Zaktualizuj postęp</string>

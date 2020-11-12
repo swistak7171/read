@@ -16,7 +16,8 @@ sealed class ScannerAction : ViewAction {
     ) : ScannerAction()
 
     data class Error(
-        val throwable: Throwable,
+        val messageResourceId: Int? = null,
+        val throwable: Throwable? = null,
     ) : ScannerAction()
 
     data class NavigateToBookEditFragment(

@@ -44,6 +44,7 @@
     <!-- ScannerFragment -->
     <string name="camera_permission_denied">Camera permission denied</string>
     <string name="camera_permission_permanently_denied">Camera permission permanently denied</string>
+    <string name="image_file_saving_error_message">An error occurred while saving image to file</string>
 
     <!-- CollectionFragment -->
     <string name="progress_percentage" translatable="false">%1$d%%</string>

@@ -1,6 +1,9 @@
 package pl.kamilszustak.read.ui.main.scanner
 
+import android.app.Application
 import androidx.camera.core.ImageProxy
+import androidx.camera.core.internal.utils.ImageUtil
+import androidx.core.net.toUri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
@@ -9,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.common.resource.DrawableResource
+import pl.kamilszustak.read.common.util.withIOContext
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBarcodeUseCase
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadTextUseCase
 import pl.kamilszustak.read.domain.access.usecase.volume.GetVolumeUseCase
@@ -17,10 +21,12 @@ import pl.kamilszustak.read.ui.base.util.getStateOf
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
 import timber.log.Timber
+import java.io.File
 import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
 
 class ScannerViewModel @Inject constructor(
+    private val application: Application,
     private val getVolumeUseCase: GetVolumeUseCase,
     private val readBarcode: ReadBarcodeUseCase,
     private val readText: ReadTextUseCase,
@@ -135,9 +141,28 @@ class ScannerViewModel @Inject constructor(
     }
 
     private suspend fun performTextRecognition(imageProxy: ImageProxy) {
+        val fileUri = withIOContext {
+            val filename = System.currentTimeMillis().toString()
+            val temporaryFile = File.createTempFile(filename, ".jpg", application.cacheDir)
+            val imageBytes = ImageUtil.imageToJpegByteArray(imageProxy) ?: return@withIOContext null
+            temporaryFile.writeBytes(imageBytes)
+            temporaryFile.toUri()
+        }
+
+        if (fileUri == null) {
+            _action.value = ScannerAction.Error(R.string.image_file_saving_error_message)
+            return
+        }
+
         readText(imageProxy)
             .onSuccess { text ->
-                Timber.i("TEXT " + text.text)
+                text.textBlocks.forEach {
+                    it.lines.forEach {
+                        it.elements.forEach {
+                            Timber.i(it.text)
+                        }
+                    }
+                }
             }.onFailure {
                 Timber.e("ERROR " + it)
             }
@@ -146,7 +171,7 @@ class ScannerViewModel @Inject constructor(
     }
 
     private fun setScanningError(throwable: Throwable) {
-        _action.value = ScannerAction.Error(throwable)
+        _action.value = ScannerAction.Error(throwable = throwable)
         detected.set(false)
     }
 }

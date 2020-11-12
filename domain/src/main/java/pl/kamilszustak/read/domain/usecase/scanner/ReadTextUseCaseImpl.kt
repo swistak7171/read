@@ -15,7 +15,6 @@ class ReadTextUseCaseImpl @Inject constructor() : ReadTextUseCase {
         TextRecognition.getClient()
     }
 
-
     override suspend fun invoke(input: ImageProxy): Result<Text> {
         val image = input.image
         if (image == null) {

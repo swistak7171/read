@@ -3,6 +3,7 @@ package pl.kamilszustak.read.ui.main.scanner
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.ImageProxy
+import androidx.camera.core.internal.utils.ImageUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.afollestad.assent.Permission
@@ -96,7 +97,10 @@ class ScannerFragment @Inject constructor(
                 }
 
                 is ScannerAction.Error -> {
-                    errorToast(action.throwable.message ?: "")
+                    when {
+                        action.messageResourceId != null -> errorToast(action.messageResourceId)
+                        action.throwable != null -> errorToast(action.throwable.message ?: "")
+                    }
                 }
 
                 is ScannerAction.NavigateToBookEditFragment -> {
