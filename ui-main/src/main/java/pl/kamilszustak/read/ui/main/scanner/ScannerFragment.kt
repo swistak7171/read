@@ -1,5 +1,7 @@
 package pl.kamilszustak.read.ui.main.scanner
 
+import android.view.MotionEvent
+import android.view.View
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.ImageProxy
@@ -9,6 +11,7 @@ import com.afollestad.assent.Permission
 import com.afollestad.assent.askForPermissions
 import com.google.android.material.tabs.TabLayout
 import pl.kamilszustak.read.model.domain.Volume
+import pl.kamilszustak.read.ui.base.OnSwipeListener
 import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.navigate
 import pl.kamilszustak.read.ui.base.util.viewModels
@@ -44,6 +47,18 @@ class ScannerFragment @Inject constructor(
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+        })
+
+        binding.cameraView.setOnTouchListener(object : OnSwipeListener(context) {
+            override fun onSwipeLeft() {
+                val event = ScannerEvent.OnSwiped(ScannerSwipeDirection.LEFT)
+                viewModel.dispatchEvent(event)
+            }
+
+            override fun onSwipeRight() {
+                val event = ScannerEvent.OnSwiped(ScannerSwipeDirection.RIGHT)
+                viewModel.dispatchEvent(event)
             }
         })
 

@@ -16,6 +16,10 @@ sealed class ScannerEvent : ViewEvent {
         val index: Int,
     ) : ScannerEvent()
 
+    data class OnSwiped(
+        val direction: ScannerSwipeDirection,
+    ) : ScannerEvent()
+
     data class OnImageCaptured(
         val imageProxy: ImageProxy,
     ) : ScannerEvent()

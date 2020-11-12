@@ -1,5 +1,6 @@
 package pl.kamilszustak.read.ui.main.scanner
 
+import androidx.camera.core.ImageProxy
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
@@ -9,21 +10,24 @@ import kotlinx.coroutines.launch
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.common.resource.DrawableResource
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBarcodeUseCase
+import pl.kamilszustak.read.domain.access.usecase.scanner.ReadTextUseCase
 import pl.kamilszustak.read.domain.access.usecase.volume.GetVolumeUseCase
 import pl.kamilszustak.read.ui.base.util.PermissionState
 import pl.kamilszustak.read.ui.base.util.getStateOf
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
+import timber.log.Timber
 import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
 
 class ScannerViewModel @Inject constructor(
     private val getVolumeUseCase: GetVolumeUseCase,
     private val readBarcode: ReadBarcodeUseCase,
+    private val readText: ReadTextUseCase,
 ) : BaseViewModel<ScannerEvent, ScannerAction>() {
 
     private var permissionState: PermissionState = PermissionState.UNKNOWN
-    private val barcodeDetected: AtomicBoolean = AtomicBoolean(false)
+    private val detected: AtomicBoolean = AtomicBoolean(false)
 
     private val _selectedMode: UniqueLiveData<ScannerMode> = UniqueLiveData(ScannerMode.ISBN)
     val selectedMode: LiveData<ScannerMode>
@@ -47,6 +51,7 @@ class ScannerViewModel @Inject constructor(
             ScannerEvent.OnTorchButtonClicked -> handleFlashButtonClick()
             is ScannerEvent.OnCameraPermissionResult -> handleCameraPermissionResult(event)
             is ScannerEvent.OnTabSelected -> handleTabSelection(event)
+            is ScannerEvent.OnSwiped -> handleSwipe(event)
             is ScannerEvent.OnImageCaptured -> handleOnImageCaptured(event)
         }
     }
@@ -79,43 +84,66 @@ class ScannerViewModel @Inject constructor(
         _selectedMode.value = ScannerMode.values().getOrNull(event.index) ?: ScannerMode.default
     }
 
+    private fun handleSwipe(event: ScannerEvent.OnSwiped) {
+        _selectedMode.value = when (event.direction) {
+            ScannerSwipeDirection.LEFT ->  ScannerMode.ISBN
+            ScannerSwipeDirection.RIGHT -> ScannerMode.QUOTE
+        }
+    }
+
     private fun handleOnImageCaptured(event: ScannerEvent.OnImageCaptured) {
-        if (barcodeDetected.get()) {
+        if (detected.get()) {
             return
         }
 
+        val mode = _selectedMode.value ?: return
         viewModelScope.launch(Dispatchers.Main) {
             _isLoading.value = true
-            barcodeDetected.set(true)
-            readBarcode(event.imageProxy)
-                .onSuccess { value ->
-                    if (value != null) {
-                        getVolumeUseCase(value)
-                            .onSuccess { volume ->
-                                if (volume != null) {
-                                    _action.value = ScannerAction.NavigateToBookEditFragment(volume = volume)
-                                } else {
-                                    _action.value = ScannerAction.NavigateToBookEditFragment(isbn = value)
-                                    barcodeDetected.set(false)
-                                }
-                            }
-                            .onFailure {
-                                setScanningError(it)
-                            }
-                    }
-                }
-                .onFailure {
-                    event.imageProxy.close()
-                    setScanningError(it)
-                }
-
+            detected.set(true)
+            when (mode) {
+                ScannerMode.ISBN -> performBarcodeRecognition(event.imageProxy)
+                ScannerMode.QUOTE -> performTextRecognition(event.imageProxy)
+            }
             _isLoading.value = false
-            barcodeDetected.set(false)
+            detected.set(false)
         }
+    }
+
+    private suspend fun performBarcodeRecognition(imageProxy: ImageProxy) {
+        readBarcode(imageProxy)
+            .onSuccess { value ->
+                if (value != null) {
+                    getVolumeUseCase(value)
+                        .onSuccess { volume ->
+                            if (volume != null) {
+                                _action.value = ScannerAction.NavigateToBookEditFragment(volume = volume)
+                            } else {
+                                _action.value = ScannerAction.NavigateToBookEditFragment(isbn = value)
+                                detected.set(false)
+                            }
+                        }
+                        .onFailure {
+                            setScanningError(it)
+                        }
+                }
+            }
+            .onFailure {
+                imageProxy.close()
+                setScanningError(it)
+            }
+    }
+
+    private suspend fun performTextRecognition(imageProxy: ImageProxy) {
+        readText(imageProxy)
+            .onSuccess { text ->
+                Timber.i(text.text)
+            }.onFailure {
+                Timber.e(it)
+            }
     }
 
     private fun setScanningError(throwable: Throwable) {
         _action.value = ScannerAction.Error(throwable)
-        barcodeDetected.set(false)
+        detected.set(false)
     }
 }
