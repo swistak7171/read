@@ -4,9 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="pl.kamilszustak.read.ui.main.scanner.ScannerMode" />
-        <import type="java.lang.CharSequence" />
-
         <variable
             name="viewModel"
             type="pl.kamilszustak.read.ui.main.scanner.ScannerViewModel" />
@@ -43,7 +40,6 @@
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/"
                     android:text="@string/isbn" />
 
                 <com.google.android.material.tabs.TabItem

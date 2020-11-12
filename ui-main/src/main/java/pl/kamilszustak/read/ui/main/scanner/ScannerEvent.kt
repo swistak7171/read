@@ -12,6 +12,10 @@ sealed class ScannerEvent : ViewEvent {
         val result: AssentResult,
     ) : ScannerEvent()
 
+    data class OnTabSelected(
+        val index: Int,
+    ) : ScannerEvent()
+
     data class OnImageCaptured(
         val imageProxy: ImageProxy,
     ) : ScannerEvent()

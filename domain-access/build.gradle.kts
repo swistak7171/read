@@ -30,4 +30,7 @@ dependencies {
 
     // CameraX
     implementation(Dependencies.AndroidX.CameraX.CAMERA_CORE)
+
+    // ML Kit
+    implementation(Dependencies.Google.MLKit.TEXT_RECOGNITION)
 }

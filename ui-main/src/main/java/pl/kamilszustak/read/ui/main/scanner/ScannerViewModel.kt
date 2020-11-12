@@ -8,7 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.common.resource.DrawableResource
-import pl.kamilszustak.read.domain.access.usecase.barcode.ReadBarcodeUseCase
+import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBarcodeUseCase
 import pl.kamilszustak.read.domain.access.usecase.volume.GetVolumeUseCase
 import pl.kamilszustak.read.ui.base.util.PermissionState
 import pl.kamilszustak.read.ui.base.util.getStateOf
@@ -46,6 +46,7 @@ class ScannerViewModel @Inject constructor(
             ScannerEvent.OnResumed -> handleOnResumed()
             ScannerEvent.OnTorchButtonClicked -> handleFlashButtonClick()
             is ScannerEvent.OnCameraPermissionResult -> handleCameraPermissionResult(event)
+            is ScannerEvent.OnTabSelected -> handleTabSelection(event)
             is ScannerEvent.OnImageCaptured -> handleOnImageCaptured(event)
         }
     }
@@ -72,6 +73,10 @@ class ScannerViewModel @Inject constructor(
     private fun handleCameraPermissionResult(event: ScannerEvent.OnCameraPermissionResult) {
         permissionState = event.result.getStateOf(Permission.CAMERA)
         setPermissionState(permissionState)
+    }
+
+    private fun handleTabSelection(event: ScannerEvent.OnTabSelected) {
+        _selectedMode.value = ScannerMode.values().getOrNull(event.index) ?: ScannerMode.default
     }
 
     private fun handleOnImageCaptured(event: ScannerEvent.OnImageCaptured) {

@@ -66,4 +66,7 @@ dependencies {
 
     // RecyclerView Animators
     implementation(Dependencies.RECYCLER_VIEW_ANIMATORS)
+
+    // ML Kit
+    implementation(Dependencies.Google.MLKit.TEXT_RECOGNITION)
 }

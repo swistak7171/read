@@ -1,12 +1,9 @@
 package pl.kamilszustak.read.ui.main.scanner
 
-import android.os.Bundle
-import android.view.View
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.ImageProxy
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewTreeLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import com.afollestad.assent.Permission
 import com.afollestad.assent.askForPermissions
@@ -35,6 +32,21 @@ class ScannerFragment @Inject constructor(
     }
 
     override fun setListeners() {
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                if (tab != null) {
+                    val event = ScannerEvent.OnTabSelected(tab.position)
+                    viewModel.dispatchEvent(event)
+                }
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+        })
+
         binding.scanButton.setOnClickListener { view ->
             val executor = Executors.newSingleThreadExecutor()
             binding.cameraView.takePicture(executor, object : ImageCapture.OnImageCapturedCallback() {
@@ -85,13 +97,9 @@ class ScannerFragment @Inject constructor(
                 return@observe
             }
 
-            val index = when (mode) {
-                ScannerMode.ISBN -> 0
-                ScannerMode.QUOTE -> 1
-            }
-
-            val tab = binding.tabLayout.getTabAt(index)
-            if (tab != null) {
+            val tab = binding.tabLayout.getTabAt(mode.index)
+            val selectedTabIndex = binding.tabLayout.selectedTabPosition
+            if (tab != null && selectedTabIndex != mode.index) {
                 binding.tabLayout.selectTab(tab)
             }
         }
