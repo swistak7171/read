@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.annotation.StringRes
 import pl.kamilszustak.read.ui.base.view.ViewAction
 
-internal sealed class MainMenuAction : ViewAction {
+sealed class MainMenuAction : ViewAction {
     object EmailAuthentication : MainMenuAction()
     object PhoneAuthentication : MainMenuAction()
 

@@ -3,7 +3,7 @@ package pl.kamilszustak.read.ui.main.scanner
 import pl.kamilszustak.read.model.domain.Volume
 import pl.kamilszustak.read.ui.base.view.ViewAction
 
-internal sealed class ScannerAction : ViewAction {
+sealed class ScannerAction : ViewAction {
     sealed class CameraPermissionAction : ScannerAction() {
         object Unknown : CameraPermissionAction()
         object Granted : CameraPermissionAction()

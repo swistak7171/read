@@ -86,8 +86,8 @@ class ScannerViewModel @Inject constructor(
 
     private fun handleSwipe(event: ScannerEvent.OnSwiped) {
         _selectedMode.value = when (event.direction) {
-            ScannerSwipeDirection.LEFT ->  ScannerMode.ISBN
-            ScannerSwipeDirection.RIGHT -> ScannerMode.QUOTE
+            ScannerSwipeDirection.LEFT ->  ScannerMode.QUOTE
+            ScannerSwipeDirection.RIGHT -> ScannerMode.ISBN
         }
     }
 
@@ -97,6 +97,7 @@ class ScannerViewModel @Inject constructor(
         }
 
         val mode = _selectedMode.value ?: return
+        Timber.i("SELECTION: $mode")
         viewModelScope.launch(Dispatchers.Main) {
             _isLoading.value = true
             detected.set(true)
@@ -136,10 +137,12 @@ class ScannerViewModel @Inject constructor(
     private suspend fun performTextRecognition(imageProxy: ImageProxy) {
         readText(imageProxy)
             .onSuccess { text ->
-                Timber.i(text.text)
+                Timber.i("TEXT " + text.text)
             }.onFailure {
-                Timber.e(it)
+                Timber.e("ERROR " + it)
             }
+
+        imageProxy.close()
     }
 
     private fun setScanningError(throwable: Throwable) {

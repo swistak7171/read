@@ -5,7 +5,7 @@ import androidx.annotation.StringRes
 import pl.kamilszustak.model.common.id.BookId
 import pl.kamilszustak.read.ui.base.view.ViewAction
 
-internal sealed class CollectionAction : ViewAction {
+sealed class CollectionAction : ViewAction {
     data class ShowAddBookDialog(
         @ArrayRes val itemsResourceId: Int,
     ) : CollectionAction()

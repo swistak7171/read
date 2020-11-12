@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import pl.kamilszustak.read.model.domain.Volume
 import pl.kamilszustak.read.ui.base.view.ViewAction
 
-internal sealed class SearchAction : ViewAction {
+sealed class SearchAction : ViewAction {
     object ShowKeyboard : SearchAction()
     object HideKeyboard : SearchAction()
     object NavigateToScannerFragment : SearchAction()

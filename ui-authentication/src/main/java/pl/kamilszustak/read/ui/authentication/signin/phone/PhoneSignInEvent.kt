@@ -4,7 +4,7 @@ import android.app.Activity
 import pl.kamilszustak.read.ui.base.view.ViewEvent
 import java.lang.ref.WeakReference
 
-internal sealed class PhoneSignInEvent : ViewEvent {
+sealed class PhoneSignInEvent : ViewEvent {
     object OnCountryEditTextClicked : PhoneSignInEvent()
     object OnVerificationCodeButtonClicked : PhoneSignInEvent()
 

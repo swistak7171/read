@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import pl.kamilszustak.read.ui.base.view.ViewEvent
 import java.lang.ref.WeakReference
 
-internal sealed class MainMenuEvent : ViewEvent {
+sealed class MainMenuEvent : ViewEvent {
     object OnEmailSignInButtonClicked : MainMenuEvent()
     object OnPhoneSignInButtonClicked : MainMenuEvent()
 

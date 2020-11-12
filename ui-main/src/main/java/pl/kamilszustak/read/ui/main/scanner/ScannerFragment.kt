@@ -1,7 +1,5 @@
 package pl.kamilszustak.read.ui.main.scanner
 
-import android.view.MotionEvent
-import android.view.View
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.ImageProxy
