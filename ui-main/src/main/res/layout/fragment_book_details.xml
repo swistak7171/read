@@ -74,7 +74,7 @@
                     android:id="@+id/authorFormField"
                     app:header="@{@string/author}"
                     app:content="@{viewModel.book.author}"
-                    goneIfNullOrBlank="@{viewModel.book.author}"
+                    app:goneIfNullOrBlank="@{viewModel.book.author}"
                     android:layout_marginTop="@dimen/default_margin" />
 
                 <include layout="@layout/form_field"
@@ -83,7 +83,7 @@
                     android:id="@+id/publicationDateFormField"
                     app:header="@{@string/publication_date}"
                     app:content="@{viewModel.book.publicationDate != null ? DateFormats.dateFormat.format(viewModel.book.publicationDate) : null}"
-                    visibleIfNotNull="@{viewModel.book.publicationDate}"
+                    app:visibleIfNotNull="@{viewModel.book.publicationDate}"
                     android:layout_marginTop="@dimen/default_margin" />
 
                 <include layout="@layout/form_field"
@@ -92,7 +92,7 @@
                     android:id="@+id/isbnFormField"
                     app:header="@{@string/isbn}"
                     app:content="@{viewModel.book.isbn}"
-                    goneIfNullOrBlank="@{viewModel.book.isbn}"
+                    app:goneIfNullOrBlank="@{viewModel.book.isbn}"
                     android:layout_marginTop="@dimen/default_margin" />
 
                 <include layout="@layout/form_field"
@@ -101,7 +101,7 @@
                     android:id="@+id/descriptionFormField"
                     app:header="@{@string/description}"
                     app:content="@{viewModel.book.description}"
-                    goneIfNullOrBlank="@{viewModel.book.description}"
+                    app:goneIfNullOrBlank="@{viewModel.book.description}"
                     android:layout_marginTop="@dimen/default_margin" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

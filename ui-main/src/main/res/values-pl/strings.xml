@@ -46,6 +46,7 @@
     <string name="delete_book_dialog_message">Czy chcesz usunąć tę książkę?</string>
     <string name="book_deleted">Książka została usunięta</string>
     <string name="deleting_book_error_message">Wystąpił błąd podczas usuwania książki</string>
+    <string name="empty_collection_message">Nie masz jeszcze żadnych książek w swojej kolekcji</string>
 
     <string-array name="add_book_dialog_options">
         <item>Dodaj ręcznie</item>
@@ -68,13 +69,16 @@
     <string name="delete_quote_dialog_message">Czy chcesz usunąć ten cytat?</string>
     <string name="quote_deleted">Cytat został usunięty</string>
     <string name="deleting_quote_error_message">Wystąpił błąd podczas usuwania cytatu</string>
+    <string name="empty_quotes_list_message">Nie masz jeszcze dodanych żadnych cytatów</string>
 
     <!-- SearchFragment -->
     <string name="search_query">Wyszukiwana fraza</string>
     <string name="blank_search_query_error_message">Pusta fraza wyszukiwania</string>
+    <string name="empty_search_result_message">Brak wyników wyszukiwania</string>
 
     <!-- ReadingLogFragment -->
     <string name="reading_log">Dziennik czytania</string>
+    <string name="empty_reading_log_message">Twój dziennik czytania jest pusty</string>
     <plurals name="reading_log_entry_content">
         <item quantity="one">Przeczytano %1$d stronę</item>
         <item quantity="few">Przeczytano %1$d strony</item>

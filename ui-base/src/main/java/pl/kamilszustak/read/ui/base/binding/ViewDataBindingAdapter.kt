@@ -6,8 +6,9 @@ import pl.kamilszustak.read.ui.base.util.setGone
 import pl.kamilszustak.read.ui.base.util.setVisible
 
 object ViewDataBindingAdapter {
-    private const val VISIBLE_IF_NOT_NULL_ATTRIBUTE = "visibleIfNotNull"
-    private const val GONE_IF_NULL_OR_BLANK_ATTRIBUTE = "goneIfNullOrBlank"
+    private const val VISIBLE_IF_NOT_NULL_ATTRIBUTE: String = "visibleIfNotNull"
+    private const val GONE_IF_NULL_OR_BLANK_ATTRIBUTE: String = "goneIfNullOrBlank"
+    private const val VISIBLE_IF_ATTRIBUTE: String = "visibleIf"
 
     @BindingAdapter(VISIBLE_IF_NOT_NULL_ATTRIBUTE)
     @JvmStatic
@@ -26,6 +27,16 @@ object ViewDataBindingAdapter {
             setGone()
         } else {
             setVisible()
+        }
+    }
+
+    @BindingAdapter(VISIBLE_IF_ATTRIBUTE)
+    @JvmStatic
+    fun View.setVisibleIf(isVisible: Boolean?) {
+        visibility = if (isVisible == true) {
+            View.VISIBLE
+        } else {
+            View.GONE
         }
     }
 }
