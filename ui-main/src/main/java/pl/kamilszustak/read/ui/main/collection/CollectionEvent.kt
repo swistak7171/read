@@ -3,7 +3,7 @@ package pl.kamilszustak.read.ui.main.collection
 import pl.kamilszustak.model.common.id.BookId
 import pl.kamilszustak.read.ui.base.view.ViewEvent
 
-sealed class CollectionEvent : ViewEvent {
+internal sealed class CollectionEvent : ViewEvent {
     object OnAddBookButtonClicked : CollectionEvent()
     object OnReadingLogButtonClicked : CollectionEvent()
 

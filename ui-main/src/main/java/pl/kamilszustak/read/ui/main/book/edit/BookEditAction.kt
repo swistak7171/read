@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import pl.kamilszustak.read.ui.base.view.ViewAction
 import java.util.*
 
-sealed class BookEditAction : ViewAction {
+internal sealed class BookEditAction : ViewAction {
     object NavigateUp : BookEditAction()
 
     data class OpenDatePicker(

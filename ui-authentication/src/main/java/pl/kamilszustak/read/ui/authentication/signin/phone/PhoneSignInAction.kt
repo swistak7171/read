@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import pl.kamilszustak.read.model.domain.Country
 import pl.kamilszustak.read.ui.base.view.ViewAction
 
-sealed class PhoneSignInAction : ViewAction {
+internal sealed class PhoneSignInAction : ViewAction {
     data class CountryPickerOpened(
         val countries: List<Country>,
     ) : PhoneSignInAction()

@@ -4,7 +4,7 @@ import androidx.camera.core.ImageProxy
 import com.afollestad.assent.AssentResult
 import pl.kamilszustak.read.ui.base.view.ViewEvent
 
-sealed class ScannerEvent : ViewEvent {
+internal sealed class ScannerEvent : ViewEvent {
     object OnResumed : ScannerEvent()
     object OnTorchButtonClicked : ScannerEvent()
 

@@ -10,8 +10,9 @@ import kotlinx.coroutines.tasks.await
 import pl.kamilszustak.read.common.util.withDefaultContext
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadTextUseCase
 import java.util.concurrent.Executors
+import javax.inject.Inject
 
-class ReadTextUseCaseImpl : ReadTextUseCase {
+class ReadTextUseCaseImpl @Inject constructor() : ReadTextUseCase {
     private val recognizer: TextRecognizer by lazy {
         val options = TextRecognizerOptions.Builder()
             .setExecutor { Executors.newSingleThreadExecutor() }

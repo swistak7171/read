@@ -3,7 +3,7 @@ package pl.kamilszustak.read.ui.main.quotes.edit
 import androidx.annotation.StringRes
 import pl.kamilszustak.read.ui.base.view.ViewAction
 
-sealed class QuoteEditAction : ViewAction {
+internal sealed class QuoteEditAction : ViewAction {
     object NavigateUp : QuoteEditAction()
 
     data class Error(
