@@ -1,19 +1,18 @@
 package pl.kamilszustak.read.ui.main.scanner
 
 import android.app.Application
+import android.graphics.BitmapFactory
 import androidx.camera.core.ImageProxy
-import androidx.camera.core.internal.utils.ImageUtil
-import androidx.core.net.toUri
+import androidx.core.net.toFile
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.afollestad.assent.Permission
-import com.google.mlkit.vision.text.Text
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.common.resource.DrawableResource
-import pl.kamilszustak.read.common.util.withIOContext
+import pl.kamilszustak.read.common.util.withDefaultContext
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBarcodeUseCase
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadTextUseCase
 import pl.kamilszustak.read.domain.access.usecase.volume.GetVolumeUseCase
@@ -21,8 +20,8 @@ import pl.kamilszustak.read.ui.base.util.PermissionState
 import pl.kamilszustak.read.ui.base.util.getStateOf
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
-import timber.log.Timber
 import java.io.File
+import java.util.*
 import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
 
@@ -59,7 +58,9 @@ class ScannerViewModel @Inject constructor(
             is ScannerEvent.OnCameraPermissionResult -> handleCameraPermissionResult(event)
             is ScannerEvent.OnTabSelected -> handleTabSelection(event)
             is ScannerEvent.OnSwiped -> handleSwipe(event)
+            is ScannerEvent.OnScanButtonClicked -> handleScanButtonClick()
             is ScannerEvent.OnImageCaptured -> handleOnImageCaptured(event)
+            is ScannerEvent.OnImageSaved -> handleImageSave(event)
         }
     }
 
@@ -98,20 +99,32 @@ class ScannerViewModel @Inject constructor(
         }
     }
 
+    private fun handleScanButtonClick() {
+        val mode = _selectedMode.value ?: return
+        val file = if (mode == ScannerMode.QUOTE) {
+            val filename = System.currentTimeMillis().toString()
+            File.createTempFile(filename, ".jpg", application.cacheDir)
+        } else {
+            null
+        }
+
+        _action.value = ScannerAction.TakePicture(file)
+    }
+
     private fun handleOnImageCaptured(event: ScannerEvent.OnImageCaptured) {
         if (detected.get()) {
             return
         }
 
-        val mode = _selectedMode.value ?: return
-        Timber.i("SELECTION: $mode")
+        val mode = _selectedMode.value
+        if (mode != ScannerMode.ISBN) {
+            return
+        }
+
         viewModelScope.launch(Dispatchers.Main) {
             _isLoading.value = true
             detected.set(true)
-            when (mode) {
-                ScannerMode.ISBN -> performBarcodeRecognition(event.imageProxy)
-                ScannerMode.QUOTE -> performTextRecognition(event.imageProxy)
-            }
+            performBarcodeRecognition(event.imageProxy)
             _isLoading.value = false
             detected.set(false)
         }
@@ -131,48 +144,53 @@ class ScannerViewModel @Inject constructor(
                             }
                         }
                         .onFailure {
-                            setScanningError(it)
+                            setError(it)
                         }
                 }
             }
             .onFailure {
                 imageProxy.close()
-                setScanningError(it)
+                setError(it)
             }
     }
 
-    private suspend fun performTextRecognition(imageProxy: ImageProxy) {
-        val fileUri = withIOContext {
-            val filename = System.currentTimeMillis().toString()
-            val temporaryFile = File.createTempFile(filename, ".jpg", application.cacheDir)
-            val imageBytes = ImageUtil.imageToJpegByteArray(imageProxy) ?: return@withIOContext null
-            temporaryFile.writeBytes(imageBytes)
-            temporaryFile.toUri()
-        }
-
-        if (fileUri == null) {
-            _action.value = ScannerAction.Error(R.string.image_file_saving_error_message)
+    private fun handleImageSave(event: ScannerEvent.OnImageSaved) {
+        if (detected.get()) {
             return
         }
 
-        readText(imageProxy)
-            .onSuccess { text ->
-                Text
-                text.textBlocks.forEach {
-                    it.lines.forEach {
-                        it.elements.forEach {
-                            Timber.i(it.text)
-                        }
-                    }
-                }
-            }.onFailure {
-                Timber.e("ERROR " + it)
+        val mode = _selectedMode.value
+        if (mode != ScannerMode.QUOTE) {
+            return
+        }
+
+        viewModelScope.launch(Dispatchers.Main) {
+            _isLoading.value = true
+            detected.set(true)
+            val bitmap = withDefaultContext {
+                val file = event.uri.toFile()
+                val bytes = file.readBytes()
+                BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
             }
 
-        imageProxy.close()
+            if (bitmap == null) {
+                _action.value = ScannerAction.Error(R.string.image_file_saving_error_message)
+                return@launch
+            }
+
+            readText(bitmap)
+                .onSuccess { text ->
+                    _action.value = ScannerAction.NavigateToTextSelectionFragment(text, event.uri)
+                }.onFailure { throwable ->
+                    setError(throwable)
+                }
+
+            _isLoading.value = false
+            detected.set(false)
+        }
     }
 
-    private fun setScanningError(throwable: Throwable) {
+    private fun setError(throwable: Throwable) {
         _action.value = ScannerAction.Error(throwable = throwable)
         detected.set(false)
     }

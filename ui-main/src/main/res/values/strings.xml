@@ -78,6 +78,9 @@
     <string name="blank_search_query_error_message">Blank search query</string>
     <string name="empty_search_result_message">Empty search result</string>
 
+    <!-- TextSelectionFragment -->
+    <string name="text_selection">Text selection</string>
+
     <!-- ReadingLogFragment -->
     <string name="reading_log">Reading log</string>
     <string name="empty_reading_log_message">Your reading log is empty</string>

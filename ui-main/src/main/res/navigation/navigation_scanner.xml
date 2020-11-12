@@ -35,6 +35,21 @@
                 app:nullable="true"
                 android:defaultValue="@null" />
         </action>
+        <action
+            android:id="@+id/action_scannerFragment_to_textSelectionFragment"
+            app:destination="@id/textSelectionFragment" />
     </fragment>
     <include app:graph="@navigation/navigation_book_edit" />
+    <fragment
+        android:id="@+id/textSelectionFragment"
+        android:name="pl.kamilszustak.read.ui.main.scanner.selection.TextSelectionFragment"
+        android:label="@string/text_selection"
+        tools:layout="@layout/fragment_text_selection">
+        <argument
+            android:name="text"
+            app:argType="pl.kamilszustak.read.model.domain.text.TextWrapper" />
+        <argument
+            android:name="imageUri"
+            app:argType="android.net.Uri" />
+    </fragment>
 </navigation>

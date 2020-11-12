@@ -59,6 +59,9 @@
     <string name="camera_permission_permanently_denied">Dostęp do kamery został odrzucony na stałe</string>
     <string name="image_file_saving_error_message">Wystąpił błąd podczas zapisywania obrazu do pliku</string>
 
+    <!-- TextSelectionFragment -->
+    <string name="text_selection">Wybór tekstu</string>
+
     <!-- ReadingProgressDialogFragment -->
     <string name="update_reading_progress">Zaktualizuj postęp</string>
     <string name="invalid_read_pages_number_error_message">Niepoprawna wartość przeczytanych stron</string>
