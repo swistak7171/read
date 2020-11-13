@@ -1,9 +1,7 @@
 package pl.kamilszustak.read.ui.main.scanner
 
 import android.app.Application
-import android.graphics.BitmapFactory
 import androidx.camera.core.ImageProxy
-import androidx.core.net.toFile
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
@@ -12,8 +10,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.common.resource.DrawableResource
-import pl.kamilszustak.read.common.util.withDefaultContext
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBarcodeUseCase
+import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBitmapUseCase
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadTextUseCase
 import pl.kamilszustak.read.domain.access.usecase.volume.GetVolumeUseCase
 import pl.kamilszustak.read.ui.base.util.PermissionState
@@ -30,6 +28,7 @@ class ScannerViewModel @Inject constructor(
     private val getVolumeUseCase: GetVolumeUseCase,
     private val readBarcode: ReadBarcodeUseCase,
     private val readText: ReadTextUseCase,
+    private val readBitmap: ReadBitmapUseCase,
 ) : BaseViewModel<ScannerEvent, ScannerAction>() {
 
     private var permissionState: PermissionState = PermissionState.UNKNOWN
@@ -167,12 +166,7 @@ class ScannerViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.Main) {
             _isLoading.value = true
             detected.set(true)
-            val bitmap = withDefaultContext {
-                val file = event.uri.toFile()
-                val bytes = file.readBytes()
-                BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-            }
-
+            val bitmap = readBitmap(event.uri)
             if (bitmap == null) {
                 _action.value = ScannerAction.Error(R.string.image_file_saving_error_message)
                 return@launch

@@ -9,6 +9,7 @@ import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryUseCa
 import pl.kamilszustak.read.domain.access.usecase.device.GetPhoneNumberUseCase
 import pl.kamilszustak.read.domain.access.usecase.log.*
 import pl.kamilszustak.read.domain.access.usecase.quote.*
+import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBitmapUseCase
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBarcodeUseCase
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadTextUseCase
 import pl.kamilszustak.read.domain.access.usecase.user.GetUserUseCase
@@ -22,6 +23,7 @@ import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.device.GetPhoneNumberUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.log.*
 import pl.kamilszustak.read.domain.usecase.quote.*
+import pl.kamilszustak.read.domain.usecase.scanner.ReadBitmapUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.scanner.ReadBarcodeUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.scanner.ReadTextUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.user.GetUserUseCaseImpl
@@ -84,6 +86,9 @@ interface UseCaseModule {
 
     @Binds
     fun bindReadTextUseCase(useCaseImpl: ReadTextUseCaseImpl): ReadTextUseCase
+
+    @Binds
+    fun bindReadBitmapUseCase(useCaseImpl: ReadBitmapUseCaseImpl): ReadBitmapUseCase
 
     @Binds
     fun bindGetUserUseCase(useCaseImpl: GetUserUseCaseImpl): GetUserUseCase
