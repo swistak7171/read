@@ -18,18 +18,22 @@ class TextSelectionViewModel(
     private val readBitmap: ReadBitmapUseCase,
 ) : BaseViewModel<TextSelectionEvent, TextSelectionAction>() {
 
+    private lateinit var originalBitmap: Bitmap
     private val _imageBitmap: MutableLiveData<Bitmap> = MutableLiveData()
     val imageBitmap: LiveData<Bitmap>
         get() = _imageBitmap
 
+    private var selectionMode: TextSelectionMode = TextSelectionMode.LINES
+
     init {
         viewModelScope.launch(Dispatchers.Main) {
-            val bitmap = readBitmap(arguments.imageUri) ?: return@launch
-            drawBoxes(bitmap)
+            originalBitmap = readBitmap(arguments.imageUri) ?: return@launch
+            drawRectangles()
         }
     }
 
-    private fun drawBoxes(bitmap: Bitmap) {
+    private fun drawRectangles() {
+        val bitmap = Bitmap.createBitmap(originalBitmap)
         val canvas = Canvas(bitmap)
         val paint = Paint().apply {
             style = Paint.Style.STROKE
@@ -39,7 +43,17 @@ class TextSelectionViewModel(
 
         arguments.text.blocks.forEach { block ->
             block.components.forEach { line ->
-                canvas.drawRect(line.boundingBox, paint)
+                when (selectionMode) {
+                    TextSelectionMode.LINES -> {
+                        canvas.drawRect(line.boundingBox, paint)
+                    }
+
+                    TextSelectionMode.WORDS -> {
+                        line.components.forEach { element ->
+                            canvas.drawRect(element.boundingBox, paint)
+                        }
+                    }
+                }
             }
         }
 
@@ -47,5 +61,30 @@ class TextSelectionViewModel(
     }
 
     override fun handleEvent(event: TextSelectionEvent) {
+        when (event) {
+            TextSelectionEvent.OnTextSelectionModeButtonClicked -> handleTextSelectionModeButtonClick()
+            is TextSelectionEvent.OnTextSelectionModeSelected -> handleModeSelection(event)
+        }
+    }
+
+    private fun handleTextSelectionModeButtonClick() {
+        val selection = selectionMode.ordinal
+        val items = TextSelectionMode.values()
+            .map(TextSelectionMode::nameResourceId)
+
+        _action.value = TextSelectionAction.ShowTextSelectionModeDialog(
+            itemsResources = items,
+            initialSelection = selection
+        )
+    }
+
+    private fun handleModeSelection(event: TextSelectionEvent.OnTextSelectionModeSelected) {
+        val mode = TextSelectionMode.values()
+            .getOrNull(event.selectionIndex)
+
+        if (mode != null) {
+            selectionMode = mode
+            drawRectangles()
+        }
     }
 }
