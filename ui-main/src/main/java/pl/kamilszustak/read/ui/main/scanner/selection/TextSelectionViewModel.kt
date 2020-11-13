@@ -12,7 +12,6 @@ import kotlinx.coroutines.launch
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBitmapUseCase
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 
-
 class TextSelectionViewModel(
     private val arguments: TextSelectionFragmentArgs,
     private val readBitmap: ReadBitmapUseCase,
@@ -23,7 +22,7 @@ class TextSelectionViewModel(
     val imageBitmap: LiveData<Bitmap>
         get() = _imageBitmap
 
-    private var selectionMode: TextSelectionMode = TextSelectionMode.LINES
+    private var selectionMode: TextSelectionMode = TextSelectionMode.default
 
     init {
         viewModelScope.launch(Dispatchers.Main) {

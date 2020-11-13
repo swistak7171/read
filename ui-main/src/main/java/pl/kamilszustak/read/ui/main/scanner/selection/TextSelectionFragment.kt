@@ -49,21 +49,7 @@ class TextSelectionFragment @Inject constructor(
     override fun observeViewModel() {
         viewModel.action.observe(viewLifecycleOwner) { action ->
             when (action) {
-                is TextSelectionAction.ShowTextSelectionModeDialog -> {
-                    val items = action.itemsResources.map { getString(it) }
-                    dialog {
-                        title(R.string.text_selection_mode)
-                        listItemsSingleChoice(
-                            items = items,
-                            initialSelection = action.initialSelection,
-                            waitForPositiveButton = false,
-                            selection = { dialog, index, text ->
-                                val event = TextSelectionEvent.OnTextSelectionModeSelected(index)
-                                viewModel.dispatchEvent(event)
-                            }
-                        )
-                    }
-                }
+                is TextSelectionAction.ShowTextSelectionModeDialog -> showTextSelectionModeDialog(action)
             }
         }
 
@@ -71,6 +57,22 @@ class TextSelectionFragment @Inject constructor(
             if (bitmap != null) {
                 binding.imageView.setImageBitmap(bitmap)
             }
+        }
+    }
+
+    private fun showTextSelectionModeDialog(action: TextSelectionAction.ShowTextSelectionModeDialog) {
+        val items = action.itemsResources.map { getString(it) }
+        dialog {
+            title(R.string.text_selection_mode)
+            listItemsSingleChoice(
+                items = items,
+                initialSelection = action.initialSelection,
+                waitForPositiveButton = false,
+                selection = { dialog, index, text ->
+                    val event = TextSelectionEvent.OnTextSelectionModeSelected(index)
+                    viewModel.dispatchEvent(event)
+                }
+            )
         }
     }
 }
