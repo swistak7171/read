@@ -80,7 +80,8 @@
 
     <!-- TextSelectionFragment -->
     <string name="text_selection">Text selection</string>
-    <string name="text_selection_mode">Selection mode</string>
+    <string name="text_selection_mode">Text selection mode</string>
+    <string name="text_selection_mode_blocks">Blocks</string>
     <string name="text_selection_mode_lines">Lines</string>
     <string name="text_sleection_mode_words">Words</string>
 

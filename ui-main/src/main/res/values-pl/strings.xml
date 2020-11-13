@@ -61,7 +61,8 @@
 
     <!-- TextSelectionFragment -->
     <string name="text_selection">Wybór tekstu</string>
-    <string name="text_selection_mode">Tryb wyboru</string>
+    <string name="text_selection_mode">Tryb wyboru tekstu</string>
+    <string name="text_selection_mode_blocks">Bloki</string>
     <string name="text_selection_mode_lines">Linie</string>
     <string name="text_sleection_mode_words">Słowa</string>
 

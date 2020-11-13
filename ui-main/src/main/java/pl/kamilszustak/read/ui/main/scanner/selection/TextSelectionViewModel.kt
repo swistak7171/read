@@ -41,9 +41,14 @@ class TextSelectionViewModel(
             color = Color.RED
         }
 
-        arguments.text.blocks.forEach { block ->
+        arguments.text.blocks.forEach blocksForEach@{ block ->
             block.components.forEach { line ->
                 when (selectionMode) {
+                    TextSelectionMode.BLOCKS -> {
+                        canvas.drawRect(block.boundingBox, paint)
+                        return@blocksForEach
+                    }
+
                     TextSelectionMode.LINES -> {
                         canvas.drawRect(line.boundingBox, paint)
                     }
