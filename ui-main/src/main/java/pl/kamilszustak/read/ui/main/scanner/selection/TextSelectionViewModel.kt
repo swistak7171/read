@@ -14,7 +14,7 @@ import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBitmapUseCase
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadTextUseCase
 import pl.kamilszustak.read.model.domain.text.TextWrapper
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
-import timber.log.Timber
+import pl.kamilszustak.read.ui.main.R
 
 class TextSelectionViewModel(
     private val arguments: TextSelectionFragmentArgs,
@@ -28,7 +28,11 @@ class TextSelectionViewModel(
 
     private val _imageBitmap: MutableLiveData<Bitmap> = UniqueLiveData()
     val imageDrawable: LiveData<HighlightableBitmap> = _imageBitmap.map { bitmap ->
-        HighlightableBitmap(resourceProvider.resources, bitmap, Color.parseColor("#88000000"))
+        HighlightableBitmap(
+            resources = resourceProvider.resources,
+            bitmap = bitmap,
+            darkenColor = resourceProvider.getColor(R.color.text_selection_outside_area_color)
+        )
     }
 
     private var selectionMode: TextSelectionMode = TextSelectionMode.default
@@ -55,6 +59,7 @@ class TextSelectionViewModel(
         when (event) {
             TextSelectionEvent.OnTextRecognitionButtonClicked -> handleTextRecognitionButtonClick()
             TextSelectionEvent.OnTextSelectionModeButtonClicked -> handleTextSelectionModeButtonClick()
+            TextSelectionEvent.OnRestoreImageButtonClicked -> handleRestoreImageButtonClick()
             is TextSelectionEvent.OnTextSelectionModeSelected -> handleModeSelection(event)
             is TextSelectionEvent.OnImageViewTouch -> handleImageViewTouch(event)
         }
@@ -62,15 +67,12 @@ class TextSelectionViewModel(
 
     private fun handleTextRecognitionButtonClick() {
         val bitmap = imageDrawable.value?.getSelectedBitmap() ?: return
-        Timber.i("bitmap")
         viewModelScope.launch(Dispatchers.Main) {
             readText(bitmap)
                 .onSuccess { text ->
-                    Timber.i("success")
                     _imageBitmap.value = bitmap
                     drawRectangles(bitmap, text)
                 }.onFailure { throwable ->
-                    Timber.i("error")
                     _action.value = TextSelectionAction.Error(throwable = throwable)
                 }
         }
@@ -122,6 +124,11 @@ class TextSelectionViewModel(
         }
     }
 
+    private fun handleRestoreImageButtonClick() {
+        _imageBitmap.value = originalBitmap
+        imageDrawable.value?.clearSelection()
+    }
+
     private fun handleImageViewTouch(event: TextSelectionEvent.OnImageViewTouch) {
         val widthRatio = originalBitmap.width / event.imageViewSize.width
         val heightRatio = originalBitmap.height / event.imageViewSize.height
@@ -149,9 +156,7 @@ class TextSelectionViewModel(
                         bottom * heightRatio
                     )
 
-//                    imageBitmap.value?.clearSelection()
                     imageDrawable.value?.selectArea(rectangle)
-                    _action.value = TextSelectionAction.InvalidateImageView
                 }
             }
 

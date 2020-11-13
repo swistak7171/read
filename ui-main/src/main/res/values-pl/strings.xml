@@ -62,6 +62,7 @@
     <!-- TextSelectionFragment -->
     <string name="recognize_text">Rozpoznaj tekst</string>
     <string name="text_selection">Wybór tekstu</string>
+    <string name="restore_image">Przywróc obraz</string>
     <string name="text_selection_mode">Tryb wyboru tekstu</string>
     <string name="text_selection_mode_blocks">Bloki</string>
     <string name="text_selection_mode_lines">Linie</string>

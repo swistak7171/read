@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/emptyReadingLogLayout"
-            app:iconDrawable="@{@drawable/icon_history}"
+            app:iconDrawable="@{@drawable/icon_restore}"
             app:message="@{@string/empty_reading_log_message}"
             android:padding="@dimen/default_padding"
             android:visibility="gone"

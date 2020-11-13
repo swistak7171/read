@@ -13,4 +13,10 @@
         android:title="@string/text_selection"
         android:icon="@drawable/icon_underline"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/restoreImageItem"
+        android:title="@string/restore_image"
+        android:icon="@drawable/icon_restore"
+        app:showAsAction="never" />
 </menu>

@@ -42,6 +42,11 @@ class TextSelectionFragment @Inject constructor(
                 true
             }
 
+            R.id.restoreImageItem -> {
+                viewModel.dispatchEvent(TextSelectionEvent.OnRestoreImageButtonClicked)
+                true
+            }
+
             else -> {
                 super.onOptionsItemSelected(item)
             }
