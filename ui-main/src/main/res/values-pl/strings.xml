@@ -60,6 +60,7 @@
     <string name="image_file_saving_error_message">Wystąpił błąd podczas zapisywania obrazu do pliku</string>
 
     <!-- TextSelectionFragment -->
+    <string name="recognize_text">Rozpoznaj tekst</string>
     <string name="text_selection">Wybór tekstu</string>
     <string name="text_selection_mode">Tryb wyboru tekstu</string>
     <string name="text_selection_mode_blocks">Bloki</string>

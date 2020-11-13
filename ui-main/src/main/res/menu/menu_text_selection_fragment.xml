@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/textRecognitionItem"
+        android:title="@string/recognize_text"
+        android:icon="@drawable/icon_check"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/textSelectionModeItem"
         android:title="@string/text_selection"
         android:icon="@drawable/icon_underline"

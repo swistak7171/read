@@ -1,7 +1,6 @@
 package pl.kamilszustak.read.ui.main.scanner.selection
 
 import android.graphics.*
-import android.graphics.Bitmap.createBitmap
 import android.view.MotionEvent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,7 +12,9 @@ import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.common.resource.ResourceProvider
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBitmapUseCase
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadTextUseCase
+import pl.kamilszustak.read.model.domain.text.TextWrapper
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
+import timber.log.Timber
 
 class TextSelectionViewModel(
     private val arguments: TextSelectionFragmentArgs,
@@ -45,45 +46,60 @@ class TextSelectionViewModel(
     init {
         viewModelScope.launch(Dispatchers.Main) {
             originalBitmap = readBitmap(arguments.imageUri) ?: return@launch
-            drawRectangles()
+            drawBitmap = Bitmap.createBitmap(originalBitmap)
+            _imageBitmap.value = drawBitmap
         }
-    }
-
-    private fun drawRectangles() {
-        drawBitmap = createBitmap(originalBitmap)
-
-        canvas.setBitmap(drawBitmap)
-
-//        arguments.text.blocks.forEach blocksForEach@{ block ->
-//            block.components.forEach { line ->
-//                when (selectionMode) {
-//                    TextSelectionMode.BLOCKS -> {
-//                        canvas.drawRect(block.boundingBox, paint)
-//                        return@blocksForEach
-//                    }
-//
-//                    TextSelectionMode.LINES -> {
-//                        canvas.drawRect(line.boundingBox, paint)
-//                    }
-//
-//                    TextSelectionMode.WORDS -> {
-//                        line.components.forEach { element ->
-//                            canvas.drawRect(element.boundingBox, paint)
-//                        }
-//                    }
-//                }
-//            }
-//        }
-
-        _imageBitmap.value = drawBitmap
     }
 
     override fun handleEvent(event: TextSelectionEvent) {
         when (event) {
+            TextSelectionEvent.OnTextRecognitionButtonClicked -> handleTextRecognitionButtonClick()
             TextSelectionEvent.OnTextSelectionModeButtonClicked -> handleTextSelectionModeButtonClick()
             is TextSelectionEvent.OnTextSelectionModeSelected -> handleModeSelection(event)
             is TextSelectionEvent.OnImageViewTouch -> handleImageViewTouch(event)
         }
+    }
+
+    private fun handleTextRecognitionButtonClick() {
+        val bitmap = imageDrawable.value?.getSelectedBitmap() ?: return
+        Timber.i("bitmap")
+        viewModelScope.launch(Dispatchers.Main) {
+            readText(bitmap)
+                .onSuccess { text ->
+                    Timber.i("success")
+                    _imageBitmap.value = bitmap
+                    drawRectangles(bitmap, text)
+                }.onFailure { throwable ->
+                    Timber.i("error")
+                    _action.value = TextSelectionAction.Error(throwable = throwable)
+                }
+        }
+    }
+
+    private fun drawRectangles(bitmap: Bitmap, text: TextWrapper) {
+        canvas.setBitmap(bitmap)
+        text.blocks.forEach blocksForEach@{ block ->
+            block.components.forEach { line ->
+                when (selectionMode) {
+                    TextSelectionMode.BLOCKS -> {
+                        canvas.drawRect(block.boundingBox, paint)
+                        return@blocksForEach
+                    }
+
+                    TextSelectionMode.LINES -> {
+                        canvas.drawRect(line.boundingBox, paint)
+                    }
+
+                    TextSelectionMode.WORDS -> {
+                        line.components.forEach { element ->
+                            canvas.drawRect(element.boundingBox, paint)
+                        }
+                    }
+                }
+            }
+        }
+
+        _action.value = TextSelectionAction.InvalidateImageView
     }
 
     private fun handleTextSelectionModeButtonClick() {
@@ -103,7 +119,6 @@ class TextSelectionViewModel(
 
         if (mode != null) {
             selectionMode = mode
-            drawRectangles()
         }
     }
 
@@ -147,17 +162,6 @@ class TextSelectionViewModel(
             MotionEvent.ACTION_CANCEL, MotionEvent.ACTION_OUTSIDE -> {
                 isMoving = false
             }
-        }
-    }
-
-    private fun readTextFromBitmap() {
-        viewModelScope.launch(Dispatchers.Main) {
-            readText(originalBitmap)
-                .onSuccess { text ->
-
-                }.onFailure { throwable ->
-                    _action.value = TextSelectionAction.Error(throwable = throwable)
-                }
         }
     }
 }

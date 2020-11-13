@@ -32,6 +32,11 @@ class TextSelectionFragment @Inject constructor(
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            R.id.textRecognitionItem -> {
+                viewModel.dispatchEvent(TextSelectionEvent.OnTextRecognitionButtonClicked)
+                true
+            }
+
             R.id.textSelectionModeItem -> {
                 viewModel.dispatchEvent(TextSelectionEvent.OnTextSelectionModeButtonClicked)
                 true
@@ -50,8 +55,7 @@ class TextSelectionFragment @Inject constructor(
 
     override fun setListeners() {
         binding.imageView.setOnTouchListener { v, event ->
-            binding.imageView.measuredWidth
-            val size = Size(binding.imageView.measuredWidth, binding.imageView.measuredHeight)
+            val size = Size(binding.imageView.width, binding.imageView.height)
             val event = TextSelectionEvent.OnImageViewTouch(event, size)
             viewModel.dispatchEvent(event)
             true

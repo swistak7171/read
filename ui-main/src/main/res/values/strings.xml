@@ -79,6 +79,7 @@
     <string name="empty_search_result_message">Empty search result</string>
 
     <!-- TextSelectionFragment -->
+    <string name="recognize_text">Recognize text</string>
     <string name="text_selection">Text selection</string>
     <string name="text_selection_mode">Text selection mode</string>
     <string name="text_selection_mode_blocks">Blocks</string>

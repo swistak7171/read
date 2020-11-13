@@ -6,6 +6,7 @@ import pl.kamilszustak.read.ui.base.view.ViewEvent
 
 sealed class TextSelectionEvent : ViewEvent {
     object OnTextSelectionModeButtonClicked : TextSelectionEvent()
+    object OnTextRecognitionButtonClicked : TextSelectionEvent()
 
     data class OnTextSelectionModeSelected(
         val selectionIndex: Int,
