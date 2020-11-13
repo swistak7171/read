@@ -1,6 +1,7 @@
 package pl.kamilszustak.read.ui.main.quotes.edit
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,17 +25,17 @@ class QuoteEditViewModel(
 
     private val inEditMode: Boolean = (arguments.quoteId != null)
 
-    private val _actionBarTitle: UniqueLiveData<Int> = UniqueLiveData()
+    private val _actionBarTitle: MutableLiveData<Int> = UniqueLiveData()
     val actionBarTitle: LiveData<Int>
         get() = _actionBarTitle
 
-    val quoteContent: UniqueLiveData<String> = UniqueLiveData()
-    val quoteAuthor: UniqueLiveData<String> = UniqueLiveData()
-    val quoteBook: UniqueLiveData<String> = UniqueLiveData()
+    val quoteContent: MutableLiveData<String> = UniqueLiveData()
+    val quoteAuthor: MutableLiveData<String> = UniqueLiveData()
+    val quoteBook: MutableLiveData<String> = UniqueLiveData()
 
     val colors: List<Int> = getQuoteColors()
 
-    private val _selectedColorIndex: UniqueLiveData<Int> = UniqueLiveData(0)
+    private val _selectedColorIndex: MutableLiveData<Int> = UniqueLiveData(0)
     val selectedColorIndex: LiveData<Int>
         get() = _selectedColorIndex
 

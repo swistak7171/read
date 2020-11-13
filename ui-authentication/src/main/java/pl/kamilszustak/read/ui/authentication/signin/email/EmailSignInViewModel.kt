@@ -1,5 +1,6 @@
 package pl.kamilszustak.read.ui.authentication.signin.email
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
@@ -17,8 +18,8 @@ class EmailSignInViewModel @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
 ) : BaseViewModel<EmailSignInEvent, EmailSignInAction>() {
 
-    val userEmailAddress: UniqueLiveData<String> = UniqueLiveData()
-    val userPassword: UniqueLiveData<String> = UniqueLiveData()
+    val userEmailAddress: MutableLiveData<String> = UniqueLiveData()
+    val userPassword: MutableLiveData<String> = UniqueLiveData()
 
     override fun handleEvent(event: EmailSignInEvent) {
         when (event) {

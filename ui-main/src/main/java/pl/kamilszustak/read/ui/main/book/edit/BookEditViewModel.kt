@@ -1,6 +1,7 @@
 package pl.kamilszustak.read.ui.main.book.edit
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
@@ -28,19 +29,19 @@ class BookEditViewModel(
 
     private val inEditMode: Boolean = (arguments.bookId != null)
 
-    private val _actionBarTitle: UniqueLiveData<Int> = UniqueLiveData()
+    private val _actionBarTitle: MutableLiveData<Int> = UniqueLiveData()
     val actionBarTitle: LiveData<Int>
         get() = _actionBarTitle
 
-    val bookTitle: UniqueLiveData<String> = UniqueLiveData()
-    val bookAuthor: UniqueLiveData<String> = UniqueLiveData()
-    val bookPagesNumber: UniqueLiveData<Int> = UniqueLiveData()
-    val bookReadPages: UniqueLiveData<Int> = UniqueLiveData(0)
-    val bookIsbn: UniqueLiveData<String?> = UniqueLiveData()
-    val bookDescription: UniqueLiveData<String?> = UniqueLiveData()
+    val bookTitle: MutableLiveData<String> = UniqueLiveData()
+    val bookAuthor: MutableLiveData<String> = UniqueLiveData()
+    val bookPagesNumber: MutableLiveData<Int> = UniqueLiveData()
+    val bookReadPages: MutableLiveData<Int> = UniqueLiveData(0)
+    val bookIsbn: MutableLiveData<String?> = UniqueLiveData()
+    val bookDescription: MutableLiveData<String?> = UniqueLiveData()
     private var coverImageUrl: String? = null
 
-    private val _bookPublicationDate: UniqueLiveData<Date?> = UniqueLiveData()
+    private val _bookPublicationDate: MutableLiveData<Date?> = UniqueLiveData()
     val bookPublicationDate: LiveData<String?>
         get() = _bookPublicationDate.map { date ->
             date.useOrNull { DateFormats.dateFormat.format(it)  }

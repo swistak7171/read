@@ -3,6 +3,7 @@ package pl.kamilszustak.read.ui.main.scanner
 import android.app.Application
 import androidx.camera.core.ImageProxy
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.afollestad.assent.Permission
@@ -31,11 +32,11 @@ class ScannerViewModel @Inject constructor(
     private var permissionState: PermissionState = PermissionState.UNKNOWN
     private val detected: AtomicBoolean = AtomicBoolean(false)
 
-    private val _selectedMode: UniqueLiveData<ScannerMode> = UniqueLiveData(ScannerMode.ISBN)
+    private val _selectedMode: MutableLiveData<ScannerMode> = UniqueLiveData(ScannerMode.ISBN)
     val selectedMode: LiveData<ScannerMode>
         get() = _selectedMode
 
-    private val isTorchEnabled: UniqueLiveData<Boolean> = UniqueLiveData(false)
+    private val isTorchEnabled: MutableLiveData<Boolean> = UniqueLiveData(false)
     val torchButtonDrawable: LiveData<DrawableResource>
         get() = isTorchEnabled.map { isEnabled ->
             val resourceId = if (isEnabled) {

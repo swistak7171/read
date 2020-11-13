@@ -9,6 +9,7 @@ import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.common.resource.ResourceProvider
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBitmapUseCase
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadTextUseCase
@@ -24,7 +25,7 @@ class TextSelectionViewModel(
     private lateinit var originalBitmap: Bitmap
     private lateinit var drawBitmap: Bitmap
 
-    private val _imageBitmap: MutableLiveData<Bitmap> = MutableLiveData()
+    private val _imageBitmap: MutableLiveData<Bitmap> = UniqueLiveData()
     val imageDrawable: LiveData<HighlightableBitmap> = _imageBitmap.map { bitmap ->
         HighlightableBitmap(resourceProvider.resources, bitmap, Color.parseColor("#88000000"))
     }
@@ -141,7 +142,7 @@ class TextSelectionViewModel(
                     )
 
 //                    imageBitmap.value?.clearSelection()
-                    imageDrawable.value?.selectRegion(rectangle)
+                    imageDrawable.value?.selectArea(rectangle)
                     _action.value = TextSelectionAction.InvalidateImageView
                 }
             }

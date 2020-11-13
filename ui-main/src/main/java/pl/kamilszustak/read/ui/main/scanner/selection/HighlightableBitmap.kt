@@ -16,17 +16,17 @@ class HighlightableBitmap(
 
     private var selection: RectF? = null
 
-    fun selectRegion(region: RectF?) {
-        selection = region
+    fun selectArea(area: RectF?) {
+        selection = area
     }
 
-    fun selectRegion(left: Float, top: Float, right: Float, bottom: Float) {
+    fun selectArea(left: Float, top: Float, right: Float, bottom: Float) {
         val rectangle = RectF(left, top, right, bottom)
-        selectRegion(rectangle)
+        selectArea(rectangle)
     }
 
     fun clearSelection() {
-        selectRegion(null)
+        selectArea(null)
     }
 
     override fun draw(canvas: Canvas) {
