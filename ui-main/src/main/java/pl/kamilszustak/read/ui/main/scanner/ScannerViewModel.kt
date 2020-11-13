@@ -12,14 +12,12 @@ import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.common.resource.DrawableResource
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBarcodeUseCase
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBitmapUseCase
-import pl.kamilszustak.read.domain.access.usecase.scanner.ReadTextUseCase
 import pl.kamilszustak.read.domain.access.usecase.volume.GetVolumeUseCase
 import pl.kamilszustak.read.ui.base.util.PermissionState
 import pl.kamilszustak.read.ui.base.util.getStateOf
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
 import java.io.File
-import java.util.*
 import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
 
@@ -27,7 +25,6 @@ class ScannerViewModel @Inject constructor(
     private val application: Application,
     private val getVolumeUseCase: GetVolumeUseCase,
     private val readBarcode: ReadBarcodeUseCase,
-    private val readText: ReadTextUseCase,
     private val readBitmap: ReadBitmapUseCase,
 ) : BaseViewModel<ScannerEvent, ScannerAction>() {
 
@@ -154,34 +151,8 @@ class ScannerViewModel @Inject constructor(
     }
 
     private fun handleImageSave(event: ScannerEvent.OnImageSaved) {
-        if (detected.get()) {
-            return
-        }
-
-        val mode = _selectedMode.value
-        if (mode != ScannerMode.QUOTE) {
-            return
-        }
-
-        viewModelScope.launch(Dispatchers.Main) {
-            _isLoading.value = true
-            detected.set(true)
-            val bitmap = readBitmap(event.uri)
-            if (bitmap == null) {
-                _action.value = ScannerAction.Error(R.string.image_file_saving_error_message)
-                return@launch
-            }
-
-            readText(bitmap)
-                .onSuccess { text ->
-                    _action.value = ScannerAction.NavigateToTextSelectionFragment(text, event.uri)
-                }.onFailure { throwable ->
-                    setError(throwable)
-                }
-
-            _isLoading.value = false
-            detected.set(false)
-        }
+        val action = ScannerAction.NavigateToTextSelectionFragment(event.uri)
+        _action.postValue(action)
     }
 
     private fun setError(throwable: Throwable) {

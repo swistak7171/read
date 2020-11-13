@@ -104,7 +104,7 @@ class ScannerFragment @Inject constructor(
                 }
 
                 is ScannerAction.NavigateToTextSelectionFragment -> {
-                    navigator.navigateToTextSelectionFragment(action.text, action.imageUri)
+                    navigator.navigateToTextSelectionFragment(action.imageUri)
                 }
             }
         }
@@ -177,8 +177,8 @@ class ScannerFragment @Inject constructor(
             navigate(direction)
         }
 
-        fun navigateToTextSelectionFragment(text: TextWrapper, uri: Uri) {
-            val direction = ScannerFragmentDirections.actionScannerFragmentToTextSelectionFragment(text, uri)
+        fun navigateToTextSelectionFragment(uri: Uri) {
+            val direction = ScannerFragmentDirections.actionScannerFragmentToTextSelectionFragment(uri)
             navigate(direction)
         }
     }

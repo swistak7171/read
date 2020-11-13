@@ -1,6 +1,7 @@
 package pl.kamilszustak.read.ui.main.scanner.selection
 
 import android.os.Bundle
+import android.util.Size
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -10,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.afollestad.materialdialogs.list.listItemsSingleChoice
 import pl.kamilszustak.read.ui.base.binding.viewBinding
 import pl.kamilszustak.read.ui.base.util.dialog
+import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.FragmentTextSelectionBinding
@@ -46,16 +48,28 @@ class TextSelectionFragment @Inject constructor(
         setHasOptionsMenu(true)
     }
 
+    override fun setListeners() {
+        binding.imageView.setOnTouchListener { v, event ->
+            binding.imageView.measuredWidth
+            val size = Size(binding.imageView.measuredWidth, binding.imageView.measuredHeight)
+            val event = TextSelectionEvent.OnImageViewTouch(event, size)
+            viewModel.dispatchEvent(event)
+            true
+        }
+    }
+
     override fun observeViewModel() {
         viewModel.action.observe(viewLifecycleOwner) { action ->
             when (action) {
                 is TextSelectionAction.ShowTextSelectionModeDialog -> showTextSelectionModeDialog(action)
+                TextSelectionAction.InvalidateImageView -> binding.imageView.invalidate()
+                is TextSelectionAction.Error -> showErrorToast(action)
             }
         }
 
-        viewModel.imageBitmap.observe(viewLifecycleOwner) { bitmap ->
-            if (bitmap != null) {
-                binding.imageView.setImageBitmap(bitmap)
+        viewModel.imageDrawable.observe(viewLifecycleOwner) { drawable ->
+            if (drawable != null) {
+                binding.imageView.setImageDrawable(drawable)
             }
         }
     }
@@ -73,6 +87,13 @@ class TextSelectionFragment @Inject constructor(
                     viewModel.dispatchEvent(event)
                 }
             )
+        }
+    }
+
+    private fun showErrorToast(action: TextSelectionAction.Error) {
+        when {
+            action.messageResourceId != null -> errorToast(action.messageResourceId)
+            action.throwable != null -> errorToast(action.throwable.message ?: "")
         }
     }
 }

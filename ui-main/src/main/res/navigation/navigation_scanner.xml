@@ -50,9 +50,6 @@
         android:label="@string/text_selection"
         tools:layout="@layout/fragment_text_selection">
         <argument
-            android:name="text"
-            app:argType="pl.kamilszustak.read.model.domain.text.TextWrapper" />
-        <argument
             android:name="imageUri"
             app:argType="android.net.Uri" />
     </fragment>

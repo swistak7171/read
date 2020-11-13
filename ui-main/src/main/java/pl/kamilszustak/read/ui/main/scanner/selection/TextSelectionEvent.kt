@@ -1,5 +1,7 @@
 package pl.kamilszustak.read.ui.main.scanner.selection
 
+import android.util.Size
+import android.view.MotionEvent
 import pl.kamilszustak.read.ui.base.view.ViewEvent
 
 sealed class TextSelectionEvent : ViewEvent {
@@ -7,5 +9,10 @@ sealed class TextSelectionEvent : ViewEvent {
 
     data class OnTextSelectionModeSelected(
         val selectionIndex: Int,
+    ) : TextSelectionEvent()
+
+    data class OnImageViewTouch(
+        val motionEvent: MotionEvent,
+        val imageViewSize: Size,
     ) : TextSelectionEvent()
 }

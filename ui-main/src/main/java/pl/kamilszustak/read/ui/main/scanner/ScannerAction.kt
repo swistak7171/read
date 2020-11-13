@@ -33,7 +33,6 @@ sealed class ScannerAction : ViewAction {
     ) : ScannerAction()
 
     data class NavigateToTextSelectionFragment(
-        val text: TextWrapper,
         val imageUri: Uri,
     ) : ScannerAction()
 }
