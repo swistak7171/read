@@ -1,6 +1,5 @@
 package pl.kamilszustak.read.ui.main.scanner.selection
 
-import android.graphics.Bitmap
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import pl.kamilszustak.read.ui.base.binding.viewBinding
@@ -20,14 +19,7 @@ class TextSelectionFragment @Inject constructor(
     override fun observeViewModel() {
         viewModel.imageBitmap.observe(viewLifecycleOwner) { bitmap ->
             if (bitmap != null) {
-                val scaledBitmap = Bitmap.createScaledBitmap(
-                    bitmap,
-                    binding.imageView.width,
-                    binding.imageView.height,
-                    false
-                )
-
-                binding.imageView.setImageBitmap(scaledBitmap)
+                binding.imageView.setImageBitmap(bitmap)
             }
         }
     }
