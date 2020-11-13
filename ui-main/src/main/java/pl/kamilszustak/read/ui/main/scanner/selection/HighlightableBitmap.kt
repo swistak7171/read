@@ -7,6 +7,7 @@ import android.graphics.RectF
 import android.graphics.Region
 import android.graphics.drawable.BitmapDrawable
 import androidx.annotation.ColorInt
+import kotlin.math.abs
 
 class HighlightableBitmap(
     resources: Resources,
@@ -27,6 +28,21 @@ class HighlightableBitmap(
 
     fun clearSelection() {
         selectArea(null)
+    }
+
+    fun getSelectedBitmap(): Bitmap {
+        val selection = this.selection
+
+        return if (selection != null) {
+            val x = selection.left.toInt()
+            val y = selection.top.toInt()
+            val width = abs(selection.left - selection.right).toInt()
+            val height = abs(selection.top - selection.bottom).toInt()
+
+            Bitmap.createBitmap(bitmap, x, y, width, height)
+        } else {
+            bitmap
+        }
     }
 
     override fun draw(canvas: Canvas) {

@@ -1,8 +1,8 @@
 package pl.kamilszustak.read.ui.main.scanner.selection
 
 import android.graphics.*
+import android.graphics.Bitmap.createBitmap
 import android.view.MotionEvent
-import androidx.core.graphics.withMatrix
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
@@ -50,7 +50,7 @@ class TextSelectionViewModel(
     }
 
     private fun drawRectangles() {
-        drawBitmap = Bitmap.createBitmap(originalBitmap)
+        drawBitmap = createBitmap(originalBitmap)
 
         canvas.setBitmap(drawBitmap)
 
@@ -76,13 +76,6 @@ class TextSelectionViewModel(
 //        }
 
         _imageBitmap.value = drawBitmap
-    }
-
-    private fun drawRectangle(rectangle: RectF, matrix: Matrix) {
-        canvas.withMatrix(matrix) {
-            clipRect(rectangle)
-//            clipRect(rectangle, paint)
-        }
     }
 
     override fun handleEvent(event: TextSelectionEvent) {
