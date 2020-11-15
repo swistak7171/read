@@ -11,7 +11,6 @@ import com.afollestad.assent.Permission
 import com.afollestad.assent.askForPermissions
 import com.google.android.material.tabs.TabLayout
 import pl.kamilszustak.read.model.domain.Volume
-import pl.kamilszustak.read.model.domain.text.TextWrapper
 import pl.kamilszustak.read.ui.base.OnSwipeListener
 import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.navigate

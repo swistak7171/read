@@ -175,6 +175,10 @@ object Dependencies {
         const val COMPILER: String = "com.github.MatrixDev.Roomigrant:RoomigrantCompiler:${Versions.ROOMIGRANT}"
     }
 
+    object Wasabeef {
+        const val RECYCLER_VIEW_ANIMATORS: String = "jp.wasabeef:recyclerview-animators:${Versions.RECYCLER_VIEW_ANIMATORS}"
+    }
+
     const val ANDROID_GRADLE_BUILD_TOOLS: String = "com.android.tools.build:gradle:${Versions.ANDROID_STUDIO}"
     const val KTLINT: String = "com.pinterest:ktlint:${Versions.KTLINT}"
     const val TIMBER: String = "com.jakewharton.timber:timber:${Versions.TIMBER}"
@@ -186,5 +190,4 @@ object Dependencies {
     const val CIRCULAR_PROGRESS_BAR: String = "com.mikhaellopez:circularprogressbar:${Versions.CIRCULAR_PROGRESS_BAR}"
     const val DISCRETE_SCROLL_VIEW: String = "com.yarolegovich:discrete-scrollview:${Versions.DISCRETE_SCROLL_VIEW}"
     const val PASTEL_PLACEHOLDERS: String = "com.github.zedlabs:pastelPlaceholders:${Versions.PASTEL_PLACEHOLDERS}"
-    const val RECYCLER_VIEW_ANIMATORS: String = "jp.wasabeef:recyclerview-animators:${Versions.RECYCLER_VIEW_ANIMATORS}"
 }
