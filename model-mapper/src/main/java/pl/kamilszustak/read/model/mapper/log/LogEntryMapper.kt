@@ -10,7 +10,7 @@ class LogEntryMapper @Inject constructor(
     getUser: GetUserUseCase,
 ) : Mapper<LogEntry, LogEntryEntity>() {
 
-    private val userId: String by lazy { getUser().uid }
+    private val userId: String by lazy { getUser().id.value }
 
     override fun map(model: LogEntry): LogEntryEntity =
         LogEntryEntity(

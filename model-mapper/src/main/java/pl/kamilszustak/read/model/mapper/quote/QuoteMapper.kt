@@ -10,7 +10,7 @@ class QuoteMapper @Inject constructor(
     getUser: GetUserUseCase,
 ) : Mapper<Quote, QuoteEntity>() {
 
-    private val userId: String by lazy { getUser().uid }
+    private val userId: String by lazy { getUser().id.value }
 
     override fun map(model: Quote): QuoteEntity =
         QuoteEntity(
