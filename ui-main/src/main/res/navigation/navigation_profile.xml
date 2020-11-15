@@ -9,5 +9,18 @@
         android:id="@+id/profileFragment"
         android:name="pl.kamilszustak.read.ui.main.profile.ProfileFragment"
         android:label="@string/menu_profile_item_title"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_profileEditFragment"
+            app:destination="@id/profileEditFragment"
+            app:enterAnim="@anim/zoom_in_enter"
+            app:exitAnim="@anim/zoom_out_exit"
+            app:popEnterAnim="@anim/zoom_in_pop_enter"
+            app:popExitAnim="@anim/zoom_out_pop_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileEditFragment"
+        android:name="pl.kamilszustak.read.ui.main.profile.edit.ProfileEditFragment"
+        android:label="@string/edit_profile"
+        tools:layout="@layout/fragment_profile_edit" />
 </navigation>

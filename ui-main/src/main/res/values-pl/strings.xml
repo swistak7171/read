@@ -108,4 +108,7 @@
     <string name="phone_number">Numer telefonu</string>
     <string name="sign_out_and_exit">Wyloguj i wyjdź</string>
     <string name="sign_out_and_exit_dialog_message">Czy na pewno chcesz się wylogować i wyjść?</string>
+
+    <!-- ProfileEditFragment -->
+    <string name="edit_profile">Edytuj profil</string>
 </resources>

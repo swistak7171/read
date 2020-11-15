@@ -31,7 +31,13 @@ class ProfileViewModel @Inject constructor(
 
     override fun handleEvent(event: ProfileEvent) {
         when (event) {
-            ProfileEvent.OnSignOutButtonClicked -> signOut()
+            ProfileEvent.OnEditButtonClicked -> {
+                _action.value = ProfileAction.NavigateToProfileEditFragment
+            }
+
+            ProfileEvent.OnSignOutButtonClicked -> {
+                signOut()
+            }
         }
     }
 }

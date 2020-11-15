@@ -109,4 +109,7 @@
     <string name="phone_number">Phone number</string>
     <string name="sign_out_and_exit">Sign out and exit</string>
     <string name="sign_out_and_exit_dialog_message">Do you want to sign out and exit?</string>
+
+    <!-- ProfileEditFragment -->
+    <string name="edit_profile">Edit profile</string>
 </resources>
