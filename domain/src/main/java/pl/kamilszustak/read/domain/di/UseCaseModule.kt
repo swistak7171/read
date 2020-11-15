@@ -9,11 +9,12 @@ import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryUseCa
 import pl.kamilszustak.read.domain.access.usecase.device.GetPhoneNumberUseCase
 import pl.kamilszustak.read.domain.access.usecase.log.*
 import pl.kamilszustak.read.domain.access.usecase.quote.*
-import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBitmapUseCase
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBarcodeUseCase
+import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBitmapUseCase
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadTextUseCase
 import pl.kamilszustak.read.domain.access.usecase.user.EditUserUseCase
 import pl.kamilszustak.read.domain.access.usecase.user.GetUserUseCase
+import pl.kamilszustak.read.domain.access.usecase.user.ObserveUserUseCase
 import pl.kamilszustak.read.domain.access.usecase.user.SignOutUseCase
 import pl.kamilszustak.read.domain.access.usecase.volume.GetVolumeUseCase
 import pl.kamilszustak.read.domain.access.usecase.volume.ObserveVolumesUseCase
@@ -24,11 +25,12 @@ import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.device.GetPhoneNumberUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.log.*
 import pl.kamilszustak.read.domain.usecase.quote.*
-import pl.kamilszustak.read.domain.usecase.scanner.ReadBitmapUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.scanner.ReadBarcodeUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.scanner.ReadBitmapUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.scanner.ReadTextUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.user.EditUserUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.user.GetUserUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.user.ObserveUserUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.user.SignOutUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.volume.GetVolumeUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.volume.ObserveVolumesUseCaseImpl
@@ -94,6 +96,9 @@ interface UseCaseModule {
 
     @Binds
     fun bindGetUserUseCase(useCaseImpl: GetUserUseCaseImpl): GetUserUseCase
+
+    @Binds
+    fun bindObserveUserUseCase(useCaseImpl: ObserveUserUseCaseImpl): ObserveUserUseCase
 
     @Binds
     fun bindEditUserUseCase(useCaseImpl: EditUserUseCaseImpl): EditUserUseCase

@@ -26,6 +26,7 @@ class EditUserUseCaseImpl @Inject constructor(
 
             with(user) {
                 if (input.name != user.displayName) {
+                    user.reauthenticate()
                     runCatching { updateProfile(request).await() }
                         .map { Unit }
                         .let { results.add(it) }
