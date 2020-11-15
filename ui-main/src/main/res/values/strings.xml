@@ -44,6 +44,7 @@
     <!-- ScannerFragment -->
     <string name="camera_permission_denied">Camera permission denied</string>
     <string name="camera_permission_permanently_denied">Camera permission permanently denied</string>
+    <string name="image_file_saving_error_message">An error occurred while saving image to file</string>
 
     <!-- CollectionFragment -->
     <string name="progress_percentage" translatable="false">%1$d%%</string>
@@ -76,6 +77,15 @@
     <string name="search_query">Search query</string>
     <string name="blank_search_query_error_message">Blank search query</string>
     <string name="empty_search_result_message">Empty search result</string>
+
+    <!-- TextSelectionFragment -->
+    <string name="recognize_text">Recognize text</string>
+    <string name="text_selection">Text selection</string>
+    <string name="restore_image">Restore image</string>
+    <string name="text_selection_mode">Text selection mode</string>
+    <string name="text_selection_mode_blocks">Blocks</string>
+    <string name="text_selection_mode_lines">Lines</string>
+    <string name="text_sleection_mode_words">Words</string>
 
     <!-- ReadingLogFragment -->
     <string name="reading_log">Reading log</string>

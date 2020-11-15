@@ -1,10 +1,7 @@
 package pl.kamilszustak.read.ui.main.quotes.edit
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
@@ -20,6 +17,7 @@ import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.FragmentQuoteEditBinding
 import javax.inject.Inject
 import kotlin.properties.Delegates
+
 
 class QuoteEditFragment @Inject constructor(
     viewModelFactory: QuoteEditViewModelFactory.Factory,
@@ -55,6 +53,16 @@ class QuoteEditFragment @Inject constructor(
     }
 
     override fun setListeners() {
+        // Add ability to scroll EditText content
+        binding.contentEditText.setOnTouchListener { view, event ->
+            view.parent.requestDisallowInterceptTouchEvent(true)
+            when (event.action and MotionEvent.ACTION_MASK) {
+                MotionEvent.ACTION_UP -> view.parent.requestDisallowInterceptTouchEvent(false)
+            }
+
+            false
+        }
+
         binding.colorLayout.children.forEachIndexed { index, view ->
             (view as? ImageView)?.setOnClickListener {
                 val event = QuoteEditEvent.OnColorSelected(index)

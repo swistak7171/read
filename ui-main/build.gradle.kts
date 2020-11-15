@@ -65,5 +65,8 @@ dependencies {
     implementation(Dependencies.DISCRETE_SCROLL_VIEW)
 
     // RecyclerView Animators
-    implementation(Dependencies.RECYCLER_VIEW_ANIMATORS)
+    implementation(Dependencies.Wasabeef.RECYCLER_VIEW_ANIMATORS)
+
+    // ML Kit
+    implementation(Dependencies.Google.MLKit.TEXT_RECOGNITION)
 }

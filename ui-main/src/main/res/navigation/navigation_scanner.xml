@@ -35,6 +35,37 @@
                 app:nullable="true"
                 android:defaultValue="@null" />
         </action>
+        <action
+            android:id="@+id/action_scannerFragment_to_textSelectionFragment"
+            app:destination="@id/textSelectionFragment"
+            app:enterAnim="@anim/zoom_in_enter"
+            app:exitAnim="@anim/zoom_out_exit"
+            app:popEnterAnim="@anim/zoom_in_pop_enter"
+            app:popExitAnim="@anim/zoom_out_pop_exit" />
     </fragment>
     <include app:graph="@navigation/navigation_book_edit" />
+    <fragment
+        android:id="@+id/textSelectionFragment"
+        android:name="pl.kamilszustak.read.ui.main.scanner.selection.TextSelectionFragment"
+        android:label="@string/text_selection"
+        tools:layout="@layout/fragment_text_selection">
+        <argument
+            android:name="imageUri"
+            app:argType="android.net.Uri" />
+        <action
+            android:id="@+id/action_textSelectionFragment_to_navigation_quote_edit"
+            app:destination="@id/navigation_quote_edit"
+            app:enterAnim="@anim/zoom_in_enter"
+            app:exitAnim="@anim/zoom_out_exit"
+            app:popEnterAnim="@anim/zoom_in_pop_enter"
+            app:popExitAnim="@anim/zoom_out_pop_exit">
+
+            <argument
+                android:name="content"
+                app:argType="string"
+                app:nullable="true"
+                android:defaultValue="@null" />
+        </action>
+    </fragment>
+    <include app:graph="@navigation/navigation_quote_edit" />
 </navigation>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/textRecognitionItem"
+        android:title="@string/recognize_text"
+        android:icon="@drawable/icon_check"
+        app:showAsAction="ifRoom" />
+
+<!--    <item-->
+<!--        android:id="@+id/textSelectionModeItem"-->
+<!--        android:title="@string/text_selection"-->
+<!--        android:icon="@drawable/icon_underline"-->
+<!--        app:showAsAction="ifRoom" />-->
+
+<!--    <item-->
+<!--        android:id="@+id/restoreImageItem"-->
+<!--        android:title="@string/restore_image"-->
+<!--        android:icon="@drawable/icon_restore"-->
+<!--        app:showAsAction="never" />-->
+</menu>

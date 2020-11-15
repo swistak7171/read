@@ -1,6 +1,7 @@
 package pl.kamilszustak.read.ui.main.book.progress
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,10 +19,10 @@ class ReadingProgressViewModel(
     private val editBook: EditBookUseCase,
 ) : BaseViewModel<ReadingProgressEvent, ReadingProgressAction>() {
 
-    private val _book: UniqueLiveData<Book> = UniqueLiveData()
+    private val _book: MutableLiveData<Book> = UniqueLiveData()
     val book: LiveData<Book> = _book
 
-    val readPages: UniqueLiveData<Int> = UniqueLiveData(0)
+    val readPages: MutableLiveData<Int> = UniqueLiveData(0)
 
     init {
         val id = BookId(arguments.bookId)

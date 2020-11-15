@@ -148,7 +148,9 @@ class QuotesFragment @Inject constructor(
 
     private inner class Navigator {
         fun navigateToQuoteEditFragment(quoteId: QuoteId? = null) {
-            val direction = QuotesFragmentDirections.actionQuotesFragmentToQuoteEditFragment(quoteId?.value)
+            val direction = QuotesFragmentDirections.actionQuotesFragmentToNavigationQuoteEdit(
+                quoteId = quoteId?.value
+            )
             navigate(direction)
         }
     }
