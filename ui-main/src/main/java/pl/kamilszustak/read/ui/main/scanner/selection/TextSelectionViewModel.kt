@@ -1,6 +1,7 @@
 package pl.kamilszustak.read.ui.main.scanner.selection
 
 import android.graphics.*
+import android.util.Size
 import android.view.MotionEvent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -23,9 +24,6 @@ class TextSelectionViewModel(
     private val readText: ReadTextUseCase,
 ) : BaseViewModel<TextSelectionEvent, TextSelectionAction>() {
 
-    private lateinit var originalBitmap: Bitmap
-    private lateinit var drawBitmap: Bitmap
-
     private val _imageBitmap: MutableLiveData<Bitmap> = UniqueLiveData()
     val imageDrawable: LiveData<HighlightableBitmap> = _imageBitmap.map { bitmap ->
         HighlightableBitmap(
@@ -35,7 +33,13 @@ class TextSelectionViewModel(
         )
     }
 
+    private lateinit var originalBitmap: Bitmap
+    private lateinit var drawBitmap: Bitmap
+
     private var selectionMode: TextSelectionMode = TextSelectionMode.default
+    private var startPoint: PointF = PointF(0F, 0F)
+    private var moveCounter: Int = 0
+    private val MOVE_THRESHOLD: Int = 5
 
     private val canvas: Canvas = Canvas()
     private val paint: Paint = Paint().apply {
@@ -43,9 +47,6 @@ class TextSelectionViewModel(
         strokeWidth = 4F
         color = Color.RED
     }
-
-    private var startPoint: PointF = PointF(0F, 0F)
-    private var isMoving: Boolean = false
 
     init {
         viewModelScope.launch(Dispatchers.Main) {
@@ -130,8 +131,6 @@ class TextSelectionViewModel(
     }
 
     private fun handleImageViewTouch(event: TextSelectionEvent.OnImageViewTouch) {
-        val widthRatio = originalBitmap.width / event.imageViewSize.width
-        val heightRatio = originalBitmap.height / event.imageViewSize.height
         val point = PointF(
             event.motionEvent.x,
             event.motionEvent.y
@@ -139,34 +138,38 @@ class TextSelectionViewModel(
 
         when (event.motionEvent.action) {
             MotionEvent.ACTION_DOWN -> {
+                moveCounter = 0
                 startPoint = point
-                isMoving = true
             }
 
             MotionEvent.ACTION_MOVE -> {
-                if (isMoving) {
-                    val left = if (startPoint.x < point.x) startPoint.x else point.x
-                    val top = if (startPoint.y < point.y) startPoint.y else point.y
-                    val right = if (startPoint.x < point.x) point.x else startPoint.x
-                    val bottom = if (startPoint.y < point.y) point.y else startPoint.y
-                    val rectangle = RectF(
-                        left * widthRatio,
-                        top * heightRatio,
-                        right * widthRatio,
-                        bottom * heightRatio
-                    )
-
-                    imageDrawable.value?.selectArea(rectangle)
-                }
+                moveCounter++
+                val rectangle = createRectangle(point, event.imageViewSize)
+                imageDrawable.value?.selectArea(rectangle)
             }
 
             MotionEvent.ACTION_UP -> {
-                isMoving = false
-            }
-
-            MotionEvent.ACTION_CANCEL, MotionEvent.ACTION_OUTSIDE -> {
-                isMoving = false
+                if (moveCounter < MOVE_THRESHOLD) {
+                    imageDrawable.value?.clearSelection()
+                }
             }
         }
+    }
+
+    private fun createRectangle(point: PointF, imageViewSize: Size): RectF {
+        val widthRatio = originalBitmap.width / imageViewSize.width
+        val heightRatio = originalBitmap.height / imageViewSize.height
+
+        val left = if (startPoint.x < point.x) startPoint.x else point.x
+        val top = if (startPoint.y < point.y) startPoint.y else point.y
+        val right = if (startPoint.x < point.x) point.x else startPoint.x
+        val bottom = if (startPoint.y < point.y) point.y else startPoint.y
+
+        return RectF(
+            left * widthRatio,
+            top * heightRatio,
+            right * widthRatio,
+            bottom * heightRatio
+        )
     }
 }
