@@ -6,20 +6,18 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import pl.kamilszustak.read.ui.base.binding.viewBinding
 import pl.kamilszustak.read.ui.base.util.dialog
 import pl.kamilszustak.read.ui.base.util.viewModels
-import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
+import pl.kamilszustak.read.ui.main.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.FragmentProfileBinding
 import javax.inject.Inject
 
 class ProfileFragment @Inject constructor(
     viewModelFactory: ViewModelProvider.Factory,
-) : BaseFragment<FragmentProfileBinding, ProfileViewModel>(R.layout.fragment_profile) {
+) : MainDataBindingFragment<FragmentProfileBinding, ProfileViewModel>(R.layout.fragment_profile) {
 
     override val viewModel: ProfileViewModel by viewModels(viewModelFactory)
-    override val binding: FragmentProfileBinding by viewBinding(FragmentProfileBinding::bind)
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_profile_fragment, menu)

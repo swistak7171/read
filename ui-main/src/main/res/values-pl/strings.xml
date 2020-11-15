@@ -103,6 +103,9 @@
     <string name="book_details">Szczegóły książki</string>
 
     <!-- ProfileFragment -->
+    <string name="user_name">Imię i nazwisko</string>
+    <string name="email_address">Adres email</string>
+    <string name="phone_number">Numer telefonu</string>
     <string name="sign_out_and_exit">Wyloguj i wyjdź</string>
     <string name="sign_out_and_exit_dialog_message">Czy na pewno chcesz się wylogować i wyjść?</string>
 </resources>

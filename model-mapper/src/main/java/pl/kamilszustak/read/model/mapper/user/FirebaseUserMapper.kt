@@ -14,15 +14,22 @@ class FirebaseUserMapper @Inject constructor() : Mapper<FirebaseUser, User>() {
         val creationDate = model.metadata?.creationTimestamp.useOrNull { Date(it) }
         val lastSignInDate = model.metadata?.lastSignInTimestamp.useOrNull { Date(it) }
 
+        val displayName = model.displayName
+        val email = model.email
+        val number = model.phoneNumber
+        val name = if (!displayName.isNullOrBlank()) displayName else null
+        val emailAddress = if (!email.isNullOrBlank()) email else null
+        val phoneNumber = if (!number.isNullOrBlank()) number else null
+
         return User(
             id = id,
             creationDate = creationDate,
             lastSignInDate = lastSignInDate,
             isAnonymous = model.isAnonymous,
-            name = model.displayName,
+            name = name,
             photoUrl = model.photoUrl,
-            emailAddress = model.email,
-            phoneNumber = model.phoneNumber
+            emailAddress = emailAddress,
+            phoneNumber = phoneNumber
         )
     }
 }
