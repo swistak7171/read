@@ -44,21 +44,6 @@
                     android:text="@={viewModel.userEmailAddress}"
                     android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/phoneNumberInputLayout"
-                android:hint="@string/phone_number"
-                android:layout_marginTop="@dimen/default_margin">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/phoneNumberEditText"
-                    android:text="@={viewModel.userPhoneNumber}"
-                    android:inputType="phone" />
-            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
     </ScrollView>
 </layout>

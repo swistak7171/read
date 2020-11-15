@@ -7,7 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pl.kamilszustak.read.domain.access.usecase.user.GetUserUseCase
 import pl.kamilszustak.read.domain.access.usecase.user.SignOutUseCase
-import pl.kamilszustak.read.model.domain.User
+import pl.kamilszustak.read.model.domain.user.User
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject

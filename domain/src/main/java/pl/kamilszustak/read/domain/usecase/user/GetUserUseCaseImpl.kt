@@ -3,7 +3,7 @@ package pl.kamilszustak.read.domain.usecase.user
 import com.google.firebase.auth.FirebaseAuth
 import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.domain.access.usecase.user.GetUserUseCase
-import pl.kamilszustak.read.model.domain.User
+import pl.kamilszustak.read.model.domain.user.User
 import pl.kamilszustak.read.model.mapper.user.FirebaseUserMapper
 import javax.inject.Inject
 import javax.inject.Singleton

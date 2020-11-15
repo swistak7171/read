@@ -3,7 +3,7 @@ package pl.kamilszustak.read.model.mapper.user
 import com.google.firebase.auth.FirebaseUser
 import pl.kamilszustak.model.common.id.UserId
 import pl.kamilszustak.read.common.util.useOrNull
-import pl.kamilszustak.read.model.domain.User
+import pl.kamilszustak.read.model.domain.user.User
 import pl.kamilszustak.read.model.mapper.Mapper
 import java.util.*
 import javax.inject.Inject

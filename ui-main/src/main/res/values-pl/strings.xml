@@ -111,4 +111,7 @@
 
     <!-- ProfileEditFragment -->
     <string name="edit_profile">Edytuj profil</string>
+    <string name="invalid_email_address">Nieprawidłowy adres email</string>
+    <string name="profil_edited_message">Profil został edytowany pomyślnie</string>
+    <string name="profil_edit_error_message">Wystąpił błąd podczas edycji profilu</string>
 </resources>

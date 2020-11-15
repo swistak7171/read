@@ -112,4 +112,7 @@
 
     <!-- ProfileEditFragment -->
     <string name="edit_profile">Edit profile</string>
+    <string name="invalid_email_address">Invalid email address</string>
+    <string name="profil_edited_message">Profile edited successfully</string>
+    <string name="profil_edit_error_message">An error occurred while editing the profile</string>
 </resources>
