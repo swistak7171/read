@@ -1,11 +1,13 @@
 package pl.kamilszustak.read.ui.main.collection
 
 import android.animation.ValueAnimator
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.afollestad.materialdialogs.list.listItems
 import com.mikepenz.fastadapter.FastAdapter
@@ -15,9 +17,8 @@ import com.yarolegovich.discretescrollview.transform.ScaleTransformer
 import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import pl.kamilszustak.model.common.id.BookId
 import pl.kamilszustak.read.model.domain.Book
-import pl.kamilszustak.read.ui.base.binding.viewBinding
 import pl.kamilszustak.read.ui.base.util.*
-import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
+import pl.kamilszustak.read.ui.main.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.activity.MainEvent
 import pl.kamilszustak.read.ui.main.activity.MainFragmentType
@@ -25,14 +26,12 @@ import pl.kamilszustak.read.ui.main.activity.MainViewModel
 import pl.kamilszustak.read.ui.main.databinding.FragmentCollectionBinding
 import javax.inject.Inject
 
-
 class CollectionFragment @Inject constructor(
     viewModelFactory: ViewModelProvider.Factory,
-) : BaseFragment<FragmentCollectionBinding, CollectionViewModel>(R.layout.fragment_collection) {
+) : MainDataBindingFragment<FragmentCollectionBinding, CollectionViewModel>(R.layout.fragment_collection) {
 
     override val viewModel: CollectionViewModel by viewModels(viewModelFactory)
     private val mainViewModel: MainViewModel by activityViewModels(viewModelFactory)
-    override val binding: FragmentCollectionBinding by viewBinding(FragmentCollectionBinding::bind)
     private val navigator: Navigator = Navigator()
     private val modelAdapter: ModelAdapter<Book, BookItem> by lazy {
         ModelAdapter { BookItem(it) }
@@ -91,7 +90,10 @@ class CollectionFragment @Inject constructor(
                     binding.booksRecyclerView.smoothScrollToPosition(position)
                 } else {
                     popupMenu(view, R.menu.popup_menu_collection_book_item) {
-                        setForceShowIcon(true)
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            setForceShowIcon(true)
+                        }
+
                         setOnMenuItemClickListener { menuItem ->
                             when (menuItem.itemId) {
                                 R.id.updateReadingProgressItem -> {
@@ -205,6 +207,8 @@ class CollectionFragment @Inject constructor(
         }
 
         viewModel.books.observe(viewLifecycleOwner) { books ->
+            binding.emptyCollectionLayout.root.isVisible = books.isEmpty()
+            binding.collectionGroup.isVisible = books.isNotEmpty()
             modelAdapter.updateModels(books)
         }
 
@@ -216,7 +220,11 @@ class CollectionFragment @Inject constructor(
 
     private fun updateProgress(progress: Int) {
         val lastProgress = binding.progressBar.progress
-        binding.progressBar.setProgress(progress, true)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            binding.progressBar.setProgress(progress, true)
+        } else {
+            binding.progressBar.progress = progress
+        }
 
         ValueAnimator.ofInt(lastProgress, progress).apply {
             duration = ITEM_TRANSITION_TIME_MILLIS.toLong() * 2

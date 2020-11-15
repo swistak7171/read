@@ -27,12 +27,26 @@
                 app:captureMode="image"
                 app:pinchToZoomEnabled="true" />
 
-            <ImageView
+            <com.google.android.material.tabs.TabLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/scannerImageView"
-                android:src="@drawable/icon_capture"
-                android:alpha="0.50" />
+                android:layout_height="wrap_content"
+                android:id="@+id/tabLayout"
+                app:tabIndicator="@null"
+                app:tabTextColor="@android:color/white"
+                app:tabSelectedTextColor="@color/colorAccent"
+                android:background="@android:color/transparent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/isbn" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/quote" />
+            </com.google.android.material.tabs.TabLayout>
 
             <ImageButton
                 android:layout_width="wrap_content"
@@ -51,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/scanButton"
-                android:src="@drawable/icon_barcode_scan"
+                android:src="@drawable/icon_capture"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"

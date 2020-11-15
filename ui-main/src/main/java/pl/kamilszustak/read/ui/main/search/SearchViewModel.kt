@@ -1,6 +1,7 @@
 package pl.kamilszustak.read.ui.main.search
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -18,9 +19,9 @@ class SearchViewModel @Inject constructor(
 ) : BaseViewModel<SearchEvent, SearchAction>() {
 
     private var lastSearchQuery: String = ""
-    val searchQuery: UniqueLiveData<String> = UniqueLiveData()
+    val searchQuery: MutableLiveData<String> = UniqueLiveData()
 
-    private val _volumes: UniqueLiveData<List<Volume>?> = UniqueLiveData()
+    private val _volumes: MutableLiveData<List<Volume>?> = UniqueLiveData()
     val volumes: LiveData<List<Volume>?>
         get() = _volumes
 

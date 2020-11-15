@@ -6,6 +6,8 @@ import android.graphics.drawable.Drawable
 import androidx.annotation.*
 
 interface ResourceProvider {
+    val resources: Resources
+
     fun getBoolean(@BoolRes resourceId: Int): Boolean
     fun getColor(@ColorRes resourceId: Int): Int
     fun getColor(@ColorRes resourceId: Int, theme: Resources.Theme): Int

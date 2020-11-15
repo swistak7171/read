@@ -1,6 +1,7 @@
 package pl.kamilszustak.read.ui.authentication.signin.phone
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
@@ -33,8 +34,8 @@ class PhoneSignInViewModel @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
 ) : BaseViewModel<PhoneSignInEvent, PhoneSignInAction>() {
 
-    val phoneNumber: UniqueLiveData<String> = UniqueLiveData()
-    private val _country: UniqueLiveData<Country> = UniqueLiveData()
+    val phoneNumber: MutableLiveData<String> = UniqueLiveData()
+    private val _country: MutableLiveData<Country> = UniqueLiveData()
     val country: LiveData<Country>
         get() = _country
 

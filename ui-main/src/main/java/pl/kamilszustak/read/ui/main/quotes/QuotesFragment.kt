@@ -1,31 +1,31 @@
 package pl.kamilszustak.read.ui.main.quotes
 
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ModelAdapter
 import com.mikepenz.fastadapter.listeners.LongClickEventHook
+import jp.wasabeef.recyclerview.animators.FadeInAnimator
 import pl.kamilszustak.model.common.id.QuoteId
 import pl.kamilszustak.read.model.domain.Quote
-import pl.kamilszustak.read.ui.base.binding.viewBinding
 import pl.kamilszustak.read.ui.base.util.*
-import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
+import pl.kamilszustak.read.ui.main.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.FragmentQuotesBinding
 import javax.inject.Inject
-import jp.wasabeef.recyclerview.animators.FadeInAnimator
 
 class QuotesFragment @Inject constructor(
     viewModelFactory: ViewModelProvider.Factory,
-) : BaseFragment<FragmentQuotesBinding, QuotesViewModel>(R.layout.fragment_quotes) {
+) : MainDataBindingFragment<FragmentQuotesBinding, QuotesViewModel>(R.layout.fragment_quotes) {
 
     override val viewModel: QuotesViewModel by viewModels(viewModelFactory)
-    override val binding: FragmentQuotesBinding by viewBinding(FragmentQuotesBinding::bind)
     private val navigator: Navigator = Navigator()
     private val modelAdapter: ModelAdapter<Quote, QuoteItem> by lazy {
         ModelAdapter { QuoteItem(it) }
@@ -103,13 +103,18 @@ class QuotesFragment @Inject constructor(
         }
 
         viewModel.quotes.observe(viewLifecycleOwner) { quotes ->
+            binding.quotesRecyclerView.isVisible = quotes.isNotEmpty()
+            binding.emptyQuotesListLayout.root.isVisible = quotes.isEmpty()
             modelAdapter.updateModels(quotes)
         }
     }
 
     private fun openQuoteItemPopupMenu(view: View, quote: Quote) {
         popupMenu(view, R.menu.popup_menu_quote_item) {
-            setForceShowIcon(true)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                setForceShowIcon(true)
+            }
+
             setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.editQuoteItem -> {
@@ -143,7 +148,9 @@ class QuotesFragment @Inject constructor(
 
     private inner class Navigator {
         fun navigateToQuoteEditFragment(quoteId: QuoteId? = null) {
-            val direction = QuotesFragmentDirections.actionQuotesFragmentToQuoteEditFragment(quoteId?.value)
+            val direction = QuotesFragmentDirections.actionQuotesFragmentToNavigationQuoteEdit(
+                quoteId = quoteId?.value
+            )
             navigate(direction)
         }
     }

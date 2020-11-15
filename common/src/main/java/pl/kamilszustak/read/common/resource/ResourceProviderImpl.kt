@@ -11,7 +11,7 @@ class ResourceProviderImpl @Inject constructor(
     private val application: Application,
 ) : ResourceProvider {
 
-    private inline val resources: Resources
+    override val resources: Resources
         get() = application.resources
 
     override fun getBoolean(@BoolRes resourceId: Int): Boolean =

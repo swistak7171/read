@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_quote_edit"
+    app:startDestination="@id/quoteEditFragment">
+
+    <argument
+        android:name="quoteId"
+        app:argType="string"
+        app:nullable="true"
+        android:defaultValue="@null"/>
+
+    <argument
+        android:name="content"
+        app:argType="string"
+        app:nullable="true"
+        android:defaultValue="@null" />
+
+    <fragment
+        android:id="@+id/quoteEditFragment"
+        android:name="pl.kamilszustak.read.ui.main.quotes.edit.QuoteEditFragment"
+        tools:layout="@layout/fragment_quote_edit">
+
+        <argument
+            android:name="quoteId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+
+        <argument
+            android:name="content"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+</navigation>

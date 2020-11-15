@@ -1,6 +1,7 @@
 package pl.kamilszustak.read.ui.main.collection
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
@@ -32,7 +33,7 @@ class CollectionViewModel @Inject constructor(
         .map { it.sortedByDescending(Book::modificationDate) }
         .asLiveData(viewModelScope.coroutineContext)
 
-    private val _currentBook: UniqueLiveData<Book> = UniqueLiveData()
+    private val _currentBook: MutableLiveData<Book> = UniqueLiveData()
     val currentBook: LiveData<Book> = _currentBook
 
     override fun handleEvent(event: CollectionEvent) {

@@ -46,6 +46,7 @@
     <string name="delete_book_dialog_message">Czy chcesz usunąć tę książkę?</string>
     <string name="book_deleted">Książka została usunięta</string>
     <string name="deleting_book_error_message">Wystąpił błąd podczas usuwania książki</string>
+    <string name="empty_collection_message">Nie masz jeszcze żadnych książek w swojej kolekcji</string>
 
     <string-array name="add_book_dialog_options">
         <item>Dodaj ręcznie</item>
@@ -56,6 +57,16 @@
     <!-- ScannerFragment -->
     <string name="camera_permission_denied">Dostęp do kamery został odrzucony</string>
     <string name="camera_permission_permanently_denied">Dostęp do kamery został odrzucony na stałe</string>
+    <string name="image_file_saving_error_message">Wystąpił błąd podczas zapisywania obrazu do pliku</string>
+
+    <!-- TextSelectionFragment -->
+    <string name="recognize_text">Rozpoznaj tekst</string>
+    <string name="text_selection">Wybór tekstu</string>
+    <string name="restore_image">Przywróc obraz</string>
+    <string name="text_selection_mode">Tryb wyboru tekstu</string>
+    <string name="text_selection_mode_blocks">Bloki</string>
+    <string name="text_selection_mode_lines">Linie</string>
+    <string name="text_sleection_mode_words">Słowa</string>
 
     <!-- ReadingProgressDialogFragment -->
     <string name="update_reading_progress">Zaktualizuj postęp</string>
@@ -68,13 +79,16 @@
     <string name="delete_quote_dialog_message">Czy chcesz usunąć ten cytat?</string>
     <string name="quote_deleted">Cytat został usunięty</string>
     <string name="deleting_quote_error_message">Wystąpił błąd podczas usuwania cytatu</string>
+    <string name="empty_quotes_list_message">Nie masz jeszcze dodanych żadnych cytatów</string>
 
     <!-- SearchFragment -->
     <string name="search_query">Wyszukiwana fraza</string>
     <string name="blank_search_query_error_message">Pusta fraza wyszukiwania</string>
+    <string name="empty_search_result_message">Brak wyników wyszukiwania</string>
 
     <!-- ReadingLogFragment -->
     <string name="reading_log">Dziennik czytania</string>
+    <string name="empty_reading_log_message">Twój dziennik czytania jest pusty</string>
     <plurals name="reading_log_entry_content">
         <item quantity="one">Przeczytano %1$d stronę</item>
         <item quantity="few">Przeczytano %1$d strony</item>

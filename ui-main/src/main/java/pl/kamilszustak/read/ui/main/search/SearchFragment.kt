@@ -3,6 +3,8 @@ package pl.kamilszustak.read.ui.main.search
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.core.view.isVisible
+import androidx.core.view.postDelayed
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.mikepenz.fastadapter.FastAdapter
@@ -10,12 +12,13 @@ import com.mikepenz.fastadapter.adapters.ModelAdapter
 import com.mikepenz.fastadapter.listeners.ClickEventHook
 import pl.kamilszustak.read.model.domain.Volume
 import pl.kamilszustak.read.ui.base.util.*
-import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.MainDataBindingFragment
+import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.activity.MainEvent
 import pl.kamilszustak.read.ui.main.activity.MainFragmentType
 import pl.kamilszustak.read.ui.main.activity.MainViewModel
 import pl.kamilszustak.read.ui.main.databinding.FragmentSearchBinding
+import timber.log.Timber
 import javax.inject.Inject
 
 class SearchFragment @Inject constructor(
@@ -110,9 +113,9 @@ class SearchFragment @Inject constructor(
         }
 
         viewModel.volumes.observe(viewLifecycleOwner) { volumes ->
-            if (volumes != null) {
-                modelAdapter.updateModels(volumes)
-            }
+            Timber.i("VOLUMES: $volumes")
+            modelAdapter.updateModels(volumes ?: listOf())
+            binding.emptySearchResultLayout.root.isVisible = volumes.isNullOrEmpty()
         }
     }
 
