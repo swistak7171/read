@@ -39,6 +39,7 @@ class TextSelectionFragment @Inject constructor(
                 true
             }
 
+            /**
             R.id.textSelectionModeItem -> {
                 viewModel.dispatchEvent(TextSelectionEvent.OnTextSelectionModeButtonClicked)
                 true
@@ -48,6 +49,7 @@ class TextSelectionFragment @Inject constructor(
                 viewModel.dispatchEvent(TextSelectionEvent.OnRestoreImageButtonClicked)
                 true
             }
+            **/
 
             else -> {
                 super.onOptionsItemSelected(item)
