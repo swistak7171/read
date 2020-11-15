@@ -65,7 +65,10 @@
                     android:text="@={viewModel.quoteContent}"
                     android:inputType="textCapSentences|textMultiLine"
                     android:lines="5"
-                    android:gravity="start|top" />
+                    android:gravity="start|top"
+                    android:overScrollMode="always"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <HorizontalScrollView

@@ -8,11 +8,12 @@ data class TextWrapper(
     val blocks: List<TextBlock>,
 ) : Parcelable {
 
-    val text: String
+    val value: String
         get() = buildString {
             blocks.forEach { block ->
-                append(System.lineSeparator())
                 append(block.value)
+                append(System.lineSeparator())
             }
+            trim()
         }
 }

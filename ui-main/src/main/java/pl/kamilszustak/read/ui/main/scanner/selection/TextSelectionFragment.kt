@@ -12,6 +12,7 @@ import com.afollestad.materialdialogs.list.listItemsSingleChoice
 import pl.kamilszustak.read.ui.base.binding.viewBinding
 import pl.kamilszustak.read.ui.base.util.dialog
 import pl.kamilszustak.read.ui.base.util.errorToast
+import pl.kamilszustak.read.ui.base.util.navigate
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.FragmentTextSelectionBinding
@@ -24,6 +25,7 @@ class TextSelectionFragment @Inject constructor(
     override val viewModel: TextSelectionViewModel by viewModels { viewModelFactory.create(args) }
     override val binding: FragmentTextSelectionBinding by viewBinding(FragmentTextSelectionBinding::bind)
     private val args: TextSelectionFragmentArgs by navArgs()
+    private val navigator: Navigator = Navigator()
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_text_selection_fragment, menu)
@@ -73,6 +75,7 @@ class TextSelectionFragment @Inject constructor(
                 is TextSelectionAction.ShowTextSelectionModeDialog -> showTextSelectionModeDialog(action)
                 TextSelectionAction.InvalidateImageView -> binding.imageView.invalidate()
                 is TextSelectionAction.Error -> showErrorToast(action)
+                is TextSelectionAction.NavigateToQuoteEditFragment -> navigator.navigateToQuoteEditFragment(action.content)
             }
         }
 
@@ -103,6 +106,15 @@ class TextSelectionFragment @Inject constructor(
         when {
             action.messageResourceId != null -> errorToast(action.messageResourceId)
             action.throwable != null -> errorToast(action.throwable.message ?: "")
+        }
+    }
+
+    private inner class Navigator {
+        fun navigateToQuoteEditFragment(content: String) {
+            val direction = TextSelectionFragmentDirections.actionTextSelectionFragmentToNavigationQuoteEdit(
+                content = content
+            )
+            navigate(direction)
         }
     }
 }

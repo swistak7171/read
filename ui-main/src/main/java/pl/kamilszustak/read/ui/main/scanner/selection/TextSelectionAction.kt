@@ -14,4 +14,8 @@ sealed class TextSelectionAction : ViewAction {
         val messageResourceId: Int? = null,
         val throwable: Throwable? = null,
     ) : TextSelectionAction()
+
+    data class NavigateToQuoteEditFragment(
+        val content: String,
+    ) : TextSelectionAction()
 }

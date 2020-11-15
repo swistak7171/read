@@ -16,6 +16,7 @@ import pl.kamilszustak.read.domain.access.usecase.scanner.ReadTextUseCase
 import pl.kamilszustak.read.model.domain.text.TextWrapper
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
+import timber.log.Timber
 
 class TextSelectionViewModel(
     private val arguments: TextSelectionFragmentArgs,
@@ -71,8 +72,10 @@ class TextSelectionViewModel(
         viewModelScope.launch(Dispatchers.Main) {
             readText(bitmap)
                 .onSuccess { text ->
-                    _imageBitmap.value = bitmap
-                    drawRectangles(bitmap, text)
+                    Timber.i(text.value)
+                    _action.value = TextSelectionAction.NavigateToQuoteEditFragment(text.value)
+//                    _imageBitmap.value = bitmap
+//                    drawRectangles(bitmap, text)
                 }.onFailure { throwable ->
                     _action.value = TextSelectionAction.Error(throwable = throwable)
                 }

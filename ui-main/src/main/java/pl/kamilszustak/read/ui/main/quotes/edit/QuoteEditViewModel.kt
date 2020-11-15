@@ -42,6 +42,10 @@ class QuoteEditViewModel(
     init {
         _actionBarTitle.value = R.string.add_quote
 
+        if (arguments.content != null) {
+            quoteContent.value = arguments.content
+        }
+
         if (inEditMode) {
             viewModelScope.launch(Dispatchers.Main) {
                 val id = QuoteId(arguments.quoteId ?: return@launch)
