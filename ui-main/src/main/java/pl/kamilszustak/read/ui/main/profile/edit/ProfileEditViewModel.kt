@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import pl.kamilszustak.read.common.FormValidator
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.domain.access.usecase.user.EditUserUseCase
 import pl.kamilszustak.read.domain.access.usecase.user.GetUserUseCase
@@ -17,20 +16,14 @@ import javax.inject.Inject
 class ProfileEditViewModel @Inject constructor(
     private val getUser: GetUserUseCase,
     private val editUser: EditUserUseCase,
-    private val validator: FormValidator,
 ) : BaseViewModel<ProfileEditEvent, ProfileEditAction>() {
 
     val userName: MutableLiveData<String> = UniqueLiveData()
-    val userEmailAddress: MutableLiveData<String> = UniqueLiveData()
 
     init {
         val user = getUser()
         if (user.name != null) {
             userName.value = user.name
-        }
-
-        if (user.emailAddress != null) {
-            userEmailAddress.value = user.emailAddress
         }
     }
 
@@ -42,16 +35,9 @@ class ProfileEditViewModel @Inject constructor(
 
     private fun handleSaveButtonClick() {
         val name = userName.value
-        val emailAddress = userEmailAddress.value
-
-        if (emailAddress != null && !validator.validateEmailAddress(emailAddress)) {
-            _action.value = ProfileEditAction.Error(R.string.invalid_email_address)
-            return
-        }
 
         val details = ProfileDetails(
-            name = name,
-            emailAddress = emailAddress
+            name = name
         )
 
         viewModelScope.launch(Dispatchers.Main) {

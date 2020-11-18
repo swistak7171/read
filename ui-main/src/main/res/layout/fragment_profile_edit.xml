@@ -29,21 +29,6 @@
                     android:text="@={viewModel.userName}"
                     android:inputType="textPersonName" />
             </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/emailAddressInputLayout"
-                android:hint="@string/email_address"
-                android:layout_marginTop="@dimen/default_margin">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/emailAddressEditText"
-                    android:text="@={viewModel.userEmailAddress}"
-                    android:inputType="textEmailAddress" />
-            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
     </ScrollView>
 </layout>

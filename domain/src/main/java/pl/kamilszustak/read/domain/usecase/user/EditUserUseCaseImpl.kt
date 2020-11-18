@@ -20,28 +20,16 @@ class EditUserUseCaseImpl @Inject constructor(
         }
 
         return withIOContext {
-            val notSignedInException = IllegalStateException("User is not signed in")
-            val user = auth.currentUser ?: return@withIOContext Result.failure(notSignedInException)
-            val results = mutableListOf<Result<Unit>>()
+            val exception = IllegalStateException("User is not signed in")
+            val user = auth.currentUser ?: return@withIOContext Result.failure(exception)
 
             with(user) {
                 if (input.name != user.displayName) {
-                    user.reauthenticate()
                     runCatching { updateProfile(request).await() }
                         .map { Unit }
-                        .let { results.add(it) }
+                } else {
+                    Result.success(Unit)
                 }
-
-                val emailAddress = input.emailAddress
-                if (emailAddress != null && emailAddress != user.email) {
-                    runCatching { updateEmail(emailAddress).await() }
-                        .map { Unit }
-                        .let { results.add(it) }
-                }
-
-                val failure = results.find { it.isFailure }
-
-                failure ?: Result.success(Unit)
             }
         }
     }
