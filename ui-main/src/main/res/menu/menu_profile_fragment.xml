@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/editProfileItem"
+        android:title="@string/edit"
+        android:icon="@drawable/icon_edit"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/signOutItem"
         android:title="@string/sign_out_and_exit"
         android:icon="@drawable/icon_exit"

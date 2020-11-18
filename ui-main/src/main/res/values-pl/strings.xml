@@ -103,6 +103,15 @@
     <string name="book_details">Szczegóły książki</string>
 
     <!-- ProfileFragment -->
+    <string name="user_name">Imię i nazwisko</string>
+    <string name="email_address">Adres email</string>
+    <string name="phone_number">Numer telefonu</string>
     <string name="sign_out_and_exit">Wyloguj i wyjdź</string>
     <string name="sign_out_and_exit_dialog_message">Czy na pewno chcesz się wylogować i wyjść?</string>
+
+    <!-- ProfileEditFragment -->
+    <string name="edit_profile">Edytuj profil</string>
+    <string name="invalid_email_address">Nieprawidłowy adres email</string>
+    <string name="profil_edited_message">Profil został edytowany pomyślnie</string>
+    <string name="profil_edit_error_message">Wystąpił błąd podczas edycji profilu</string>
 </resources>

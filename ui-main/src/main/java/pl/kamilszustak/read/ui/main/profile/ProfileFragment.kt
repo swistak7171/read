@@ -6,20 +6,20 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import pl.kamilszustak.read.ui.base.binding.viewBinding
 import pl.kamilszustak.read.ui.base.util.dialog
+import pl.kamilszustak.read.ui.base.util.navigate
 import pl.kamilszustak.read.ui.base.util.viewModels
-import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
+import pl.kamilszustak.read.ui.main.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.FragmentProfileBinding
 import javax.inject.Inject
 
 class ProfileFragment @Inject constructor(
     viewModelFactory: ViewModelProvider.Factory,
-) : BaseFragment<FragmentProfileBinding, ProfileViewModel>(R.layout.fragment_profile) {
+) : MainDataBindingFragment<FragmentProfileBinding, ProfileViewModel>(R.layout.fragment_profile) {
 
     override val viewModel: ProfileViewModel by viewModels(viewModelFactory)
-    override val binding: FragmentProfileBinding by viewBinding(FragmentProfileBinding::bind)
+    private val navigator: Navigator = Navigator()
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_profile_fragment, menu)
@@ -28,14 +28,13 @@ class ProfileFragment @Inject constructor(
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.signOutItem -> {
-                dialog {
-                    title(R.string.sign_out_and_exit)
-                    message(R.string.sign_out_and_exit_dialog_message)
-                    positiveButton(R.string.yes) { viewModel.dispatchEvent(ProfileEvent.OnSignOutButtonClicked) }
-                    negativeButton(R.string.no) { it.dismiss() }
-                }
+            R.id.editProfileItem -> {
+                viewModel.dispatchEvent(ProfileEvent.OnEditButtonClicked)
+                true
+            }
 
+            R.id.signOutItem -> {
+                showSignOutDialog()
                 true
             }
 
@@ -47,6 +46,31 @@ class ProfileFragment @Inject constructor(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setHasOptionsMenu(true)
+    }
+
+    override fun observeViewModel() {
+        viewModel.action.observe(viewLifecycleOwner) { action ->
+            when (action) {
+                ProfileAction.NavigateToProfileEditFragment -> navigator.navigateToUserEditFragment()
+            }
+        }
+    }
+
+    private fun showSignOutDialog() {
+        dialog {
+            title(R.string.sign_out_and_exit)
+            message(R.string.sign_out_and_exit_dialog_message)
+            positiveButton(R.string.yes) { viewModel.dispatchEvent(ProfileEvent.OnSignOutButtonClicked) }
+            negativeButton(R.string.no) { it.dismiss() }
+        }
+    }
+
+    private inner class Navigator {
+        fun navigateToUserEditFragment() {
+            val direction = ProfileFragmentDirections.actionProfileFragmentToProfileEditFragment()
+            navigate(direction)
+        }
     }
 }
