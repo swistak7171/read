@@ -2,7 +2,7 @@ package pl.kamilszustak.read.ui.base.binding
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import pl.kamilszustak.read.common.DateFormats
+import pl.kamilszustak.read.common.date.DateFormats
 import pl.kamilszustak.read.common.util.useOrNull
 import java.util.*
 

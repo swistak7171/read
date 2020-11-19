@@ -120,4 +120,5 @@
     <string name="daily_reading_goal">Dzienny cel czytania</string>
     <string name="reading_goal_on">Cel czytania włączony</string>
     <string name="reading_goal_off">Cel czytania wyłączony</string>
+    <string name="reminder_time">Godzina</string>
 </resources>
