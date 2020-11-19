@@ -9,4 +9,8 @@ sealed class ReadingGoalAction : ViewAction {
         @StringRes val titleResourceId: Int,
         val time: Time,
     ) : ReadingGoalAction()
+
+    data class Error(
+        @StringRes val messageResourceId: Int,
+    ) : ReadingGoalAction()
 }

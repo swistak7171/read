@@ -36,6 +36,7 @@ class ReadingGoalViewModel @Inject constructor() : BaseViewModel<ReadingGoalEven
         when (event) {
             ReadingGoalEvent.OnHourEditTextClicked -> handleTimeEditTextClick()
             is ReadingGoalEvent.OnTimeSelected -> handleTimeSelection(event)
+            ReadingGoalEvent.OnSaveButtonClicked -> handleSaveButtonClick()
         }
     }
 
@@ -46,5 +47,21 @@ class ReadingGoalViewModel @Inject constructor() : BaseViewModel<ReadingGoalEven
 
     private fun handleTimeSelection(event: ReadingGoalEvent.OnTimeSelected) {
         _goalTime.value = event.time
+    }
+
+    private fun handleSaveButtonClick() {
+        val isEnabled = isGoalEnabled.value ?: false
+        val time = _goalTime.value
+        val pagesNumber = goalPagesNumber.value
+
+        if (time == null) {
+            _action.value = ReadingGoalAction.Error(R.string.reminder_time_not_selected_error_message)
+            return
+        }
+
+        if (pagesNumber == null) {
+            _action.value = ReadingGoalAction.Error(R.string.number_of_pages_not_entered_error_message)
+            return
+        }
     }
 }

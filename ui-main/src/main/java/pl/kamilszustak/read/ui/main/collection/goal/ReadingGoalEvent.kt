@@ -5,6 +5,7 @@ import pl.kamilszustak.read.ui.base.view.ViewEvent
 
 sealed class ReadingGoalEvent : ViewEvent {
     object OnHourEditTextClicked : ReadingGoalEvent()
+    object OnSaveButtonClicked : ReadingGoalEvent()
 
     data class OnTimeSelected(
         val time: Time,

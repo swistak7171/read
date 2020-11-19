@@ -121,5 +121,7 @@
     <string name="daily_reading_goal">Daily reading goal</string>
     <string name="reading_goal_on">Reading goal on</string>
     <string name="reading_goal_off">Reading goal off</string>
-    <string name="reminder_time">Reminder hour</string>
+    <string name="reminder_time">Reminder time</string>
+    <string name="reminder_time_not_selected_error_message">Reminder time not selected</string>
+    <string name="number_of_pages_not_entered_error_message">Number of pages not entered</string>
 </resources>

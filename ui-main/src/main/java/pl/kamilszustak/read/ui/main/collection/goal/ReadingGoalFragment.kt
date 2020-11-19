@@ -1,8 +1,14 @@
 package pl.kamilszustak.read.ui.main.collection.goal
 
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.timepicker.MaterialTimePicker
 import pl.kamilszustak.read.common.date.Time
+import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.main.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.R
@@ -16,6 +22,30 @@ class ReadingGoalFragment @Inject constructor(
     override val viewModel: ReadingGoalViewModel by viewModels(viewModelFactory)
     private val TIME_PICKER_TAG: String = "time_picker"
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_reading_goal_fragment, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.saveItem -> {
+                viewModel.dispatchEvent(ReadingGoalEvent.OnSaveButtonClicked)
+                true
+            }
+
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setHasOptionsMenu(true)
+    }
+
     override fun setListeners() {
         binding.timeEditText.setOnClickListener {
             viewModel.dispatchEvent(ReadingGoalEvent.OnHourEditTextClicked)
@@ -26,6 +56,7 @@ class ReadingGoalFragment @Inject constructor(
         viewModel.action.observe(viewLifecycleOwner) { action ->
             when (action) {
                 is ReadingGoalAction.ShowTimePicker -> showTimePicker(action)
+                is ReadingGoalAction.Error -> errorToast(action.messageResourceId)
             }
         }
     }
