@@ -27,6 +27,10 @@ dependencies {
     implementation(project(Modules.MODEL_DATA))
     implementation(project(Modules.MODEL_NETWORK))
     implementation(project(Modules.MODEL_MAPPER))
+    implementation(project(Modules.WORK))
+
+    // WorkManager
+    implementation(Dependencies.AndroidX.Work.WORK_RUNTIME_KTX)
 
     // Dagger
     kapt(Dependencies.Google.Dagger.DAGGER_ANDROID_PROCESSOR)

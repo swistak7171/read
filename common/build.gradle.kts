@@ -56,9 +56,6 @@ dependencies {
     api(Dependencies.AndroidX.Core.CORE)
     api(Dependencies.AndroidX.Core.CORE_KTX)
 
-    // WorkManager
-    api(Dependencies.AndroidX.Work.WORK_RUNTIME_KTX)
-
     // Firebase Authentication
     api(Dependencies.Google.Firebase.Authentication.AUTH_KTX)
 
