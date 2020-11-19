@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import pl.kamilszustak.read.common.date.Time
 import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.viewModels
@@ -65,6 +66,7 @@ class ReadingGoalFragment @Inject constructor(
         val title = getString(action.titleResourceId)
         val timePicker = MaterialTimePicker.Builder()
             .setTitleText(title)
+            .setTimeFormat(TimeFormat.CLOCK_24H)
             .setHour(action.time.hour)
             .setMinute(action.time.minute)
             .build()

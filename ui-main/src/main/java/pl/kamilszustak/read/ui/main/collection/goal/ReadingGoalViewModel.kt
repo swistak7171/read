@@ -4,14 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import pl.kamilszustak.read.common.date.Time
-import pl.kamilszustak.read.common.date.currentTime
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.common.util.map
+import pl.kamilszustak.read.domain.access.usecase.goal.SetReadingGoalUseCase
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
 import javax.inject.Inject
 
-class ReadingGoalViewModel @Inject constructor() : BaseViewModel<ReadingGoalEvent, ReadingGoalAction>() {
+class ReadingGoalViewModel @Inject constructor(
+    private val setReadingGoal: SetReadingGoalUseCase,
+) : BaseViewModel<ReadingGoalEvent, ReadingGoalAction>() {
+
     val isGoalEnabled: MutableLiveData<Boolean> = UniqueLiveData()
     val switchLabelResourceId: LiveData<Int> = isGoalEnabled.map(R.string.empty_placeholder) { isEnabled ->
         if (isEnabled) {
@@ -25,11 +28,7 @@ class ReadingGoalViewModel @Inject constructor() : BaseViewModel<ReadingGoalEven
     private val _goalTime: MutableLiveData<Time> = UniqueLiveData()
     val goalTime: LiveData<String>
         get() = _goalTime.map { time ->
-            if (time != null) {
-                "${time.hour}:${time.minute}"
-            } else {
-                ""
-            }
+            time?.format() ?: ""
         }
 
     override fun handleEvent(event: ReadingGoalEvent) {
@@ -41,8 +40,8 @@ class ReadingGoalViewModel @Inject constructor() : BaseViewModel<ReadingGoalEven
     }
 
     private fun handleTimeEditTextClick() {
-        val time = currentTime()
-        _action.value = ReadingGoalAction.ShowTimePicker(R.string.reminder_time, time)
+        val currentTime = Time.current()
+        _action.value = ReadingGoalAction.ShowTimePicker(R.string.reminder_time, currentTime)
     }
 
     private fun handleTimeSelection(event: ReadingGoalEvent.OnTimeSelected) {
@@ -63,5 +62,7 @@ class ReadingGoalViewModel @Inject constructor() : BaseViewModel<ReadingGoalEven
             _action.value = ReadingGoalAction.Error(R.string.number_of_pages_not_entered_error_message)
             return
         }
+
+        setReadingGoal(pagesNumber, time)
     }
 }

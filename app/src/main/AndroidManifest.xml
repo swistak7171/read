@@ -25,6 +25,11 @@
             android:value="@string/facebook_app_id"
             tools:replace="android:value" />
 
+        <provider
+            android:name="androidx.work.impl.WorkManagerInitializer"
+            android:authorities="${applicationId}.workmanager-init"
+            tools:node="remove" />
+
         <activity
             android:name=".ui.splashscreen.activity.SplashScreenActivity"
             android:theme="@style/SplashScreenTheme">

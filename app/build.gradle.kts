@@ -126,4 +126,7 @@ dependencies {
 
     // Moshi
     implementation(Dependencies.Moshi.MOSHI)
+
+    // WorkManager
+    implementation(Dependencies.AndroidX.Work.WORK_RUNTIME_KTX)
 }
