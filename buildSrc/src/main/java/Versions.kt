@@ -1,5 +1,5 @@
 object Versions {
-    const val KOTLIN: String = "1.4.20-276"
+    const val KOTLIN: String = "1.4.20"
 //    const val KOTLIN: String = "1.4.20-RC"
 //    const val KOTLIN: String = "1.4.0"
     const val ANDROID_STUDIO: String = "4.1.1"
@@ -29,7 +29,7 @@ object Versions {
     const val LEAK_CANARY: String = "2.5"
     const val MOSHI: String = "1.11.0"
     const val MATERIAL_DIALOGS: String = "3.3.0"
-    const val FAST_ADAPTER: String = "5.3.0"
+    const val FAST_ADAPTER: String = "5.3.1"
     const val MATERIALIZE: String = "1.2.1"
     const val ASSENT: String = "3.0.0-RC4"
     const val TOASTY: String = "1.5.0"
