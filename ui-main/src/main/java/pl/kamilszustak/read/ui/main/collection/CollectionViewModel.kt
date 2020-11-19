@@ -57,6 +57,10 @@ class CollectionViewModel @Inject constructor(
                 _action.value = CollectionAction.NavigateToReadingLogFragment
             }
 
+            CollectionEvent.OnReadingGoalButtonClicked -> {
+                _action.value = CollectionAction.NavigateToReadingGoalFragment
+            }
+
             is CollectionEvent.OnDialogOptionSelected -> {
                 when (event.index) {
                     0 -> _action.value = CollectionAction.NavigateToBookEditFragment()

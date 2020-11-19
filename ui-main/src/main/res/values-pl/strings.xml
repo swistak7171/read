@@ -114,4 +114,10 @@
     <string name="invalid_email_address">Nieprawidłowy adres email</string>
     <string name="profil_edited_message">Profil został edytowany pomyślnie</string>
     <string name="profil_edit_error_message">Wystąpił błąd podczas edycji profilu</string>
+
+    <!-- ReadingGoalFragment -->
+    <string name="reading_goal">Cel czytania</string>
+    <string name="daily_reading_goal">Dzienny cel czytania</string>
+    <string name="reading_goal_on">Cel czytania włączony</string>
+    <string name="reading_goal_off">Cel czytania wyłączony</string>
 </resources>

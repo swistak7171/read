@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 
-inline fun <S, T> LiveData<S>.mapWithInitialValue(
+inline fun <S, T> LiveData<S>.map(
     initialValue: T,
     crossinline transform: (S) -> T
 ): LiveData<T> {
@@ -12,15 +12,14 @@ inline fun <S, T> LiveData<S>.mapWithInitialValue(
 
     return result.apply {
         value = initialValue
-        addSource(this@mapWithInitialValue) {
+        addSource(this@map) {
             value = transform(it)
         }
     }
 }
 
 inline fun <T> MutableLiveData<T>.update(transform: (T?) -> T?) {
-    val updated = transform(this.value)
-    this.value = updated
+    value = transform(value)
 }
 
 inline fun <T> MutableLiveData<T>.updateNotNull(transform: (T) -> T?) {

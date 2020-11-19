@@ -30,4 +30,5 @@ sealed class CollectionAction : ViewAction {
     object NavigateToSearchFragment : CollectionAction()
     object NavigateToScannerFragment : CollectionAction()
     object NavigateToReadingLogFragment : CollectionAction()
+    object NavigateToReadingGoalFragment : CollectionAction()
 }

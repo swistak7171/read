@@ -115,4 +115,10 @@
     <string name="invalid_email_address">Invalid email address</string>
     <string name="profil_edited_message">Profile edited successfully</string>
     <string name="profil_edit_error_message">An error occurred while editing the profile</string>
+
+    <!-- ReadingGoalFragment -->
+    <string name="reading_goal">Reading goal</string>
+    <string name="daily_reading_goal">Daily reading goal</string>
+    <string name="reading_goal_on">Reading goal on</string>
+    <string name="reading_goal_off">Reading goal off</string>
 </resources>

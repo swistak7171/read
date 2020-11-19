@@ -7,6 +7,7 @@ import dagger.multibindings.IntoMap
 import pl.kamilszustak.read.ui.base.di.key.ViewModelKey
 import pl.kamilszustak.read.ui.main.activity.MainViewModel
 import pl.kamilszustak.read.ui.main.collection.CollectionViewModel
+import pl.kamilszustak.read.ui.main.collection.goal.ReadingGoalViewModel
 import pl.kamilszustak.read.ui.main.collection.log.ReadingLogViewModel
 import pl.kamilszustak.read.ui.main.profile.ProfileViewModel
 import pl.kamilszustak.read.ui.main.profile.edit.ProfileEditViewModel
@@ -55,4 +56,9 @@ interface MainViewModelModule {
     @IntoMap
     @ViewModelKey(ProfileEditViewModel::class)
     fun bindProfileEditViewModel(viewModel: ProfileEditViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ReadingGoalViewModel::class)
+    fun bindReadingGoalViewModel(viewModel: ReadingGoalViewModel): ViewModel
 }
