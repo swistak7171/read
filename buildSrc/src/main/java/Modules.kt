@@ -1,6 +1,7 @@
 object Modules {
     const val APP: String = ":app"
     const val COMMON: String = ":common"
+    const val NOTIFICATION: String = ":notification"
     const val DATA: String = ":data"
     const val DATA_ACCESS: String = ":data-access"
     const val DOMAIN: String = ":domain"

@@ -22,11 +22,12 @@ class SetReadingGoalUseCaseImpl @Inject constructor(
             .build()
 
         // TODO: Change to KEEP
-        workManager.enqueueUniquePeriodicWork(
-            ReadingGoalNotificationWorker.NAME,
-            ExistingPeriodicWorkPolicy.REPLACE,
-            request
-        )
+//        workManager.enqueueUniquePeriodicWork(
+//            ReadingGoalNotificationWorker.NAME,
+//            ExistingPeriodicWorkPolicy.REPLACE,
+//            request
+//        )
+        workManager.enqueue(request)
 
         return Result.success(Unit)
     }
