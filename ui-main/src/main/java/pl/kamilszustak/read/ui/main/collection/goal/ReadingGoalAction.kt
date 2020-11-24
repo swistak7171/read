@@ -13,4 +13,6 @@ sealed class ReadingGoalAction : ViewAction {
     data class Error(
         @StringRes val messageResourceId: Int,
     ) : ReadingGoalAction()
+
+    object ReadingGoalSet : ReadingGoalAction()
 }

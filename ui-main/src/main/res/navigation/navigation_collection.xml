@@ -85,7 +85,7 @@
     <fragment
         android:id="@+id/logEntryDetailsFragment"
         android:name="pl.kamilszustak.read.ui.main.collection.log.details.LogEntryDetailsFragment"
-        tools:layout="@layout/dialog_fragment_log_entry_details" >
+        tools:layout="@layout/fragment_log_entry_details" >
         <argument
             android:name="logEntryId"
             app:argType="string" />

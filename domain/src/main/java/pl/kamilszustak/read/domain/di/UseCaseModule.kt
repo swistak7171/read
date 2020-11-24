@@ -132,6 +132,9 @@ interface UseCaseModule {
     fun bindGetReadingLogUseCase(useCaseImpl: GetReadingLogUseCaseImpl): GetReadingLogUseCase
 
     @Binds
+    fun bindGetReadingLogByDateUseCase(useCaseImpl: GetReadingLogByDateUseCaseImpl): GetReadingLogByDateUseCase
+
+    @Binds
     fun bindObserveLogEntryUseCase(useCaseImpl: ObserveLogEntryUseCaseImpl): ObserveLogEntryUseCase
 
     @Binds

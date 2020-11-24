@@ -19,6 +19,7 @@ class ReadingProgressViewModel(
     private val editBook: EditBookUseCase,
 ) : BaseViewModel<ReadingProgressEvent, ReadingProgressAction>() {
 
+    private var lastReadPages: Int = 0
     private val _book: MutableLiveData<Book> = UniqueLiveData()
     val book: LiveData<Book> = _book
 
@@ -28,8 +29,9 @@ class ReadingProgressViewModel(
         val id = BookId(arguments.bookId)
         viewModelScope.launch(Dispatchers.Main) {
             _book.value = getBook(id).also { book ->
-                if (book != null) {
-                    readPages.value = book.readPages
+                book?.readPages?.let { pages ->
+                    readPages.value = pages
+                    lastReadPages = pages
                 }
             }
         }
@@ -37,6 +39,10 @@ class ReadingProgressViewModel(
 
     override fun handleEvent(event: ReadingProgressEvent) {
         when (event) {
+            is ReadingProgressEvent.OnFinishCheckBoxCheckedChanged -> {
+                handleFinishCheckBoxCheckedChange(event)
+            }
+
             ReadingProgressEvent.OnCancelButtonClicked -> {
                 _action.value = ReadingProgressAction.NavigateUp
             }
@@ -45,6 +51,21 @@ class ReadingProgressViewModel(
                 handleSaveButtonClicked()
             }
         }
+    }
+
+    private fun handleFinishCheckBoxCheckedChange(event: ReadingProgressEvent.OnFinishCheckBoxCheckedChanged) {
+        if (event.isChecked) {
+            val book = book.value
+            val pages = readPages.value
+            if (book != null && pages != null) {
+                readPages.value = book.pagesNumber
+                lastReadPages = pages
+            }
+        } else {
+            readPages.value = lastReadPages
+        }
+
+        _action.value = ReadingProgressAction.ChangePagesNumberPickerEnabled(!event.isChecked)
     }
 
     private fun handleSaveButtonClicked() {

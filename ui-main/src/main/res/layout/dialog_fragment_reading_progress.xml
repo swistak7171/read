@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -13,15 +14,32 @@
         android:layout_height="match_parent"
         android:padding="@dimen/default_padding">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/titleTextView"
+            android:text="@string/reading_progress"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/finishCheckBox"
+            android:text="@string/finish_the_book"
+            app:layout_constraintTop_toBottomOf="@id/titleTextView" />
+
         <NumberPicker
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/pageNumberPicker"
-            app:min="@{0}"
+            app:wrapSelectorWheel="@{false}"
+            app:min="@{viewModel.book.readPages}"
             app:max="@{viewModel.book.pagesNumber}"
             android:value="@={viewModel.readPages}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/finishCheckBox" />
 
         <Button
             android:layout_width="wrap_content"

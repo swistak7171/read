@@ -10,6 +10,7 @@ import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import pl.kamilszustak.read.common.date.Time
 import pl.kamilszustak.read.ui.base.util.errorToast
+import pl.kamilszustak.read.ui.base.util.successToast
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.main.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.R
@@ -57,6 +58,7 @@ class ReadingGoalFragment @Inject constructor(
         viewModel.action.observe(viewLifecycleOwner) { action ->
             when (action) {
                 is ReadingGoalAction.ShowTimePicker -> showTimePicker(action)
+                ReadingGoalAction.ReadingGoalSet -> successToast(R.string.reading_goal_set)
                 is ReadingGoalAction.Error -> errorToast(action.messageResourceId)
             }
         }

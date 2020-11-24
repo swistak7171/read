@@ -3,10 +3,13 @@ package pl.kamilszustak.read.ui.main.collection.goal
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import pl.kamilszustak.read.common.date.Time
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.common.util.map
 import pl.kamilszustak.read.domain.access.usecase.goal.SetDailyReadingGoalUseCase
+import pl.kamilszustak.read.model.domain.ReadingGoal
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
 import javax.inject.Inject
@@ -63,6 +66,19 @@ class ReadingGoalViewModel @Inject constructor(
             return
         }
 
-        setDailyReadingGoal(pagesNumber, time)
+        viewModelScope.launch {
+            val goal = ReadingGoal(
+                pagesNumber = pagesNumber,
+                reminderTime = time
+            )
+
+            setDailyReadingGoal(goal)
+                .onSuccess {
+                    _action.value = ReadingGoalAction.ReadingGoalSet
+                }.onFailure {
+                    _action.value = ReadingGoalAction.Error(R.string.reading_goal_setting_error_message)
+                }
+        }
+
     }
 }
