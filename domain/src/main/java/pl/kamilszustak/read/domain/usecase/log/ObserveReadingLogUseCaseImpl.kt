@@ -15,5 +15,5 @@ class ObserveReadingLogUseCaseImpl @Inject constructor(
 
     override fun invoke(): Flow<List<LogEntry>> =
         repository.observeAll()
-            .map { mapper.mapAll(it) }
+            .map { mapper.mapAll(it, Unit) }
 }

@@ -6,8 +6,8 @@ import pl.kamilszustak.read.model.domain.IsbnType
 import pl.kamilszustak.read.model.mapper.Mapper
 import javax.inject.Inject
 
-class IsbnDtoMapper @Inject constructor() : Mapper<IsbnDto, Isbn>() {
-    override fun map(model: IsbnDto): Isbn {
+class IsbnDtoMapper @Inject constructor() : Mapper<IsbnDto, Isbn, Unit>() {
+    override fun map(model: IsbnDto, parameter: Unit): Isbn {
         val type = when (model.type) {
             "ISBN_10" -> IsbnType.ISBN_10
             "ISBN_13" -> IsbnType.ISBN_13

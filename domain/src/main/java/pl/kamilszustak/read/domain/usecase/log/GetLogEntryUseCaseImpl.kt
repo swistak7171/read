@@ -17,5 +17,5 @@ class GetLogEntryUseCaseImpl @Inject constructor(
 
     override suspend fun invoke(input: LogEntryId): LogEntry? =
         repository.getById(input.value)
-            .useOrNull { mapper.map(it) }
+            .useOrNull { mapper.map(it, Unit) }
 }

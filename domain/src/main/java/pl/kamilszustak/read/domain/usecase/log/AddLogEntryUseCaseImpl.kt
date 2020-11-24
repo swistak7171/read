@@ -14,7 +14,7 @@ class AddLogEntryUseCaseImpl @Inject constructor(
 ) : AddLogEntryUseCase {
 
     override suspend fun invoke(input: LogEntry): Result<Unit> {
-        val entity = mapper.map(input)
+        val entity = mapper.map(input, Unit)
 
         return repository.add(entity)
     }

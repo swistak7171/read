@@ -4,29 +4,29 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import pl.kamilszustak.read.common.util.withDefaultContext
 
-abstract class Mapper<T, R> {
-    abstract fun map(model: T): R
+abstract class Mapper<T, R, P> {
+    abstract fun map(model: T, parameter: P): R
 
-    suspend fun mapAsync(model: T): R = withDefaultContext {
-        map(model)
+    suspend fun mapAsync(model: T, parameter: P): R = withDefaultContext {
+        map(model, parameter)
     }
 
-    fun mapAll(models: Iterable<T>): List<R> = models.map { model ->
-        this.map(model)
+    fun mapAll(models: Iterable<T>, parameter: P): List<R> = models.map { model ->
+        map(model, parameter)
     }
 
-    suspend fun mapAllAsync(models: Iterable<T>): List<R> = withDefaultContext {
-        models.map { async { map(it) } }
+    suspend fun mapAllAsync(models: Iterable<T>, parameter: P): List<R> = withDefaultContext {
+        models.map { async { map(it, parameter) } }
             .awaitAll()
     }
 
-    inline fun onMap(model: T, action: (R) -> Unit) {
-        val mapped = this.map(model)
+    inline fun onMap(model: T, parameter: P, action: (R) -> Unit) {
+        val mapped = map(model, parameter)
         action(mapped)
     }
 
-    inline fun onMapAll(models: Iterable<T>, action: (List<R>) -> Unit) {
-        val mapped = this.mapAll(models)
+    inline fun onMapAll(models: Iterable<T>, parameter: P, action: (List<R>) -> Unit) {
+        val mapped = mapAll(models, parameter)
         action(mapped)
     }
 }

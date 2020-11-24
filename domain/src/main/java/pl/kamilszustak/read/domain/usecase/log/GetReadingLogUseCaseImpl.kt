@@ -13,5 +13,5 @@ class GetReadingLogUseCaseImpl @Inject constructor(
 
     override suspend fun invoke(): List<LogEntry> =
         repository.getAll()
-            .map { mapper.map(it) }
+            .map { mapper.map(it, Unit) }
 }
