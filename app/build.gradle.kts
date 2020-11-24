@@ -95,6 +95,7 @@ dependencies {
     implementation(project(Modules.DOMAIN_ACCESS))
     implementation(project(Modules.NETWORK))
     implementation(project(Modules.WORK))
+    implementation(project(Modules.NOTIFICATION))
     implementation(project(Modules.MODEL_DATA))
     implementation(project(Modules.MODEL_DOMAIN))
     implementation(project(Modules.MODEL_MAPPER))

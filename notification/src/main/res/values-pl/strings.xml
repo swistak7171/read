@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="reading_goal_notification_channel_name">Cele czytania</string>
+    <string name="daily_reading_goal_notification_title">Dzienny cel czytania</string>
+    <plurals name="daily_reading_goal_notification_text">
+        <item quantity="one">Dziś pozostała %1$d strona do przeczytania</item>
+        <item quantity="few">Dziś pozostały %1$d strony do przeczytania</item>
+        <item quantity="other">Dziś pozostało %1$d stron do przeczytania</item>
+    </plurals>
 </resources>

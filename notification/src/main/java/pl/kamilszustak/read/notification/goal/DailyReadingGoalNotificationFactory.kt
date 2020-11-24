@@ -1,25 +1,31 @@
 package pl.kamilszustak.read.notification.goal
 
+import android.app.Application
 import android.app.Notification
-import android.content.Context
 import androidx.core.app.NotificationCompat
+import pl.kamilszustak.read.common.resource.ResourceProvider
 import pl.kamilszustak.read.notification.NotificationFactory
 import pl.kamilszustak.read.notification.R
 import pl.kamilszustak.read.notification.channel.ReadingGoalNotificationChannelFactory
+import javax.inject.Inject
 
-class DailyReadingGoalNotificationFactory : NotificationFactory<DailyReadingGoalNotificationDetails>() {
-    override fun create(
-        context: Context,
-        details: DailyReadingGoalNotificationDetails
-    ): Notification {
-        val factory = ReadingGoalNotificationChannelFactory()
-        val channelId = factory.create(context).id
+class DailyReadingGoalNotificationFactory @Inject constructor(
+    private val application: Application,
+    private val resourceProvider: ResourceProvider,
+    private val channelFactory: ReadingGoalNotificationChannelFactory,
+) : NotificationFactory<DailyReadingGoalNotificationDetails>() {
 
-        return NotificationCompat.Builder(context, channelId)
+    override fun create(details: DailyReadingGoalNotificationDetails): Notification {
+        val channelId = channelFactory.create().id
+        val pagesLeft = details.progressMaxValue - details.progressValue
+        val title = resourceProvider.getString(R.string.daily_reading_goal_notification_title)
+        val text = resourceProvider.getPluralString(R.plurals.daily_reading_goal_notification_text, pagesLeft, pagesLeft)
+
+        return NotificationCompat.Builder(application, channelId)
             .setSmallIcon(R.drawable.icon_alarm)
-            .setContentTitle("Reading goal")
-            .setContentText("You read ${details.progressValue} pages of ${details.progressMaxValue} today")
+            .setContentTitle(title)
             .setProgress(details.progressMaxValue, details.progressValue, false)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(text))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setAutoCancel(true)
             .build()

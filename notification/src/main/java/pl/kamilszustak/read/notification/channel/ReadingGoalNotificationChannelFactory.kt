@@ -1,15 +1,21 @@
 package pl.kamilszustak.read.notification.channel
 
+import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.Context
+import pl.kamilszustak.read.common.resource.ResourceProvider
 import pl.kamilszustak.read.notification.NotificationChannelFactory
 import pl.kamilszustak.read.notification.R
+import javax.inject.Inject
 
-class ReadingGoalNotificationChannelFactory : NotificationChannelFactory() {
-    override fun create(context: Context): NotificationChannel {
-        val manager = getNotificationManager(context)
-        val name = context.getString(R.string.reading_goal_notification_channel_name)
+class ReadingGoalNotificationChannelFactory @Inject constructor(
+    private val application: Application,
+    private val resourceProvider: ResourceProvider,
+) : NotificationChannelFactory() {
+
+    override fun create(): NotificationChannel {
+        val manager = getNotificationManager(application)
+        val name = resourceProvider.getString(R.string.reading_goal_notification_channel_name)
         val channel = NotificationChannel(CHANNEL_ID, name, NotificationManager.IMPORTANCE_DEFAULT)
         manager.createNotificationChannel(channel)
 

@@ -10,18 +10,18 @@ import pl.kamilszustak.read.notification.goal.DailyReadingGoalNotificationDetail
 import pl.kamilszustak.read.notification.goal.DailyReadingGoalNotificationFactory
 import pl.kamilszustak.read.work.ListenableWorkerFactory
 
-class ReadingGoalNotificationWorker @AssistedInject constructor(
+class DailyReadingGoalNotificationWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted parameters: WorkerParameters,
+    private val notificationFactory: DailyReadingGoalNotificationFactory,
 ) : CoroutineWorker(context, parameters) {
 
     override suspend fun doWork(): Result {
-        val factory = DailyReadingGoalNotificationFactory()
         val details = DailyReadingGoalNotificationDetails(
             progressMaxValue = 100,
             progressValue = 50
         )
-        val notification = factory.create(applicationContext, details)
+        val notification = notificationFactory.create(details)
 
         with(NotificationManagerCompat.from(applicationContext)) {
             notify(DailyReadingGoalNotificationFactory.NOTIFICATION_ID, notification)

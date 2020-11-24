@@ -7,7 +7,7 @@ import dagger.multibindings.IntoMap
 import pl.kamilszustak.read.work.ListenableWorkerFactory
 import pl.kamilszustak.read.work.di.factory.WorkerFactoryImpl
 import pl.kamilszustak.read.work.di.key.WorkerKey
-import pl.kamilszustak.read.work.worker.ReadingGoalNotificationWorker
+import pl.kamilszustak.read.work.worker.DailyReadingGoalNotificationWorker
 
 @Module
 interface WorkerFactoryModule {
@@ -16,6 +16,6 @@ interface WorkerFactoryModule {
 
     @Binds
     @IntoMap
-    @WorkerKey(ReadingGoalNotificationWorker::class)
-    fun bindReadingGoalNotificationWorkerFactory(factory: ReadingGoalNotificationWorker.Factory): ListenableWorkerFactory
+    @WorkerKey(DailyReadingGoalNotificationWorker::class)
+    fun bindReadingGoalNotificationWorkerFactory(factory: DailyReadingGoalNotificationWorker.Factory): ListenableWorkerFactory
 }
