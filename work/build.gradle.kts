@@ -20,6 +20,7 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     implementation(project(Modules.COMMON))
+    implementation(project(Modules.NOTIFICATION))
 
     // WorkManager
     implementation(Dependencies.AndroidX.Work.WORK_RUNTIME_KTX)
