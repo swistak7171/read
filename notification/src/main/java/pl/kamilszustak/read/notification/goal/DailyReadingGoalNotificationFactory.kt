@@ -2,25 +2,23 @@ package pl.kamilszustak.read.notification.goal
 
 import android.app.Application
 import android.app.Notification
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import androidx.core.app.NotificationCompat
+import pl.kamilszustak.model.common.ReadingGoalResult
 import pl.kamilszustak.read.common.resource.ResourceProvider
 import pl.kamilszustak.read.notification.NotificationFactory
 import pl.kamilszustak.read.notification.R
 import pl.kamilszustak.read.notification.channel.ReadingGoalNotificationChannelFactory
 import javax.inject.Inject
 
-
 class DailyReadingGoalNotificationFactory @Inject constructor(
     private val application: Application,
     private val resourceProvider: ResourceProvider,
     private val channelFactory: ReadingGoalNotificationChannelFactory,
-) : NotificationFactory<DailyReadingGoalNotificationDetails>() {
+) : NotificationFactory<ReadingGoalResult>() {
 
-    override fun create(details: DailyReadingGoalNotificationDetails): Notification {
+    override fun create(details: ReadingGoalResult): Notification {
         val channelId = channelFactory.create().id
-        val pagesLeft = details.progressMaxValue - details.progressValue
+        val pagesLeft = details.pagesToRead - details.readPages
         val title = resourceProvider.getString(R.string.daily_reading_goal_notification_title)
         val text = resourceProvider.getPluralString(
             R.plurals.daily_reading_goal_notification_text,
@@ -32,8 +30,8 @@ class DailyReadingGoalNotificationFactory @Inject constructor(
             R.plurals.daily_reading_goal_notification_big_text,
             pagesLeft,
             pagesLeft,
-            details.progressValue,
-            details.progressMaxValue
+            details.readPages,
+            details.pagesToRead
         )
 
         val style = NotificationCompat.BigTextStyle()
@@ -44,7 +42,7 @@ class DailyReadingGoalNotificationFactory @Inject constructor(
             .setContentTitle(title)
             .setContentText(text)
             .setSmallIcon(R.drawable.icon_alarm)
-            .setProgress(details.progressMaxValue, details.progressValue, false)
+            .setProgress(details.pagesToRead, details.readPages, false)
             .setStyle(style)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setAutoCancel(true)

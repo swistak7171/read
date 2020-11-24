@@ -8,14 +8,14 @@ import kotlinx.coroutines.launch
 import pl.kamilszustak.read.common.date.Time
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.common.util.map
-import pl.kamilszustak.read.domain.access.usecase.goal.SetDailyReadingGoalUseCase
+import pl.kamilszustak.read.domain.access.usecase.goal.AddDailyReadingGoalUseCase
 import pl.kamilszustak.read.model.domain.ReadingGoal
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
 import javax.inject.Inject
 
 class ReadingGoalViewModel @Inject constructor(
-    private val setDailyReadingGoal: SetDailyReadingGoalUseCase,
+    private val addDailyReadingGoal: AddDailyReadingGoalUseCase,
 ) : BaseViewModel<ReadingGoalEvent, ReadingGoalAction>() {
 
     val isGoalEnabled: MutableLiveData<Boolean> = UniqueLiveData(false)
@@ -72,7 +72,7 @@ class ReadingGoalViewModel @Inject constructor(
                 reminderTime = time
             )
 
-            setDailyReadingGoal(goal)
+            addDailyReadingGoal(goal)
                 .onSuccess {
                     _action.value = ReadingGoalAction.ReadingGoalSet
                 }.onFailure {

@@ -21,6 +21,7 @@ dependencies {
 
     implementation(project(Modules.COMMON))
     implementation(project(Modules.NOTIFICATION))
+    implementation(project(Modules.DOMAIN_ACCESS))
 
     // WorkManager
     implementation(Dependencies.AndroidX.Work.WORK_RUNTIME_KTX)

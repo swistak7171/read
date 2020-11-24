@@ -4,9 +4,8 @@ import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import pl.kamilszustak.read.common.date.Time
 import pl.kamilszustak.read.data.access.repository.ReadingGoalRepository
-import pl.kamilszustak.read.domain.access.usecase.goal.SetDailyReadingGoalUseCase
+import pl.kamilszustak.read.domain.access.usecase.goal.AddDailyReadingGoalUseCase
 import pl.kamilszustak.read.model.domain.ReadingGoal
-import pl.kamilszustak.read.model.entity.goal.ReadingGoalEntity
 import pl.kamilszustak.read.model.entity.goal.ReadingGoalType
 import pl.kamilszustak.read.model.mapper.goal.ReadingGoalMapper
 import pl.kamilszustak.read.work.worker.DailyReadingGoalNotificationWorker
@@ -15,15 +14,15 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class SetDailyReadingGoalUseCaseImpl @Inject constructor(
+class AddDailyReadingGoalUseCaseImpl @Inject constructor(
     private val repository: ReadingGoalRepository,
     private val workManager: WorkManager,
     private val mapper: ReadingGoalMapper,
-) : SetDailyReadingGoalUseCase {
+) : AddDailyReadingGoalUseCase {
 
     override suspend fun invoke(input: ReadingGoal): Result<Unit> {
         val entity = mapper.map(input, ReadingGoalType.DAILY)
-        repository.set(entity)
+        repository.add(entity)
 
         val delay = Time.current().toLater(input.reminderTime)
         val request = PeriodicWorkRequestBuilder<DailyReadingGoalNotificationWorker>(1, TimeUnit.DAYS)

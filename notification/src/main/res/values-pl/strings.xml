@@ -8,8 +8,8 @@
         <item quantity="other">Pozostało %1$d stron</item>
     </plurals>
     <plurals name="daily_reading_goal_notification_big_text">
-        <item quantity="one">Dziś pozostała %1$d strona do przeczytania (przeczytano %2$d/%3$d)</item>
-        <item quantity="few">Dziś pozostały %1$d strony do przeczytania (przeczytano %2$d/%3$d)</item>
-        <item quantity="other">Dziś pozostało %1$d stron do przeczytania (przeczytano %2$d/%3$d)</item>
+        <item quantity="one">Dziś pozostała %1$d strona do przeczytania (%2$d/%3$d)</item>
+        <item quantity="few">Dziś pozostały %1$d strony do przeczytania (%2$d/%3$d)</item>
+        <item quantity="other">Dziś pozostało %1$d stron do przeczytania (%2$d/%3$d)</item>
     </plurals>
 </resources>
