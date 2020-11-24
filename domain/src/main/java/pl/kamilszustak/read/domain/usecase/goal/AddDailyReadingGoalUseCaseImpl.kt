@@ -1,5 +1,6 @@
 package pl.kamilszustak.read.domain.usecase.goal
 
+import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import pl.kamilszustak.read.common.date.Time
@@ -29,12 +30,11 @@ class AddDailyReadingGoalUseCaseImpl @Inject constructor(
             .setInitialDelay(delay, TimeUnit.MILLISECONDS)
             .build()
 
-//        workManager.enqueueUniquePeriodicWork(
-//            ReadingGoalNotificationWorker.NAME,
-//            ExistingPeriodicWorkPolicy.REPLACE,
-//            request
-//        )
-        workManager.enqueue(request)
+        workManager.enqueueUniquePeriodicWork(
+            DailyReadingGoalNotificationWorker.NAME,
+            ExistingPeriodicWorkPolicy.REPLACE,
+            request
+        )
 
         return Result.success(Unit)
     }

@@ -3,7 +3,7 @@ package pl.kamilszustak.read.domain.usecase.goal
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import pl.kamilszustak.model.common.ReadingGoalResult
-import pl.kamilszustak.read.domain.access.usecase.goal.CheckDailyReadingGoalUseCase
+import pl.kamilszustak.read.domain.access.usecase.goal.CheckDailyReadingGoalCompletionUseCase
 import pl.kamilszustak.read.domain.access.usecase.goal.GetLatestDailyReadingGoalUseCase
 import pl.kamilszustak.read.domain.access.usecase.log.GetReadingLogByDateUseCase
 import pl.kamilszustak.read.model.domain.LogEntry
@@ -12,10 +12,10 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CheckDailyReadingGoalUseCaseImpl @Inject constructor(
+class CheckDailyReadingGoalCompletionUseCaseImpl @Inject constructor(
     private val getLatestDailyReadingGoal: GetLatestDailyReadingGoalUseCase,
     private val getReadingLogByDate: GetReadingLogByDateUseCase,
-) : CheckDailyReadingGoalUseCase {
+) : CheckDailyReadingGoalCompletionUseCase {
 
     override suspend fun invoke(): ReadingGoalResult? {
         val goalDeferred = coroutineScope { async { getLatestDailyReadingGoal() } }

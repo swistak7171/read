@@ -9,6 +9,7 @@ import pl.kamilszustak.read.common.date.Time
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.common.util.map
 import pl.kamilszustak.read.domain.access.usecase.goal.AddDailyReadingGoalUseCase
+import pl.kamilszustak.read.domain.access.usecase.goal.GetLatestDailyReadingGoalUseCase
 import pl.kamilszustak.read.model.domain.ReadingGoal
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
@@ -16,6 +17,7 @@ import javax.inject.Inject
 
 class ReadingGoalViewModel @Inject constructor(
     private val addDailyReadingGoal: AddDailyReadingGoalUseCase,
+    private val getLatestDailyReadingGoal: GetLatestDailyReadingGoalUseCase,
 ) : BaseViewModel<ReadingGoalEvent, ReadingGoalAction>() {
 
     val isGoalEnabled: MutableLiveData<Boolean> = UniqueLiveData(false)
@@ -33,6 +35,16 @@ class ReadingGoalViewModel @Inject constructor(
         get() = _goalTime.map { time ->
             time?.format() ?: ""
         }
+
+    init {
+        viewModelScope.launch {
+            val goal = getLatestDailyReadingGoal()
+            if (goal != null) {
+                goalPagesNumber.value = goal.pagesNumber
+                _goalTime.value = goal.reminderTime
+            }
+        }
+    }
 
     override fun handleEvent(event: ReadingGoalEvent) {
         when (event) {
