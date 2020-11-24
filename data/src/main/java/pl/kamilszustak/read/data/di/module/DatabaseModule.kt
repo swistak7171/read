@@ -6,14 +6,12 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import dagger.Module
 import dagger.Provides
-import pl.kamilszustak.read.data.di.qualifier.BookCollection
-import pl.kamilszustak.read.data.di.qualifier.QuoteCollection
-import pl.kamilszustak.read.data.di.qualifier.ReadingLogCollection
-import pl.kamilszustak.read.data.di.qualifier.RootDatabaseReference
+import pl.kamilszustak.read.data.di.qualifier.*
 import pl.kamilszustak.read.model.entity.BookEntity
 import pl.kamilszustak.read.model.entity.DatabaseCollection
 import pl.kamilszustak.read.model.entity.LogEntryEntity
 import pl.kamilszustak.read.model.entity.QuoteEntity
+import pl.kamilszustak.read.model.entity.goal.ReadingGoalEntity
 import javax.inject.Singleton
 
 @Module
@@ -69,4 +67,10 @@ class DatabaseModule {
     @ReadingLogCollection
     fun provideReadingLogCollection(@RootDatabaseReference reference: DatabaseReference): DatabaseCollection =
         createUserDatabaseCollection(reference, LogEntryEntity.COLLECTION_NAME, LogEntryEntity.USER_ID_PROPERTY)
+
+    @Provides
+    @Singleton
+    @ReadingGoalCollection
+    fun provideReadingGoalCollection(@RootDatabaseReference reference: DatabaseReference): DatabaseCollection =
+        createUserDatabaseCollection(reference, ReadingGoalEntity.COLLECTION_NAME, ReadingGoalEntity.USER_ID_PROPERTY)
 }

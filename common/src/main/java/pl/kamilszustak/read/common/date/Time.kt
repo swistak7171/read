@@ -81,6 +81,27 @@ data class Time(
 
             return Time(hour, minute, format)
         }
+
+        fun parse(text: String): Time =
+            parseOrNull(text) ?: throw IllegalArgumentException("Invalid time text: $text. Should be in format \"hh:mm\"")
+
+        fun parseOrNull(text: String): Time? {
+            val hour = text.substringBefore(":")
+                .toIntOrNull()
+
+            if (hour == null || hour !in 0..23) {
+                return null
+            }
+
+            val minute = text.substringAfter(":")
+                .toIntOrNull()
+
+            if (minute == null || minute !in 0..59) {
+                return null
+            }
+
+            return Time(hour, minute)
+        }
     }
 }
 
