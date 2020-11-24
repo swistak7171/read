@@ -22,9 +22,11 @@ class DailyReadingGoalNotificationWorker @AssistedInject constructor(
             progressValue = 50
         )
         val notification = notificationFactory.create(details)
-
-        with(NotificationManagerCompat.from(applicationContext)) {
-            notify(DailyReadingGoalNotificationFactory.NOTIFICATION_ID, notification)
+        val notificationId = DailyReadingGoalNotificationFactory.NOTIFICATION_ID
+        val manager = NotificationManagerCompat.from(applicationContext)
+        with(manager) {
+            cancel(notificationId)
+            notify(notificationId, notification)
         }
 
         return Result.success()
