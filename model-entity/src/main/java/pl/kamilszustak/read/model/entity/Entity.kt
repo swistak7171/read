@@ -1,4 +1,4 @@
-package pl.kamilszustak.read.model.data
+package pl.kamilszustak.read.model.entity
 
 import com.google.firebase.database.PropertyName
 import java.util.Date

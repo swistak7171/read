@@ -10,7 +10,7 @@ object Modules {
     const val WORK: String = ":work"
     const val MODEL_COMMON: String = ":model-common"
     const val MODEL_DOMAIN: String = ":model-domain"
-    const val MODEL_DATA: String = ":model-data"
+    const val MODEL_ENTITY: String = ":model-entity"
     const val MODEL_NETWORK: String = ":model-network"
     const val MODEL_MAPPER: String = ":model-mapper"
     const val UI_BASE: String = ":ui-base"

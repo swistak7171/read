@@ -1,7 +1,7 @@
 package pl.kamilszustak.read.data.access.repository
 
 import kotlinx.coroutines.flow.Flow
-import pl.kamilszustak.read.model.data.LogEntryEntity
+import pl.kamilszustak.read.model.entity.LogEntryEntity
 
 interface LogEntryRepository {
     suspend fun add(entry: LogEntryEntity): Result<Unit>

@@ -3,7 +3,7 @@ package pl.kamilszustak.read.model.mapper.book
 import pl.kamilszustak.model.common.id.BookId
 import pl.kamilszustak.model.common.id.VolumeId
 import pl.kamilszustak.read.common.util.useOrNull
-import pl.kamilszustak.read.model.data.BookEntity
+import pl.kamilszustak.read.model.entity.BookEntity
 import pl.kamilszustak.read.model.domain.Book
 import pl.kamilszustak.read.model.mapper.Mapper
 import javax.inject.Inject

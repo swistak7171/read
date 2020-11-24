@@ -1,4 +1,4 @@
-package pl.kamilszustak.read.model.data
+package pl.kamilszustak.read.model.entity
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

@@ -1,7 +1,7 @@
 package pl.kamilszustak.read.data.access.repository
 
 import kotlinx.coroutines.flow.Flow
-import pl.kamilszustak.read.model.data.BookEntity
+import pl.kamilszustak.read.model.entity.BookEntity
 
 interface BookRepository {
     suspend fun add(book: BookEntity): Result<Unit>

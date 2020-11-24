@@ -1,7 +1,7 @@
 package pl.kamilszustak.read.model.mapper.quote
 
 import pl.kamilszustak.read.domain.access.usecase.user.GetUserUseCase
-import pl.kamilszustak.read.model.data.QuoteEntity
+import pl.kamilszustak.read.model.entity.QuoteEntity
 import pl.kamilszustak.read.model.domain.Quote
 import pl.kamilszustak.read.model.mapper.Mapper
 import javax.inject.Inject

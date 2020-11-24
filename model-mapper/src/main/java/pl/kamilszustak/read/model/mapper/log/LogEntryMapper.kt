@@ -1,7 +1,7 @@
 package pl.kamilszustak.read.model.mapper.log
 
 import pl.kamilszustak.read.domain.access.usecase.user.GetUserUseCase
-import pl.kamilszustak.read.model.data.LogEntryEntity
+import pl.kamilszustak.read.model.entity.LogEntryEntity
 import pl.kamilszustak.read.model.domain.LogEntry
 import pl.kamilszustak.read.model.mapper.Mapper
 import javax.inject.Inject

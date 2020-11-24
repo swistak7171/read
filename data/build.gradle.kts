@@ -34,7 +34,7 @@ dependencies {
     implementation(project(Modules.NETWORK))
     implementation(project(Modules.DATA_ACCESS))
     implementation(project(Modules.MODEL_DOMAIN))
-    implementation(project(Modules.MODEL_DATA))
+    implementation(project(Modules.MODEL_ENTITY))
     implementation(project(Modules.MODEL_NETWORK))
     implementation(project(Modules.DOMAIN_ACCESS))
 

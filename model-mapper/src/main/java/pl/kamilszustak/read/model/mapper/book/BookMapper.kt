@@ -1,7 +1,7 @@
 package pl.kamilszustak.read.model.mapper.book
 
 import pl.kamilszustak.read.domain.access.usecase.user.GetUserUseCase
-import pl.kamilszustak.read.model.data.BookEntity
+import pl.kamilszustak.read.model.entity.BookEntity
 import pl.kamilszustak.read.model.domain.Book
 import pl.kamilszustak.read.model.mapper.Mapper
 import javax.inject.Inject

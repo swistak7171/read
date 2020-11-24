@@ -7,8 +7,8 @@ import pl.kamilszustak.read.data.util.entityFlow
 import pl.kamilszustak.read.data.util.entityListFlow
 import pl.kamilszustak.read.data.util.readEntity
 import pl.kamilszustak.read.data.util.readEntityList
-import pl.kamilszustak.read.model.data.DatabaseCollection
-import pl.kamilszustak.read.model.data.Entity
+import pl.kamilszustak.read.model.entity.DatabaseCollection
+import pl.kamilszustak.read.model.entity.Entity
 
 abstract class Repository(
     protected val collection: DatabaseCollection,

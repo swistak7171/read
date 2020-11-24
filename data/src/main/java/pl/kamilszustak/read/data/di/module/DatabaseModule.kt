@@ -10,10 +10,10 @@ import pl.kamilszustak.read.data.di.qualifier.BookCollection
 import pl.kamilszustak.read.data.di.qualifier.QuoteCollection
 import pl.kamilszustak.read.data.di.qualifier.ReadingLogCollection
 import pl.kamilszustak.read.data.di.qualifier.RootDatabaseReference
-import pl.kamilszustak.read.model.data.BookEntity
-import pl.kamilszustak.read.model.data.DatabaseCollection
-import pl.kamilszustak.read.model.data.LogEntryEntity
-import pl.kamilszustak.read.model.data.QuoteEntity
+import pl.kamilszustak.read.model.entity.BookEntity
+import pl.kamilszustak.read.model.entity.DatabaseCollection
+import pl.kamilszustak.read.model.entity.LogEntryEntity
+import pl.kamilszustak.read.model.entity.QuoteEntity
 import javax.inject.Singleton
 
 @Module

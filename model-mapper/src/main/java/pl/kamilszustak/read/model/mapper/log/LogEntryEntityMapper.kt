@@ -3,7 +3,7 @@ package pl.kamilszustak.read.model.mapper.log
 import pl.kamilszustak.model.common.id.BookId
 import pl.kamilszustak.model.common.id.LogEntryId
 import pl.kamilszustak.read.domain.access.usecase.book.GetBookUseCase
-import pl.kamilszustak.read.model.data.LogEntryEntity
+import pl.kamilszustak.read.model.entity.LogEntryEntity
 import pl.kamilszustak.read.model.domain.LogEntry
 import pl.kamilszustak.read.model.mapper.CoroutineMapper
 import javax.inject.Inject

@@ -22,7 +22,7 @@ dependencies {
     implementation(project(Modules.COMMON))
     implementation(project(Modules.MODEL_COMMON))
     implementation(project(Modules.MODEL_DOMAIN))
-    implementation(project(Modules.MODEL_DATA))
+    implementation(project(Modules.MODEL_ENTITY))
 
     // Dagger
     kapt(Dependencies.Google.Dagger.DAGGER_ANDROID_PROCESSOR)

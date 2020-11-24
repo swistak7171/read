@@ -30,7 +30,7 @@ class DailyReadingGoalNotificationWorker @AssistedInject constructor(
         }
 
         return Result.success()
-    }
+     }
 
     companion object {
         const val NAME: String = "reading_goal_notification_worker"
