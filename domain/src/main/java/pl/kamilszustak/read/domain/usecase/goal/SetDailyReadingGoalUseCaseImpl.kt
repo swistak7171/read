@@ -3,24 +3,33 @@ package pl.kamilszustak.read.domain.usecase.goal
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import pl.kamilszustak.read.common.date.Time
-import pl.kamilszustak.read.domain.access.usecase.goal.SetReadingGoalUseCase
+import pl.kamilszustak.read.data.access.repository.ReadingGoalRepository
+import pl.kamilszustak.read.domain.access.usecase.goal.SetDailyReadingGoalUseCase
+import pl.kamilszustak.read.model.domain.ReadingGoal
+import pl.kamilszustak.read.model.entity.goal.ReadingGoalEntity
+import pl.kamilszustak.read.model.entity.goal.ReadingGoalType
+import pl.kamilszustak.read.model.mapper.goal.ReadingGoalMapper
 import pl.kamilszustak.read.work.worker.DailyReadingGoalNotificationWorker
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class SetReadingGoalUseCaseImpl @Inject constructor(
+class SetDailyReadingGoalUseCaseImpl @Inject constructor(
+    private val repository: ReadingGoalRepository,
     private val workManager: WorkManager,
-) : SetReadingGoalUseCase {
+    private val mapper: ReadingGoalMapper,
+) : SetDailyReadingGoalUseCase {
 
-    override fun invoke(pagesNumber: Int, reminderTime: Time): Result<Unit> {
-        val delay = Time.current().toLater(reminderTime)
+    override suspend fun invoke(input: ReadingGoal): Result<Unit> {
+        val entity = mapper.map(input, ReadingGoalType.DAILY)
+        repository.set(entity)
+
+        val delay = Time.current().toLater(input.reminderTime)
         val request = PeriodicWorkRequestBuilder<DailyReadingGoalNotificationWorker>(1, TimeUnit.DAYS)
             .setInitialDelay(delay, TimeUnit.MILLISECONDS)
             .build()
 
-        // TODO: Change to KEEP
 //        workManager.enqueueUniquePeriodicWork(
 //            ReadingGoalNotificationWorker.NAME,
 //            ExistingPeriodicWorkPolicy.REPLACE,

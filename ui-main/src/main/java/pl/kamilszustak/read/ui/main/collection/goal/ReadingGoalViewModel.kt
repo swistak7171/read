@@ -6,13 +6,13 @@ import androidx.lifecycle.map
 import pl.kamilszustak.read.common.date.Time
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.common.util.map
-import pl.kamilszustak.read.domain.access.usecase.goal.SetReadingGoalUseCase
+import pl.kamilszustak.read.domain.access.usecase.goal.SetDailyReadingGoalUseCase
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
 import javax.inject.Inject
 
 class ReadingGoalViewModel @Inject constructor(
-    private val setReadingGoal: SetReadingGoalUseCase,
+    private val setDailyReadingGoal: SetDailyReadingGoalUseCase,
 ) : BaseViewModel<ReadingGoalEvent, ReadingGoalAction>() {
 
     val isGoalEnabled: MutableLiveData<Boolean> = UniqueLiveData(false)
@@ -63,6 +63,6 @@ class ReadingGoalViewModel @Inject constructor(
             return
         }
 
-        setReadingGoal(pagesNumber, time)
+        setDailyReadingGoal(pagesNumber, time)
     }
 }
