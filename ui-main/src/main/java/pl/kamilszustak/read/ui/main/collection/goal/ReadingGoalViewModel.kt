@@ -15,7 +15,7 @@ class ReadingGoalViewModel @Inject constructor(
     private val setReadingGoal: SetReadingGoalUseCase,
 ) : BaseViewModel<ReadingGoalEvent, ReadingGoalAction>() {
 
-    val isGoalEnabled: MutableLiveData<Boolean> = UniqueLiveData()
+    val isGoalEnabled: MutableLiveData<Boolean> = UniqueLiveData(false)
     val switchLabelResourceId: LiveData<Int> = isGoalEnabled.map(R.string.empty_placeholder) { isEnabled ->
         if (isEnabled) {
             R.string.reading_goal_on

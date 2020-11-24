@@ -18,9 +18,10 @@ class DailyReadingGoalNotificationFactory : NotificationFactory<DailyReadingGoal
         return NotificationCompat.Builder(context, channelId)
             .setSmallIcon(R.drawable.icon_alarm)
             .setContentTitle("Reading goal")
-            .setContentText("You read ${details.progressValue} pages today")
+            .setContentText("You read ${details.progressValue} pages of ${details.progressMaxValue} today")
             .setProgress(details.progressMaxValue, details.progressValue, false)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setAutoCancel(true)
             .build()
     }
 
