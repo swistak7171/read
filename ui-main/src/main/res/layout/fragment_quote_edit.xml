@@ -23,6 +23,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/authorInputLayout"
                 android:hint="@string/author"
+                app:endIconMode="clear_text"
                 android:layout_marginHorizontal="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin" >
 
@@ -39,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/bookTitleInputLayout"
                 android:hint="@string/book_title"
+                app:endIconMode="clear_text"
                 android:layout_marginHorizontal="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin">
 
@@ -55,6 +57,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/contentInputLayout"
                 android:hint="@string/content"
+                app:endIconMode="clear_text"
                 android:layout_marginHorizontal="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin">
 

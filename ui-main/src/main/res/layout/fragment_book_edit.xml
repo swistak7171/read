@@ -22,6 +22,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/titleInputLayout"
                 android:hint="@string/title"
+                app:endIconMode="clear_text"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -37,6 +38,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/authorInputLayout"
                 android:hint="@string/author"
+                app:endIconMode="clear_text"
                 app:layout_constraintTop_toBottomOf="@id/titleInputLayout"
                 android:layout_marginTop="@dimen/default_margin">
 
@@ -53,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/pagesNumberInputLayout"
                 android:hint="@string/number_of_pages"
+                app:endIconMode="clear_text"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/readPagesInputLayout"
                 app:layout_constraintTop_toBottomOf="@id/authorInputLayout"
@@ -72,6 +75,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/readPagesInputLayout"
                 android:hint="@string/read_pages"
+                app:endIconMode="clear_text"
                 app:layout_constraintStart_toEndOf="@id/pagesNumberInputLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/pagesNumberInputLayout"
@@ -90,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/isbnInputLayout"
                 android:hint="@string/isbn"
+                app:endIconMode="clear_text"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/publicationDateInputLayout"
                 app:layout_constraintTop_toBottomOf="@id/pagesNumberInputLayout"
@@ -110,6 +115,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/publicationDateInputLayout"
                 android:hint="@string/publication_date"
+                app:endIconMode="clear_text"
                 app:layout_constraintStart_toEndOf="@id/isbnInputLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/isbnInputLayout"
@@ -128,6 +134,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/descriptionInputLayout"
                 android:hint="@string/description"
+                app:endIconMode="clear_text"
                 app:layout_constraintTop_toBottomOf="@id/isbnInputLayout"
                 android:layout_marginTop="@dimen/default_margin">
 
