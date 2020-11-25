@@ -14,5 +14,6 @@ sealed class ReadingGoalAction : ViewAction {
         @StringRes val messageResourceId: Int,
     ) : ReadingGoalAction()
 
+    object ReadingGoalCancelled : ReadingGoalAction()
     object ReadingGoalSet : ReadingGoalAction()
 }

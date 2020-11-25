@@ -121,11 +121,12 @@
     <!-- ReadingGoalFragment -->
     <string name="reading_goal">Reading goal</string>
     <string name="daily_reading_goal">Daily reading goal</string>
-    <string name="reading_goal_on">Reading goal on</string>
-    <string name="reading_goal_off">Reading goal off</string>
+    <string name="daily_reading_goal_on">Daily reading goal on</string>
+    <string name="daily_reading_goal_off">Daily reading goal off</string>
     <string name="reminder_time">Reminder time</string>
     <string name="reminder_time_not_selected_error_message">Reminder time not selected</string>
     <string name="number_of_pages_not_entered_error_message">Number of pages not entered</string>
-    <string name="reading_goal_setting_error_message">An error occurred while setting the reading goal</string>
-    <string name="reading_goal_set">Reading goal set successfully</string>
+    <string name="daily_reading_goal_setting_error_message">An error occurred while setting the daily reading goal</string>
+    <string name="daily_reading_goal_cancelled">Daily reading goal cancelled</string>
+    <string name="daily_reading_goal_set">Daily reading goal set successfully</string>
 </resources>

@@ -8,7 +8,9 @@ import kotlinx.coroutines.launch
 import pl.kamilszustak.read.common.date.Time
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.common.util.map
+import pl.kamilszustak.read.domain.access.storage.SettingsStorage
 import pl.kamilszustak.read.domain.access.usecase.goal.AddDailyReadingGoalUseCase
+import pl.kamilszustak.read.domain.access.usecase.goal.CancelDailyReadingGoalUseCase
 import pl.kamilszustak.read.domain.access.usecase.goal.GetLatestDailyReadingGoalUseCase
 import pl.kamilszustak.read.model.domain.ReadingGoal
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
@@ -16,16 +18,18 @@ import pl.kamilszustak.read.ui.main.R
 import javax.inject.Inject
 
 class ReadingGoalViewModel @Inject constructor(
+    private val settingsStorage: SettingsStorage,
     private val addDailyReadingGoal: AddDailyReadingGoalUseCase,
+    private val cancelDailyReadingGoal: CancelDailyReadingGoalUseCase,
     private val getLatestDailyReadingGoal: GetLatestDailyReadingGoalUseCase,
 ) : BaseViewModel<ReadingGoalEvent, ReadingGoalAction>() {
 
     val isGoalEnabled: MutableLiveData<Boolean> = UniqueLiveData(false)
     val switchLabelResourceId: LiveData<Int> = isGoalEnabled.map(R.string.empty_placeholder) { isEnabled ->
         if (isEnabled) {
-            R.string.reading_goal_on
+            R.string.daily_reading_goal_on
         } else {
-            R.string.reading_goal_off
+            R.string.daily_reading_goal_off
         }
     }
 
@@ -38,10 +42,19 @@ class ReadingGoalViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val goal = getLatestDailyReadingGoal()
-            if (goal != null) {
-                goalPagesNumber.value = goal.pagesNumber
-                _goalTime.value = goal.reminderTime
+            launch {
+                val goal = getLatestDailyReadingGoal()
+                if (goal != null) {
+                    goalPagesNumber.value = goal.pagesNumber
+                    _goalTime.value = goal.reminderTime
+                }
+            }
+
+            launch {
+                val value = settingsStorage.isDailyReadingGoalEnabled.get()
+                if (value != null) {
+                    isGoalEnabled.value = value
+                }
             }
         }
     }
@@ -70,6 +83,16 @@ class ReadingGoalViewModel @Inject constructor(
 
     private fun handleSaveButtonClick() {
         val isEnabled = isGoalEnabled.value ?: false
+        if (!isEnabled) {
+            viewModelScope.launch {
+                cancelDailyReadingGoal()
+                settingsStorage.isDailyReadingGoalEnabled.edit(false)
+                _action.value = ReadingGoalAction.ReadingGoalCancelled
+            }
+
+            return
+        }
+
         val time = _goalTime.value
         val pagesNumber = goalPagesNumber.value
 
@@ -91,9 +114,10 @@ class ReadingGoalViewModel @Inject constructor(
 
             addDailyReadingGoal(goal)
                 .onSuccess {
+                    settingsStorage.isDailyReadingGoalEnabled.edit(true)
                     _action.value = ReadingGoalAction.ReadingGoalSet
                 }.onFailure {
-                    _action.value = ReadingGoalAction.Error(R.string.reading_goal_setting_error_message)
+                    _action.value = ReadingGoalAction.Error(R.string.daily_reading_goal_setting_error_message)
                 }
         }
 

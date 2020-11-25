@@ -24,7 +24,7 @@
                 android:id="@+id/enableSwitch"
                 android:checked="@={viewModel.isGoalEnabled}"
                 android:text="@{viewModel.switchLabelResourceId}"
-                tools:text="@string/reading_goal_off"
+                tools:text="@string/daily_reading_goal_off"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textfield.TextInputLayout

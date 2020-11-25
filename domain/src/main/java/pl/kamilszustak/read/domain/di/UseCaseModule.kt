@@ -8,6 +8,7 @@ import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryCodeU
 import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryUseCase
 import pl.kamilszustak.read.domain.access.usecase.device.GetPhoneNumberUseCase
 import pl.kamilszustak.read.domain.access.usecase.goal.AddDailyReadingGoalUseCase
+import pl.kamilszustak.read.domain.access.usecase.goal.CancelDailyReadingGoalUseCase
 import pl.kamilszustak.read.domain.access.usecase.goal.CheckDailyReadingGoalCompletionUseCase
 import pl.kamilszustak.read.domain.access.usecase.goal.GetLatestDailyReadingGoalUseCase
 import pl.kamilszustak.read.domain.access.usecase.log.*
@@ -27,6 +28,7 @@ import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryCodeUseCaseI
 import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.device.GetPhoneNumberUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.goal.AddDailyReadingGoalUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.goal.CancelDailyReadingGoalUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.goal.CheckDailyReadingGoalCompletionUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.goal.GetLatestDailyReadingGoalUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.log.*
@@ -153,4 +155,7 @@ interface UseCaseModule {
 
     @Binds
     fun bindCheckDailyReadingGoalCompletionUseCase(useCaseImpl: CheckDailyReadingGoalCompletionUseCaseImpl): CheckDailyReadingGoalCompletionUseCase
+
+    @Binds
+    fun bindCancelDailyReadingGoalUseCase(useCaseImpl: CancelDailyReadingGoalUseCaseImpl): CancelDailyReadingGoalUseCase
 }

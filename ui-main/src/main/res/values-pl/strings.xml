@@ -120,11 +120,12 @@
     <!-- ReadingGoalFragment -->
     <string name="reading_goal">Cel czytania</string>
     <string name="daily_reading_goal">Dzienny cel czytania</string>
-    <string name="reading_goal_on">Cel czytania włączony</string>
-    <string name="reading_goal_off">Cel czytania wyłączony</string>
+    <string name="daily_reading_goal_on">Dzienny cel czytania włączony</string>
+    <string name="daily_reading_goal_off">Dzienny cel czytania wyłączony</string>
     <string name="reminder_time">Czas przypomnienia</string>
     <string name="reminder_time_not_selected_error_message">Nie wybrano czasu przypomnienia</string>
     <string name="number_of_pages_not_entered_error_message">Nie wpisano liczby stron</string>
-    <string name="reading_goal_setting_error_message">Wystąpił błąd podczas ustawiania celu czytania</string>
-    <string name="reading_goal_set">Cel czytania ustawiony pomyślnie</string>
+    <string name="daily_reading_goal_setting_error_message">Wystąpił błąd podczas ustawiania dziennego celu czytania</string>
+    <string name="daily_reading_goal_cancelled">Dzienny cel czytania anulowany</string>
+    <string name="daily_reading_goal_set">Dzienny cel czytania ustawiony pomyślnie</string>
 </resources>
