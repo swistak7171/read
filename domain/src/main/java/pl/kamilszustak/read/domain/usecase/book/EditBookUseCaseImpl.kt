@@ -31,7 +31,7 @@ class EditBookUseCaseImpl @Inject constructor(
 
         return runNotNull(book) { originalBook ->
             val editedBook = edit(originalBook)
-            val mapped = mapper.map(editedBook).apply {
+            val mapped = mapper.map(editedBook, Unit).apply {
                 modificationDate = Date()
             }
 

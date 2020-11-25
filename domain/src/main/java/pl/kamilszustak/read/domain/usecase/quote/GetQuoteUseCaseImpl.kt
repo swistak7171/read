@@ -17,5 +17,5 @@ class GetQuoteUseCaseImpl @Inject constructor(
 
     override suspend fun invoke(input: QuoteId): Quote? =
         repository.getById(input.value)
-            .useOrNull { mapper.map(it) }
+            .useOrNull { mapper.map(it, Unit) }
 }

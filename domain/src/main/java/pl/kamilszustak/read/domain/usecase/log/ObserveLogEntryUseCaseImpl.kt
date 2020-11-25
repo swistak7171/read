@@ -16,5 +16,5 @@ class ObserveLogEntryUseCaseImpl @Inject constructor(
 
     override fun invoke(input: LogEntryId): Flow<LogEntry> =
         repository.observeById(input.value)
-            .map { mapper.map(it) }
+            .map { mapper.map(it, Unit) }
 }

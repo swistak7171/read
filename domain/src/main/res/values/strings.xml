@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_data_store_name">settings</string>
+    <string name="daily_reading_goal_data_store_value_name">is_daily_reading_goal_enabled</string>
+</resources>

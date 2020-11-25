@@ -17,5 +17,5 @@ class ObserveAllBooksUseCaseImpl @Inject constructor(
 
     override fun invoke(): Flow<List<Book>> =
         bookRepository.observeAll()
-            .map { mapper.mapAll(it) }
+            .map { mapper.mapAll(it, Unit) }
 }

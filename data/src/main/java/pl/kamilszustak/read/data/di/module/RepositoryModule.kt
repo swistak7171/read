@@ -21,4 +21,7 @@ interface RepositoryModule {
 
     @Binds
     fun bindLogEntryRepository(repositoryImpl: LogEntryRepositoryImpl): LogEntryRepository
+
+    @Binds
+    fun bindReadingGoalRepository(repositoryImpl: ReadingGoalRepositoryImpl): ReadingGoalRepository
 }

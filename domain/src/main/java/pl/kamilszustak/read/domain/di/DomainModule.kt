@@ -4,7 +4,8 @@ import dagger.Module
 
 @Module(
     includes = [
-        UseCaseModule::class
+        UseCaseModule::class,
+        StorageModule::class,
     ]
 )
 interface DomainModule

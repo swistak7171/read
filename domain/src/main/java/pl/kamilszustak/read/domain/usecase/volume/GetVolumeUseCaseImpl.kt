@@ -21,7 +21,7 @@ class GetVolumeUseCaseImpl @Inject constructor(
         return volumeRepository.getAll(parameters)
             .map { volumes ->
                 volumes?.firstOrNull()
-                    .useOrNull { mapper.map(it) }
+                    .useOrNull { mapper.map(it, Unit) }
             }
     }
 }

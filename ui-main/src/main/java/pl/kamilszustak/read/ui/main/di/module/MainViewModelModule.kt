@@ -7,8 +7,10 @@ import dagger.multibindings.IntoMap
 import pl.kamilszustak.read.ui.base.di.key.ViewModelKey
 import pl.kamilszustak.read.ui.main.activity.MainViewModel
 import pl.kamilszustak.read.ui.main.collection.CollectionViewModel
+import pl.kamilszustak.read.ui.main.collection.goal.ReadingGoalViewModel
 import pl.kamilszustak.read.ui.main.collection.log.ReadingLogViewModel
 import pl.kamilszustak.read.ui.main.profile.ProfileViewModel
+import pl.kamilszustak.read.ui.main.profile.edit.ProfileEditViewModel
 import pl.kamilszustak.read.ui.main.quotes.QuotesViewModel
 import pl.kamilszustak.read.ui.main.scanner.ScannerViewModel
 import pl.kamilszustak.read.ui.main.search.SearchViewModel
@@ -49,4 +51,14 @@ interface MainViewModelModule {
     @IntoMap
     @ViewModelKey(ReadingLogViewModel::class)
     fun bindReadingLogViewModel(viewModel: ReadingLogViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProfileEditViewModel::class)
+    fun bindProfileEditViewModel(viewModel: ProfileEditViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ReadingGoalViewModel::class)
+    fun bindReadingGoalViewModel(viewModel: ReadingGoalViewModel): ViewModel
 }

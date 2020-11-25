@@ -22,6 +22,7 @@ class CollectionViewModel @Inject constructor(
 ) : BaseViewModel<CollectionEvent, CollectionAction>() {
 
     val books: LiveData<List<Book>> = observeAllBooks()
+        .map { it.sortedByDescending(Book::modificationDate) }
         .also { booksFlow ->
             viewModelScope.launch {
                 val book = booksFlow.firstOrNull()?.firstOrNull()
@@ -30,7 +31,6 @@ class CollectionViewModel @Inject constructor(
                 }
             }
         }
-        .map { it.sortedByDescending(Book::modificationDate) }
         .asLiveData(viewModelScope.coroutineContext)
 
     private val _currentBook: MutableLiveData<Book> = UniqueLiveData()
@@ -55,6 +55,10 @@ class CollectionViewModel @Inject constructor(
 
             CollectionEvent.OnReadingLogButtonClicked -> {
                 _action.value = CollectionAction.NavigateToReadingLogFragment
+            }
+
+            CollectionEvent.OnReadingGoalButtonClicked -> {
+                _action.value = CollectionAction.NavigateToReadingGoalFragment
             }
 
             is CollectionEvent.OnDialogOptionSelected -> {

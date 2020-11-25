@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="pl.kamilszustak.read.common.DateFormats" />
+        <import type="pl.kamilszustak.read.common.date.DateFormats" />
 
         <variable
             name="viewModel"

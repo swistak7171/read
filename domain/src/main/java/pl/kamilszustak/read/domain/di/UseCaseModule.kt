@@ -7,12 +7,18 @@ import pl.kamilszustak.read.domain.access.usecase.country.GetAllCountriesUseCase
 import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryCodeUseCase
 import pl.kamilszustak.read.domain.access.usecase.country.GetDefaultCountryUseCase
 import pl.kamilszustak.read.domain.access.usecase.device.GetPhoneNumberUseCase
+import pl.kamilszustak.read.domain.access.usecase.goal.AddDailyReadingGoalUseCase
+import pl.kamilszustak.read.domain.access.usecase.goal.CancelDailyReadingGoalUseCase
+import pl.kamilszustak.read.domain.access.usecase.goal.CheckDailyReadingGoalCompletionUseCase
+import pl.kamilszustak.read.domain.access.usecase.goal.GetLatestDailyReadingGoalUseCase
 import pl.kamilszustak.read.domain.access.usecase.log.*
 import pl.kamilszustak.read.domain.access.usecase.quote.*
-import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBitmapUseCase
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBarcodeUseCase
+import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBitmapUseCase
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadTextUseCase
+import pl.kamilszustak.read.domain.access.usecase.user.EditUserUseCase
 import pl.kamilszustak.read.domain.access.usecase.user.GetUserUseCase
+import pl.kamilszustak.read.domain.access.usecase.user.ObserveUserUseCase
 import pl.kamilszustak.read.domain.access.usecase.user.SignOutUseCase
 import pl.kamilszustak.read.domain.access.usecase.volume.GetVolumeUseCase
 import pl.kamilszustak.read.domain.access.usecase.volume.ObserveVolumesUseCase
@@ -21,12 +27,18 @@ import pl.kamilszustak.read.domain.usecase.country.GetAllCountriesUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryCodeUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.country.GetDefaultCountryUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.device.GetPhoneNumberUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.goal.AddDailyReadingGoalUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.goal.CancelDailyReadingGoalUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.goal.CheckDailyReadingGoalCompletionUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.goal.GetLatestDailyReadingGoalUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.log.*
 import pl.kamilszustak.read.domain.usecase.quote.*
-import pl.kamilszustak.read.domain.usecase.scanner.ReadBitmapUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.scanner.ReadBarcodeUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.scanner.ReadBitmapUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.scanner.ReadTextUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.user.EditUserUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.user.GetUserUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.user.ObserveUserUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.user.SignOutUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.volume.GetVolumeUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.volume.ObserveVolumesUseCaseImpl
@@ -94,6 +106,12 @@ interface UseCaseModule {
     fun bindGetUserUseCase(useCaseImpl: GetUserUseCaseImpl): GetUserUseCase
 
     @Binds
+    fun bindObserveUserUseCase(useCaseImpl: ObserveUserUseCaseImpl): ObserveUserUseCase
+
+    @Binds
+    fun bindEditUserUseCase(useCaseImpl: EditUserUseCaseImpl): EditUserUseCase
+
+    @Binds
     fun bindSignOutUseCase(useCaseImpl: SignOutUseCaseImpl): SignOutUseCase
 
     @Binds
@@ -118,6 +136,9 @@ interface UseCaseModule {
     fun bindGetReadingLogUseCase(useCaseImpl: GetReadingLogUseCaseImpl): GetReadingLogUseCase
 
     @Binds
+    fun bindGetReadingLogByDateUseCase(useCaseImpl: GetReadingLogByDateUseCaseImpl): GetReadingLogByDateUseCase
+
+    @Binds
     fun bindObserveLogEntryUseCase(useCaseImpl: ObserveLogEntryUseCaseImpl): ObserveLogEntryUseCase
 
     @Binds
@@ -125,4 +146,16 @@ interface UseCaseModule {
 
     @Binds
     fun bindDeleteBookReadingLogUseCase(useCaseImpl: DeleteBookReadingLogUseCaseImpl): DeleteBookReadingLogUseCase
+
+    @Binds
+    fun bindGetDailyReadingGoalUseCase(useCaseImpl: GetLatestDailyReadingGoalUseCaseImpl): GetLatestDailyReadingGoalUseCase
+
+    @Binds
+    fun bindSetDailyReadingGoalUseCase(useCaseImpl: AddDailyReadingGoalUseCaseImpl): AddDailyReadingGoalUseCase
+
+    @Binds
+    fun bindCheckDailyReadingGoalCompletionUseCase(useCaseImpl: CheckDailyReadingGoalCompletionUseCaseImpl): CheckDailyReadingGoalCompletionUseCase
+
+    @Binds
+    fun bindCancelDailyReadingGoalUseCase(useCaseImpl: CancelDailyReadingGoalUseCaseImpl): CancelDailyReadingGoalUseCase
 }

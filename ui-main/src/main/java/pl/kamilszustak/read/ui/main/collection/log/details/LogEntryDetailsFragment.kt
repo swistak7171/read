@@ -2,21 +2,21 @@ package pl.kamilszustak.read.ui.main.collection.log.details
 
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import pl.kamilszustak.read.common.DateFormats
+import pl.kamilszustak.read.common.date.DateFormats
 import pl.kamilszustak.read.ui.base.binding.viewBinding
 import pl.kamilszustak.read.ui.base.util.load
 import pl.kamilszustak.read.ui.base.util.setFormattedText
 import pl.kamilszustak.read.ui.base.view.fragment.BaseFragment
 import pl.kamilszustak.read.ui.main.R
-import pl.kamilszustak.read.ui.main.databinding.DialogFragmentLogEntryDetailsBinding
+import pl.kamilszustak.read.ui.main.databinding.FragmentLogEntryDetailsBinding
 import javax.inject.Inject
 
 class LogEntryDetailsFragment @Inject constructor(
     viewModelFactory: LogEntryDetailsViewModelFactory.Factory,
-) : BaseFragment<DialogFragmentLogEntryDetailsBinding, LogEntryDetailsViewModel>(R.layout.dialog_fragment_log_entry_details) {
+) : BaseFragment<FragmentLogEntryDetailsBinding, LogEntryDetailsViewModel>(R.layout.fragment_log_entry_details) {
 
     override val viewModel: LogEntryDetailsViewModel by viewModels { viewModelFactory.create(args) }
-    override val binding: DialogFragmentLogEntryDetailsBinding by viewBinding(DialogFragmentLogEntryDetailsBinding::bind)
+    override val binding: FragmentLogEntryDetailsBinding by viewBinding(FragmentLogEntryDetailsBinding::bind)
     private val args: LogEntryDetailsFragmentArgs by navArgs()
 
     override fun observeViewModel() {

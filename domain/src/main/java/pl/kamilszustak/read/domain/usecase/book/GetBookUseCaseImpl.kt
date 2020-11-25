@@ -17,5 +17,5 @@ class GetBookUseCaseImpl @Inject constructor(
 
     override suspend fun invoke(input: BookId): Book? =
         repository.getById(input.value)
-            .useOrNull { mapper.map(it) }
+            .useOrNull { mapper.map(it, Unit) }
 }

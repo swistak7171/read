@@ -1,7 +1,7 @@
 package pl.kamilszustak.read.data.access.repository
 
 import kotlinx.coroutines.flow.Flow
-import pl.kamilszustak.read.model.data.QuoteEntity
+import pl.kamilszustak.read.model.entity.QuoteEntity
 
 interface QuoteRepository {
     suspend fun add(quote: QuoteEntity): Result<Unit>

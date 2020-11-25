@@ -14,7 +14,7 @@ class AddQuoteUseCaseImpl @Inject constructor(
 ) : AddQuoteUseCase {
 
     override suspend fun invoke(input: Quote): Result<Unit> {
-        val entity = quoteMapper.map(input)
+        val entity = quoteMapper.map(input, Unit)
 
         return quoteRepository.add(entity)
     }

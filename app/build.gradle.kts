@@ -94,7 +94,9 @@ dependencies {
     implementation(project(Modules.DOMAIN))
     implementation(project(Modules.DOMAIN_ACCESS))
     implementation(project(Modules.NETWORK))
-    implementation(project(Modules.MODEL_DATA))
+    implementation(project(Modules.WORK))
+    implementation(project(Modules.NOTIFICATION))
+    implementation(project(Modules.MODEL_ENTITY))
     implementation(project(Modules.MODEL_DOMAIN))
     implementation(project(Modules.MODEL_MAPPER))
     implementation(project(Modules.UI_BASE))
@@ -125,4 +127,7 @@ dependencies {
 
     // Moshi
     implementation(Dependencies.Moshi.MOSHI)
+
+    // WorkManager
+    implementation(Dependencies.AndroidX.Work.WORK_RUNTIME_KTX)
 }

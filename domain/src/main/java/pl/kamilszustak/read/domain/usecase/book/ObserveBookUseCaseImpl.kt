@@ -16,5 +16,5 @@ class ObserveBookUseCaseImpl @Inject constructor(
 
     override fun invoke(input: BookId): Flow<Book> =
         repository.observeById(input.value)
-            .map { mapper.map(it) }
+            .map { mapper.map(it, Unit) }
 }

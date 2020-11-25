@@ -1,6 +1,6 @@
 package pl.kamilszustak.read.domain.access.usecase.user
 
-import com.google.firebase.auth.FirebaseUser
 import pl.kamilszustak.read.domain.access.usecase.UseCase
+import pl.kamilszustak.read.model.domain.user.User
 
-interface GetUserUseCase : UseCase<FirebaseUser>
+interface GetUserUseCase : UseCase<User>

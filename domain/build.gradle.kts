@@ -24,9 +24,17 @@ dependencies {
     implementation(project(Modules.DATA_ACCESS))
     implementation(project(Modules.MODEL_COMMON))
     implementation(project(Modules.MODEL_DOMAIN))
-    implementation(project(Modules.MODEL_DATA))
+    implementation(project(Modules.MODEL_ENTITY))
     implementation(project(Modules.MODEL_NETWORK))
     implementation(project(Modules.MODEL_MAPPER))
+    implementation(project(Modules.WORK))
+
+    // WorkManager
+    implementation(Dependencies.AndroidX.Work.WORK_RUNTIME_KTX)
+
+    // DataStore
+    implementation(Dependencies.AndroidX.DataStore.DATA_STORE_PREFERENCES)
+    implementation(Dependencies.AndroidX.DataStore.DATA_STORE_PREFERENCES_CORE)
 
     // Dagger
     kapt(Dependencies.Google.Dagger.DAGGER_ANDROID_PROCESSOR)

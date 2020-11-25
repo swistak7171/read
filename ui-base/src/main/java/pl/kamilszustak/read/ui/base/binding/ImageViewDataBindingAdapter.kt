@@ -1,6 +1,8 @@
 package pl.kamilszustak.read.ui.base.binding
 
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.widget.ImageView
 import androidx.annotation.ColorInt
 import androidx.databinding.BindingAdapter
@@ -10,14 +12,35 @@ import pl.kamilszustak.read.ui.base.util.load
 
 object ImageViewDataBindingAdapter {
     private const val IMAGE_URL_ATTRIBUTE: String = "imageUrl"
+    private const val PLACEHOLDER_ATTRIBUTE: String = "placeholder"
     private const val SRC_ATTRIBUTE: String = "android:src"
     private const val COLOR_DRAWABLE_ATTRIBUTE: String = "colorDrawable"
 
-    @BindingAdapter(IMAGE_URL_ATTRIBUTE)
+    @BindingAdapter(
+        value = [
+            IMAGE_URL_ATTRIBUTE,
+            PLACEHOLDER_ATTRIBUTE
+        ],
+        requireAll = false
+    )
     @JvmStatic
-    fun ImageView.setImageUrl(imageUrl: String?) {
+    fun ImageView.setImageUrl(imageUrl: String?, placeholder: Drawable?) {
         if (imageUrl != null) {
-            load(imageUrl)
+            load(imageUrl, placeholder)
+        }
+    }
+
+    @BindingAdapter(
+        value = [
+            IMAGE_URL_ATTRIBUTE,
+            PLACEHOLDER_ATTRIBUTE
+        ],
+        requireAll = false
+    )
+    @JvmStatic
+    fun ImageView.setImageUrl(imageUrl: Uri?, placeholder: Drawable?) {
+        if (imageUrl != null) {
+            load(imageUrl.toString(), placeholder)
         }
     }
 

@@ -37,6 +37,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/phoneNumberInputLayout"
             android:hint="@string/phone_number"
+            app:endIconMode="clear_text"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/countryCodeInputLayout"
             app:layout_constraintEnd_toEndOf="parent"

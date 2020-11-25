@@ -2,9 +2,9 @@ package pl.kamilszustak.read.model.mapper.volume
 
 import pl.kamilszustak.model.common.id.VolumeId
 import pl.kamilszustak.model.network.VolumeDto
+import pl.kamilszustak.read.common.date.DateFormats
 import pl.kamilszustak.read.common.util.tryOrNull
 import pl.kamilszustak.read.common.util.useOrNull
-import pl.kamilszustak.read.common.DateFormats
 import pl.kamilszustak.read.model.domain.Book
 import pl.kamilszustak.read.model.domain.Volume
 import pl.kamilszustak.read.model.mapper.Mapper
@@ -12,9 +12,9 @@ import javax.inject.Inject
 
 class VolumeDtoMapper @Inject constructor(
     private val isbnDtoMapper: IsbnDtoMapper,
-) : Mapper<VolumeDto, Volume>() {
+) : Mapper<VolumeDto, Volume, Unit>() {
 
-    override fun map(model: VolumeDto): Volume {
+    override fun map(model: VolumeDto, parameter: Unit): Volume {
         val id = VolumeId(model.id)
         val author = model.details.authors?.joinToString(", ")
         val subtitle = model.details.subtitle.takeIf { !it.isNullOrBlank() }
@@ -32,7 +32,7 @@ class VolumeDtoMapper @Inject constructor(
         }
 
         val isbns = model.details.isbns?.mapNotNull {
-            tryOrNull { isbnDtoMapper.map(it) }
+            tryOrNull { isbnDtoMapper.map(it, Unit) }
         }
 
         return Volume(

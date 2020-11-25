@@ -19,6 +19,7 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
+    implementation(project(Modules.COMMON))
     implementation(project(Modules.MODEL_COMMON))
 
     // Firebase Authentication

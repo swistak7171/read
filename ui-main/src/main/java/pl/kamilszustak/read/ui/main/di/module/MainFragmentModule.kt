@@ -9,9 +9,11 @@ import pl.kamilszustak.read.ui.main.book.details.BookDetailsFragment
 import pl.kamilszustak.read.ui.main.book.edit.BookEditFragment
 import pl.kamilszustak.read.ui.main.book.progress.ReadingProgressDialogFragment
 import pl.kamilszustak.read.ui.main.collection.CollectionFragment
+import pl.kamilszustak.read.ui.main.collection.goal.ReadingGoalFragment
 import pl.kamilszustak.read.ui.main.collection.log.ReadingLogFragment
 import pl.kamilszustak.read.ui.main.collection.log.details.LogEntryDetailsFragment
 import pl.kamilszustak.read.ui.main.profile.ProfileFragment
+import pl.kamilszustak.read.ui.main.profile.edit.ProfileEditFragment
 import pl.kamilszustak.read.ui.main.quotes.QuotesFragment
 import pl.kamilszustak.read.ui.main.quotes.edit.QuoteEditFragment
 import pl.kamilszustak.read.ui.main.scanner.ScannerFragment
@@ -79,4 +81,14 @@ interface MainFragmentModule {
     @IntoMap
     @FragmentKey(TextSelectionFragment::class)
     fun bindTextSelectionFragment(fragment: TextSelectionFragment): Fragment
+
+    @Binds
+    @IntoMap
+    @FragmentKey(ProfileEditFragment::class)
+    fun bindProfileEditFragment(fragment: ProfileEditFragment): Fragment
+
+    @Binds
+    @IntoMap
+    @FragmentKey(ReadingGoalFragment::class)
+    fun bindReadingGoalFragment(fragment: ReadingGoalFragment): Fragment
 }
