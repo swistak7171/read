@@ -49,8 +49,12 @@ class ReadingGoalFragment @Inject constructor(
     }
 
     override fun setListeners() {
+        binding.timeInputLayout.setEndIconOnClickListener {
+            viewModel.dispatchEvent(ReadingGoalEvent.OnTimeClearButtonClicked)
+        }
+
         binding.timeEditText.setOnClickListener {
-            viewModel.dispatchEvent(ReadingGoalEvent.OnHourEditTextClicked)
+            viewModel.dispatchEvent(ReadingGoalEvent.OnTimeEditTextClicked)
         }
     }
 

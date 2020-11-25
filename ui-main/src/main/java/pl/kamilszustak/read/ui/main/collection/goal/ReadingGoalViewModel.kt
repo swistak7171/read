@@ -48,7 +48,8 @@ class ReadingGoalViewModel @Inject constructor(
 
     override fun handleEvent(event: ReadingGoalEvent) {
         when (event) {
-            ReadingGoalEvent.OnHourEditTextClicked -> handleTimeEditTextClick()
+            ReadingGoalEvent.OnTimeEditTextClicked -> handleTimeEditTextClick()
+            ReadingGoalEvent.OnTimeClearButtonClicked -> handleTimeClearButtonClick()
             is ReadingGoalEvent.OnTimeSelected -> handleTimeSelection(event)
             ReadingGoalEvent.OnSaveButtonClicked -> handleSaveButtonClick()
         }
@@ -57,6 +58,10 @@ class ReadingGoalViewModel @Inject constructor(
     private fun handleTimeEditTextClick() {
         val currentTime = Time.current()
         _action.value = ReadingGoalAction.ShowTimePicker(R.string.reminder_time, currentTime)
+    }
+
+    private fun handleTimeClearButtonClick() {
+        _goalTime.value = null
     }
 
     private fun handleTimeSelection(event: ReadingGoalEvent.OnTimeSelected) {

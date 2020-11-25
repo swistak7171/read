@@ -82,6 +82,10 @@ class BookEditViewModel(
                 _action.value = BookEditAction.OpenDatePicker(date)
             }
 
+            BookEditEvent.OnDateClearButtonClicked -> {
+                _bookPublicationDate.value = null
+            }
+
             is BookEditEvent.OnPublicationDateSelected -> {
                 _bookPublicationDate.value = event.date
             }

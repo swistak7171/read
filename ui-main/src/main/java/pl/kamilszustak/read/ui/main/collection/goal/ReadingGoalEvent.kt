@@ -4,7 +4,8 @@ import pl.kamilszustak.read.common.date.Time
 import pl.kamilszustak.read.ui.base.view.ViewEvent
 
 sealed class ReadingGoalEvent : ViewEvent {
-    object OnHourEditTextClicked : ReadingGoalEvent()
+    object OnTimeEditTextClicked : ReadingGoalEvent()
+    object OnTimeClearButtonClicked : ReadingGoalEvent()
     object OnSaveButtonClicked : ReadingGoalEvent()
 
     data class OnTimeSelected(
