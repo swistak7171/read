@@ -32,6 +32,10 @@ dependencies {
     // WorkManager
     implementation(Dependencies.AndroidX.Work.WORK_RUNTIME_KTX)
 
+    // DataStore
+    implementation(Dependencies.AndroidX.DataStore.DATA_STORE_PREFERENCES)
+    implementation(Dependencies.AndroidX.DataStore.DATA_STORE_PREFERENCES_CORE)
+
     // Dagger
     kapt(Dependencies.Google.Dagger.DAGGER_ANDROID_PROCESSOR)
     kapt(Dependencies.Google.Dagger.DAGGER_COMPILER)

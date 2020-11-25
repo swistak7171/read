@@ -10,6 +10,7 @@ object Versions {
     const val ACTIVITY: String = "1.2.0-beta01"
     const val FRAGMENT: String = "1.3.0-beta01"
     const val PREFERENCE: String = "1.1.1"
+    const val DATA_STORE: String = "1.0.0-alpha04"
     const val NAVIGATION: String = "2.3.1"
     const val NAVIGATION_SAFE_ARGS_GRADLE_PLUGIN: String = "1.0.0"
     const val LIFECYCLE: String = "2.3.0-beta01"
