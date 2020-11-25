@@ -8,8 +8,8 @@ import pl.kamilszustak.read.model.mapper.Mapper
 import java.util.*
 import javax.inject.Inject
 
-class FirebaseUserMapper @Inject constructor() : Mapper<FirebaseUser, User>() {
-    override fun map(model: FirebaseUser): User {
+class FirebaseUserMapper @Inject constructor() : Mapper<FirebaseUser, User, Unit>() {
+    override fun map(model: FirebaseUser, parameter: Unit): User {
         val id = UserId(model.uid)
         val creationDate = model.metadata?.creationTimestamp.useOrNull { Date(it) }
         val lastSignInDate = model.metadata?.lastSignInTimestamp.useOrNull { Date(it) }

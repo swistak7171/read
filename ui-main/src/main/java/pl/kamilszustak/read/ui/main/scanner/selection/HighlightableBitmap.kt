@@ -35,10 +35,18 @@ class HighlightableBitmap(
         val selection = this.selection
 
         return if (selection != null) {
-            val x = selection.left.toInt()
-            val y = selection.top.toInt()
-            val width = abs(selection.left - selection.right).toInt()
-            val height = abs(selection.top - selection.bottom).toInt()
+            var x = selection.left.toInt()
+            if (x < 0) {
+                x = 0
+            }
+
+            var y = selection.top.toInt()
+            if (y < 0) {
+                y = 0
+            }
+
+            val width = abs(x - selection.right).toInt()
+            val height = abs(y - selection.bottom).toInt()
 
             Bitmap.createBitmap(bitmap, x, y, width, height)
         } else {

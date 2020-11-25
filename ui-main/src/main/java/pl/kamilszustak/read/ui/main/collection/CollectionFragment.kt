@@ -58,6 +58,11 @@ class CollectionFragment @Inject constructor(
                 true
             }
 
+            R.id.readingGoalItem -> {
+                viewModel.dispatchEvent(CollectionEvent.OnReadingGoalButtonClicked)
+                true
+            }
+
             else -> {
                 super.onOptionsItemSelected(item)
             }
@@ -182,6 +187,10 @@ class CollectionFragment @Inject constructor(
                     navigator.navigateToReadingLogFragment()
                 }
 
+                CollectionAction.NavigateToReadingGoalFragment -> {
+                    navigator.navigateToReadingGoalFragment()
+                }
+
                 is CollectionAction.NavigateToReadingProgressDialogFragment -> {
                     navigator.navigateToReadingProgressDialogFragment(action.bookId)
                 }
@@ -268,6 +277,11 @@ class CollectionFragment @Inject constructor(
 
         fun navigateToReadingLogFragment() {
             val direction = CollectionFragmentDirections.actionCollectionFragmentToReadingLogFragment()
+            navigate(direction)
+        }
+
+        fun navigateToReadingGoalFragment() {
+            val direction = CollectionFragmentDirections.actionCollectionFragmentToReadingGoalFragment()
             navigate(direction)
         }
 

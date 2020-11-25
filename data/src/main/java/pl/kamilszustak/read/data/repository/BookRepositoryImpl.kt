@@ -9,8 +9,8 @@ import pl.kamilszustak.read.data.util.entityFlow
 import pl.kamilszustak.read.data.util.entityListFlow
 import pl.kamilszustak.read.data.util.readEntity
 import pl.kamilszustak.read.data.util.readEntityList
-import pl.kamilszustak.read.model.data.BookEntity
-import pl.kamilszustak.read.model.data.DatabaseCollection
+import pl.kamilszustak.read.model.entity.BookEntity
+import pl.kamilszustak.read.model.entity.DatabaseCollection
 import javax.inject.Inject
 import javax.inject.Singleton
 

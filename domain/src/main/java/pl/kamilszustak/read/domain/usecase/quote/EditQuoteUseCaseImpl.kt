@@ -23,7 +23,7 @@ class EditQuoteUseCaseImpl @Inject constructor(
 
         return runNotNull(quote) {
             val edited = edit(it)
-            val mapped = mapper.map(edited).apply {
+            val mapped = mapper.map(edited, Unit).apply {
                 modificationDate = Date()
             }
 

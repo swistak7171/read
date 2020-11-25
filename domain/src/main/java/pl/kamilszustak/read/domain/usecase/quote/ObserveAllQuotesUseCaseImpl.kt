@@ -17,5 +17,5 @@ class ObserveAllQuotesUseCaseImpl @Inject constructor(
 
     override fun invoke(): Flow<List<Quote>> =
         quoteRepository.observeAll()
-            .map { mapper.mapAll(it) }
+            .map { mapper.mapAll(it, Unit) }
 }

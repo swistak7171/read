@@ -15,6 +15,6 @@ class GetUserUseCaseImpl @Inject constructor(
 ) : GetUserUseCase {
 
     override fun invoke(): User =
-        auth.currentUser.useOrNull { mapper.map(it) }
+        auth.currentUser.useOrNull { mapper.map(it, Unit) }
             ?: throw IllegalStateException("User is not signed in")
 }

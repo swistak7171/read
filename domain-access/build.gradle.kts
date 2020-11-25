@@ -22,11 +22,15 @@ dependencies {
     implementation(project(Modules.COMMON))
     implementation(project(Modules.MODEL_COMMON))
     implementation(project(Modules.MODEL_DOMAIN))
-    implementation(project(Modules.MODEL_DATA))
+    implementation(project(Modules.MODEL_ENTITY))
 
     // Dagger
     kapt(Dependencies.Google.Dagger.DAGGER_ANDROID_PROCESSOR)
     kapt(Dependencies.Google.Dagger.DAGGER_COMPILER)
+
+    // DataStore
+    implementation(Dependencies.AndroidX.DataStore.DATA_STORE_PREFERENCES)
+    implementation(Dependencies.AndroidX.DataStore.DATA_STORE_PREFERENCES_CORE)
 
     // CameraX
     implementation(Dependencies.AndroidX.CameraX.CAMERA_CORE)

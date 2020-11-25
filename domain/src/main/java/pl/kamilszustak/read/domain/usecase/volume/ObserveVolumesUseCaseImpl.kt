@@ -21,7 +21,7 @@ class ObserveVolumesUseCaseImpl @Inject constructor(
         repository.observeAll(input)
             .map { volumes ->
                 volumes.useOrNull {
-                    mapper.mapAll(it)
+                    mapper.mapAll(it, Unit)
                 }
             }
 }

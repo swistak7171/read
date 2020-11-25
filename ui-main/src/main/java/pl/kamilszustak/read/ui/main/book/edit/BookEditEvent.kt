@@ -5,6 +5,7 @@ import java.util.*
 
 sealed class BookEditEvent : ViewEvent {
     object OnDateEditTextClicked : BookEditEvent()
+    object OnDateClearButtonClicked : BookEditEvent()
     object OnSaveBookButtonClicked : BookEditEvent()
 
     data class OnPublicationDateSelected(

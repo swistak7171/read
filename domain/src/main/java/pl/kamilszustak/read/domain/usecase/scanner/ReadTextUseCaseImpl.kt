@@ -5,7 +5,6 @@ import android.graphics.Bitmap
 import android.net.Uri
 import androidx.camera.core.ImageProxy
 import com.google.mlkit.vision.common.InputImage
-import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.TextRecognizer
 import kotlinx.coroutines.tasks.await
@@ -55,7 +54,7 @@ class ReadTextUseCaseImpl @Inject constructor(
                 val text = recognizer.process(inputImage).await()
 
                 if (text != null) {
-                    textMapper.map(text)
+                    textMapper.map(text, Unit)
                 } else {
                     throw Exception("Text not recognized")
                 }

@@ -6,6 +6,7 @@ plugins {
     id(Plugins.ANDROID_LIBRARY)
     id(Plugins.KOTLIN_ANDROID)
     id(Plugins.KOTLIN_KAPT)
+    id(Plugins.KOTLIN_ANDROID_EXTENSIONS)
 }
 
 android {
@@ -54,9 +55,6 @@ dependencies {
     // Core
     api(Dependencies.AndroidX.Core.CORE)
     api(Dependencies.AndroidX.Core.CORE_KTX)
-
-    // WorkManager
-    api(Dependencies.AndroidX.Work.WORK_RUNTIME_KTX)
 
     // Firebase Authentication
     api(Dependencies.Google.Firebase.Authentication.AUTH_KTX)

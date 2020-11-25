@@ -51,6 +51,10 @@ class BookEditFragment @Inject constructor(
     }
 
     override fun setListeners() {
+        binding.publicationDateInputLayout.setEndIconOnClickListener {
+            viewModel.dispatchEvent(BookEditEvent.OnDateClearButtonClicked)
+        }
+
         binding.publicationDateEditText.setOnClickListener {
             viewModel.dispatchEvent(BookEditEvent.OnDateEditTextClicked)
         }

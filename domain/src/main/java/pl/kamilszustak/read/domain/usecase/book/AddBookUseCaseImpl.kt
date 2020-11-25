@@ -14,7 +14,7 @@ class AddBookUseCaseImpl @Inject constructor(
 ) : AddBookUseCase {
 
     override suspend fun invoke(input: Book): Result<Unit> {
-        val entity = bookMapper.map(input)
+        val entity = bookMapper.map(input, Unit)
 
         return bookRepository.add(entity)
     }

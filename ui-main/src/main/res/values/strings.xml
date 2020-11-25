@@ -61,6 +61,8 @@
     </string-array>
 
     <!-- ReadingProgressDialogFragment -->
+    <string name="reading_progress">Reading progress</string>
+    <string name="finish_the_book">Finish the book</string>
     <string name="update_reading_progress">Update reading progress</string>
     <string name="invalid_read_pages_number_error_message">Invalid read pages number</string>
     <string name="reading_progress_edit_error_message">An error occurred while editing reading progress</string>
@@ -115,4 +117,16 @@
     <string name="invalid_email_address">Invalid email address</string>
     <string name="profil_edited_message">Profile edited successfully</string>
     <string name="profil_edit_error_message">An error occurred while editing the profile</string>
+
+    <!-- ReadingGoalFragment -->
+    <string name="reading_goal">Reading goal</string>
+    <string name="daily_reading_goal">Daily reading goal</string>
+    <string name="daily_reading_goal_on">Daily reading goal on</string>
+    <string name="daily_reading_goal_off">Daily reading goal off</string>
+    <string name="reminder_time">Reminder time</string>
+    <string name="reminder_time_not_selected_error_message">Reminder time not selected</string>
+    <string name="number_of_pages_not_entered_error_message">Number of pages not entered</string>
+    <string name="daily_reading_goal_setting_error_message">An error occurred while setting the daily reading goal</string>
+    <string name="daily_reading_goal_cancelled">Daily reading goal cancelled</string>
+    <string name="daily_reading_goal_set">Daily reading goal set successfully</string>
 </resources>

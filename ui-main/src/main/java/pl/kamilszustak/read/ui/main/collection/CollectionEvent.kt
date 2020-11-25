@@ -6,6 +6,7 @@ import pl.kamilszustak.read.ui.base.view.ViewEvent
 sealed class CollectionEvent : ViewEvent {
     object OnAddBookButtonClicked : CollectionEvent()
     object OnReadingLogButtonClicked : CollectionEvent()
+    object OnReadingGoalButtonClicked : CollectionEvent()
 
     data class OnScrolled(
         val position: Int,

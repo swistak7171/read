@@ -2,6 +2,7 @@ package pl.kamilszustak.read.data.repository
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.tasks.await
+import pl.kamilszustak.read.common.date.DateFormats
 import pl.kamilszustak.read.common.util.withIOContext
 import pl.kamilszustak.read.data.access.repository.LogEntryRepository
 import pl.kamilszustak.read.data.di.qualifier.ReadingLogCollection
@@ -9,8 +10,9 @@ import pl.kamilszustak.read.data.util.entityFlow
 import pl.kamilszustak.read.data.util.entityListFlow
 import pl.kamilszustak.read.data.util.readEntity
 import pl.kamilszustak.read.data.util.readEntityList
-import pl.kamilszustak.read.model.data.DatabaseCollection
-import pl.kamilszustak.read.model.data.LogEntryEntity
+import pl.kamilszustak.read.model.entity.DatabaseCollection
+import pl.kamilszustak.read.model.entity.LogEntryEntity
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -60,6 +62,15 @@ class LogEntryRepositoryImpl @Inject constructor(
     override suspend fun getAll(): List<LogEntryEntity> = withIOContext {
         readEntityList(collection.query)
     }
+
+    override suspend fun getAllByDate(date: Date): List<LogEntryEntity> {
+        val formattedDate = DateFormats.dateFormat.format(date)
+
+        return getAll().filter { entry ->
+            DateFormats.dateFormat.format(entry.creationDate) == formattedDate
+        }
+    }
+
 
     override suspend fun getById(id: String): LogEntryEntity? = withIOContext {
         readEntity { collection.reference.child(id) }

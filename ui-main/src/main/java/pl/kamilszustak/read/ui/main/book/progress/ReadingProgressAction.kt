@@ -7,6 +7,10 @@ sealed class ReadingProgressAction : ViewAction {
     object ProgressUpdated : ReadingProgressAction()
     object NavigateUp : ReadingProgressAction()
 
+    data class ChangePagesNumberPickerEnabled(
+        val isEnabled: Boolean,
+    ) : ReadingProgressAction()
+
     data class Error(
         @StringRes val messageResourceId: Int,
     ) : ReadingProgressAction()

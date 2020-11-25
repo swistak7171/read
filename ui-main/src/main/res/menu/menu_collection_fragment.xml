@@ -6,11 +6,16 @@
         android:id="@+id/addBookItem"
         android:title="@string/add_book"
         android:icon="@drawable/icon_plus"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/readingLogItem"
         android:title="@string/reading_log"
         android:icon="@drawable/icon_restore"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/readingGoalItem"
+        android:title="@string/reading_goal"
+        app:showAsAction="never" />
 </menu>

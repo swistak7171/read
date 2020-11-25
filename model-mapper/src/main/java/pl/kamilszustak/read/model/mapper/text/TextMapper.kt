@@ -5,8 +5,8 @@ import pl.kamilszustak.read.model.domain.text.*
 import pl.kamilszustak.read.model.mapper.Mapper
 import javax.inject.Inject
 
-class TextMapper @Inject constructor() : Mapper<Text, TextWrapper>() {
-    override fun map(model: Text): TextWrapper {
+class TextMapper @Inject constructor() : Mapper<Text, TextWrapper, Unit>() {
+    override fun map(model: Text, parameter: Unit): TextWrapper {
         val blocks = mutableListOf<TextBlock>()
         model.textBlocks.forEach blocksForEach@{ textBlock ->
             val blockBox = textBlock?.boundingBox

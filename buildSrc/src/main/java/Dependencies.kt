@@ -76,6 +76,11 @@ object Dependencies {
             const val PREFERENCE_KTX: String = "androidx.preference:preference-ktx:${Versions.PREFERENCE}"
         }
 
+        object DataStore {
+            const val DATA_STORE_PREFERENCES: String = "androidx.datastore:datastore-preferences:${Versions.DATA_STORE}"
+            const val DATA_STORE_PREFERENCES_CORE: String = "androidx.datastore:datastore-preferences-core:${Versions.DATA_STORE}"
+        }
+
         object Navigation {
             const val NAVIGATION_FRAGMENT_KTX: String = "androidx.navigation:navigation-fragment-ktx:${Versions.NAVIGATION}"
             const val NAVIGATION_UI_KTX: String = "androidx.navigation:navigation-ui-ktx:${Versions.NAVIGATION}"
