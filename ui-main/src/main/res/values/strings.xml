@@ -117,6 +117,7 @@
     <string name="invalid_email_address">Invalid email address</string>
     <string name="profil_edited_message">Profile edited successfully</string>
     <string name="profil_edit_error_message">An error occurred while editing the profile</string>
+    <string name="statistics">Statistics</string>
 
     <!-- ReadingGoalFragment -->
     <string name="reading_goal">Reading goal</string>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BarChartView">
+        <item name="chart_barsRadius">4dp</item>
+        <item name="chart_barsColor">@color/colorAccent</item>
+        <item name="chart_axis">x</item>
+        <item name="chart_labelsSize">10dp</item>
+    </style>
+</resources>

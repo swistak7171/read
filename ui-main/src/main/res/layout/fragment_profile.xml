@@ -21,7 +21,7 @@
             <ImageView
                 android:layout_width="128dp"
                 android:layout_height="128dp"
-                android:id="@+id/phoneImageView"
+                android:id="@+id/profilePhotoImageView"
                 app:imageUrl="@{viewModel.user.photoUrl}"
                 tools:src="@tools:sample/avatars"
                 app:placeholder="@{@drawable/icon_person}"
@@ -32,8 +32,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/linearLayout"
                 android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@id/phoneImageView"
+                app:layout_constraintTop_toBottomOf="@id/profilePhotoImageView"
                 android:layout_marginTop="@dimen/default_margin">
 
                 <include layout="@layout/form_field"
@@ -60,6 +61,20 @@
                     app:header="@{@string/phone_number}"
                     app:content="@{viewModel.user.phoneNumber}"
                     app:visibleIfNotNull="@{viewModel.user.phoneNumber}"
+                    android:layout_marginTop="@dimen/default_margin" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/statisticsTextView"
+                    android:text="@string/statistics"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_marginTop="@dimen/default_margin" />
+
+                <ViewFlipper
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:id="@+id/chartFlipper"
                     android:layout_marginTop="@dimen/default_margin" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
