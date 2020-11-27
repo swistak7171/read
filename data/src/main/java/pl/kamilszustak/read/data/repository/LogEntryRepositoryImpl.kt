@@ -63,15 +63,6 @@ class LogEntryRepositoryImpl @Inject constructor(
         readEntityList(collection.query)
     }
 
-    override suspend fun getAllByDate(date: Date): List<LogEntryEntity> {
-        val formattedDate = DateFormats.dateFormat.format(date)
-
-        return getAll().filter { entry ->
-            DateFormats.dateFormat.format(entry.creationDate) == formattedDate
-        }
-    }
-
-
     override suspend fun getById(id: String): LogEntryEntity? = withIOContext {
         readEntity { collection.reference.child(id) }
     }

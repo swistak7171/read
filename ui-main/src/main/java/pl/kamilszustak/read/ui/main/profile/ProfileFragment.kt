@@ -29,6 +29,7 @@ class ProfileFragment @Inject constructor(
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        android.R.array.emailAddressTypes
         return when (item.itemId) {
             R.id.editProfileItem -> {
                 viewModel.dispatchEvent(ProfileEvent.OnEditButtonClicked)

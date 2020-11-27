@@ -1,7 +1,10 @@
 package pl.kamilszustak.read.domain.access.usecase.log
 
-import pl.kamilszustak.read.domain.access.usecase.CoroutineParametrizedUseCase
+import pl.kamilszustak.read.domain.access.usecase.BaseUseCase
 import pl.kamilszustak.read.model.domain.LogEntry
 import java.util.*
 
-interface GetReadingLogByDateUseCase : CoroutineParametrizedUseCase<Date, List<LogEntry>>
+interface GetReadingLogByDateUseCase : BaseUseCase {
+    suspend operator fun invoke(input: Date): List<LogEntry>
+    suspend operator fun invoke(year: Int, month: Int, day: Int): List<LogEntry>
+}
