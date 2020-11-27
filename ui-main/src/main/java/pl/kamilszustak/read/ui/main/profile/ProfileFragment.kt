@@ -11,10 +11,9 @@ import pl.kamilszustak.read.ui.base.util.navigate
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.main.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.R
-import pl.kamilszustak.read.ui.main.chart.ChartFactory
 import pl.kamilszustak.read.ui.main.databinding.FragmentProfileBinding
+import pl.kamilszustak.read.ui.main.util.show
 import javax.inject.Inject
-import kotlin.random.Random
 
 class ProfileFragment @Inject constructor(
     viewModelFactory: ViewModelProvider.Factory,
@@ -51,21 +50,6 @@ class ProfileFragment @Inject constructor(
         super.onViewCreated(view, savedInstanceState)
 
         setHasOptionsMenu(true)
-
-        fun generate(): List<Pair<String, Float>> {
-            val data = mutableListOf<Pair<String, Float>>()
-            repeat(31) {
-                data.add("$it" to Random.nextFloat())
-            }
-
-            return data
-        }
-
-        val factory = ChartFactory(requireContext())
-        repeat(5) {
-            val chart = factory.createBarChart(generate())
-            binding.chartFlipper.addView(chart)
-        }
     }
 
     override fun observeViewModel() {
@@ -73,6 +57,14 @@ class ProfileFragment @Inject constructor(
             when (action) {
                 ProfileAction.NavigateToProfileEditFragment -> navigator.navigateToUserEditFragment()
             }
+        }
+
+        viewModel.monthlyStatistics.observe(viewLifecycleOwner) { statistics ->
+            if (statistics == null) {
+                return@observe
+            }
+
+            binding.statisticsChartView.show(statistics)
         }
     }
 

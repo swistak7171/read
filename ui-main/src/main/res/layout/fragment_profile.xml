@@ -71,11 +71,11 @@
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                     android:layout_marginTop="@dimen/default_margin" />
 
-                <ViewFlipper
+                <com.db.williamchart.view.BarChartView
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:id="@+id/chartFlipper"
-                    android:layout_marginTop="@dimen/default_margin" />
+                    android:id="@+id/statisticsChartView"
+                    style="@style/BarChartView" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -16,6 +16,8 @@ import pl.kamilszustak.read.domain.access.usecase.quote.*
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBarcodeUseCase
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBitmapUseCase
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadTextUseCase
+import pl.kamilszustak.read.domain.access.usecase.statistics.GenerateMonthlyReadingStatistcsUseCase
+import pl.kamilszustak.read.domain.access.usecase.statistics.ObserveMonthlyReadingStatisticsUseCase
 import pl.kamilszustak.read.domain.access.usecase.user.EditUserUseCase
 import pl.kamilszustak.read.domain.access.usecase.user.GetUserUseCase
 import pl.kamilszustak.read.domain.access.usecase.user.ObserveUserUseCase
@@ -36,6 +38,8 @@ import pl.kamilszustak.read.domain.usecase.quote.*
 import pl.kamilszustak.read.domain.usecase.scanner.ReadBarcodeUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.scanner.ReadBitmapUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.scanner.ReadTextUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.statistics.GenerateMonthlyReadingStatistcsUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.statistics.ObserveMonthlyReadingStatisticsUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.user.EditUserUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.user.GetUserUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.user.ObserveUserUseCaseImpl
@@ -158,4 +162,10 @@ interface UseCaseModule {
 
     @Binds
     fun bindCancelDailyReadingGoalUseCase(useCaseImpl: CancelDailyReadingGoalUseCaseImpl): CancelDailyReadingGoalUseCase
+
+    @Binds
+    fun bindObserveMonthlyReadingStatisticsUseCase(useCaseImpl: ObserveMonthlyReadingStatisticsUseCaseImpl): ObserveMonthlyReadingStatisticsUseCase
+
+    @Binds
+    fun bindGenerateMonthlyReadingStatistcsUseCase(useCaseImpl: GenerateMonthlyReadingStatistcsUseCaseImpl): GenerateMonthlyReadingStatistcsUseCase
 }

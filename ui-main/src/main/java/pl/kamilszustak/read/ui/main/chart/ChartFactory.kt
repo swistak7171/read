@@ -16,11 +16,9 @@ class ChartFactory(
             ViewGroup.LayoutParams.MATCH_PARENT
         )
 
-    fun createBarChart(data: List<Pair<String, Float>>, layoutParams: ViewGroup.LayoutParams = defaultLayoutParams): BarChartView {
+    fun createBarChart(layoutParams: ViewGroup.LayoutParams = defaultLayoutParams): BarChartView {
         return BarChartView(contextThemeWrapperOf(R.style.BarChartView)).apply {
             this.layoutParams = layoutParams
-
-            show(data)
         }
     }
 
