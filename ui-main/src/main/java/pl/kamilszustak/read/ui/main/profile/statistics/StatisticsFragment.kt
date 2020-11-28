@@ -16,6 +16,24 @@ class StatisticsFragment @Inject constructor(
     override val viewModel: StatisticsViewModel by viewModels(viewModelFactory)
     private val chartFactory: ChartFactory = ChartFactory()
 
+    override fun setListeners() {
+        binding.weekSwitcher.previousButton.setOnClickListener {
+            viewModel.dispatchEvent(StatisticsEvent.OnPreviousWeekButtonClicked)
+        }
+
+        binding.weekSwitcher.nextButton.setOnClickListener {
+            viewModel.dispatchEvent(StatisticsEvent.OnNextWeekButtonClicked)
+        }
+
+        binding.monthSwitcher.previousButton.setOnClickListener {
+            viewModel.dispatchEvent(StatisticsEvent.OnPreviousMonthButtonClicked)
+        }
+
+        binding.monthSwitcher.nextButton.setOnClickListener {
+            viewModel.dispatchEvent(StatisticsEvent.OnNextMonthButtonClicked)
+        }
+    }
+
     override fun observeViewModel() {
         viewModel.weeklyStatistics.observe(viewLifecycleOwner) { statistics ->
             if (statistics == null) return@observe

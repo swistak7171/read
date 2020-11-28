@@ -11,6 +11,6 @@
         <item name="chart_barsColor">@color/colorAccent</item>
         <item name="chart_axis">x</item>
         <item name="chart_labelsSize">8dp</item>
-        <item name="chart_labelsColor">@color/defaultTextColor</item>
+        <item name="chart_labelsColor">@color/text</item>
     </style>
 </resources>

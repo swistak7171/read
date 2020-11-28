@@ -30,4 +30,13 @@ class StatisticsViewModel @Inject constructor() : BaseViewModel<StatisticsEvent,
     private val _monthlyStatistics: MutableLiveData<List<Map<String, Int>>> = UniqueLiveData()
     val monthlyStatistics: LiveData<List<Map<String, Int>>>
         get() = _monthlyStatistics
+
+    override fun handleEvent(event: StatisticsEvent) {
+        when (event) {
+            StatisticsEvent.OnPreviousWeekButtonClicked -> {}
+            StatisticsEvent.OnNextWeekButtonClicked -> {}
+            StatisticsEvent.OnPreviousMonthButtonClicked -> {}
+            StatisticsEvent.OnNextMonthButtonClicked -> {}
+        }
+    }
 }

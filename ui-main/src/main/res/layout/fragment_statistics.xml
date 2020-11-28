@@ -21,6 +21,7 @@
             <include layout="@layout/switcher"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/weekSwitcher"
                 app:text="@{viewModel.weekText}" />
 
             <ViewFlipper
@@ -39,6 +40,7 @@
             <include layout="@layout/switcher"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/monthSwitcher"
                 app:text="@{viewModel.monthText}"
                 android:layout_marginTop="@dimen/default_margin" />
 

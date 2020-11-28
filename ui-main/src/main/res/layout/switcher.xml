@@ -16,7 +16,7 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/weekLeftButton"
+            android:id="@+id/previousButton"
             android:src="@drawable/icon_arrow_left_short"
             android:background="?selectableItemBackgroundBorderless"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,16 +28,16 @@
             android:id="@+id/weekTextView"
             android:text="@{text}"
             tools:text="20.01 - 27.01"
-            app:layout_constraintStart_toEndOf="@id/weekLeftButton"
-            app:layout_constraintEnd_toStartOf="@id/weekRightButton"
-            app:layout_constraintTop_toTopOf="@id/weekLeftButton"
-            app:layout_constraintBottom_toBottomOf="@id/weekLeftButton"
+            app:layout_constraintStart_toEndOf="@id/previousButton"
+            app:layout_constraintEnd_toStartOf="@id/nextButton"
+            app:layout_constraintTop_toTopOf="@id/previousButton"
+            app:layout_constraintBottom_toBottomOf="@id/previousButton"
             android:layout_marginHorizontal="@dimen/default_margin" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/weekRightButton"
+            android:id="@+id/nextButton"
             android:src="@drawable/icon_arrow_right_short"
             android:background="?selectableItemBackgroundBorderless"
             app:layout_constraintEnd_toEndOf="parent"
