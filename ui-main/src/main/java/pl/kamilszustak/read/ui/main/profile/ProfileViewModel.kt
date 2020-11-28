@@ -46,6 +46,10 @@ class ProfileViewModel @Inject constructor(
                 _action.value = ProfileAction.NavigateToProfileEditFragment
             }
 
+            ProfileEvent.OnMoreStatisticsButtonClicked -> {
+                _action.value = ProfileAction.NavigateToStatisticsFragment
+            }
+
             ProfileEvent.OnSignOutButtonClicked -> {
                 signOut()
             }

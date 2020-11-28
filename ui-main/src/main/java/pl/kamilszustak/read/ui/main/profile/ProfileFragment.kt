@@ -52,6 +52,12 @@ class ProfileFragment @Inject constructor(
         setHasOptionsMenu(true)
     }
 
+    override fun setListeners() {
+        binding.moreStatisticsButton.setOnClickListener {
+            viewModel.dispatchEvent(ProfileEvent.OnMoreStatisticsButtonClicked)
+        }
+    }
+
     override fun observeViewModel() {
         viewModel.action.observe(viewLifecycleOwner) { action ->
             when (action) {
@@ -81,6 +87,10 @@ class ProfileFragment @Inject constructor(
         fun navigateToUserEditFragment() {
             val direction = ProfileFragmentDirections.actionProfileFragmentToProfileEditFragment()
             navigate(direction)
+        }
+
+        fun navigateToStatisticsFragment() {
+
         }
     }
 }
