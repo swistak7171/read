@@ -4,8 +4,8 @@ import androidx.annotation.StringRes
 import pl.kamilszustak.read.common.R
 
 enum class Month(
-    private val number: Int,
-    @StringRes private val nameResourceId: Int,
+    val number: Int,
+    @StringRes val nameResourceId: Int,
 ) : HasDays {
 
     JANUARY(1, R.string.january) {

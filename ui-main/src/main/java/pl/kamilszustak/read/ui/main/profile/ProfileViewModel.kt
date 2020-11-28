@@ -1,13 +1,14 @@
 package pl.kamilszustak.read.ui.main.profile
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import pl.kamilszustak.read.common.date.Month
+import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.domain.access.usecase.statistics.ObserveMonthlyReadingStatisticsUseCase
 import pl.kamilszustak.read.domain.access.usecase.user.ObserveUserUseCase
 import pl.kamilszustak.read.domain.access.usecase.user.SignOutUseCase
 import pl.kamilszustak.read.model.domain.user.User
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
+import pl.kamilszustak.read.ui.main.R
 import java.util.*
 import javax.inject.Inject
 
@@ -21,13 +22,20 @@ class ProfileViewModel @Inject constructor(
         .asLiveData(viewModelScope.coroutineContext)
 
     val monthlyStatistics: LiveData<Map<String, Int>>
+    private val currentMonth: MutableLiveData<Month> = UniqueLiveData()
+    val currentMonthName: LiveData<Int>
+        get() = currentMonth.map { month ->
+            month?.nameResourceId ?: R.string.empty_placeholder
+        }
 
     init {
         val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH) + 1
-        monthlyStatistics = observeMonthlyReadingStatistics(year, month)
+        val yearNumber = calendar.get(Calendar.YEAR)
+        val monthNumber = calendar.get(Calendar.MONTH) + 1
+        monthlyStatistics = observeMonthlyReadingStatistics(yearNumber, monthNumber)
             .asLiveData(viewModelScope.coroutineContext)
+
+        currentMonth.value = Month.ofNumber(monthNumber)
     }
 
     override fun handleEvent(event: ProfileEvent) {

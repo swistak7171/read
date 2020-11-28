@@ -32,7 +32,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/linearLayout"
+                android:id="@+id/profileDetailsLayout"
                 android:orientation="vertical"
                 app:layout_constraintTop_toBottomOf="@id/profilePhotoImageView"
                 android:layout_marginTop="@dimen/default_margin">
@@ -62,21 +62,62 @@
                     app:content="@{viewModel.user.phoneNumber}"
                     app:visibleIfNotNull="@{viewModel.user.phoneNumber}"
                     android:layout_marginTop="@dimen/default_margin" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/statisticsTextView"
-                    android:text="@string/statistics"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                    android:layout_marginTop="@dimen/default_margin" />
-
-                <com.db.williamchart.view.BarChartView
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:id="@+id/statisticsChartView"
-                    style="@style/BarChartView" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:id="@+id/profileDetailsDivider"
+                android:background="@color/md_grey_200"
+                app:layout_constraintTop_toBottomOf="@id/profileDetailsLayout"
+                android:layout_marginTop="@dimen/default_margin" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/statisticsTextView"
+                android:text="@string/statistics"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profileDetailsDivider"
+                android:layout_marginTop="@dimen/default_margin"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/moreStatisticsButton"
+                android:text="@string/more"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                app:layout_constraintStart_toEndOf="@id/statisticsTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/statisticsTextView"
+                app:layout_constraintBottom_toBottomOf="@id/statisticsTextView"
+                app:layout_constraintHorizontal_bias="1.0" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/statisticsBarrier"
+                app:constraint_referenced_ids="statisticsTextView,moreStatisticsButton"
+                app:barrierDirection="bottom" />
+
+            <com.db.williamchart.view.BarChartView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/statisticsChartView"
+                style="@style/BarChartView"
+                app:layout_constraintTop_toBottomOf="@id/statisticsBarrier"
+                android:layout_marginTop="@dimen/default_margin" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/monthTextView"
+                android:text="@{viewModel.currentMonthName}"
+                tools:text="@string/january"
+                android:gravity="center_horizontal"
+                app:layout_constraintTop_toBottomOf="@id/statisticsChartView"
+                android:layout_marginTop="@dimen/default_half_margin" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>
