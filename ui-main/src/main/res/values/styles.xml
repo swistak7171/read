@@ -2,13 +2,15 @@
 <resources>
     <style name="Divider">
         <item name="android:layout_height">2dp</item>
-        <item name="android:background">@color/md_grey_200</item>
+        <item name="android:background">@color/divider_background</item>
     </style>
 
     <style name="BarChartView">
+        <item name="android:layout_height">@dimen/chart_height</item>
         <item name="chart_barsRadius">4dp</item>
         <item name="chart_barsColor">@color/colorAccent</item>
         <item name="chart_axis">x</item>
-        <item name="chart_labelsSize">10dp</item>
+        <item name="chart_labelsSize">8dp</item>
+        <item name="chart_labelsColor">@color/defaultTextColor</item>
     </style>
 </resources>

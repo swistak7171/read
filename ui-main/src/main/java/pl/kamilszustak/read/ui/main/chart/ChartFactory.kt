@@ -7,21 +7,21 @@ import androidx.appcompat.view.ContextThemeWrapper
 import com.db.williamchart.view.BarChartView
 import pl.kamilszustak.read.ui.main.R
 
-class ChartFactory(
-    private val context: Context,
-) {
+class ChartFactory {
     private val defaultLayoutParams: ViewGroup.LayoutParams
         get() = ViewGroup.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT
         )
 
-    fun createBarChart(layoutParams: ViewGroup.LayoutParams = defaultLayoutParams): BarChartView {
-        return BarChartView(contextThemeWrapperOf(R.style.BarChartView)).apply {
+    fun createBarChart(context: Context, layoutParams: ViewGroup.LayoutParams = defaultLayoutParams): BarChartView {
+        val contextWrapper = contextThemeWrapperOf(context, R.style.BarChartView)
+
+        return BarChartView(contextWrapper).apply {
             this.layoutParams = layoutParams
         }
     }
 
-    private fun contextThemeWrapperOf(@StyleRes styleResourceId: Int): ContextThemeWrapper =
+    private fun contextThemeWrapperOf(context: Context, @StyleRes styleResourceId: Int): ContextThemeWrapper =
         ContextThemeWrapper(context, styleResourceId)
 }

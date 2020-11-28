@@ -12,7 +12,7 @@ import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.main.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.FragmentProfileBinding
-import pl.kamilszustak.read.ui.main.util.show
+import pl.kamilszustak.read.ui.main.util.animate
 import javax.inject.Inject
 
 class ProfileFragment @Inject constructor(
@@ -67,11 +67,9 @@ class ProfileFragment @Inject constructor(
         }
 
         viewModel.monthlyStatistics.observe(viewLifecycleOwner) { statistics ->
-            if (statistics == null) {
-                return@observe
-            }
+            if (statistics == null) return@observe
 
-            binding.statisticsChartView.show(statistics)
+            binding.statisticsChartView.animate(statistics)
         }
     }
 

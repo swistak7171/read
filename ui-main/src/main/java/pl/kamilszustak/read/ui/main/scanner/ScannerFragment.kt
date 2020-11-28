@@ -109,9 +109,7 @@ class ScannerFragment @Inject constructor(
         }
 
         viewModel.selectedMode.observe(viewLifecycleOwner) { mode ->
-            if (mode == null) {
-                return@observe
-            }
+            if (mode == null) return@observe
 
             val tab = binding.tabLayout.getTabAt(mode.index)
             val selectedTabIndex = binding.tabLayout.selectedTabPosition

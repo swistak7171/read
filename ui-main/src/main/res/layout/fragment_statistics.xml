@@ -13,39 +13,41 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/default_padding">
-
-            <ImageButton
-                android:layout_width="wrap_content"
+            android:orientation="vertical">
+            
+            <include layout="@layout/switcher"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/weekLeftButton"
-                android:src="@drawable/icon_arrow_left_short"
-                android:background="?selectableItemBackgroundBorderless"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:text="@{viewModel.weekText}" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/weekTextView"
-                tools:text="20.01 - 27.01"
-                app:layout_constraintStart_toEndOf="@id/weekLeftButton"
-                app:layout_constraintEnd_toStartOf="@id/weekRightButton"
-                app:layout_constraintTop_toTopOf="@id/weekLeftButton"
-                app:layout_constraintBottom_toBottomOf="@id/weekLeftButton"
-                android:layout_marginHorizontal="@dimen/default_margin" />
+            <ViewFlipper
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/chart_height"
+                android:id="@+id/weekChartsViewFlipper"
+                android:layout_marginHorizontal="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin" />
+            
+            <View
+                android:layout_width="match_parent"
+                style="@style/Divider"
+                android:layout_marginHorizontal="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin" />
 
-            <ImageButton
-                android:layout_width="wrap_content"
+            <include layout="@layout/switcher"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/weekRightButton"
-                android:src="@drawable/icon_arrow_right_short"
-                android:background="?selectableItemBackgroundBorderless"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                app:text="@{viewModel.monthText}"
+                android:layout_marginTop="@dimen/default_margin" />
+
+            <ViewFlipper
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/chart_height"
+                android:id="@+id/monthChartsViewFlipper"
+                android:layout_marginHorizontal="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin" />
+        </LinearLayout>
     </ScrollView>
 </layout>

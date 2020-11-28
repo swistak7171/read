@@ -102,7 +102,6 @@
 
             <com.db.williamchart.view.BarChartView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
                 android:id="@+id/statisticsChartView"
                 style="@style/BarChartView"
                 app:layout_constraintTop_toBottomOf="@id/statisticsBarrier"
