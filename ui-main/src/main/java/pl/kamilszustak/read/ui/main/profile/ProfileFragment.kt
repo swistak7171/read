@@ -62,6 +62,7 @@ class ProfileFragment @Inject constructor(
         viewModel.action.observe(viewLifecycleOwner) { action ->
             when (action) {
                 ProfileAction.NavigateToProfileEditFragment -> navigator.navigateToUserEditFragment()
+                ProfileAction.NavigateToStatisticsFragment -> navigator.navigateToStatisticsFragment()
             }
         }
 
@@ -90,7 +91,8 @@ class ProfileFragment @Inject constructor(
         }
 
         fun navigateToStatisticsFragment() {
-
+            val direction = ProfileFragmentDirections.actionProfileFragmentToStatisticsFragment()
+            navigate(direction)
         }
     }
 }
