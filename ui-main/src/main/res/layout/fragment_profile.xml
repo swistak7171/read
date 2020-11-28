@@ -66,9 +66,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
                 android:id="@+id/profileDetailsDivider"
-                android:background="@color/md_grey_200"
+                style="@style/Divider"
                 app:layout_constraintTop_toBottomOf="@id/profileDetailsLayout"
                 android:layout_marginTop="@dimen/default_margin" />
 
@@ -115,6 +114,7 @@
                 android:id="@+id/monthTextView"
                 android:text="@{viewModel.currentMonthName}"
                 tools:text="@string/january"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
                 android:gravity="center_horizontal"
                 app:layout_constraintTop_toBottomOf="@id/statisticsChartView"
                 android:layout_marginTop="@dimen/default_half_margin" />

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="Divider">
+        <item name="android:layout_height">2dp</item>
+        <item name="android:background">@color/md_grey_200</item>
+    </style>
+
     <style name="BarChartView">
         <item name="chart_barsRadius">4dp</item>
         <item name="chart_barsColor">@color/colorAccent</item>

@@ -36,6 +36,8 @@ class ProfileViewModel @Inject constructor(
             .asLiveData(viewModelScope.coroutineContext)
 
         currentMonth.value = Month.ofNumber(monthNumber)
+
+        Calendar.DAY_OF_WEEK
     }
 
     override fun handleEvent(event: ProfileEvent) {
