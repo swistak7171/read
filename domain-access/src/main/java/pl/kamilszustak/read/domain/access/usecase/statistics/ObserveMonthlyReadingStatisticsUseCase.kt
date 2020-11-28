@@ -1,8 +1,9 @@
 package pl.kamilszustak.read.domain.access.usecase.statistics
 
 import kotlinx.coroutines.flow.Flow
+import pl.kamilszustak.read.common.date.SimpleDate
 import pl.kamilszustak.read.domain.access.usecase.BaseUseCase
 
 interface ObserveMonthlyReadingStatisticsUseCase : BaseUseCase {
-    operator fun invoke(year: Int, month: Int): Flow<Map<String, Int>>
+    operator fun invoke(date: SimpleDate): Flow<Map<String, Int>>
 }

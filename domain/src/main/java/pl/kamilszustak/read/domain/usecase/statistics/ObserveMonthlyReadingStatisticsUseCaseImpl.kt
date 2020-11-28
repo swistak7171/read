@@ -2,6 +2,7 @@ package pl.kamilszustak.read.domain.usecase.statistics
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import pl.kamilszustak.read.common.date.SimpleDate
 import pl.kamilszustak.read.data.access.repository.LogEntryRepository
 import pl.kamilszustak.read.domain.access.usecase.statistics.ObserveMonthlyReadingStatisticsUseCase
 import java.util.*
@@ -13,7 +14,7 @@ class ObserveMonthlyReadingStatisticsUseCaseImpl @Inject constructor(
     private val repository: LogEntryRepository,
 ) : ObserveMonthlyReadingStatisticsUseCase {
 
-    override fun invoke(year: Int, month: Int): Flow<Map<String, Int>> {
+    override fun invoke(date: SimpleDate): Flow<Map<String, Int>> {
         val calendar = Calendar.getInstance()
         val monthLength = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
 
@@ -22,10 +23,9 @@ class ObserveMonthlyReadingStatisticsUseCaseImpl @Inject constructor(
                 entries.asSequence()
                     .filter { entry ->
                         calendar.time = entry.creationDate
-                        val entryYear = calendar.get(Calendar.YEAR)
-                        val entryMonth = calendar.get(Calendar.MONTH) + 1
+                        val entryDate = SimpleDate.fromCalendar(calendar)
 
-                        (year == entryYear && month == entryMonth)
+                        (date.year == entryDate.year && date.month == entryDate.month)
                     }
                     .sortedBy { it.creationDate }
                     .groupBy { entry ->
