@@ -6,7 +6,20 @@ data class SimpleDate(
     val year: Int,
     val month: Int,
     val day: Int,
-) {
+) : Comparable<SimpleDate> {
+
+    override fun compareTo(other: SimpleDate): Int {
+        return when {
+            this == other -> 0
+
+            this.year > other.year ||
+                (this.year == other.year && this.month > other.month) ||
+                (this.year == other.year && this.month == other.month && this.day > other.day) -> 1
+
+            else -> -1
+        }
+    }
+
     fun toDate(): Date = toCalendar().time
 
     fun assignTo(calendar: Calendar) {

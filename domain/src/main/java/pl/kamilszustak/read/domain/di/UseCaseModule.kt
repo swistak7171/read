@@ -16,9 +16,9 @@ import pl.kamilszustak.read.domain.access.usecase.quote.*
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBarcodeUseCase
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBitmapUseCase
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadTextUseCase
-import pl.kamilszustak.read.domain.access.usecase.statistics.GenerateAllWeeklyStatisticsUseCase
+import pl.kamilszustak.read.domain.access.usecase.statistics.GenerateAllWeeklyReadingStatisticsUseCase
 import pl.kamilszustak.read.domain.access.usecase.statistics.GenerateMonthlyReadingStatistcsUseCase
-import pl.kamilszustak.read.domain.access.usecase.statistics.ObserveAllWeeklyStatisticsUseCase
+import pl.kamilszustak.read.domain.access.usecase.statistics.ObserveAllWeeklyReadingStatisticsUseCase
 import pl.kamilszustak.read.domain.access.usecase.statistics.ObserveMonthlyReadingStatisticsUseCase
 import pl.kamilszustak.read.domain.access.usecase.user.EditUserUseCase
 import pl.kamilszustak.read.domain.access.usecase.user.GetUserUseCase
@@ -40,9 +40,9 @@ import pl.kamilszustak.read.domain.usecase.quote.*
 import pl.kamilszustak.read.domain.usecase.scanner.ReadBarcodeUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.scanner.ReadBitmapUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.scanner.ReadTextUseCaseImpl
-import pl.kamilszustak.read.domain.usecase.statistics.GenerateAllWeeklyStatisticsUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.statistics.GenerateAllWeeklyReadingStatisticsUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.statistics.GenerateMonthlyReadingStatistcsUseCaseImpl
-import pl.kamilszustak.read.domain.usecase.statistics.ObserveAllWeeklyStatisticsUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.statistics.ObserveAllWeeklyReadingStatisticsUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.statistics.ObserveMonthlyReadingStatisticsUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.user.EditUserUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.user.GetUserUseCaseImpl
@@ -174,8 +174,8 @@ interface UseCaseModule {
     fun bindGenerateMonthlyReadingStatistcsUseCase(useCaseImpl: GenerateMonthlyReadingStatistcsUseCaseImpl): GenerateMonthlyReadingStatistcsUseCase
 
     @Binds
-    fun bindObserveAllWeeklyStatisticsUseCase(useCaseImpl: ObserveAllWeeklyStatisticsUseCaseImpl): ObserveAllWeeklyStatisticsUseCase
+    fun bindObserveAllWeeklyReadingStatisticsUseCase(useCaseImpl: ObserveAllWeeklyReadingStatisticsUseCaseImpl): ObserveAllWeeklyReadingStatisticsUseCase
 
     @Binds
-    fun bindGenerateAllWeeklyStatisticsUseCase(useCaseImpl: GenerateAllWeeklyStatisticsUseCaseImpl): GenerateAllWeeklyStatisticsUseCase
+    fun bindGenerateAllWeeklyReadingStatisticsUseCase(useCaseImpl: GenerateAllWeeklyReadingStatisticsUseCaseImpl): GenerateAllWeeklyReadingStatisticsUseCase
 }
