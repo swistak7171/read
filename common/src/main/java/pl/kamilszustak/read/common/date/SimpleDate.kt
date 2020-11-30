@@ -7,12 +7,16 @@ data class SimpleDate(
     val month: Int,
     val day: Int,
 ) {
-    fun toDate(): Date {
-        val calendar = Calendar.getInstance().apply {
-            set(year, month -1, day)
-        }
+    fun toDate(): Date = toCalendar().time
 
-        return calendar.time
+    fun assignTo(calendar: Calendar) {
+        calendar.set(year, month - 1, day)
+    }
+
+    fun toCalendar(): Calendar {
+        return Calendar.getInstance().apply {
+            assignTo(this)
+        }
     }
 
     companion object {
@@ -39,3 +43,9 @@ data class SimpleDate(
         }
     }
 }
+
+var Calendar.date: SimpleDate
+    get() = SimpleDate.fromCalendar(this)
+    set(value) {
+        value.assignTo(this)
+    }

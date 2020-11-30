@@ -12,7 +12,7 @@ class GenerateMonthlyReadingStatistcsUseCaseImpl @Inject constructor(
     private val observeMonthlyReadingStatistics: ObserveMonthlyReadingStatisticsUseCase,
 ) : GenerateMonthlyReadingStatistcsUseCase {
 
-    override suspend fun invoke(date: SimpleDate): Map<String, Int>? {
+    override suspend fun invoke(date: SimpleDate): Map<SimpleDate, Int>? {
         return observeMonthlyReadingStatistics(date)
             .firstOrNull()
     }

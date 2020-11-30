@@ -5,5 +5,5 @@ import pl.kamilszustak.read.common.date.SimpleDate
 import pl.kamilszustak.read.domain.access.usecase.BaseUseCase
 
 interface ObserveMonthlyReadingStatisticsUseCase : BaseUseCase {
-    operator fun invoke(date: SimpleDate): Flow<Map<String, Int>>
+    operator fun invoke(date: SimpleDate): Flow<Map<SimpleDate, Int>>
 }

@@ -1,7 +1,9 @@
 package pl.kamilszustak.read.ui.main.profile
 
 import androidx.lifecycle.*
+import kotlinx.coroutines.flow.map
 import pl.kamilszustak.read.common.date.Month
+import pl.kamilszustak.read.common.date.SimpleDate
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.domain.access.usecase.statistics.ObserveMonthlyReadingStatisticsUseCase
 import pl.kamilszustak.read.domain.access.usecase.user.ObserveUserUseCase
@@ -32,7 +34,13 @@ class ProfileViewModel @Inject constructor(
         val calendar = Calendar.getInstance()
         val yearNumber = calendar.get(Calendar.YEAR)
         val monthNumber = calendar.get(Calendar.MONTH) + 1
-        monthlyStatistics = observeMonthlyReadingStatistics(yearNumber, monthNumber)
+        val date = SimpleDate(yearNumber, monthNumber, 0)
+        monthlyStatistics = observeMonthlyReadingStatistics(date)
+            .map { map ->
+                map.mapKeys { mapEntry ->
+                    mapEntry.key.day.toString()
+                }
+            }
             .asLiveData(viewModelScope.coroutineContext)
 
         currentMonth.value = Month.ofNumber(monthNumber)

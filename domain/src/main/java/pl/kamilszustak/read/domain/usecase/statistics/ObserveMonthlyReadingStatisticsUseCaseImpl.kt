@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.map
 import pl.kamilszustak.read.common.date.SimpleDate
 import pl.kamilszustak.read.data.access.repository.LogEntryRepository
 import pl.kamilszustak.read.domain.access.usecase.statistics.ObserveMonthlyReadingStatisticsUseCase
+import pl.kamilszustak.read.model.entity.LogEntryEntity
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -14,7 +15,7 @@ class ObserveMonthlyReadingStatisticsUseCaseImpl @Inject constructor(
     private val repository: LogEntryRepository,
 ) : ObserveMonthlyReadingStatisticsUseCase {
 
-    override fun invoke(date: SimpleDate): Flow<Map<String, Int>> {
+    override fun invoke(date: SimpleDate): Flow<Map<SimpleDate, Int>> {
         val calendar = Calendar.getInstance()
         val monthLength = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
 
@@ -27,7 +28,7 @@ class ObserveMonthlyReadingStatisticsUseCaseImpl @Inject constructor(
 
                         (date.year == entryDate.year && date.month == entryDate.month)
                     }
-                    .sortedBy { it.creationDate }
+                    .sortedBy(LogEntryEntity::creationDate)
                     .groupBy { entry ->
                         calendar.time = entry.creationDate
                         calendar.get(Calendar.DAY_OF_MONTH)
@@ -46,7 +47,11 @@ class ObserveMonthlyReadingStatisticsUseCaseImpl @Inject constructor(
                         }
                     }
                     .toSortedMap()
-                    .mapKeys { it.key.toString() }
+                    .mapKeys { mapEntry ->
+                        date.copy(
+                            day = mapEntry.key
+                        )
+                    }
             }
     }
 }
