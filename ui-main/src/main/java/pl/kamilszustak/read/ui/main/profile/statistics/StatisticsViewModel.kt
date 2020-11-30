@@ -2,17 +2,24 @@ package pl.kamilszustak.read.ui.main.profile.statistics
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asLiveData
+import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import pl.kamilszustak.read.common.date.DateHelper
+import pl.kamilszustak.read.common.date.SimpleDate
+import pl.kamilszustak.read.common.date.Week
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
-import pl.kamilszustak.read.domain.access.usecase.statistics.ObserveAllWeeklyReadingStatisticsUseCase
+import pl.kamilszustak.read.domain.access.usecase.statistics.ObserveWeeklyReadingStatisticsUseCase
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
+import timber.log.Timber
 import javax.inject.Inject
 
 class StatisticsViewModel @Inject constructor(
-    private val observeAllWeeklyReadingStatistics: ObserveAllWeeklyReadingStatisticsUseCase,
+    private val observeWeeklyReadingStatistics: ObserveWeeklyReadingStatisticsUseCase,
 ) : BaseViewModel<StatisticsEvent, StatisticsAction>() {
+
+    private var currentDay: SimpleDate = SimpleDate.current()
 
     private val _weekText: MutableLiveData<String> = UniqueLiveData()
     val weekText: LiveData<String>
@@ -30,22 +37,26 @@ class StatisticsViewModel @Inject constructor(
     val currentMonthChart: LiveData<Int>
         get() = _currentMonthChart
 
-    val weeklyStatistics: LiveData<List<Map<String, Int>>>
+    val _weeklyStatistics: MutableLiveData<Map<SimpleDate, Int>> = UniqueLiveData()
+    val weeklyStatistics: LiveData<Map<String, Int>>
+        get() = _weeklyStatistics.map { statistics ->
+            statistics.mapKeys { entry ->
+                entry.key.day.toString()
+            }
+        }
 
-    private val _monthlyStatistics: MutableLiveData<List<Map<String, Int>>> = UniqueLiveData()
-    val monthlyStatistics: LiveData<List<Map<String, Int>>>
-        get() = _monthlyStatistics
+    val _monthlyStatistics: MutableLiveData<Map<SimpleDate, Int>> = UniqueLiveData()
+    val monthlyStatistics: LiveData<Map<String, Int>>
+        get() = _monthlyStatistics.map { statistics ->
+            statistics.mapKeys { entry ->
+                entry.key.day.toString()
+            }
+        }
 
     init {
-        weeklyStatistics = observeAllWeeklyReadingStatistics()
-            .map { list ->
-                list.map { map ->
-                    map.mapKeys { mapEntry ->
-                        mapEntry.key.day.toString()
-                    }
-                }
-            }
-            .asLiveData(viewModelScope.coroutineContext)
+        collectWeeklyStatistics()
+        val currentWeek = DateHelper.generateWeek(currentDay)
+        _weekText.value = getWeekText(currentWeek)
     }
 
     override fun handleEvent(event: StatisticsEvent) {
@@ -54,6 +65,21 @@ class StatisticsViewModel @Inject constructor(
             StatisticsEvent.OnNextWeekButtonClicked -> {}
             StatisticsEvent.OnPreviousMonthButtonClicked -> {}
             StatisticsEvent.OnNextMonthButtonClicked -> {}
+        }
+    }
+
+    private fun collectWeeklyStatistics() {
+        viewModelScope.launch {
+            observeWeeklyReadingStatistics(currentDay)
+                .collect { _weeklyStatistics.value = it; Timber.i(it.toString())}
+        }
+    }
+
+    private fun getWeekText(week: Week): String {
+        return buildString {
+            append(week.startDate.format())
+            append(" - ")
+            append(week.endDate.format())
         }
     }
 }

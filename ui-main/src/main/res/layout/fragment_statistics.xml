@@ -24,10 +24,11 @@
                 android:id="@+id/weekSwitcher"
                 app:text="@{viewModel.weekText}" />
 
-            <ViewFlipper
+            <com.db.williamchart.view.BarChartView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/chart_height"
-                android:id="@+id/weekChartsViewFlipper"
+                android:id="@+id/weeklyStatisticsChartView"
+                style="@style/BarChartView"
                 android:layout_marginHorizontal="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin" />
             
@@ -44,10 +45,11 @@
                 app:text="@{viewModel.monthText}"
                 android:layout_marginTop="@dimen/default_margin" />
 
-            <ViewFlipper
+            <com.db.williamchart.view.BarChartView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/chart_height"
-                android:id="@+id/monthChartsViewFlipper"
+                android:id="@+id/monthlyStatisticsChartView"
+                style="@style/BarChartView"
                 android:layout_marginHorizontal="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin" />
         </LinearLayout>

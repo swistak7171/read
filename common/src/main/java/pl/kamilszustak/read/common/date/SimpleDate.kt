@@ -1,5 +1,6 @@
 package pl.kamilszustak.read.common.date
 
+import androidx.annotation.CheckResult
 import java.util.*
 
 data class SimpleDate(
@@ -20,6 +21,13 @@ data class SimpleDate(
         }
     }
 
+    @CheckResult
+    fun addDays(days: Int): SimpleDate {
+        return toCalendar()
+            .apply { add(Calendar.DATE, days) }
+            .date
+    }
+
     fun toDate(): Date = toCalendar().time
 
     fun assignTo(calendar: Calendar) {
@@ -31,6 +39,28 @@ data class SimpleDate(
             assignTo(this)
         }
     }
+
+    fun format(): String {
+        val formattedMonth = addPadding(month)
+        val formattedDay = addPadding(day)
+
+        return buildString {
+            append(year)
+            append("-")
+            append(formattedMonth)
+            append("-")
+            append(formattedDay)
+        }
+    }
+
+    private fun addPadding(value: Int): String {
+        return if (value < 10) {
+            "0$value"
+        } else {
+            value.toString()
+        }
+    }
+
 
     companion object {
         fun fromCalendar(calendar: Calendar): SimpleDate {
@@ -62,3 +92,6 @@ var Calendar.date: SimpleDate
     set(value) {
         value.assignTo(this)
     }
+
+fun Date.toSimpleDate(): SimpleDate =
+    SimpleDate.fromDate(this)
