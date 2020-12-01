@@ -7,7 +7,6 @@ import pl.kamilszustak.read.common.date.SimpleDate
 import pl.kamilszustak.read.common.date.toSimpleDate
 import pl.kamilszustak.read.data.access.repository.LogEntryRepository
 import pl.kamilszustak.read.domain.access.usecase.statistics.ObserveWeeklyReadingStatisticsUseCase
-import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -19,7 +18,6 @@ class ObserveWeeklyReadingStatisticsUseCaseImpl @Inject constructor(
     override fun invoke(input: SimpleDate): Flow<Map<SimpleDate, Int>> {
         val week = DateHelper.generateWeek(input)
         val weekDays = week.days
-        Timber.i(weekDays.toString())
 
         return repository.observeAll()
             .map { logEntries ->

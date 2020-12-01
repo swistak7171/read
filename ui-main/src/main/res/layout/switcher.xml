@@ -2,10 +2,19 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
         <variable
             name="text"
             type="String" />
+
+        <variable
+            name="isPreviousButtonEnabled"
+            type="Boolean" />
+
+        <variable
+            name="isNextButtonEnabled"
+            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,6 +28,7 @@
             android:id="@+id/previousButton"
             android:src="@drawable/icon_arrow_left_short"
             android:background="?selectableItemBackgroundBorderless"
+            android:enabled="@{isPreviousButtonEnabled ?? true}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,6 +50,7 @@
             android:id="@+id/nextButton"
             android:src="@drawable/icon_arrow_right_short"
             android:background="?selectableItemBackgroundBorderless"
+            android:enabled="@{isNextButtonEnabled ?? true}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

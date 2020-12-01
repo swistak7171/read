@@ -11,11 +11,13 @@ import pl.kamilszustak.read.common.date.SimpleDate
 import pl.kamilszustak.read.common.date.Week
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.domain.access.usecase.statistics.ObserveMonthlyReadingStatisticsUseCase
+import pl.kamilszustak.read.domain.access.usecase.statistics.ObserveReadPagesStatisticsUseCase
 import pl.kamilszustak.read.domain.access.usecase.statistics.ObserveWeeklyReadingStatisticsUseCase
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import javax.inject.Inject
 
 class StatisticsViewModel @Inject constructor(
+    private val observeReadPagesStatistics: ObserveReadPagesStatisticsUseCase,
     private val observeWeeklyReadingStatistics: ObserveWeeklyReadingStatisticsUseCase,
     private val observeMonthlyReadingStatistics: ObserveMonthlyReadingStatisticsUseCase,
 ) : BaseViewModel<StatisticsEvent, StatisticsAction>() {
@@ -35,10 +37,22 @@ class StatisticsViewModel @Inject constructor(
     private val currentWeekDate: SimpleDate = SimpleDate.current()
     private val currentMonthDate: SimpleDate = SimpleDate.current()
 
+    val readPagesText: LiveData<String>
+        get() = _readPagesStatistics.map { statistics ->
+            if (statistics != null) {
+                buildString {
+                    append(statistics.first)
+                    append(" / ")
+                    append(statistics.second)
+                }
+            } else {
+                "0 / 0"
+            }
+        }
+
     private val _weekText: MutableLiveData<String> = UniqueLiveData()
     val weekText: LiveData<String>
         get() = _weekText
-
 
     private val _monthText: MutableLiveData<String> = UniqueLiveData()
     val monthText: LiveData<String>
@@ -52,7 +66,13 @@ class StatisticsViewModel @Inject constructor(
     val isNextMonthButtonEnabled: LiveData<Boolean>
         get() = _isNextMonthButtonEnabled
 
-    val _weeklyStatistics: MutableLiveData<Map<SimpleDate, Int>> = UniqueLiveData()
+    private val _readPagesStatistics: MutableLiveData<Pair<Int, Int>> = UniqueLiveData()
+    val readPagesStatistics: LiveData<Pair<Float, Float>>
+        get() = _readPagesStatistics.map { statistics ->
+            statistics.first.toFloat() to statistics.second.toFloat()
+        }
+
+    private val _weeklyStatistics: MutableLiveData<Map<SimpleDate, Int>> = UniqueLiveData()
     val weeklyStatistics: LiveData<Map<String, Int>>
         get() = _weeklyStatistics.map { statistics ->
             statistics.mapKeys { entry ->
@@ -60,7 +80,7 @@ class StatisticsViewModel @Inject constructor(
             }
         }
 
-    val _monthlyStatistics: MutableLiveData<Map<SimpleDate, Int>> = UniqueLiveData()
+    private val _monthlyStatistics: MutableLiveData<Map<SimpleDate, Int>> = UniqueLiveData()
     val monthlyStatistics: LiveData<Map<String, Int>>
         get() = _monthlyStatistics.map { statistics ->
             statistics.mapKeys { entry ->
@@ -69,6 +89,7 @@ class StatisticsViewModel @Inject constructor(
         }
 
     init {
+        collectReadPagesStatistics()
         changeWeek()
         changeMonth()
     }
@@ -112,6 +133,13 @@ class StatisticsViewModel @Inject constructor(
     private fun changeMonth() {
         collectMonthlyStatistics()
         _monthText.value = getMonthText()
+    }
+
+    private fun collectReadPagesStatistics() {
+        viewModelScope.launch {
+            observeReadPagesStatistics()
+                .collect { _readPagesStatistics.value = it }
+        }
     }
 
     private fun collectWeeklyStatistics() {

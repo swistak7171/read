@@ -22,6 +22,62 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/generalStatisticsTextView"
+                android:text="@string/general_statistics"
+                android:fontFamily="sans-serif-light"
+                android:textSize="@dimen/header_text_size"
+                android:layout_marginHorizontal="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin">
+
+                <com.db.williamchart.view.DonutChartView
+                    android:layout_width="@dimen/donut_chart_size"
+                    android:layout_height="@dimen/donut_chart_size"
+                    android:id="@+id/readPagesChartView"
+                    style="@style/DonutChartView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/readPagesTitleTextView"
+                    android:text="@string/read_pages"
+                    app:layout_constraintStart_toStartOf="@id/readPagesTextView"
+                    app:layout_constraintEnd_toEndOf="@id/readPagesTextView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/readPagesTextView"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintVertical_chainStyle="packed"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/readPagesTextView"
+                    android:text="@{viewModel.readPagesText}"
+                    tools:text="150 / 500"
+                    android:textSize="32dp"
+                    app:layout_constraintStart_toEndOf="@id/readPagesChartView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/readPagesTitleTextView"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginStart="@dimen/default_margin" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_width="match_parent"
+                style="@style/Divider"
+                android:layout_marginHorizontal="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/weeklyStatisticsTextView"
                 android:text="@string/weekly_statistics"
                 android:fontFamily="sans-serif-light"
@@ -33,11 +89,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/weekSwitcher"
-                app:text="@{viewModel.weekText}" />
+                app:text="@{viewModel.weekText}"
+                app:isNextButtonEnabled="@{viewModel.isNextWeekButtonEnabled}" />
 
             <com.db.williamchart.view.BarChartView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/chart_height"
+                android:layout_height="@dimen/axis_chart_height"
                 android:id="@+id/weeklyStatisticsChartView"
                 style="@style/BarChartView"
                 android:layout_marginHorizontal="@dimen/default_margin"
@@ -63,11 +120,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/monthSwitcher"
-                app:text="@{viewModel.monthText}" />
+                app:text="@{viewModel.monthText}"
+                app:isNextButtonEnabled="@{viewModel.isNextMonthButtonEnabled}" />
 
             <com.db.williamchart.view.BarChartView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/chart_height"
+                android:layout_height="@dimen/axis_chart_height"
                 android:id="@+id/monthlyStatisticsChartView"
                 style="@style/BarChartView"
                 android:layout_marginHorizontal="@dimen/default_margin"

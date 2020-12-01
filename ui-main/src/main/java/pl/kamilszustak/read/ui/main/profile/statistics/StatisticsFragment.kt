@@ -1,11 +1,15 @@
 package pl.kamilszustak.read.ui.main.profile.statistics
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.db.williamchart.view.DonutChartView
 import pl.kamilszustak.read.ui.base.OnSwipeListener
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.main.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.R
-import pl.kamilszustak.read.ui.main.chart.ChartFactory
 import pl.kamilszustak.read.ui.main.databinding.FragmentStatisticsBinding
 import pl.kamilszustak.read.ui.main.util.animate
 import javax.inject.Inject
@@ -15,7 +19,26 @@ class StatisticsFragment @Inject constructor(
 ) : MainDataBindingFragment<FragmentStatisticsBinding, StatisticsViewModel>(R.layout.fragment_statistics) {
 
     override val viewModel: StatisticsViewModel by viewModels(viewModelFactory)
-    private val chartFactory: ChartFactory = ChartFactory()
+
+    // TODO: Delete after williamchart update
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return super.onCreateView(inflater, container, savedInstanceState)
+            .also { view ->
+                view?.findViewById<DonutChartView>(R.id.readPagesChartView)
+                    ?.show(listOf())
+            }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val accentColor = requireContext().getColor(R.color.colorAccent)
+        binding.readPagesChartView.donutColors = intArrayOf(accentColor)
+    }
 
     override fun setListeners() {
         binding.weekSwitcher.previousButton.setOnClickListener {
@@ -56,16 +79,13 @@ class StatisticsFragment @Inject constructor(
     }
 
     override fun observeViewModel() {
-        viewModel.isNextWeekButtonEnabled.observe(viewLifecycleOwner) { isEnabled ->
-            if (isEnabled == null) return@observe
+        viewModel.readPagesStatistics.observe(viewLifecycleOwner) { statistics ->
+            if (statistics == null) return@observe
 
-            binding.weekSwitcher.nextButton.isEnabled = isEnabled
-        }
-
-        viewModel.isNextMonthButtonEnabled.observe(viewLifecycleOwner) { isEnabled ->
-            if (isEnabled == null) return@observe
-
-            binding.monthSwitcher.nextButton.isEnabled = isEnabled
+            with(binding.readPagesChartView) {
+                donutTotal = statistics.second
+                animate(listOf(statistics.first))
+            }
         }
 
         viewModel.weeklyStatistics.observe(viewLifecycleOwner) { statistics ->
