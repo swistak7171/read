@@ -22,11 +22,16 @@ data class SimpleDate(
     }
 
     @CheckResult
-    fun addDays(days: Int): SimpleDate {
-        return toCalendar()
-            .apply { add(Calendar.DATE, days) }
-            .date
-    }
+    fun addDays(days: Int): SimpleDate =
+        add(Calendar.DAY_OF_MONTH, days)
+
+    @CheckResult
+    fun addWeeks(weeks: Int): SimpleDate =
+        add(Calendar.WEEK_OF_YEAR, weeks)
+
+    @CheckResult
+    fun addMonth(months: Int): SimpleDate =
+        add(Calendar.MONTH, months)
 
     fun toDate(): Date = toCalendar().time
 
@@ -53,6 +58,12 @@ data class SimpleDate(
         }
     }
 
+    private fun add(field: Int, value: Int): SimpleDate {
+        return toCalendar()
+            .apply { add(field, value) }
+            .date
+    }
+
     private fun addPadding(value: Int): String {
         return if (value < 10) {
             "0$value"
@@ -60,7 +71,6 @@ data class SimpleDate(
             value.toString()
         }
     }
-
 
     companion object {
         fun fromCalendar(calendar: Calendar): SimpleDate {

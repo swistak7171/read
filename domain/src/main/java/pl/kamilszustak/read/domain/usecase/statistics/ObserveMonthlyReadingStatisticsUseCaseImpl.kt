@@ -15,8 +15,8 @@ class ObserveMonthlyReadingStatisticsUseCaseImpl @Inject constructor(
     private val repository: LogEntryRepository,
 ) : ObserveMonthlyReadingStatisticsUseCase {
 
-    override fun invoke(date: SimpleDate): Flow<Map<SimpleDate, Int>> {
-        val calendar = Calendar.getInstance()
+    override fun invoke(input: SimpleDate): Flow<Map<SimpleDate, Int>> {
+        val calendar = input.toCalendar()
         val monthLength = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
 
         return repository.observeAll()
@@ -26,7 +26,7 @@ class ObserveMonthlyReadingStatisticsUseCaseImpl @Inject constructor(
                         calendar.time = entry.creationDate
                         val entryDate = SimpleDate.fromCalendar(calendar)
 
-                        (date.year == entryDate.year && date.month == entryDate.month)
+                        (input.year == entryDate.year && input.month == entryDate.month)
                     }
                     .sortedBy(LogEntryEntity::creationDate)
                     .groupBy { entry ->
@@ -48,7 +48,7 @@ class ObserveMonthlyReadingStatisticsUseCaseImpl @Inject constructor(
                     }
                     .toSortedMap()
                     .mapKeys { mapEntry ->
-                        date.copy(
+                        input.copy(
                             day = mapEntry.key
                         )
                     }

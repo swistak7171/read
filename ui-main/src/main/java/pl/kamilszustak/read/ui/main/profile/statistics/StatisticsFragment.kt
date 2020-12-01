@@ -7,7 +7,6 @@ import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.chart.ChartFactory
 import pl.kamilszustak.read.ui.main.databinding.FragmentStatisticsBinding
 import pl.kamilszustak.read.ui.main.util.animate
-import timber.log.Timber
 import javax.inject.Inject
 
 class StatisticsFragment @Inject constructor(
@@ -36,6 +35,18 @@ class StatisticsFragment @Inject constructor(
     }
 
     override fun observeViewModel() {
+        viewModel.isNextWeekButtonEnabled.observe(viewLifecycleOwner) { isEnabled ->
+            if (isEnabled == null) return@observe
+
+            binding.weekSwitcher.nextButton.isEnabled = isEnabled
+        }
+
+        viewModel.isNextMonthButtonEnabled.observe(viewLifecycleOwner) { isEnabled ->
+            if (isEnabled == null) return@observe
+
+            binding.monthSwitcher.nextButton.isEnabled = isEnabled
+        }
+
         viewModel.weeklyStatistics.observe(viewLifecycleOwner) { statistics ->
             if (statistics == null) return@observe
 
@@ -45,7 +56,10 @@ class StatisticsFragment @Inject constructor(
         viewModel.monthlyStatistics.observe(viewLifecycleOwner) { statistics ->
             if (statistics == null) return@observe
 
-            binding.monthlyStatisticsChartView.animate(statistics)
+            with(binding.monthlyStatisticsChartView) {
+                barsColorsList = List(statistics.size) { barsColor }.toList()
+                animate(statistics)
+            }
         }
     }
 }

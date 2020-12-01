@@ -11,7 +11,6 @@ import pl.kamilszustak.read.domain.access.usecase.user.SignOutUseCase
 import pl.kamilszustak.read.model.domain.user.User
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import pl.kamilszustak.read.ui.main.R
-import java.util.*
 import javax.inject.Inject
 
 class ProfileViewModel @Inject constructor(
@@ -31,10 +30,7 @@ class ProfileViewModel @Inject constructor(
         }
 
     init {
-        val calendar = Calendar.getInstance()
-        val yearNumber = calendar.get(Calendar.YEAR)
-        val monthNumber = calendar.get(Calendar.MONTH) + 1
-        val date = SimpleDate(yearNumber, monthNumber, 0)
+        val date = SimpleDate.current()
         monthlyStatistics = observeMonthlyReadingStatistics(date)
             .map { map ->
                 map.mapKeys { mapEntry ->
@@ -43,9 +39,7 @@ class ProfileViewModel @Inject constructor(
             }
             .asLiveData(viewModelScope.coroutineContext)
 
-        currentMonth.value = Month.ofNumber(monthNumber)
-
-        Calendar.DAY_OF_WEEK
+        currentMonth.value = Month.ofNumber(date.month)
     }
 
     override fun handleEvent(event: ProfileEvent) {
