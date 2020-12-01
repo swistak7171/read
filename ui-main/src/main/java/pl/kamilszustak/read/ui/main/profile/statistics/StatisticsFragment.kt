@@ -1,6 +1,7 @@
 package pl.kamilszustak.read.ui.main.profile.statistics
 
 import androidx.lifecycle.ViewModelProvider
+import pl.kamilszustak.read.ui.base.OnSwipeListener
 import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.main.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.R
@@ -32,6 +33,26 @@ class StatisticsFragment @Inject constructor(
         binding.monthSwitcher.nextButton.setOnClickListener {
             viewModel.dispatchEvent(StatisticsEvent.OnNextMonthButtonClicked)
         }
+
+        binding.weeklyStatisticsChartView.setOnTouchListener(object : OnSwipeListener(context) {
+            override fun onSwipeLeft() {
+                viewModel.dispatchEvent(StatisticsEvent.OnWeeklyStatisticsChartSwipedLeft)
+            }
+
+            override fun onSwipeRight() {
+                viewModel.dispatchEvent(StatisticsEvent.OnWeeklyStatisticsChartSwipedRight)
+            }
+        })
+
+        binding.monthlyStatisticsChartView.setOnTouchListener(object : OnSwipeListener(context) {
+            override fun onSwipeLeft() {
+                viewModel.dispatchEvent(StatisticsEvent.OnMonthlyStatisticsChartSwipedLeft)
+            }
+
+            override fun onSwipeRight() {
+                viewModel.dispatchEvent(StatisticsEvent.OnMonthlyStatisticsChartSwipedRight)
+            }
+        })
     }
 
     override fun observeViewModel() {

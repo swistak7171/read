@@ -75,12 +75,12 @@ class StatisticsViewModel @Inject constructor(
 
     override fun handleEvent(event: StatisticsEvent) {
         when (event) {
-            StatisticsEvent.OnPreviousWeekButtonClicked -> {
+            StatisticsEvent.OnPreviousWeekButtonClicked, StatisticsEvent.OnWeeklyStatisticsChartSwipedRight -> {
                 weekDate = weekDate.addWeeks(-1)
                 changeWeek()
             }
 
-            StatisticsEvent.OnNextWeekButtonClicked -> {
+            StatisticsEvent.OnNextWeekButtonClicked, StatisticsEvent.OnWeeklyStatisticsChartSwipedLeft -> {
                 val newDate = weekDate.addWeeks(1)
                 if (newDate <= currentWeekDate) {
                     weekDate = newDate
@@ -88,12 +88,12 @@ class StatisticsViewModel @Inject constructor(
                 }
             }
 
-            StatisticsEvent.OnPreviousMonthButtonClicked -> {
+            StatisticsEvent.OnPreviousMonthButtonClicked, StatisticsEvent.OnMonthlyStatisticsChartSwipedRight -> {
                 monthDate = monthDate.addMonth(-1)
                 changeMonth()
             }
 
-            StatisticsEvent.OnNextMonthButtonClicked -> {
+            StatisticsEvent.OnNextMonthButtonClicked, StatisticsEvent.OnMonthlyStatisticsChartSwipedLeft -> {
                 val newDate = monthDate.addMonth(1)
                 if (newDate <= currentMonthDate) {
                     monthDate = newDate
