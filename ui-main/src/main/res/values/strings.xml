@@ -130,4 +130,9 @@
     <string name="daily_reading_goal_setting_error_message">An error occurred while setting the daily reading goal</string>
     <string name="daily_reading_goal_cancelled">Daily reading goal cancelled</string>
     <string name="daily_reading_goal_set">Daily reading goal set successfully</string>
+
+    <!-- StatisticsFragment -->
+    <string name="general_statistics">General</string>
+    <string name="weekly_statistics">Weekly</string>
+    <string name="monthly_statistics">Monthly</string>
 </resources>

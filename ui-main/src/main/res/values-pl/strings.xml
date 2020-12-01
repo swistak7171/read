@@ -129,4 +129,9 @@
     <string name="daily_reading_goal_setting_error_message">Wystąpił błąd podczas ustawiania dziennego celu czytania</string>
     <string name="daily_reading_goal_cancelled">Dzienny cel czytania anulowany</string>
     <string name="daily_reading_goal_set">Dzienny cel czytania ustawiony pomyślnie</string>
+
+    <!-- StatisticsFragment -->
+    <string name="general_statistics">Ogólne</string>
+    <string name="weekly_statistics">Tygodniowe</string>
+    <string name="monthly_statistics">Miesięczne</string>
 </resources>

@@ -18,6 +18,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingBottom="@dimen/default_padding">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/weeklyStatisticsTextView"
+                android:text="@string/weekly_statistics"
+                android:fontFamily="sans-serif-light"
+                android:textSize="@dimen/header_text_size"
+                android:layout_marginHorizontal="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin" />
             
             <include layout="@layout/switcher"
                 android:layout_width="match_parent"
@@ -39,12 +49,21 @@
                 android:layout_marginHorizontal="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/monthlyStatisticsTextView"
+                android:text="@string/monthly_statistics"
+                android:fontFamily="sans-serif-light"
+                android:textSize="@dimen/header_text_size"
+                android:layout_marginHorizontal="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin" />
+
             <include layout="@layout/switcher"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/monthSwitcher"
-                app:text="@{viewModel.monthText}"
-                android:layout_marginTop="@dimen/default_margin" />
+                app:text="@{viewModel.monthText}" />
 
             <com.db.williamchart.view.BarChartView
                 android:layout_width="match_parent"
