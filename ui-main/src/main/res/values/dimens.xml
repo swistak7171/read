@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="quote_color_view_size">48dp</dimen>
+    <dimen name="axis_chart_height">200dp</dimen>
+    <dimen name="donut_chart_size">100dp</dimen>
+    <dimen name="header_text_size">24sp</dimen>
 </resources>

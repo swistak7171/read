@@ -180,14 +180,17 @@ object Dependencies {
         const val COMPILER: String = "com.github.MatrixDev.Roomigrant:RoomigrantCompiler:${Versions.ROOMIGRANT}"
     }
 
-    object Wasabeef {
-        const val RECYCLER_VIEW_ANIMATORS: String = "jp.wasabeef:recyclerview-animators:${Versions.RECYCLER_VIEW_ANIMATORS}"
+    object Williamchart {
+        const val WILLIAMCHART: String = "com.diogobernardino:williamchart:${Versions.WILLIAMCHART}"
+        const val WILLIAMCHART_TOOLTIP_SLIDER: String = "com.diogobernardino.williamchart:tooltip-slider:${Versions.WILLIAMCHART}"
+        const val WILLIAMCHART_TOOLTIP_POINTS: String = "com.diogobernardino.williamchart:tooltip-points:${Versions.WILLIAMCHART}"
     }
 
     const val ANDROID_GRADLE_BUILD_TOOLS: String = "com.android.tools.build:gradle:${Versions.ANDROID_STUDIO}"
     const val KTLINT: String = "com.pinterest:ktlint:${Versions.KTLINT}"
     const val TIMBER: String = "com.jakewharton.timber:timber:${Versions.TIMBER}"
     const val LEAK_CANARY_ANDROID: String = "com.squareup.leakcanary:leakcanary-android:${Versions.LEAK_CANARY}"
+    const val RECYCLER_VIEW_ANIMATORS: String = "jp.wasabeef:recyclerview-animators:${Versions.RECYCLER_VIEW_ANIMATORS}"
     const val TOASTY: String = "com.github.GrenderG:Toasty:${Versions.TOASTY}"
     const val FACEBOOK_ANDROID_SDK: String = "com.facebook.android:facebook-android-sdk:${Versions.FACEBOOK_ANDROID_SDK}"
     const val TWITTER_ANDROID_SDK: String = "com.twitter.sdk.android:twitter-core:${Versions.TWITTER_ANDROID_SDK}"

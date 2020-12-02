@@ -4,4 +4,5 @@ import pl.kamilszustak.read.ui.base.view.ViewAction
 
 sealed class ProfileAction : ViewAction {
     object NavigateToProfileEditFragment : ProfileAction()
+    object NavigateToStatisticsFragment : ProfileAction()
 }

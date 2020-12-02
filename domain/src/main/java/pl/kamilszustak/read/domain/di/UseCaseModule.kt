@@ -16,6 +16,7 @@ import pl.kamilszustak.read.domain.access.usecase.quote.*
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBarcodeUseCase
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadBitmapUseCase
 import pl.kamilszustak.read.domain.access.usecase.scanner.ReadTextUseCase
+import pl.kamilszustak.read.domain.access.usecase.statistics.*
 import pl.kamilszustak.read.domain.access.usecase.user.EditUserUseCase
 import pl.kamilszustak.read.domain.access.usecase.user.GetUserUseCase
 import pl.kamilszustak.read.domain.access.usecase.user.ObserveUserUseCase
@@ -36,6 +37,7 @@ import pl.kamilszustak.read.domain.usecase.quote.*
 import pl.kamilszustak.read.domain.usecase.scanner.ReadBarcodeUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.scanner.ReadBitmapUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.scanner.ReadTextUseCaseImpl
+import pl.kamilszustak.read.domain.usecase.statistics.*
 import pl.kamilszustak.read.domain.usecase.user.EditUserUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.user.GetUserUseCaseImpl
 import pl.kamilszustak.read.domain.usecase.user.ObserveUserUseCaseImpl
@@ -158,4 +160,28 @@ interface UseCaseModule {
 
     @Binds
     fun bindCancelDailyReadingGoalUseCase(useCaseImpl: CancelDailyReadingGoalUseCaseImpl): CancelDailyReadingGoalUseCase
+
+    @Binds
+    fun bindObserveMonthlyReadingStatisticsUseCase(useCaseImpl: ObserveMonthlyReadingStatisticsUseCaseImpl): ObserveMonthlyReadingStatisticsUseCase
+
+    @Binds
+    fun bindGenerateMonthlyReadingStatistcsUseCase(useCaseImpl: GenerateMonthlyReadingStatistcsUseCaseImpl): GenerateMonthlyReadingStatistcsUseCase
+
+    @Binds
+    fun bindObserveWeeklyReadingStatisticsUseCase(useCaseImpl: ObserveWeeklyReadingStatisticsUseCaseImpl): ObserveWeeklyReadingStatisticsUseCase
+
+    @Binds
+    fun bindGenerateWeeklyReadingStatisticsUseCase(useCaseImpl: GenerateWeeklyReadingStatisticsUseCaseImpl): GenerateWeeklyReadingStatisticsUseCase
+
+    @Binds
+    fun bindObserveReadPagesStatisticsUseCase(useCaseImpl: ObserveReadPagesStatisticsUseCaseImpl): ObserveReadPagesStatisticsUseCase
+
+    @Binds
+    fun bindGenerateReadPagesStatisticsUseCase(useCaseImpl: GenerateReadPagesStatisticsUseCaseImpl): GenerateReadPagesStatisticsUseCase
+
+    @Binds
+    fun bindObserveReadBooksStatisticsUseCase(useCaseImpl: ObserveReadBooksStatisticsUseCaseImpl): ObserveReadBooksStatisticsUseCase
+
+    @Binds
+    fun bindGenerateReadBooksStatisticsUseCase(useCaseImpl: GenerateReadBooksStatisticsUseCaseImpl): GenerateReadBooksStatisticsUseCase
 }

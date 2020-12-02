@@ -11,6 +11,7 @@ import pl.kamilszustak.read.ui.main.collection.goal.ReadingGoalViewModel
 import pl.kamilszustak.read.ui.main.collection.log.ReadingLogViewModel
 import pl.kamilszustak.read.ui.main.profile.ProfileViewModel
 import pl.kamilszustak.read.ui.main.profile.edit.ProfileEditViewModel
+import pl.kamilszustak.read.ui.main.profile.statistics.StatisticsViewModel
 import pl.kamilszustak.read.ui.main.quotes.QuotesViewModel
 import pl.kamilszustak.read.ui.main.scanner.ScannerViewModel
 import pl.kamilszustak.read.ui.main.search.SearchViewModel
@@ -61,4 +62,9 @@ interface MainViewModelModule {
     @IntoMap
     @ViewModelKey(ReadingGoalViewModel::class)
     fun bindReadingGoalViewModel(viewModel: ReadingGoalViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(StatisticsViewModel::class)
+    fun bindStatisticsViewModel(viewModel: StatisticsViewModel): ViewModel
 }

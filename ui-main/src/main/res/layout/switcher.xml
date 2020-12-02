@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="text"
+            type="String" />
+
+        <variable
+            name="isPreviousButtonEnabled"
+            type="Boolean" />
+
+        <variable
+            name="isNextButtonEnabled"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/previousButton"
+            android:src="@drawable/icon_arrow_left_short"
+            android:background="?selectableItemBackgroundBorderless"
+            android:enabled="@{isPreviousButtonEnabled ?? true}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/weekTextView"
+            android:text="@{text}"
+            tools:text="20.01 - 27.01"
+            app:layout_constraintStart_toEndOf="@id/previousButton"
+            app:layout_constraintEnd_toStartOf="@id/nextButton"
+            app:layout_constraintTop_toTopOf="@id/previousButton"
+            app:layout_constraintBottom_toBottomOf="@id/previousButton"
+            android:layout_marginHorizontal="@dimen/default_margin" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nextButton"
+            android:src="@drawable/icon_arrow_right_short"
+            android:background="?selectableItemBackgroundBorderless"
+            android:enabled="@{isNextButtonEnabled ?? true}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

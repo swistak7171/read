@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Divider">
+        <item name="android:layout_height">2dp</item>
+        <item name="android:background">@color/divider_background</item>
+    </style>
+
+    <style name="DonutChartView">
+        <item name="chart_donutThickness">16dp</item>
+        <item name="chart_donutBackgroundColor">@color/donut_chart_view_background_color</item>
+        <item name="chart_donutRoundCorners">true</item>
+    </style>
+
+    <style name="BarChartView">
+        <item name="android:layout_height">@dimen/axis_chart_height</item>
+        <item name="chart_barsRadius">4dp</item>
+        <item name="chart_barsColor">@color/colorAccent</item>
+        <item name="chart_axis">x</item>
+        <item name="chart_labelsSize">8dp</item>
+        <item name="chart_labelsColor">@color/text</item>
+    </style>
+</resources>
