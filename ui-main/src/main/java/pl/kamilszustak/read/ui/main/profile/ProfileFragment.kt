@@ -12,6 +12,7 @@ import pl.kamilszustak.read.ui.base.util.viewModels
 import pl.kamilszustak.read.ui.main.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.R
 import pl.kamilszustak.read.ui.main.databinding.FragmentProfileBinding
+import pl.kamilszustak.read.ui.main.util.animate
 import javax.inject.Inject
 
 class ProfileFragment @Inject constructor(
@@ -27,6 +28,7 @@ class ProfileFragment @Inject constructor(
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        android.R.array.emailAddressTypes
         return when (item.itemId) {
             R.id.editProfileItem -> {
                 viewModel.dispatchEvent(ProfileEvent.OnEditButtonClicked)
@@ -50,10 +52,26 @@ class ProfileFragment @Inject constructor(
         setHasOptionsMenu(true)
     }
 
+    override fun setListeners() {
+        binding.moreStatisticsButton.setOnClickListener {
+            viewModel.dispatchEvent(ProfileEvent.OnMoreStatisticsButtonClicked)
+        }
+    }
+
     override fun observeViewModel() {
         viewModel.action.observe(viewLifecycleOwner) { action ->
             when (action) {
                 ProfileAction.NavigateToProfileEditFragment -> navigator.navigateToUserEditFragment()
+                ProfileAction.NavigateToStatisticsFragment -> navigator.navigateToStatisticsFragment()
+            }
+        }
+
+        viewModel.monthlyStatistics.observe(viewLifecycleOwner) { statistics ->
+            statistics ?: return@observe
+
+            with(binding.statisticsChartView) {
+                barsColorsList = List(statistics.size) { barsColor }.toList()
+                animate(statistics)
             }
         }
     }
@@ -70,6 +88,11 @@ class ProfileFragment @Inject constructor(
     private inner class Navigator {
         fun navigateToUserEditFragment() {
             val direction = ProfileFragmentDirections.actionProfileFragmentToProfileEditFragment()
+            navigate(direction)
+        }
+
+        fun navigateToStatisticsFragment() {
+            val direction = ProfileFragmentDirections.actionProfileFragmentToStatisticsFragment()
             navigate(direction)
         }
     }

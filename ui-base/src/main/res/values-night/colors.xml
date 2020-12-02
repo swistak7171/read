@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="text">@android:color/white</color>
     <color name="background">#000000</color>
+    <color name="divider_background">@color/md_grey_900</color>
 </resources>

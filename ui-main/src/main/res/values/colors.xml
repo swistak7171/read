@@ -2,4 +2,5 @@
 <resources>
     <color name="quote_color_selection">@android:color/black</color>
     <color name="text_selection_outside_area_color">#88000000</color>
+    <color name="donut_chart_view_background_color">@color/md_grey_700</color>
 </resources>
