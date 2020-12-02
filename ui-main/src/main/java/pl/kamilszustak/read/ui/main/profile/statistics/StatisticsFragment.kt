@@ -28,7 +28,12 @@ class StatisticsFragment @Inject constructor(
     ): View? {
         return super.onCreateView(inflater, container, savedInstanceState)
             .also { view ->
-                view?.findViewById<DonutChartView>(R.id.readPagesChartView)
+                view?.findViewById<View>(R.id.readPagesChartLayout)
+                    ?.findViewById<DonutChartView>(R.id.chartView)
+                    ?.show(listOf())
+
+                view?.findViewById<View>(R.id.readBooksChartLayout)
+                    ?.findViewById<DonutChartView>(R.id.chartView)
                     ?.show(listOf())
             }
     }
@@ -37,7 +42,8 @@ class StatisticsFragment @Inject constructor(
         super.onViewCreated(view, savedInstanceState)
 
         val accentColor = requireContext().getColor(R.color.colorAccent)
-        binding.readPagesChartView.donutColors = intArrayOf(accentColor)
+        binding.readPagesChartLayout.chartView.donutColors = intArrayOf(accentColor)
+        binding.readBooksChartLayout.chartView.donutColors = intArrayOf(accentColor)
     }
 
     override fun setListeners() {
@@ -80,22 +86,22 @@ class StatisticsFragment @Inject constructor(
 
     override fun observeViewModel() {
         viewModel.readPagesStatistics.observe(viewLifecycleOwner) { statistics ->
-            if (statistics == null) return@observe
+            statistics ?: return@observe
 
-            with(binding.readPagesChartView) {
+            with(binding.readPagesChartLayout.chartView) {
                 donutTotal = statistics.second
                 animate(listOf(statistics.first))
             }
         }
 
         viewModel.weeklyStatistics.observe(viewLifecycleOwner) { statistics ->
-            if (statistics == null) return@observe
+            statistics ?: return@observe
 
             binding.weeklyStatisticsChartView.animate(statistics)
         }
 
         viewModel.monthlyStatistics.observe(viewLifecycleOwner) { statistics ->
-            if (statistics == null) return@observe
+            statistics ?: return@observe
 
             with(binding.monthlyStatisticsChartView) {
                 barsColorsList = List(statistics.size) { barsColor }.toList()

@@ -50,6 +50,9 @@ class StatisticsViewModel @Inject constructor(
             }
         }
 
+    val readBooksText: LiveData<String>
+
+
     private val _weekText: MutableLiveData<String> = UniqueLiveData()
     val weekText: LiveData<String>
         get() = _weekText

@@ -29,45 +29,23 @@
                 android:layout_marginHorizontal="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <include layout="@layout/layout_chart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/readPagesChartLayout"
+                app:header="@{@string/read_pages}"
+                app:content="@{viewModel.readPagesText}"
                 android:layout_marginHorizontal="@dimen/default_margin"
-                android:layout_marginTop="@dimen/default_margin">
+                android:layout_marginTop="@dimen/default_margin" />
 
-                <com.db.williamchart.view.DonutChartView
-                    android:layout_width="@dimen/donut_chart_size"
-                    android:layout_height="@dimen/donut_chart_size"
-                    android:id="@+id/readPagesChartView"
-                    style="@style/DonutChartView"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/readPagesTitleTextView"
-                    android:text="@string/read_pages"
-                    app:layout_constraintStart_toStartOf="@id/readPagesTextView"
-                    app:layout_constraintEnd_toEndOf="@id/readPagesTextView"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/readPagesTextView"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintVertical_chainStyle="packed"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/readPagesTextView"
-                    android:text="@{viewModel.readPagesText}"
-                    tools:text="150 / 500"
-                    android:textSize="32dp"
-                    app:layout_constraintStart_toEndOf="@id/readPagesChartView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/readPagesTitleTextView"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginStart="@dimen/default_margin" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <include layout="@layout/layout_chart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/readBooksChartLayout"
+                app:header="@{@string/read_books}"
+                app:content="@{viewModel.readBooksText}"
+                android:layout_marginHorizontal="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin" />
 
             <View
                 android:layout_width="match_parent"

@@ -67,7 +67,7 @@ class ProfileFragment @Inject constructor(
         }
 
         viewModel.monthlyStatistics.observe(viewLifecycleOwner) { statistics ->
-            if (statistics == null) return@observe
+            statistics ?: return@observe
 
             with(binding.statisticsChartView) {
                 barsColorsList = List(statistics.size) { barsColor }.toList()

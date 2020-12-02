@@ -135,4 +135,5 @@
     <string name="general_statistics">General</string>
     <string name="weekly_statistics">Weekly</string>
     <string name="monthly_statistics">Monthly</string>
+    <string name="read_books">Read books</string>
 </resources>
