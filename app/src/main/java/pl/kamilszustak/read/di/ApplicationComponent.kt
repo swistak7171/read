@@ -14,6 +14,7 @@ import pl.kamilszustak.read.domain.di.DomainModule
 import pl.kamilszustak.read.network.di.NetworkModule
 import pl.kamilszustak.read.ui.authentication.di.AuthenticationComponent
 import pl.kamilszustak.read.ui.authentication.di.scope.AuthenticationScope
+import pl.kamilszustak.read.ui.base.di.module.ServiceModule
 import pl.kamilszustak.read.ui.main.di.MainComponent
 import pl.kamilszustak.read.ui.main.di.scope.MainScope
 import pl.kamilszustak.read.ui.splashscreen.di.SplashScreenComponent
@@ -25,6 +26,7 @@ import javax.inject.Singleton
     modules = [
         AndroidInjectionModule::class,
         ApplicationModule::class,
+        ServiceModule::class,
         FirebaseAuthenticationModule::class,
         NetworkModule::class,
         DataModule::class,

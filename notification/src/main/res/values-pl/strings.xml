@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="main_notification_channel_name">Główne</string>
+
     <string name="reading_goal_notification_channel_name">Cele czytania</string>
     <string name="daily_reading_goal_notification_title">Dzienny cel czytania</string>
     <plurals name="daily_reading_goal_notification_text">
