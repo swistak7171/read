@@ -39,6 +39,8 @@ object Versions {
     const val ROOMIGRANT: String = "0.1.7"
     const val FIREBASE_AUTH: String = "20.0.1"
     const val FIREBASE_AUTH_UI: String = "6.3.0"
+    const val FIREBASE_MESSAGING: String = "21.0.0"
+    const val FIREBASE_ANALYTICS: String = "18.0.0"
     const val GOOGLE_SERVICES: String = "4.3.4"
     const val FACEBOOK_ANDROID_SDK: String = "7.1.0"
     const val TWITTER_ANDROID_SDK: String = "3.3.0"
