@@ -32,6 +32,7 @@ class DailyReadingGoalNotificationWorker @AssistedInject constructor(
         val notification = notificationFactory.create(result)
         val notificationId = DailyReadingGoalNotificationFactory.NOTIFICATION_ID
         val manager = NotificationManagerCompat.from(applicationContext)
+
         with(manager) {
             cancel(notificationId)
             notify(notificationId, notification)

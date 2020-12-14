@@ -6,18 +6,18 @@ import pl.kamilszustak.read.notification.NotificationChannelFactory
 import pl.kamilszustak.read.notification.R
 import javax.inject.Inject
 
-class ReadingGoalNotificationChannelFactory @Inject constructor(
+class MainNotificationChannelFactory @Inject constructor(
     application: Application,
     private val resourceProvider: ResourceProvider,
 ) : NotificationChannelFactory(application) {
 
     override val name: String
-        get() = resourceProvider.getString(R.string.reading_goal_notification_channel_name)
+        get() = resourceProvider.getString(R.string.main_notification_channel_name)
 
     override val id: String
         get() = CHANNEL_ID
 
     companion object {
-        const val CHANNEL_ID: String = "reading_goal_notification_channel"
+        const val CHANNEL_ID: String = "main_notification_channel"
     }
 }
