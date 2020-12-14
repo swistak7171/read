@@ -6,6 +6,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import com.db.williamchart.pointtooltip.PointTooltip
 import pl.kamilszustak.read.ui.base.util.dialog
 import pl.kamilszustak.read.ui.base.util.navigate
 import pl.kamilszustak.read.ui.base.util.viewModels
@@ -50,6 +51,7 @@ class ProfileFragment @Inject constructor(
         super.onViewCreated(view, savedInstanceState)
 
         setHasOptionsMenu(true)
+        binding.statisticsChartView.tooltip = PointTooltip()
     }
 
     override fun setListeners() {

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.db.williamchart.pointtooltip.PointTooltip
 import com.db.williamchart.view.DonutChartView
 import pl.kamilszustak.read.ui.base.OnSwipeListener
 import pl.kamilszustak.read.ui.base.util.viewModels
@@ -41,9 +42,16 @@ class StatisticsFragment @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initializeChartViews()
+    }
+
+    private fun initializeChartViews() {
         val accentColor = requireContext().getColor(R.color.colorAccent)
         binding.readPagesChartLayout.chartView.donutColors = intArrayOf(accentColor)
         binding.readBooksChartLayout.chartView.donutColors = intArrayOf(accentColor)
+
+        binding.weeklyStatisticsChartView.tooltip = PointTooltip()
+        binding.monthlyStatisticsChartView.tooltip = PointTooltip()
     }
 
     override fun setListeners() {
@@ -104,6 +112,7 @@ class StatisticsFragment @Inject constructor(
             statistics ?: return@observe
 
             with(binding.monthlyStatisticsChartView) {
+                // TODO: Delete after williamchart update
                 barsColorsList = List(statistics.size) { barsColor }.toList()
                 animate(statistics)
             }
