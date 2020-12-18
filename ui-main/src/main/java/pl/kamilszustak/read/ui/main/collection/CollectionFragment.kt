@@ -159,6 +159,12 @@ class CollectionFragment @Inject constructor(
         }
     }
 
+    override fun setListeners() {
+        binding.holdButton.setOnFinishListener {
+            successToast("FINISHED")
+        }
+    }
+
     override fun observeViewModel() {
         viewModel.action.observe(viewLifecycleOwner) { action ->
             when (action) {
@@ -223,16 +229,15 @@ class CollectionFragment @Inject constructor(
 
         viewModel.currentBook.observe(viewLifecycleOwner) { book ->
             updateProgress(book.progressPercentage)
-            updateDescription(book.description)
         }
     }
 
     private fun updateProgress(progress: Int) {
-        val lastProgress = binding.progressBar.progress
+        val lastProgress = binding.readingProgressIndicator.progress
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            binding.progressBar.setProgress(progress, true)
+            binding.readingProgressIndicator.setProgress(progress, true)
         } else {
-            binding.progressBar.progress = progress
+            binding.readingProgressIndicator.progress = progress
         }
 
         ValueAnimator.ofInt(lastProgress, progress).apply {
@@ -242,22 +247,6 @@ class CollectionFragment @Inject constructor(
                 binding.progressPercentageTextView.text = getString(R.string.progress_percentage, value)
             }
         }.start()
-    }
-
-    private fun updateDescription(description: String?) {
-        with(binding.descriptionTextView) {
-            animate()
-                .alpha(0.0F)
-                .setDuration(ITEM_TRANSITION_TIME_MILLIS.toLong())
-                .withEndAction {
-                    text = description
-                    animate()
-                        .alpha(1.0F)
-                        .setDuration(ITEM_TRANSITION_TIME_MILLIS.toLong())
-                        .start()
-                }
-                .start()
-        }
     }
 
     private inner class Navigator {

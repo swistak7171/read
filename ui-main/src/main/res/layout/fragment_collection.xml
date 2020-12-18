@@ -13,7 +13,7 @@
             android:id="@+id/booksRecyclerView"
             tools:listitem="@layout/item_book"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/descriptionTextView" />
+            app:layout_constraintBottom_toTopOf="@id/holdButton" />
 
         <include layout="@layout/empty_list_indicator"
             android:layout_width="match_parent"
@@ -34,23 +34,23 @@
             android:id="@+id/collectionGroup"
             android:visibility="gone"
             tools:visibility="visible"
-            app:constraint_referenced_ids="booksRecyclerView,descriptionTextView,progressBar,progressPercentageTextView" />
+            app:constraint_referenced_ids="booksRecyclerView,holdButton,readingProgressIndicator,progressPercentageTextView" />
 
-        <TextView
-            android:layout_width="match_parent"
+        <pl.kamilszustak.read.ui.base.view.custom.HoldButton
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/descriptionTextView"
-            android:ellipsize="end"
-            android:lines="5"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-            android:gravity="bottom"
-            android:padding="@dimen/default_padding"
-            app:layout_constraintBottom_toTopOf="@id/progressBar" />
+            android:id="@+id/holdButton"
+            app:delay="2000"
+            app:text="+15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/readingProgressIndicator"
+            android:layout_marginBottom="@dimen/default_margin" />
 
         <com.google.android.material.progressindicator.ProgressIndicator
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/progressBar"
+            android:id="@+id/readingProgressIndicator"
             tools:progress="50"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/progressPercentageTextView"
@@ -63,8 +63,8 @@
             android:id="@+id/progressPercentageTextView"
             tools:text="50%"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/progressBar"
-            app:layout_constraintBottom_toBottomOf="@id/progressBar"
+            app:layout_constraintTop_toTopOf="@id/readingProgressIndicator"
+            app:layout_constraintBottom_toBottomOf="@id/readingProgressIndicator"
             android:layout_marginEnd="@dimen/default_margin" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -15,4 +15,8 @@
     <dimen name="default_double_elevation">8dp</dimen>
     <dimen name="default_elevation">4dp</dimen>
     <dimen name="default_half_elevation">2dp</dimen>
+
+    <dimen name="hold_button_text_size">16dp</dimen>
+    <dimen name="hold_button_progress_size">92dp</dimen>
+    <dimen name="hold_button_circular_radius">36dp</dimen>
 </resources>
