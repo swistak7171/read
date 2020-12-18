@@ -34,7 +34,7 @@ class BookEditFragment @Inject constructor(
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.saveBookItem -> {
-                viewModel.dispatchEvent(BookEditEvent.OnSaveBookButtonClicked)
+                viewModel.dispatch(BookEditEvent.OnSaveBookButtonClicked)
                 true
             }
 
@@ -52,11 +52,11 @@ class BookEditFragment @Inject constructor(
 
     override fun setListeners() {
         binding.publicationDateInputLayout.setEndIconOnClickListener {
-            viewModel.dispatchEvent(BookEditEvent.OnDateClearButtonClicked)
+            viewModel.dispatch(BookEditEvent.OnDateClearButtonClicked)
         }
 
         binding.publicationDateEditText.setOnClickListener {
-            viewModel.dispatchEvent(BookEditEvent.OnDateEditTextClicked)
+            viewModel.dispatch(BookEditEvent.OnDateEditTextClicked)
         }
     }
 
@@ -87,7 +87,7 @@ class BookEditFragment @Inject constructor(
             if (timestamp != null) {
                 val date = Date(timestamp)
                 val event = BookEditEvent.OnPublicationDateSelected(date)
-                viewModel.dispatchEvent(event)
+                viewModel.dispatch(event)
             }
         }
 

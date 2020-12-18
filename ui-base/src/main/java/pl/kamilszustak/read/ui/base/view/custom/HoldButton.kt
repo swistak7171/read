@@ -91,6 +91,10 @@ class HoldButton @JvmOverloads constructor(
         binding.progressIndicator.progress = 0
     }
 
+    fun setText(text: String) {
+        binding.textView.text = text
+    }
+
     fun setOnFinishListener(listener: OnFinishListener) {
         onFinishListener = listener
     }

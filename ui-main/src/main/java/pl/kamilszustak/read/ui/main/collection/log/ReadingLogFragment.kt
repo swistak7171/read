@@ -30,7 +30,7 @@ class ReadingLogFragment @Inject constructor(
         val fastAdapter = FastAdapter.with(modelAdapter).apply {
             onClickListener = { view, adapter, item, position ->
                 val event = ReadingLogEvent.OnLogEntryClicked(item.model.id)
-                viewModel.dispatchEvent(event)
+                viewModel.dispatch(event)
                 true
             }
         }

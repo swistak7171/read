@@ -16,7 +16,7 @@ class EmailSignInFragment @Inject constructor(
 
     override fun setListeners() {
         binding.signInButton.setOnClickListener {
-            viewModel.dispatchEvent(EmailSignInEvent.OnSignInButtonClicked)
+            viewModel.dispatch(EmailSignInEvent.OnSignInButtonClicked)
         }
     }
 

@@ -35,7 +35,7 @@ class QuoteEditFragment @Inject constructor(
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.saveQuoteItem -> {
-                viewModel.dispatchEvent(QuoteEditEvent.OnSaveQuoteButtonClicked)
+                viewModel.dispatch(QuoteEditEvent.OnSaveQuoteButtonClicked)
                 true
             }
 
@@ -66,7 +66,7 @@ class QuoteEditFragment @Inject constructor(
         binding.colorLayout.children.forEachIndexed { index, view ->
             (view as? ImageView)?.setOnClickListener {
                 val event = QuoteEditEvent.OnColorSelected(index)
-                viewModel.dispatchEvent(event)
+                viewModel.dispatch(event)
             }
         }
     }

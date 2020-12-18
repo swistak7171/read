@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.domain.access.usecase.book.DeleteBookUseCase
+import pl.kamilszustak.read.domain.access.usecase.book.EditBookUseCase
 import pl.kamilszustak.read.domain.access.usecase.book.ObserveAllBooksUseCase
 import pl.kamilszustak.read.model.domain.Book
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
@@ -19,6 +20,7 @@ import javax.inject.Inject
 class CollectionViewModel @Inject constructor(
     private val observeAllBooks: ObserveAllBooksUseCase,
     private val deleteBook: DeleteBookUseCase,
+    private val editBook: EditBookUseCase,
 ) : BaseViewModel<CollectionEvent, CollectionAction>() {
 
     val books: LiveData<List<Book>> = observeAllBooks()
@@ -35,6 +37,10 @@ class CollectionViewModel @Inject constructor(
 
     private val _currentBook: MutableLiveData<Book> = UniqueLiveData()
     val currentBook: LiveData<Book> = _currentBook
+
+    val firstFastUpdateValue: Int = 5
+    val secondFastUpdateValue: Int = 15
+    val thirdFastUpdateValue: Int = 30
 
     override fun handleEvent(event: CollectionEvent) {
         when (event) {
@@ -59,6 +65,18 @@ class CollectionViewModel @Inject constructor(
 
             CollectionEvent.OnReadingGoalButtonClicked -> {
                 _action.value = CollectionAction.NavigateToReadingGoalFragment
+            }
+
+            CollectionEvent.OnFirstFastUpdateButtonClicked -> {
+                handleFastUpdateButtonClick(firstFastUpdateValue)
+            }
+
+            CollectionEvent.OnSecondFastUpdateButtonClicked -> {
+                handleFastUpdateButtonClick(secondFastUpdateValue)
+            }
+
+            CollectionEvent.OnThirdFastupdateButtonClicked -> {
+                handleFastUpdateButtonClick(thirdFastUpdateValue)
             }
 
             is CollectionEvent.OnDialogOptionSelected -> {
@@ -92,6 +110,22 @@ class CollectionViewModel @Inject constructor(
             deleteBook(event.bookId)
                 .onSuccess { _action.value = CollectionAction.BookDeleted }
                 .onFailure { _action.value = CollectionAction.Error(R.string.deleting_book_error_message) }
+        }
+    }
+
+    private fun handleFastUpdateButtonClick(value: Int) {
+        val id = currentBook.value?.id ?: return
+        viewModelScope.launch(Dispatchers.Main) {
+            val result = editBook(id) { book ->
+                book.copy(
+                    readPages = book.readPages + value
+                )
+            }
+
+            with(result) {
+                onSuccess { _action.value = CollectionAction.ReadingProgressUpdated }
+                onFailure { _action.value = CollectionAction.Error(R.string.reading_progress_edit_error_message) }
+            }
         }
     }
 }

@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="pl.kamilszustak.read.ui.main.collection.CollectionViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -13,7 +19,7 @@
             android:id="@+id/booksRecyclerView"
             tools:listitem="@layout/item_book"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/holdButton" />
+            app:layout_constraintBottom_toTopOf="@id/firstFastUpdateButton" />
 
         <include layout="@layout/empty_list_indicator"
             android:layout_width="match_parent"
@@ -34,18 +40,41 @@
             android:id="@+id/collectionGroup"
             android:visibility="gone"
             tools:visibility="visible"
-            app:constraint_referenced_ids="booksRecyclerView,holdButton,readingProgressIndicator,progressPercentageTextView" />
+            app:constraint_referenced_ids="booksRecyclerView,firstFastUpdateButton,readingProgressIndicator,progressPercentageTextView" />
 
         <pl.kamilszustak.read.ui.base.view.custom.HoldButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/holdButton"
-            app:delay="2000"
-            app:text="+15"
+            android:id="@+id/firstFastUpdateButton"
+            app:delay="@integer/fast_reading_update_hold_button_delay"
+            app:text="@{`+` + viewModel.firstFastUpdateValue}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/secondFastUpdateButton"
             app:layout_constraintBottom_toTopOf="@id/readingProgressIndicator"
-            android:layout_marginBottom="@dimen/default_margin" />
+            android:layout_marginBottom="@dimen/default_margin"
+            app:layout_constraintHorizontal_chainStyle="spread" />
+        
+        <pl.kamilszustak.read.ui.base.view.custom.HoldButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/secondFastUpdateButton"
+            app:delay="@integer/fast_reading_update_hold_button_delay"
+            app:text="@{`+` + viewModel.secondFastUpdateValue}"
+            app:layout_constraintStart_toEndOf="@id/firstFastUpdateButton"
+            app:layout_constraintEnd_toStartOf="@id/thirdFastUpdateButton"
+            app:layout_constraintTop_toTopOf="@id/firstFastUpdateButton"
+            app:layout_constraintBottom_toBottomOf="@id/firstFastUpdateButton" />
+
+        <pl.kamilszustak.read.ui.base.view.custom.HoldButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/thirdFastUpdateButton"
+            app:delay="@integer/fast_reading_update_hold_button_delay"
+            app:text="@{`+` + viewModel.thirdFastUpdateValue}"
+            app:layout_constraintStart_toEndOf="@id/secondFastUpdateButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/secondFastUpdateButton"
+            app:layout_constraintBottom_toBottomOf="@id/secondFastUpdateButton" />
 
         <com.google.android.material.progressindicator.ProgressIndicator
             android:layout_width="0dp"

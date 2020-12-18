@@ -7,6 +7,9 @@ sealed class CollectionEvent : ViewEvent {
     object OnAddBookButtonClicked : CollectionEvent()
     object OnReadingLogButtonClicked : CollectionEvent()
     object OnReadingGoalButtonClicked : CollectionEvent()
+    object OnFirstFastUpdateButtonClicked : CollectionEvent()
+    object OnSecondFastUpdateButtonClicked : CollectionEvent()
+    object OnThirdFastupdateButtonClicked : CollectionEvent()
 
     data class OnScrolled(
         val position: Int,

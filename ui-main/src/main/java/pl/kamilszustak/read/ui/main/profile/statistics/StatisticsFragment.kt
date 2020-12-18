@@ -48,38 +48,38 @@ class StatisticsFragment @Inject constructor(
 
     override fun setListeners() {
         binding.weekSwitcher.previousButton.setOnClickListener {
-            viewModel.dispatchEvent(StatisticsEvent.OnPreviousWeekButtonClicked)
+            viewModel.dispatch(StatisticsEvent.OnPreviousWeekButtonClicked)
         }
 
         binding.weekSwitcher.nextButton.setOnClickListener {
-            viewModel.dispatchEvent(StatisticsEvent.OnNextWeekButtonClicked)
+            viewModel.dispatch(StatisticsEvent.OnNextWeekButtonClicked)
         }
 
         binding.monthSwitcher.previousButton.setOnClickListener {
-            viewModel.dispatchEvent(StatisticsEvent.OnPreviousMonthButtonClicked)
+            viewModel.dispatch(StatisticsEvent.OnPreviousMonthButtonClicked)
         }
 
         binding.monthSwitcher.nextButton.setOnClickListener {
-            viewModel.dispatchEvent(StatisticsEvent.OnNextMonthButtonClicked)
+            viewModel.dispatch(StatisticsEvent.OnNextMonthButtonClicked)
         }
 
         binding.weeklyStatisticsChartView.setOnTouchListener(object : OnSwipeListener(context) {
             override fun onSwipeLeft() {
-                viewModel.dispatchEvent(StatisticsEvent.OnWeeklyStatisticsChartSwipedLeft)
+                viewModel.dispatch(StatisticsEvent.OnWeeklyStatisticsChartSwipedLeft)
             }
 
             override fun onSwipeRight() {
-                viewModel.dispatchEvent(StatisticsEvent.OnWeeklyStatisticsChartSwipedRight)
+                viewModel.dispatch(StatisticsEvent.OnWeeklyStatisticsChartSwipedRight)
             }
         })
 
         binding.monthlyStatisticsChartView.setOnTouchListener(object : OnSwipeListener(context) {
             override fun onSwipeLeft() {
-                viewModel.dispatchEvent(StatisticsEvent.OnMonthlyStatisticsChartSwipedLeft)
+                viewModel.dispatch(StatisticsEvent.OnMonthlyStatisticsChartSwipedLeft)
             }
 
             override fun onSwipeRight() {
-                viewModel.dispatchEvent(StatisticsEvent.OnMonthlyStatisticsChartSwipedRight)
+                viewModel.dispatch(StatisticsEvent.OnMonthlyStatisticsChartSwipedRight)
             }
         })
     }

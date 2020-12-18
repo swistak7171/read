@@ -30,12 +30,12 @@ class BookDetailsFragment @Inject constructor(
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.updateReadingProgressItem -> {
-                viewModel.dispatchEvent(BookDetailsEvent.OnUpdateReadingProgressButtonClicked)
+                viewModel.dispatch(BookDetailsEvent.OnUpdateReadingProgressButtonClicked)
                 true
             }
 
             R.id.editBookItem -> {
-                viewModel.dispatchEvent(BookDetailsEvent.OnEditBookButtonClicked)
+                viewModel.dispatch(BookDetailsEvent.OnEditBookButtonClicked)
                 true
             }
 
@@ -44,7 +44,7 @@ class BookDetailsFragment @Inject constructor(
                     title(R.string.delete_book_dialog_title)
                     message(R.string.delete_book_dialog_message)
                     positiveButton(R.string.yes) {
-                        viewModel.dispatchEvent(BookDetailsEvent.OnDeleteBookButtonClicked)
+                        viewModel.dispatch(BookDetailsEvent.OnDeleteBookButtonClicked)
                     }
                     negativeButton(R.string.no) { dialog ->
                         dialog.dismiss()
@@ -67,7 +67,7 @@ class BookDetailsFragment @Inject constructor(
 
     override fun setListeners() {
         binding.progressBar.setOnClickListener {
-            viewModel.dispatchEvent(BookDetailsEvent.OnProgressBarClicked)
+            viewModel.dispatch(BookDetailsEvent.OnProgressBarClicked)
         }
     }
 

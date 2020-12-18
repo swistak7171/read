@@ -27,6 +27,7 @@ sealed class CollectionAction : ViewAction {
     ) : CollectionAction()
 
     object BookDeleted : CollectionAction()
+    object ReadingProgressUpdated : CollectionAction()
     object NavigateToSearchFragment : CollectionAction()
     object NavigateToScannerFragment : CollectionAction()
     object NavigateToReadingLogFragment : CollectionAction()

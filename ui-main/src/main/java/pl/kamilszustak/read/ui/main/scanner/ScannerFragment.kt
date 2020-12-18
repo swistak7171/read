@@ -34,7 +34,7 @@ class ScannerFragment @Inject constructor(
 
     override fun onResume() {
         super.onResume()
-        viewModel.dispatchEvent(ScannerEvent.OnResumed)
+        viewModel.dispatch(ScannerEvent.OnResumed)
     }
 
     override fun setListeners() {
@@ -42,7 +42,7 @@ class ScannerFragment @Inject constructor(
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if (tab != null) {
                     val event = ScannerEvent.OnTabSelected(tab.position)
-                    viewModel.dispatchEvent(event)
+                    viewModel.dispatch(event)
                 }
             }
 
@@ -56,21 +56,21 @@ class ScannerFragment @Inject constructor(
         binding.previewView.setOnTouchListener(object : OnSwipeListener(context) {
             override fun onSwipeLeft() {
                 val event = ScannerEvent.OnSwiped(ScannerSwipeDirection.LEFT)
-                viewModel.dispatchEvent(event)
+                viewModel.dispatch(event)
             }
 
             override fun onSwipeRight() {
                 val event = ScannerEvent.OnSwiped(ScannerSwipeDirection.RIGHT)
-                viewModel.dispatchEvent(event)
+                viewModel.dispatch(event)
             }
         })
 
         binding.scanButton.setOnClickListener {
-            viewModel.dispatchEvent(ScannerEvent.OnScanButtonClicked)
+            viewModel.dispatch(ScannerEvent.OnScanButtonClicked)
         }
 
         binding.torchButton.setOnClickListener {
-            viewModel.dispatchEvent(ScannerEvent.OnTorchButtonClicked)
+            viewModel.dispatch(ScannerEvent.OnTorchButtonClicked)
         }
     }
 
@@ -137,7 +137,7 @@ class ScannerFragment @Inject constructor(
         lifecycleScope.launchWhenResumed {
             askForPermissions(Permission.CAMERA) { result ->
                 val event = ScannerEvent.OnCameraPermissionResult(result)
-                viewModel.dispatchEvent(event)
+                viewModel.dispatch(event)
             }
         }
     }
@@ -148,7 +148,7 @@ class ScannerFragment @Inject constructor(
             cameraController.takePicture(executor, object : ImageCapture.OnImageCapturedCallback() {
                 override fun onCaptureSuccess(image: ImageProxy) {
                     val event = ScannerEvent.OnImageCaptured(image)
-                    viewModel.dispatchEvent(event)
+                    viewModel.dispatch(event)
                 }
 
                 override fun onError(exception: ImageCaptureException) {
@@ -163,7 +163,7 @@ class ScannerFragment @Inject constructor(
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     val uri = action.file.toUri()
                     val event = ScannerEvent.OnImageSaved(uri)
-                    viewModel.dispatchEvent(event)
+                    viewModel.dispatch(event)
                 }
 
                 override fun onError(exception: ImageCaptureException) {
