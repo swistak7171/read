@@ -1,9 +1,11 @@
 package pl.kamilszustak.read.ui.main.scanner
 
 import android.net.Uri
+import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.ImageProxy
+import androidx.camera.view.LifecycleCameraController
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -28,6 +30,7 @@ class ScannerFragment @Inject constructor(
 
     override val viewModel: ScannerViewModel by viewModels(viewModelFactory)
     private val navigator: Navigator = Navigator()
+    private lateinit var cameraController: LifecycleCameraController
 
     override fun onResume() {
         super.onResume()
@@ -50,7 +53,7 @@ class ScannerFragment @Inject constructor(
             }
         })
 
-        binding.cameraView.setOnTouchListener(object : OnSwipeListener(context) {
+        binding.previewView.setOnTouchListener(object : OnSwipeListener(context) {
             override fun onSwipeLeft() {
                 val event = ScannerEvent.OnSwiped(ScannerSwipeDirection.LEFT)
                 viewModel.dispatchEvent(event)
@@ -77,14 +80,14 @@ class ScannerFragment @Inject constructor(
                 is ScannerAction.CameraPermissionAction -> {
                     when (action) {
                         ScannerAction.CameraPermissionAction.Unknown -> checkCameraPermission()
-                        ScannerAction.CameraPermissionAction.Granted -> initializeCameraView()
+                        ScannerAction.CameraPermissionAction.Granted -> initializeCamera()
                         ScannerAction.CameraPermissionAction.Denied -> errorToast(R.string.camera_permission_denied)
                         ScannerAction.CameraPermissionAction.PermanentlyDenied -> errorToast(R.string.camera_permission_permanently_denied)
                     }
                 }
 
                 is ScannerAction.ChangeTorchState -> {
-                    binding.cameraView.enableTorch(action.isEnabled)
+                    cameraController.enableTorch(action.isEnabled)
                 }
 
                 is ScannerAction.TakePicture -> {
@@ -119,6 +122,17 @@ class ScannerFragment @Inject constructor(
         }
     }
 
+    private fun initializeCamera() {
+        cameraController = LifecycleCameraController(requireContext()).apply {
+            bindToLifecycle(viewLifecycleOwner)
+            cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+            isPinchToZoomEnabled = true
+            isTapToFocusEnabled = true
+        }
+
+        binding.previewView.controller = cameraController
+    }
+
     private fun checkCameraPermission() {
         lifecycleScope.launchWhenResumed {
             askForPermissions(Permission.CAMERA) { result ->
@@ -128,14 +142,10 @@ class ScannerFragment @Inject constructor(
         }
     }
 
-    private fun initializeCameraView() {
-        binding.cameraView.bindToLifecycle(viewLifecycleOwner)
-    }
-
     private fun takePicture(action: ScannerAction.TakePicture) {
         val executor = Executors.newSingleThreadExecutor()
         if (action.file == null) {
-            binding.cameraView.takePicture(executor, object : ImageCapture.OnImageCapturedCallback() {
+            cameraController.takePicture(executor, object : ImageCapture.OnImageCapturedCallback() {
                 override fun onCaptureSuccess(image: ImageProxy) {
                     val event = ScannerEvent.OnImageCaptured(image)
                     viewModel.dispatchEvent(event)
@@ -161,7 +171,7 @@ class ScannerFragment @Inject constructor(
                 }
             }
 
-            binding.cameraView.takePicture(options, executor, callback)
+            cameraController.takePicture(options, executor, callback)
         }
     }
 

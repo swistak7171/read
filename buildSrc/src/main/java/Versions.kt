@@ -4,7 +4,7 @@ object Versions {
 //    const val KOTLIN: String = "1.4.30-M2-104"
     const val ANDROID_STUDIO: String = "4.1.1"
     const val KOTLINX_COROUTINES: String = "1.4.2"
-    const val MATERIAL_COMPONENTS: String = "1.3.0-beta01"
+    const val MATERIAL_COMPONENTS: String = "1.3.0-alpha03"
     const val APP_COMPAT: String = "1.2.0"
     const val CONSTRAINT_LAYOUT: String = "2.0.4"
     const val CORE: String = "1.5.0-alpha05"
