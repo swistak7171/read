@@ -13,7 +13,7 @@
         android:padding="@dimen/default_padding">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/countryCodeInputLayout"
             android:hint="@string/country_code"
@@ -21,7 +21,8 @@
             app:startIconTint="@null"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/phoneNumberInputLayout"
-            app:layout_constraintBottom_toBottomOf="@id/phoneNumberInputLayout">
+            app:layout_constraintBottom_toBottomOf="@id/phoneNumberInputLayout"
+            app:layout_constraintWidth_percent="0.3">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
