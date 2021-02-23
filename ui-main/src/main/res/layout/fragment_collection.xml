@@ -76,7 +76,7 @@
             app:layout_constraintTop_toTopOf="@id/secondFastUpdateButton"
             app:layout_constraintBottom_toBottomOf="@id/secondFastUpdateButton" />
 
-        <com.google.android.material.progressindicator.ProgressIndicator
+        <com.google.android.material.progressindicator.LinearProgressIndicator
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/readingProgressIndicator"

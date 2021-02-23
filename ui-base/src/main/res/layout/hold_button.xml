@@ -28,12 +28,11 @@
         app:layout_constraintTop_toTopOf="@id/button"
         app:layout_constraintBottom_toBottomOf="@id/button" />
 
-    <com.google.android.material.progressindicator.ProgressIndicator
-        android:layout_width="@dimen/hold_button_progress_size"
-        android:layout_height="@dimen/hold_button_progress_size"
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/progressIndicator"
-        app:circularRadius="@dimen/hold_button_circular_radius"
-        style="@style/Widget.MaterialComponents.ProgressIndicator.Circular.Determinate"
+        app:indicatorSize="@dimen/hold_button_progress_size"
         app:layout_constraintStart_toStartOf="@id/button"
         app:layout_constraintEnd_toEndOf="@id/button"
         app:layout_constraintTop_toTopOf="@id/button"

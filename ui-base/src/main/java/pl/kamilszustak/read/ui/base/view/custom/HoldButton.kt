@@ -6,9 +6,9 @@ import android.os.CountDownTimer
 import android.util.AttributeSet
 import android.view.MotionEvent
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.res.use
 import pl.kamilszustak.read.ui.base.R
 import pl.kamilszustak.read.ui.base.databinding.HoldButtonBinding
-import timber.log.Timber
 
 class HoldButton @JvmOverloads constructor(
     context: Context,
@@ -35,14 +35,12 @@ class HoldButton @JvmOverloads constructor(
     }
 
     private fun initializeView(attributeSet: AttributeSet?) {
-        val attributes = context.theme.obtainStyledAttributes(
+        context.theme.obtainStyledAttributes(
             attributeSet,
             R.styleable.HoldButton,
             0,
             0
-        )
-
-        try {
+        ).use { attributes ->
             delay = attributes.getInteger(R.styleable.HoldButton_delay, 0)
             binding.progressIndicator.max = delay
             createTimer()
@@ -51,8 +49,6 @@ class HoldButton @JvmOverloads constructor(
 
             val textColor = attributes.getColor(R.styleable.HoldButton_textColor, Color.BLACK)
             binding.textView.setTextColor(textColor)
-        } finally {
-            attributes.recycle()
         }
     }
 
@@ -60,7 +56,7 @@ class HoldButton @JvmOverloads constructor(
         timer = object : CountDownTimer(delay.toLong(), 1) {
             override fun onTick(millisUntilFinished: Long) {
                 val progress = (delay - millisUntilFinished).toInt()
-                binding.progressIndicator.progress = progress
+                binding.progressIndicator.setProgressCompat(progress, false)
             }
 
             override fun onFinish() {
@@ -71,7 +67,6 @@ class HoldButton @JvmOverloads constructor(
 
     private fun setListeners() {
         binding.button.setOnTouchListener { v, event ->
-            Timber.i("BUTTON ACTION: ${event.action}")
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> startCounting()
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL, MotionEvent.ACTION_OUTSIDE -> cancelCounting()
@@ -88,7 +83,7 @@ class HoldButton @JvmOverloads constructor(
 
     private fun cancelCounting() {
         timer.cancel()
-        binding.progressIndicator.progress = 0
+        binding.progressIndicator.setProgressCompat(0, true)
     }
 
     fun setText(text: String) {
