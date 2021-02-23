@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.core.view.isVisible
-import androidx.core.view.postDelayed
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.mikepenz.fastadapter.FastAdapter
@@ -34,11 +33,11 @@ class SearchFragment @Inject constructor(
 
     override fun onResume() {
         super.onResume()
-        viewModel.dispatchEvent(SearchEvent.OnResumed)
+        viewModel.dispatch(SearchEvent.OnResumed)
     }
 
     override fun onPause() {
-        viewModel.dispatchEvent(SearchEvent.OnPaused)
+        viewModel.dispatch(SearchEvent.OnPaused)
         super.onPause()
     }
 
@@ -66,7 +65,7 @@ class SearchFragment @Inject constructor(
                     item: VolumeItem
                 ) {
                     val event = SearchEvent.OnAddToCollectionButtonClicked(item.model)
-                    viewModel.dispatchEvent(event)
+                    viewModel.dispatch(event)
                 }
             })
         }
@@ -78,11 +77,11 @@ class SearchFragment @Inject constructor(
 
     override fun setListeners() {
         binding.scanButton.setOnClickListener {
-            viewModel.dispatchEvent(SearchEvent.OnScanButtonClicked)
+            viewModel.dispatch(SearchEvent.OnScanButtonClicked)
         }
 
         binding.searchButton.setOnClickListener {
-            viewModel.dispatchEvent(SearchEvent.OnSearchButtonClicked)
+            viewModel.dispatch(SearchEvent.OnSearchButtonClicked)
         }
     }
 
@@ -99,7 +98,7 @@ class SearchFragment @Inject constructor(
 
                 SearchAction.NavigateToScannerFragment -> {
                     val event = MainEvent.OnFragmentSelectionChanged(MainFragmentType.SCANNER_FRAGMENT)
-                    mainViewModel.dispatchEvent(event)
+                    mainViewModel.dispatch(event)
                 }
 
                 is SearchAction.NavigateToBookEditFragment -> {
@@ -122,7 +121,7 @@ class SearchFragment @Inject constructor(
     private fun initializeEditText() {
         binding.searchEditText.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                viewModel.dispatchEvent(SearchEvent.OnSearchButtonClicked)
+                viewModel.dispatch(SearchEvent.OnSearchButtonClicked)
                 true
             } else {
                 false

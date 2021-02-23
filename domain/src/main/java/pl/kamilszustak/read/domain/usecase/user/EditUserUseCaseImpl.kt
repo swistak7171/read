@@ -1,7 +1,7 @@
 package pl.kamilszustak.read.domain.usecase.user
 
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.userProfileChangeRequest
+import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.coroutines.tasks.await
 import pl.kamilszustak.read.common.util.withIOContext
 import pl.kamilszustak.read.domain.access.usecase.user.EditUserUseCase
@@ -15,9 +15,9 @@ class EditUserUseCaseImpl @Inject constructor(
 ) : EditUserUseCase {
 
     override suspend fun invoke(input: ProfileDetails): Result<Unit> {
-        val request = userProfileChangeRequest {
-            this.displayName = input.name
-        }
+        val request = UserProfileChangeRequest.Builder()
+            .setDisplayName(input.name)
+            .build()
 
         return withIOContext {
             val exception = IllegalStateException("User is not signed in")

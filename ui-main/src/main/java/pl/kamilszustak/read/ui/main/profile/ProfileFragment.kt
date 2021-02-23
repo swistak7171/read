@@ -31,7 +31,7 @@ class ProfileFragment @Inject constructor(
         android.R.array.emailAddressTypes
         return when (item.itemId) {
             R.id.editProfileItem -> {
-                viewModel.dispatchEvent(ProfileEvent.OnEditButtonClicked)
+                viewModel.dispatch(ProfileEvent.OnEditButtonClicked)
                 true
             }
 
@@ -54,7 +54,7 @@ class ProfileFragment @Inject constructor(
 
     override fun setListeners() {
         binding.moreStatisticsButton.setOnClickListener {
-            viewModel.dispatchEvent(ProfileEvent.OnMoreStatisticsButtonClicked)
+            viewModel.dispatch(ProfileEvent.OnMoreStatisticsButtonClicked)
         }
     }
 
@@ -80,7 +80,7 @@ class ProfileFragment @Inject constructor(
         dialog {
             title(R.string.sign_out_and_exit)
             message(R.string.sign_out_and_exit_dialog_message)
-            positiveButton(R.string.yes) { viewModel.dispatchEvent(ProfileEvent.OnSignOutButtonClicked) }
+            positiveButton(R.string.yes) { viewModel.dispatch(ProfileEvent.OnSignOutButtonClicked) }
             negativeButton(R.string.no) { it.dismiss() }
         }
     }

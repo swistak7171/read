@@ -35,7 +35,7 @@ class TextSelectionFragment @Inject constructor(
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.textRecognitionItem -> {
-                viewModel.dispatchEvent(TextSelectionEvent.OnTextRecognitionButtonClicked)
+                viewModel.dispatch(TextSelectionEvent.OnTextRecognitionButtonClicked)
                 true
             }
 
@@ -66,7 +66,7 @@ class TextSelectionFragment @Inject constructor(
         binding.imageView.setOnTouchListener { v, event ->
             val size = Size(binding.imageView.width, binding.imageView.height)
             val event = TextSelectionEvent.OnImageViewTouch(event, size)
-            viewModel.dispatchEvent(event)
+            viewModel.dispatch(event)
             true
         }
     }
@@ -98,7 +98,7 @@ class TextSelectionFragment @Inject constructor(
                 waitForPositiveButton = false,
                 selection = { dialog, index, text ->
                     val event = TextSelectionEvent.OnTextSelectionModeSelected(index)
-                    viewModel.dispatchEvent(event)
+                    viewModel.dispatch(event)
                 }
             )
         }

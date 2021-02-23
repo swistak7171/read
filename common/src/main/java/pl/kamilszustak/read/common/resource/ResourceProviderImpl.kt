@@ -33,12 +33,6 @@ class ResourceProviderImpl @Inject constructor(
     override fun getDrawable(resourceId: Int, theme: Resources.Theme): Drawable =
         resources.getDrawable(resourceId, theme)
 
-    override fun getFloat(@DimenRes resourceId: Int): Float =
-        resources.getFloat(resourceId)
-
-    override fun getFont(@FontRes resourceId: Int): Typeface =
-        resources.getFont(resourceId)
-
     override fun getId(name: String, defaultType: String?, defaultPackage: String?): Int =
         resources.getIdentifier(name, defaultType, defaultPackage)
 

@@ -18,9 +18,9 @@
     <string name="description">Description</string>
     <string name="select_a_publication_date">Select a publication date</string>
 
-    <string name="blank_book_title">Blank title</string>
-    <string name="blank_book_author">Blank author</string>
-    <string name="blank_book_number_of_pages">Blank number of pages</string>
+    <string name="blank_book_title">Title not entered</string>
+    <string name="blank_book_author">Author not entered</string>
+    <string name="blank_book_number_of_pages">Number of pages not entered</string>
     <string name="read_pages_over_number_of_pages">Number of read pages cannot be higher than number of all pages</string>
     <string name="adding_book_error_message">An error occurred while adding the book</string>
     <string name="book_added_successfully">Book added successfully</string>
@@ -33,8 +33,8 @@
     <string name="edit_quote">Edit quote</string>
     <string name="content">Content</string>
     <string name="book_title">Book title</string>
-    <string name="blank_quote_content">Blank content</string>
-    <string name="blank_quote_author">Blank author</string>
+    <string name="blank_quote_content">Content not entered</string>
+    <string name="blank_quote_author">Author not entered</string>
     <string name="quote_color_not_selected">Color not selected</string>
     <string name="adding_quote_error_message">An error occurred while adding the quote</string>
     <string name="quote_added_successfully">Quote added successfully</string>

@@ -39,7 +39,7 @@ class QuotesFragment @Inject constructor(
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.addQuoteItem -> {
-                viewModel.dispatchEvent(QuotesEvent.OnAddQuoteButtonClicked)
+                viewModel.dispatch(QuotesEvent.OnAddQuoteButtonClicked)
                 true
             }
 
@@ -119,7 +119,7 @@ class QuotesFragment @Inject constructor(
                 when (menuItem.itemId) {
                     R.id.editQuoteItem -> {
                         val event = QuotesEvent.OnEditQuoteButtonClicked(quote.id)
-                        viewModel.dispatchEvent(event)
+                        viewModel.dispatch(event)
                         true
                     }
 
@@ -129,7 +129,7 @@ class QuotesFragment @Inject constructor(
                             message(R.string.delete_quote_dialog_message)
                             positiveButton(R.string.yes) {
                                 val event = QuotesEvent.OnDeleteQuoteButtonClicked(quote.id)
-                                viewModel.dispatchEvent(event)
+                                viewModel.dispatch(event)
                             }
                             negativeButton(R.string.no) { dialog ->
                                 dialog.dismiss()
