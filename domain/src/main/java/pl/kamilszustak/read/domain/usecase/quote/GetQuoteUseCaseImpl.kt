@@ -1,7 +1,6 @@
 package pl.kamilszustak.read.domain.usecase.quote
 
 import pl.kamilszustak.model.common.id.QuoteId
-import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.data.access.repository.QuoteRepository
 import pl.kamilszustak.read.domain.access.usecase.quote.GetQuoteUseCase
 import pl.kamilszustak.read.model.domain.Quote
@@ -17,5 +16,5 @@ class GetQuoteUseCaseImpl @Inject constructor(
 
     override suspend fun invoke(input: QuoteId): Quote? =
         repository.getById(input.value)
-            .useOrNull { mapper.map(it, Unit) }
+            ?.let { mapper.map(it, Unit) }
 }

@@ -8,7 +8,6 @@ import androidx.core.view.children
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import org.jetbrains.anko.padding
-import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.navigateUp
 import pl.kamilszustak.read.ui.base.util.successToast
@@ -73,7 +72,7 @@ class QuoteEditFragment @Inject constructor(
 
     override fun observeViewModel() {
         viewModel.actionBarTitle.observe(viewLifecycleOwner) { titleResourceId ->
-            titleResourceId.useOrNull { resourceId ->
+            titleResourceId?.let { resourceId ->
                 (activity as? AppCompatActivity)?.supportActionBar?.title = getString(resourceId)
             }
         }

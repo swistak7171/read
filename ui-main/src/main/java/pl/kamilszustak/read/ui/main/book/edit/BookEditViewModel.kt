@@ -9,7 +9,6 @@ import kotlinx.coroutines.launch
 import pl.kamilszustak.model.common.id.BookId
 import pl.kamilszustak.read.common.date.DateFormats
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
-import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.domain.access.usecase.book.AddBookUseCase
 import pl.kamilszustak.read.domain.access.usecase.book.EditBookUseCase
 import pl.kamilszustak.read.domain.access.usecase.book.GetBookUseCase
@@ -44,7 +43,7 @@ class BookEditViewModel(
     private val _bookPublicationDate: MutableLiveData<Date?> = UniqueLiveData()
     val bookPublicationDate: LiveData<String?>
         get() = _bookPublicationDate.map { date ->
-            date.useOrNull { DateFormats.dateFormat.format(it)  }
+            date?.let { DateFormats.dateFormat.format(it)  }
         }
 
     init {

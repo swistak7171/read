@@ -1,6 +1,5 @@
 package pl.kamilszustak.read.domain.usecase.goal
 
-import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.data.access.repository.ReadingGoalRepository
 import pl.kamilszustak.read.domain.access.usecase.goal.GetLatestDailyReadingGoalUseCase
 import pl.kamilszustak.read.model.domain.ReadingGoal
@@ -18,6 +17,6 @@ class GetLatestDailyReadingGoalUseCaseImpl @Inject constructor(
     override suspend fun invoke(): ReadingGoal? {
         val goal = repository.getLatest(ReadingGoalType.DAILY)
 
-        return goal.useOrNull { mapper.map(it, Unit) }
+        return goal?.let { mapper.map(it, Unit) }
     }
 }
