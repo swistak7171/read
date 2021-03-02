@@ -1,7 +1,7 @@
 package pl.kamilszustak.read.domain.usecase.scanner
 
 import androidx.camera.core.ImageProxy
-import com.google.android.gms.vision.barcode.Barcode
+import com.google.mlkit.vision.barcode.Barcode
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
@@ -14,7 +14,7 @@ import javax.inject.Inject
 class ReadBarcodeUseCaseImpl @Inject constructor() : ReadBarcodeUseCase {
     private val scanner: BarcodeScanner by lazy {
         val options = BarcodeScannerOptions.Builder()
-            .setBarcodeFormats(Barcode.ISBN, Barcode.EAN_13)
+            .setBarcodeFormats(Barcode.TYPE_ISBN, Barcode.FORMAT_EAN_13)
             .build()
 
         BarcodeScanning.getClient(options)

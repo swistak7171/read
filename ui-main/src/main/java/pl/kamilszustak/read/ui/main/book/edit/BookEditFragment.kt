@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.datepicker.MaterialDatePicker
-import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.ui.base.util.errorToast
 import pl.kamilszustak.read.ui.base.util.navigateUp
 import pl.kamilszustak.read.ui.base.util.successToast
@@ -34,7 +33,7 @@ class BookEditFragment @Inject constructor(
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.saveBookItem -> {
-                viewModel.dispatchEvent(BookEditEvent.OnSaveBookButtonClicked)
+                viewModel.dispatch(BookEditEvent.OnSaveBookButtonClicked)
                 true
             }
 
@@ -52,17 +51,17 @@ class BookEditFragment @Inject constructor(
 
     override fun setListeners() {
         binding.publicationDateInputLayout.setEndIconOnClickListener {
-            viewModel.dispatchEvent(BookEditEvent.OnDateClearButtonClicked)
+            viewModel.dispatch(BookEditEvent.OnDateClearButtonClicked)
         }
 
         binding.publicationDateEditText.setOnClickListener {
-            viewModel.dispatchEvent(BookEditEvent.OnDateEditTextClicked)
+            viewModel.dispatch(BookEditEvent.OnDateEditTextClicked)
         }
     }
 
     override fun observeViewModel() {
         viewModel.actionBarTitle.observe(viewLifecycleOwner) { titleResourceId ->
-            titleResourceId.useOrNull { resourceId ->
+            titleResourceId?.let { resourceId ->
                 (activity as? AppCompatActivity)?.supportActionBar?.title = getString(resourceId)
             }
         }
@@ -87,7 +86,7 @@ class BookEditFragment @Inject constructor(
             if (timestamp != null) {
                 val date = Date(timestamp)
                 val event = BookEditEvent.OnPublicationDateSelected(date)
-                viewModel.dispatchEvent(event)
+                viewModel.dispatch(event)
             }
         }
 

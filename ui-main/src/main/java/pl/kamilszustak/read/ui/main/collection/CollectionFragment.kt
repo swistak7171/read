@@ -49,17 +49,17 @@ class CollectionFragment @Inject constructor(
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.addBookItem -> {
-                viewModel.dispatchEvent(CollectionEvent.OnAddBookButtonClicked)
+                viewModel.dispatch(CollectionEvent.OnAddBookButtonClicked)
                 true
             }
 
             R.id.readingLogItem -> {
-                viewModel.dispatchEvent(CollectionEvent.OnReadingLogButtonClicked)
+                viewModel.dispatch(CollectionEvent.OnReadingLogButtonClicked)
                 true
             }
 
             R.id.readingGoalItem -> {
-                viewModel.dispatchEvent(CollectionEvent.OnReadingGoalButtonClicked)
+                viewModel.dispatch(CollectionEvent.OnReadingGoalButtonClicked)
                 true
             }
 
@@ -83,7 +83,7 @@ class CollectionFragment @Inject constructor(
                     binding.booksRecyclerView.smoothScrollToPosition(position)
                 } else {
                     val event = CollectionEvent.OnBookClicked(item.model.id)
-                    viewModel.dispatchEvent(event)
+                    viewModel.dispatch(event)
                 }
 
                 true
@@ -103,13 +103,13 @@ class CollectionFragment @Inject constructor(
                             when (menuItem.itemId) {
                                 R.id.updateReadingProgressItem -> {
                                     val event = CollectionEvent.OnUpdateReadingProgressButtonClicked(item.model.id)
-                                    viewModel.dispatchEvent(event)
+                                    viewModel.dispatch(event)
                                     true
                                 }
 
                                 R.id.editBookItem -> {
                                     val event = CollectionEvent.OnEditBookButtonClicked(item.model.id)
-                                    viewModel.dispatchEvent(event)
+                                    viewModel.dispatch(event)
                                     true
                                 }
 
@@ -119,7 +119,7 @@ class CollectionFragment @Inject constructor(
                                         message(R.string.delete_book_dialog_message)
                                         positiveButton(R.string.yes) {
                                             val event = CollectionEvent.OnDeleteBookButtonClicked(item.model.id)
-                                            viewModel.dispatchEvent(event)
+                                            viewModel.dispatch(event)
                                         }
                                         negativeButton(R.string.no) { dialog ->
                                             dialog.dismiss()
@@ -152,10 +152,24 @@ class CollectionFragment @Inject constructor(
             setItemTransitionTimeMillis(ITEM_TRANSITION_TIME_MILLIS)
             addScrollListener { scrollPosition, currentPosition, newPosition, currentHolder, newCurrent ->
                 val event = CollectionEvent.OnScrolled(newPosition)
-                viewModel.dispatchEvent(event)
+                viewModel.dispatch(event)
             }
             itemAnimator = FadeInAnimator()
             adapter = fastAdapter
+        }
+    }
+
+    override fun setListeners() {
+        binding.firstFastUpdateButton.setOnFinishListener {
+            viewModel.dispatch(CollectionEvent.OnFirstFastUpdateButtonClicked)
+        }
+
+        binding.secondFastUpdateButton.setOnFinishListener {
+            viewModel.dispatch(CollectionEvent.OnSecondFastUpdateButtonClicked)
+        }
+
+        binding.thirdFastUpdateButton.setOnFinishListener {
+            viewModel.dispatch(CollectionEvent.OnThirdFastupdateButtonClicked)
         }
     }
 
@@ -169,7 +183,7 @@ class CollectionFragment @Inject constructor(
                             waitForPositiveButton = false,
                             selection = { dialog, index, text ->
                                 val event = CollectionEvent.OnDialogOptionSelected(index)
-                                viewModel.dispatchEvent(event)
+                                viewModel.dispatch(event)
                             }
                         )
                     }
@@ -197,16 +211,20 @@ class CollectionFragment @Inject constructor(
 
                 CollectionAction.NavigateToSearchFragment -> {
                     val event = MainEvent.OnFragmentSelectionChanged(MainFragmentType.SEARCH_FRAGMENT)
-                    mainViewModel.dispatchEvent(event)
+                    mainViewModel.dispatch(event)
                 }
 
                 CollectionAction.NavigateToScannerFragment -> {
                     val event = MainEvent.OnFragmentSelectionChanged(MainFragmentType.SCANNER_FRAGMENT)
-                    mainViewModel.dispatchEvent(event)
+                    mainViewModel.dispatch(event)
                 }
 
                 CollectionAction.BookDeleted -> {
                     successToast(R.string.book_deleted)
+                }
+
+                CollectionAction.ReadingProgressUpdated -> {
+                    successToast(R.string.reading_progress_updated)
                 }
 
                 is CollectionAction.Error -> {
@@ -223,16 +241,15 @@ class CollectionFragment @Inject constructor(
 
         viewModel.currentBook.observe(viewLifecycleOwner) { book ->
             updateProgress(book.progressPercentage)
-            updateDescription(book.description)
         }
     }
 
     private fun updateProgress(progress: Int) {
-        val lastProgress = binding.progressBar.progress
+        val lastProgress = binding.readingProgressIndicator.progress
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            binding.progressBar.setProgress(progress, true)
+            binding.readingProgressIndicator.setProgress(progress, true)
         } else {
-            binding.progressBar.progress = progress
+            binding.readingProgressIndicator.progress = progress
         }
 
         ValueAnimator.ofInt(lastProgress, progress).apply {
@@ -242,22 +259,6 @@ class CollectionFragment @Inject constructor(
                 binding.progressPercentageTextView.text = getString(R.string.progress_percentage, value)
             }
         }.start()
-    }
-
-    private fun updateDescription(description: String?) {
-        with(binding.descriptionTextView) {
-            animate()
-                .alpha(0.0F)
-                .setDuration(ITEM_TRANSITION_TIME_MILLIS.toLong())
-                .withEndAction {
-                    text = description
-                    animate()
-                        .alpha(1.0F)
-                        .setDuration(ITEM_TRANSITION_TIME_MILLIS.toLong())
-                        .start()
-                }
-                .start()
-        }
     }
 
     private inner class Navigator {

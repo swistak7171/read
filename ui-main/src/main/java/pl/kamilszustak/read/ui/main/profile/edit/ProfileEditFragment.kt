@@ -29,7 +29,7 @@ class ProfileEditFragment @Inject constructor(
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.saveItem -> {
-                viewModel.dispatchEvent(ProfileEditEvent.OnSaveButtonClicked)
+                viewModel.dispatch(ProfileEditEvent.OnSaveButtonClicked)
                 true
             }
 

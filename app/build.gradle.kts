@@ -117,6 +117,12 @@ dependencies {
     // Firebase Database
     implementation(Dependencies.Google.Firebase.Database.DATABASE_KTX)
 
+    // Firebase Messaging
+    implementation(Dependencies.Google.Firebase.Messaging.MESSAGING_KTX)
+
+    // Firebase Analytics
+    implementation(Dependencies.Google.Firebase.Analytics.ANALYTICS_KTX)
+
     // Retrofit
     implementation(Dependencies.Retrofit.RETROFIT)
     implementation(Dependencies.Retrofit.RETROFIT_CONVERTER_MOSHI)

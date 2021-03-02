@@ -14,8 +14,6 @@ interface ResourceProvider {
     fun getDimension(@DimenRes resourceId: Int): Float
     fun getDrawable(@DrawableRes resourceId: Int): Drawable
     fun getDrawable(@DrawableRes resourceId: Int, theme: Resources.Theme): Drawable
-    fun getFloat(@DimenRes resourceId: Int): Float
-    fun getFont(@FontRes resourceId: Int): Typeface
     fun getId(name: String, defaultType: String? = null, defaultPackage: String? = null): Int
     fun getIntArray(@ArrayRes resourceId: Int): IntArray
     fun getInt(@IntegerRes resourceId: Int): Int

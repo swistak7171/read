@@ -42,14 +42,10 @@ class EmailSignInViewModel @Inject constructor(
         }
 
         viewModelScope.launch(Dispatchers.IO) {
-            var result = tryOrNull {
+            val  result = tryOrNull {
                 firebaseAuth.createUserWithEmailAndPassword(email, password).await()
-            }
-
-            if (result == null) {
-                result = tryOrNull {
-                    firebaseAuth.signInWithEmailAndPassword(email, password).await()
-                }
+            } ?: tryOrNull {
+                firebaseAuth.signInWithEmailAndPassword(email, password).await()
             }
 
             if (result?.user != null) {

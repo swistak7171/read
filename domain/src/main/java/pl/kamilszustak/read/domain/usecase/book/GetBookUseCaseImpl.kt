@@ -1,7 +1,6 @@
 package pl.kamilszustak.read.domain.usecase.book
 
 import pl.kamilszustak.model.common.id.BookId
-import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.data.access.repository.BookRepository
 import pl.kamilszustak.read.domain.access.usecase.book.GetBookUseCase
 import pl.kamilszustak.read.model.domain.Book
@@ -17,5 +16,5 @@ class GetBookUseCaseImpl @Inject constructor(
 
     override suspend fun invoke(input: BookId): Book? =
         repository.getById(input.value)
-            .useOrNull { mapper.map(it, Unit) }
+            ?.let { mapper.map(it, Unit) }
 }

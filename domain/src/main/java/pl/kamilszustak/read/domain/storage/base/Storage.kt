@@ -3,8 +3,7 @@ package pl.kamilszustak.read.domain.storage.base
 import android.app.Application
 import androidx.annotation.StringRes
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.preferencesKey
+import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.createDataStore
 import pl.kamilszustak.read.domain.access.storage.base.DataStoreValue
 
@@ -21,7 +20,16 @@ abstract class Storage(
 
     protected inline fun <reified T : Any> getValue(@StringRes nameResourceId: Int): DataStoreValue<T> {
         val name = application.getString(nameResourceId)
-        val key = preferencesKey<T>(name)
+        val key = when (T::class) {
+            Int::class -> intPreferencesKey(name)
+            Double::class -> doublePreferencesKey(name)
+            String::class -> stringPreferencesKey(name)
+            Boolean::class -> booleanPreferencesKey(name)
+            Float::class -> floatPreferencesKey(name)
+            Long::class -> longPreferencesKey(name)
+            Set::class -> stringSetPreferencesKey(name)
+            else -> throw IllegalArgumentException("Invalid Preferences.Key type: ${T::class.qualifiedName}")
+        } as Preferences.Key<T>
 
         return DataStoreValueImpl(dataStore, key)
     }

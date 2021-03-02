@@ -18,9 +18,9 @@
     <string name="description">Opis</string>
     <string name="select_a_publication_date">Wybierz datę publikacji</string>
 
-    <string name="blank_book_title">Brak tytułu</string>
-    <string name="blank_book_author">Brak autora</string>
-    <string name="blank_book_number_of_pages">Brak ilości stron</string>
+    <string name="blank_book_title">Nie wpisano tytułu</string>
+    <string name="blank_book_author">Nie wpisano autora</string>
+    <string name="blank_book_number_of_pages">Nie wpisano liczby stron</string>
     <string name="read_pages_over_number_of_pages">Liczba przeczytanych stron nie może być wyższa niż liczba wszystkich stron</string>
     <string name="adding_book_error_message">Wystąpił błąd podczas dodawania książki</string>
     <string name="book_added_successfully">Książka została dodana pomyślnie</string>
@@ -33,9 +33,9 @@
     <string name="edit_quote">Edytuj cytat</string>
     <string name="content">Treść</string>
     <string name="book_title">Tytuł książki</string>
-    <string name="blank_quote_content">Pusta treść</string>
-    <string name="blank_quote_author">Brak autora</string>
-    <string name="quote_color_not_selected">Kolor nie został wybrany</string>
+    <string name="blank_quote_content">Nie wpisano treści</string>
+    <string name="blank_quote_author">Nie wpisano autora</string>
+    <string name="quote_color_not_selected">Nie wybrano koloru</string>
     <string name="adding_quote_error_message">Wystąpił błąd podczas dodawania cytatu</string>
     <string name="quote_added_successfully">Cytat został dodany pomyślnie</string>
     <string name="editing_quote_error_message">Wystąpił błąd podczas edytowania cytatu</string>

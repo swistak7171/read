@@ -22,17 +22,17 @@ class PhoneSignInFragment @Inject constructor(
 
     override fun setListeners() {
         binding.countryCodeEditText.setOnClickListener {
-            viewModel.dispatchEvent(PhoneSignInEvent.OnCountryEditTextClicked)
+            viewModel.dispatch(PhoneSignInEvent.OnCountryEditTextClicked)
         }
 
         binding.verificationCodeButton.setOnClickListener {
-            viewModel.dispatchEvent(PhoneSignInEvent.OnVerificationCodeButtonClicked)
+            viewModel.dispatch(PhoneSignInEvent.OnVerificationCodeButtonClicked)
         }
 
         binding.signInButton.setOnClickListener {
             val reference = requireActivity().asWeakReference()
             val event = PhoneSignInEvent.OnSignInButtonClicked(reference)
-            viewModel.dispatchEvent(event)
+            viewModel.dispatch(event)
         }
     }
 
@@ -50,7 +50,7 @@ class PhoneSignInFragment @Inject constructor(
                             waitForPositiveButton = false,
                             selection = { dialog, index, text ->
                                 val event = PhoneSignInEvent.OnCountrySelected(index)
-                                viewModel.dispatchEvent(event)
+                                viewModel.dispatch(event)
                             }
                         )
                     }
@@ -73,7 +73,7 @@ class PhoneSignInFragment @Inject constructor(
                             maxLength = 6
                         ) { dialog, text ->
                             val event = PhoneSignInEvent.OnVerificationCodeEntered(text.toString())
-                            viewModel.dispatchEvent(event)
+                            viewModel.dispatch(event)
                         }
                     }
                 }

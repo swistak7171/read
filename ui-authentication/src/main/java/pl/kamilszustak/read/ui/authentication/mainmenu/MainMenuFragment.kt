@@ -28,7 +28,7 @@ class MainMenuFragment @Inject constructor(
         super.onActivityResult(requestCode, resultCode, data)
 
         val event = MainMenuEvent.OnActivityFacebookResult(requestCode, resultCode, data)
-        viewModel.dispatchEvent(event)
+        viewModel.dispatch(event)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,29 +39,29 @@ class MainMenuFragment @Inject constructor(
 
     override fun setListeners() {
         binding.emailAddressSignInButton.setOnClickListener {
-            viewModel.dispatchEvent(MainMenuEvent.OnEmailSignInButtonClicked)
+            viewModel.dispatch(MainMenuEvent.OnEmailSignInButtonClicked)
         }
 
         binding.phoneNumberSignInButton.setOnClickListener {
-            viewModel.dispatchEvent(MainMenuEvent.OnPhoneSignInButtonClicked)
+            viewModel.dispatch(MainMenuEvent.OnPhoneSignInButtonClicked)
         }
 
         binding.googleSignInButton.setOnClickListener {
             val webClientId = getString(R.string.google_web_client_id)
             val reference = requireActivity().asWeakReference()
             val event = MainMenuEvent.OnGoogleSignInButtonClicked(reference, webClientId)
-            viewModel.dispatchEvent(event)
+            viewModel.dispatch(event)
         }
 
         binding.facebookSignInButton.setOnClickListener {
             val event = MainMenuEvent.OnFacebookSignInButtonClicked(this.asWeakReference())
-            viewModel.dispatchEvent(event)
+            viewModel.dispatch(event)
         }
 
         binding.twitterSignInButton.setOnClickListener {
             val reference = requireActivity().asWeakReference()
             val event = MainMenuEvent.OnTwitterSignInButtonClicked(reference)
-            viewModel.dispatchEvent(event)
+            viewModel.dispatch(event)
         }
     }
 
@@ -94,7 +94,7 @@ class MainMenuFragment @Inject constructor(
         googleActivityLauncher = registerForActivityResult(contract) { result ->
             val intent = result.data ?: return@registerForActivityResult
             val event = MainMenuEvent.OnActivityGoogleResult(intent)
-            viewModel.dispatchEvent(event)
+            viewModel.dispatch(event)
         }
     }
 

@@ -33,7 +33,7 @@ class ReadingGoalFragment @Inject constructor(
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.saveItem -> {
-                viewModel.dispatchEvent(ReadingGoalEvent.OnSaveButtonClicked)
+                viewModel.dispatch(ReadingGoalEvent.OnSaveButtonClicked)
                 true
             }
 
@@ -51,11 +51,11 @@ class ReadingGoalFragment @Inject constructor(
 
     override fun setListeners() {
         binding.timeInputLayout.setEndIconOnClickListener {
-            viewModel.dispatchEvent(ReadingGoalEvent.OnTimeClearButtonClicked)
+            viewModel.dispatch(ReadingGoalEvent.OnTimeClearButtonClicked)
         }
 
         binding.timeEditText.setOnClickListener {
-            viewModel.dispatchEvent(ReadingGoalEvent.OnTimeEditTextClicked)
+            viewModel.dispatch(ReadingGoalEvent.OnTimeEditTextClicked)
         }
     }
 
@@ -82,7 +82,7 @@ class ReadingGoalFragment @Inject constructor(
                 addOnPositiveButtonClickListener {
                     val time = Time(hour, minute)
                     val event = ReadingGoalEvent.OnTimeSelected(time)
-                    viewModel.dispatchEvent(event)
+                    viewModel.dispatch(event)
                 }
             }
 

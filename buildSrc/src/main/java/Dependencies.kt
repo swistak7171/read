@@ -31,6 +31,14 @@ object Dependencies {
             object Database {
                 const val DATABASE_KTX: String = "com.google.firebase:firebase-database-ktx:${Versions.FIREBASE_DATABASE}"
             }
+
+            object Messaging {
+                const val MESSAGING_KTX: String = "com.google.firebase:firebase-messaging-ktx:${Versions.FIREBASE_MESSAGING}"
+            }
+
+            object Analytics {
+                const val ANALYTICS_KTX: String = "com.google.firebase:firebase-analytics-ktx:${Versions.FIREBASE_ANALYTICS}"
+            }
         }
 
         object Gms {

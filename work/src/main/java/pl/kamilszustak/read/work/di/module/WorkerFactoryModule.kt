@@ -17,5 +17,5 @@ interface WorkerFactoryModule {
     @Binds
     @IntoMap
     @WorkerKey(DailyReadingGoalNotificationWorker::class)
-    fun bindReadingGoalNotificationWorkerFactory(factory: DailyReadingGoalNotificationWorker.Factory): ListenableWorkerFactory
+    fun bindDailyReadingGoalNotificationWorkerFactory(factory: DailyReadingGoalNotificationWorker.Factory): ListenableWorkerFactory
 }

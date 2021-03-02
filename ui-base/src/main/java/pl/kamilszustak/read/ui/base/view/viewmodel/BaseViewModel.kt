@@ -20,7 +20,7 @@ abstract class BaseViewModel<E : ViewEvent, A : ViewAction> : ViewModel() {
     protected open fun handleEvent(event: E) {
     }
 
-    fun dispatchEvent(event: E) {
+    fun dispatch(event: E) {
         handleEvent(event)
     }
 }

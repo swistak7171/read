@@ -20,15 +20,15 @@ class ReadingProgressDialogFragment @Inject constructor(
     override fun setListeners() {
         binding.finishCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
             val event = ReadingProgressEvent.OnFinishCheckBoxCheckedChanged(isChecked)
-            viewModel.dispatchEvent(event)
+            viewModel.dispatch(event)
         }
 
         binding.saveButton.setOnClickListener {
-            viewModel.dispatchEvent(ReadingProgressEvent.OnSaveButtonClicked)
+            viewModel.dispatch(ReadingProgressEvent.OnSaveButtonClicked)
         }
 
         binding.cancelButton.setOnClickListener {
-            viewModel.dispatchEvent(ReadingProgressEvent.OnCancelButtonClicked)
+            viewModel.dispatch(ReadingProgressEvent.OnCancelButtonClicked)
         }
     }
 

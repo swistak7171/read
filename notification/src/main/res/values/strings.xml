@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="main_notification_channel_name">Main</string>
+
     <string name="reading_goal_notification_channel_name">Reading goals</string>
     <string name="daily_reading_goal_notification_title">Daily reading goal</string>
     <plurals name="daily_reading_goal_notification_text">

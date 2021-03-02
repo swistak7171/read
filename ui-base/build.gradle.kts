@@ -40,6 +40,7 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     implementation(project(Modules.COMMON))
+    implementation(project(Modules.NOTIFICATION))
 
     // Dagger
     implementation(Dependencies.Google.Dagger.DAGGER_ANDROID)
@@ -87,6 +88,9 @@ dependencies {
 
     // RecyclerView
     api(Dependencies.AndroidX.RecyclerView.RECYCLER_VIEW)
+
+    // Firebase Messaging
+    implementation(Dependencies.Google.Firebase.Messaging.MESSAGING_KTX)
 
     // Material Dialogs
     api(Dependencies.MaterialDialogs.MATERIAL_DIALOGS_CORE)
