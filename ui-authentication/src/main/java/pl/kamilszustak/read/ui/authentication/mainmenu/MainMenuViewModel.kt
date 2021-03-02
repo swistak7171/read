@@ -17,7 +17,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import pl.kamilszustak.read.common.util.getOnce
-import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.ui.authentication.R
 import pl.kamilszustak.read.ui.base.view.viewmodel.BaseViewModel
 import timber.log.Timber
@@ -42,8 +41,8 @@ class MainMenuViewModel @Inject constructor(
 
             is MainMenuEvent.OnGoogleSignInButtonClicked -> {
                 val intent = handleGoogleAuthentication(event)
-                intent.useOrNull {
-                    _action.value = MainMenuAction.GoogleAuthentication(it)
+                if (null != intent) {
+                    _action.value = MainMenuAction.GoogleAuthentication(intent)
                 }
             }
 

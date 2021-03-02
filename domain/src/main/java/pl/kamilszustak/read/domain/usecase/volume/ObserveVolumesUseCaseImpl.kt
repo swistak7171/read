@@ -3,7 +3,6 @@ package pl.kamilszustak.read.domain.usecase.volume
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import pl.kamilszustak.model.common.VolumeSearchParameterType
-import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.data.access.repository.VolumeRepository
 import pl.kamilszustak.read.domain.access.usecase.volume.ObserveVolumesUseCase
 import pl.kamilszustak.read.model.domain.Volume
@@ -20,8 +19,6 @@ class ObserveVolumesUseCaseImpl @Inject constructor(
     override fun invoke(input: Map<VolumeSearchParameterType, String>): Flow<List<Volume>?> =
         repository.observeAll(input)
             .map { volumes ->
-                volumes.useOrNull {
-                    mapper.mapAll(it, Unit)
-                }
+                volumes?.let { mapper.mapAll(it, Unit) }
             }
 }

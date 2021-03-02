@@ -4,7 +4,6 @@ import pl.kamilszustak.model.common.id.VolumeId
 import pl.kamilszustak.model.network.VolumeDto
 import pl.kamilszustak.read.common.date.DateFormats
 import pl.kamilszustak.read.common.util.tryOrNull
-import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.model.domain.Book
 import pl.kamilszustak.read.model.domain.Volume
 import pl.kamilszustak.read.model.mapper.Mapper
@@ -20,7 +19,7 @@ class VolumeDtoMapper @Inject constructor(
         val subtitle = model.details.subtitle.takeIf { !it.isNullOrBlank() }
         val description = model.details.description.takeIf { !it.isNullOrBlank() }
         val publisher = model.details.publisher.takeIf { !it.isNullOrBlank() }
-        val publicationDate = model.details.publicationDate.useOrNull { date ->
+        val publicationDate = model.details.publicationDate?.let { date ->
             val dashesNumber = date.count { it == '-' }
             val dateFormat = when (dashesNumber) {
                 0 -> DateFormats.yearFormat

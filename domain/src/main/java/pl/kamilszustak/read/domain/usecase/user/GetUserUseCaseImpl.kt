@@ -1,7 +1,6 @@
 package pl.kamilszustak.read.domain.usecase.user
 
 import com.google.firebase.auth.FirebaseAuth
-import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.domain.access.usecase.user.GetUserUseCase
 import pl.kamilszustak.read.model.domain.user.User
 import pl.kamilszustak.read.model.mapper.user.FirebaseUserMapper
@@ -15,6 +14,6 @@ class GetUserUseCaseImpl @Inject constructor(
 ) : GetUserUseCase {
 
     override fun invoke(): User =
-        auth.currentUser.useOrNull { mapper.map(it, Unit) }
+        auth.currentUser?.let { mapper.map(it, Unit) }
             ?: throw IllegalStateException("User is not signed in")
 }

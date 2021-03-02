@@ -1,7 +1,6 @@
 package pl.kamilszustak.read.domain.usecase.volume
 
 import pl.kamilszustak.model.common.VolumeSearchParameterType
-import pl.kamilszustak.read.common.util.useOrNull
 import pl.kamilszustak.read.data.access.repository.VolumeRepository
 import pl.kamilszustak.read.domain.access.usecase.volume.GetVolumeUseCase
 import pl.kamilszustak.read.model.domain.Volume
@@ -21,7 +20,7 @@ class GetVolumeUseCaseImpl @Inject constructor(
         return volumeRepository.getAll(parameters)
             .map { volumes ->
                 volumes?.firstOrNull()
-                    .useOrNull { mapper.map(it, Unit) }
+                    ?.let { mapper.map(it, Unit) }
             }
     }
 }
