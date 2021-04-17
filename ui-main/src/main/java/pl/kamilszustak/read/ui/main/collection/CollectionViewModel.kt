@@ -24,7 +24,10 @@ class CollectionViewModel @Inject constructor(
 ) : BaseViewModel<CollectionEvent, CollectionAction>() {
 
     val books: LiveData<List<Book>> = observeAllBooks()
-        .map { it.sortedByDescending(Book::modificationDate) }
+        .map { books ->
+            books.filter { !it.isArchived }
+                .sortedByDescending(Book::modificationDate)
+        }
         .also { booksFlow ->
             viewModelScope.launch {
                 val book = booksFlow.firstOrNull()?.firstOrNull()
@@ -99,8 +102,27 @@ class CollectionViewModel @Inject constructor(
                 _action.value = CollectionAction.NavigateToBookEditFragment(event.bookId)
             }
 
+            is CollectionEvent.OnArchiveBookButtonClicked -> {
+                handleArchiveBookButtonClick(event)
+            }
+
             is CollectionEvent.OnDeleteBookButtonClicked -> {
                 handleDeleteBookButtonClick(event)
+            }
+        }
+    }
+
+    private fun handleArchiveBookButtonClick(event: CollectionEvent.OnArchiveBookButtonClicked) {
+        viewModelScope.launch(Dispatchers.Main) {
+            val result = editBook(event.bookId) { book ->
+                book.copy(
+                    isArchived = true
+                )
+            }
+
+            with(result) {
+                onSuccess { _action.value = CollectionAction.BookArchived }
+                onFailure { _action.value = CollectionAction.Error(R.string.archiving_book_error_message) }
             }
         }
     }

@@ -40,6 +40,10 @@ data class BookEntity(
     @set:PropertyName(USER_ID_PROPERTY)
     var userId: String = "",
 
+    @get:PropertyName(IS_ARCHIVED_PROPERTY)
+    @set:PropertyName(IS_ARCHIVED_PROPERTY)
+    var isArchived: Boolean = false,
+
     @get:PropertyName(READ_PAGES_PROPERTY)
     @set:PropertyName(READ_PAGES_PROPERTY)
     var readPages: Int = 0,
@@ -56,6 +60,7 @@ data class BookEntity(
         const val ISBD_PROPERTY: String = "isbn"
         const val DESCRIPTION_PROPERTY: String = "description"
         const val COVER_IMAGE_URL_PROPERTY: String = "cover_image_url"
+        const val IS_ARCHIVED_PROPERTY: String = "is_archived"
         const val USER_ID_PROPERTY: String = "user_id"
     }
 }

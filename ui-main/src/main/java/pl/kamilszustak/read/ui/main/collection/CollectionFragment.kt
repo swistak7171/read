@@ -113,6 +113,12 @@ class CollectionFragment @Inject constructor(
                                     true
                                 }
 
+                                R.id.archiveBookItem -> {
+                                    val event = CollectionEvent.OnArchiveBookButtonClicked(item.model.id)
+                                    viewModel.dispatch(event)
+                                    true
+                                }
+
                                 R.id.deleteBookItem -> {
                                     dialog {
                                         title(R.string.delete_book_dialog_title)
@@ -217,6 +223,10 @@ class CollectionFragment @Inject constructor(
                 CollectionAction.NavigateToScannerFragment -> {
                     val event = MainEvent.OnFragmentSelectionChanged(MainFragmentType.SCANNER_FRAGMENT)
                     mainViewModel.dispatch(event)
+                }
+
+                CollectionAction.BookArchived -> {
+                    successToast(R.string.book_archived)
                 }
 
                 CollectionAction.BookDeleted -> {

@@ -26,6 +26,7 @@ sealed class CollectionAction : ViewAction {
         @StringRes val messageResourceId: Int,
     ) : CollectionAction()
 
+    object BookArchived : CollectionAction()
     object BookDeleted : CollectionAction()
     object ReadingProgressUpdated : CollectionAction()
     object NavigateToSearchFragment : CollectionAction()

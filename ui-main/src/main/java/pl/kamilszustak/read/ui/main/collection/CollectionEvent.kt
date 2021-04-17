@@ -31,6 +31,10 @@ sealed class CollectionEvent : ViewEvent {
         val bookId: BookId,
     ) : CollectionEvent()
 
+    data class OnArchiveBookButtonClicked(
+        val bookId: BookId,
+    ) : CollectionEvent()
+
     data class OnDeleteBookButtonClicked(
         val bookId: BookId,
     ) : CollectionEvent()

@@ -19,7 +19,8 @@ data class Book(
     val isbn: String?,
     val description: String?,
     val coverImageUrl: String? = COVER_IMAGE_PLACEHOLDER_URL,
-    val readPages: Int = 0
+    val isArchived: Boolean = false,
+    val readPages: Int = 0,
 ) : Model() {
 
     val progress: Float
