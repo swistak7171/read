@@ -1,6 +1,6 @@
 package pl.kamilszustak.read.model.domain
 
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import pl.kamilszustak.model.common.id.LogEntryId
 import java.util.*
 

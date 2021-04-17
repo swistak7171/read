@@ -1,7 +1,7 @@
 package pl.kamilszustak.read.model.domain
 
 import androidx.annotation.ColorInt
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import pl.kamilszustak.model.common.id.QuoteId
 import java.util.*
 
