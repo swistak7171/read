@@ -53,6 +53,11 @@ class CollectionFragment @Inject constructor(
                 true
             }
 
+            R.id.archiveItem -> {
+                viewModel.dispatch(CollectionEvent.OnArchiveButtonClicked)
+                true
+            }
+
             R.id.readingLogItem -> {
                 viewModel.dispatch(CollectionEvent.OnReadingLogButtonClicked)
                 true
@@ -203,11 +208,15 @@ class CollectionFragment @Inject constructor(
                     navigator.navigateToBookDetailsFragment(action.bookId)
                 }
 
-                CollectionAction.NavigateToReadingLogFragment -> {
+                is CollectionAction.NavigateToArchiveFragment -> {
+                    navigator.navigateToArchiveFragment()
+                }
+
+                is CollectionAction.NavigateToReadingLogFragment -> {
                     navigator.navigateToReadingLogFragment()
                 }
 
-                CollectionAction.NavigateToReadingGoalFragment -> {
+                is CollectionAction.NavigateToReadingGoalFragment -> {
                     navigator.navigateToReadingGoalFragment()
                 }
 
@@ -215,25 +224,25 @@ class CollectionFragment @Inject constructor(
                     navigator.navigateToReadingProgressDialogFragment(action.bookId)
                 }
 
-                CollectionAction.NavigateToSearchFragment -> {
+                is CollectionAction.NavigateToSearchFragment -> {
                     val event = MainEvent.OnFragmentSelectionChanged(MainFragmentType.SEARCH_FRAGMENT)
                     mainViewModel.dispatch(event)
                 }
 
-                CollectionAction.NavigateToScannerFragment -> {
+                is CollectionAction.NavigateToScannerFragment -> {
                     val event = MainEvent.OnFragmentSelectionChanged(MainFragmentType.SCANNER_FRAGMENT)
                     mainViewModel.dispatch(event)
                 }
 
-                CollectionAction.BookArchived -> {
+                is CollectionAction.BookArchived -> {
                     successToast(R.string.book_archived)
                 }
 
-                CollectionAction.BookDeleted -> {
+                is CollectionAction.BookDeleted -> {
                     successToast(R.string.book_deleted)
                 }
 
-                CollectionAction.ReadingProgressUpdated -> {
+                is CollectionAction.ReadingProgressUpdated -> {
                     successToast(R.string.reading_progress_updated)
                 }
 
@@ -283,6 +292,11 @@ class CollectionFragment @Inject constructor(
             val direction = CollectionFragmentDirections.actionCollectionFragmentToBookDetailsFragment(
                 bookId.value
             )
+            navigate(direction)
+        }
+
+        fun navigateToArchiveFragment() {
+            val direction = CollectionFragmentDirections.actionCollectionFragmentToArchiveFragment()
             navigate(direction)
         }
 

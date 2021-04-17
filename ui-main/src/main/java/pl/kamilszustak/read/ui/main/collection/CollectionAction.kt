@@ -31,6 +31,7 @@ sealed class CollectionAction : ViewAction {
     object ReadingProgressUpdated : CollectionAction()
     object NavigateToSearchFragment : CollectionAction()
     object NavigateToScannerFragment : CollectionAction()
+    object NavigateToArchiveFragment : CollectionAction()
     object NavigateToReadingLogFragment : CollectionAction()
     object NavigateToReadingGoalFragment : CollectionAction()
 }

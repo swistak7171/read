@@ -137,4 +137,7 @@
     <string name="weekly_statistics">Tygodniowe</string>
     <string name="monthly_statistics">Miesięczne</string>
     <string name="read_books">Przeczytane książki</string>
+
+    <!-- ARchiveFragment -->
+    <string name="archive">Archiwum</string>
 </resources>

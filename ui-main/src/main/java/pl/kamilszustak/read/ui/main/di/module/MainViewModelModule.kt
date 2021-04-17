@@ -7,6 +7,7 @@ import dagger.multibindings.IntoMap
 import pl.kamilszustak.read.ui.base.di.key.ViewModelKey
 import pl.kamilszustak.read.ui.main.activity.MainViewModel
 import pl.kamilszustak.read.ui.main.collection.CollectionViewModel
+import pl.kamilszustak.read.ui.main.collection.archive.ArchiveViewModel
 import pl.kamilszustak.read.ui.main.collection.goal.ReadingGoalViewModel
 import pl.kamilszustak.read.ui.main.collection.log.ReadingLogViewModel
 import pl.kamilszustak.read.ui.main.profile.ProfileViewModel
@@ -67,4 +68,9 @@ interface MainViewModelModule {
     @IntoMap
     @ViewModelKey(StatisticsViewModel::class)
     fun bindStatisticsViewModel(viewModel: StatisticsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ArchiveViewModel::class)
+    fun bindArchiveViewModel(viewModel: ArchiveViewModel): ViewModel
 }

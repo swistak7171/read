@@ -5,6 +5,7 @@ import pl.kamilszustak.read.ui.base.view.ViewEvent
 
 sealed class CollectionEvent : ViewEvent {
     object OnAddBookButtonClicked : CollectionEvent()
+    object OnArchiveButtonClicked : CollectionEvent()
     object OnReadingLogButtonClicked : CollectionEvent()
     object OnReadingGoalButtonClicked : CollectionEvent()
     object OnFirstFastUpdateButtonClicked : CollectionEvent()

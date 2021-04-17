@@ -62,23 +62,27 @@ class CollectionViewModel @Inject constructor(
                 _action.value = CollectionAction.NavigateToBookDetailsFragment(event.bookId)
             }
 
-            CollectionEvent.OnReadingLogButtonClicked -> {
+            is CollectionEvent.OnArchiveButtonClicked -> {
+                _action.value = CollectionAction.NavigateToArchiveFragment
+            }
+
+            is CollectionEvent.OnReadingLogButtonClicked -> {
                 _action.value = CollectionAction.NavigateToReadingLogFragment
             }
 
-            CollectionEvent.OnReadingGoalButtonClicked -> {
+            is CollectionEvent.OnReadingGoalButtonClicked -> {
                 _action.value = CollectionAction.NavigateToReadingGoalFragment
             }
 
-            CollectionEvent.OnFirstFastUpdateButtonClicked -> {
+            is CollectionEvent.OnFirstFastUpdateButtonClicked -> {
                 handleFastUpdateButtonClick(firstFastUpdateValue)
             }
 
-            CollectionEvent.OnSecondFastUpdateButtonClicked -> {
+            is CollectionEvent.OnSecondFastUpdateButtonClicked -> {
                 handleFastUpdateButtonClick(secondFastUpdateValue)
             }
 
-            CollectionEvent.OnThirdFastupdateButtonClicked -> {
+            is CollectionEvent.OnThirdFastupdateButtonClicked -> {
                 handleFastUpdateButtonClick(thirdFastUpdateValue)
             }
 

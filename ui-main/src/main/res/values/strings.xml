@@ -138,4 +138,7 @@
     <string name="weekly_statistics">Weekly</string>
     <string name="monthly_statistics">Monthly</string>
     <string name="read_books">Read books</string>
+
+    <!-- ArchiveFragment -->
+    <string name="archive">Archive</string>
 </resources>
