@@ -139,5 +139,6 @@
     <string name="read_books">Przeczytane książki</string>
 
     <!-- ARchiveFragment -->
-    <string name="archive">Archiwum</string>
+    <string name="books_archive">Archiwum książek</string>
+    <string name="book_archiving_date">Zarchiwizowano %1$s</string>
 </resources>

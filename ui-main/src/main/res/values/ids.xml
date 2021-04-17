@@ -4,4 +4,5 @@
     <item name="fastadapter_quote_item" type="id" />
     <item name="fastadapter_volume_item" type="id" />
     <item name="fastadapter_log_entry_item" type="id" />
+    <item name="fastadapter_archived_book_item" type="id" />
 </resources>

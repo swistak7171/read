@@ -20,6 +20,7 @@ data class Book(
     val description: String?,
     val coverImageUrl: String? = COVER_IMAGE_PLACEHOLDER_URL,
     val isArchived: Boolean = false,
+    val archivingDate: Date? = null,
     val readPages: Int = 0,
 ) : Model() {
 

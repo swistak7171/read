@@ -129,6 +129,6 @@
     <fragment
         android:id="@+id/archiveFragment"
         android:name="pl.kamilszustak.read.ui.main.collection.archive.ArchiveFragment"
-        android:label="@string/archive"
+        android:label="@string/books_archive"
         tools:layout="@layout/fragment_archive" />
 </navigation>

@@ -16,7 +16,7 @@
 
     <item
         android:id="@+id/archiveBookItem"
-        android:title="@string/archive"
+        android:title="@string/books_archive"
         android:icon="@drawable/icon_archive"
         app:showAsAction="never" />
 

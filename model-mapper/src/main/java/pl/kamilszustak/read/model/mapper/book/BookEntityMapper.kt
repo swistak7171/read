@@ -25,6 +25,7 @@ class BookEntityMapper @Inject constructor() : Mapper<BookEntity, Book, Unit>() 
             description = model.description,
             coverImageUrl = model.coverImageUrl,
             isArchived = model.isArchived,
+            archivingDate = model.archivingDate,
             readPages = model.readPages
         )
     }

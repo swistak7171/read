@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
+import pl.kamilszustak.read.domain.access.usecase.book.ArchiveBookUseCase
 import pl.kamilszustak.read.domain.access.usecase.book.DeleteBookUseCase
 import pl.kamilszustak.read.domain.access.usecase.book.EditBookUseCase
 import pl.kamilszustak.read.domain.access.usecase.book.ObserveAllBooksUseCase
@@ -21,6 +22,7 @@ class CollectionViewModel @Inject constructor(
     private val observeAllBooks: ObserveAllBooksUseCase,
     private val deleteBook: DeleteBookUseCase,
     private val editBook: EditBookUseCase,
+    private val archiveBook: ArchiveBookUseCase
 ) : BaseViewModel<CollectionEvent, CollectionAction>() {
 
     val books: LiveData<List<Book>> = observeAllBooks()
@@ -118,16 +120,9 @@ class CollectionViewModel @Inject constructor(
 
     private fun handleArchiveBookButtonClick(event: CollectionEvent.OnArchiveBookButtonClicked) {
         viewModelScope.launch(Dispatchers.Main) {
-            val result = editBook(event.bookId) { book ->
-                book.copy(
-                    isArchived = true
-                )
-            }
-
-            with(result) {
-                onSuccess { _action.value = CollectionAction.BookArchived }
-                onFailure { _action.value = CollectionAction.Error(R.string.archiving_book_error_message) }
-            }
+            archiveBook(event.bookId)
+                .onSuccess { _action.value = CollectionAction.BookArchived }
+                .onFailure { _action.value = CollectionAction.Error(R.string.archiving_book_error_message) }
         }
     }
 
