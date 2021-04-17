@@ -10,7 +10,10 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.afollestad.materialdialogs.list.listItems
+import com.mikepenz.fastadapter.ClickListener
 import com.mikepenz.fastadapter.FastAdapter
+import com.mikepenz.fastadapter.IAdapter
+import com.mikepenz.fastadapter.LongClickListener
 import com.mikepenz.fastadapter.adapters.ModelAdapter
 import com.yarolegovich.discretescrollview.transform.Pivot
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer
@@ -82,72 +85,86 @@ class CollectionFragment @Inject constructor(
 
     override fun initializeRecyclerView() {
         val fastAdapter = FastAdapter.with(modelAdapter).apply {
-            onClickListener = { view, adapter, item, position ->
-                val currentPosition = binding.booksRecyclerView.currentItem
-                if (position != currentPosition) {
-                    binding.booksRecyclerView.smoothScrollToPosition(position)
-                } else {
-                    val event = CollectionEvent.OnBookClicked(item.model.id)
-                    viewModel.dispatch(event)
-                }
+            onClickListener = object : ClickListener<BookItem> {
+                override fun invoke(
+                    v: View?,
+                    adapter: IAdapter<BookItem>,
+                    item: BookItem,
+                    position: Int
+                ): Boolean {
+                    val currentPosition = binding.booksRecyclerView.currentItem
+                    if (position != currentPosition) {
+                        binding.booksRecyclerView.smoothScrollToPosition(position)
+                    } else {
+                        val event = CollectionEvent.OnBookClicked(item.model.id)
+                        viewModel.dispatch(event)
+                    }
 
-                true
+                    return true
+                }
             }
 
-            onLongClickListener = { view, adapter, item, position ->
-                val currentPosition = binding.booksRecyclerView.currentItem
-                if (position != currentPosition) {
-                    binding.booksRecyclerView.smoothScrollToPosition(position)
-                } else {
-                    popupMenu(view, R.menu.popup_menu_collection_book_item) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                            setForceShowIcon(true)
-                        }
+            onLongClickListener = object : LongClickListener<BookItem> {
+                override fun invoke(
+                    v: View,
+                    adapter: IAdapter<BookItem>,
+                    item: BookItem,
+                    position: Int
+                ): Boolean {
+                    val currentPosition = binding.booksRecyclerView.currentItem
+                    if (position != currentPosition) {
+                        binding.booksRecyclerView.smoothScrollToPosition(position)
+                    } else {
+                        popupMenu(v, R.menu.popup_menu_collection_book_item) {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                                setForceShowIcon(true)
+                            }
 
-                        setOnMenuItemClickListener { menuItem ->
-                            when (menuItem.itemId) {
-                                R.id.updateReadingProgressItem -> {
-                                    val event = CollectionEvent.OnUpdateReadingProgressButtonClicked(item.model.id)
-                                    viewModel.dispatch(event)
-                                    true
-                                }
-
-                                R.id.editBookItem -> {
-                                    val event = CollectionEvent.OnEditBookButtonClicked(item.model.id)
-                                    viewModel.dispatch(event)
-                                    true
-                                }
-
-                                R.id.archiveBookItem -> {
-                                    val event = CollectionEvent.OnArchiveBookButtonClicked(item.model.id)
-                                    viewModel.dispatch(event)
-                                    true
-                                }
-
-                                R.id.deleteBookItem -> {
-                                    dialog {
-                                        title(R.string.delete_book_dialog_title)
-                                        message(R.string.delete_book_dialog_message)
-                                        positiveButton(R.string.yes) {
-                                            val event = CollectionEvent.OnDeleteBookButtonClicked(item.model.id)
-                                            viewModel.dispatch(event)
-                                        }
-                                        negativeButton(R.string.no) { dialog ->
-                                            dialog.dismiss()
-                                        }
+                            setOnMenuItemClickListener { menuItem ->
+                                when (menuItem.itemId) {
+                                    R.id.updateReadingProgressItem -> {
+                                        val event = CollectionEvent.OnUpdateReadingProgressButtonClicked(item.model.id)
+                                        viewModel.dispatch(event)
+                                        true
                                     }
-                                    true
-                                }
 
-                                else -> {
-                                    false
+                                    R.id.editBookItem -> {
+                                        val event = CollectionEvent.OnEditBookButtonClicked(item.model.id)
+                                        viewModel.dispatch(event)
+                                        true
+                                    }
+
+                                    R.id.archiveBookItem -> {
+                                        val event = CollectionEvent.OnArchiveBookButtonClicked(item.model.id)
+                                        viewModel.dispatch(event)
+                                        true
+                                    }
+
+                                    R.id.deleteBookItem -> {
+                                        dialog {
+                                            title(R.string.delete_book_dialog_title)
+                                            message(R.string.delete_book_dialog_message)
+                                            positiveButton(R.string.yes) {
+                                                val event = CollectionEvent.OnDeleteBookButtonClicked(item.model.id)
+                                                viewModel.dispatch(event)
+                                            }
+                                            negativeButton(R.string.no) { dialog ->
+                                                dialog.dismiss()
+                                            }
+                                        }
+                                        true
+                                    }
+
+                                    else -> {
+                                        false
+                                    }
                                 }
                             }
                         }
                     }
-                }
 
-                true
+                    return true
+                }
             }
         }
 

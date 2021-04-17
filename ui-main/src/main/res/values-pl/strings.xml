@@ -140,5 +140,8 @@
 
     <!-- ARchiveFragment -->
     <string name="books_archive">Archiwum książek</string>
+    <string name="empty_books_archive_message">Twoje archiwum książek jest puste</string>
     <string name="book_archiving_date">Zarchiwizowano %1$s</string>
+    <string name="book_unarchiving_success_message">Książka została cofnięta z archiwum</string>
+    <string name="book_unarchiving_error_message">Wystąpił błąd podczas cofania książki z archiwum</string>
 </resources>

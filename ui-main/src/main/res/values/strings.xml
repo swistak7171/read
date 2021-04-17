@@ -141,5 +141,8 @@
 
     <!-- ArchiveFragment -->
     <string name="books_archive">Books archive</string>
+    <string name="empty_books_archive_message">Your books archive is empty</string>
     <string name="book_archiving_date">Archived %1$s</string>
+    <string name="book_unarchiving_success_message">Book unarchived successfully</string>
+    <string name="book_unarchiving_error_message">An error occurred while unarchiving the book</string>
 </resources>
