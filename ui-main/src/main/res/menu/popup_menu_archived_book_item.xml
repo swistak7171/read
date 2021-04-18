@@ -7,4 +7,10 @@
         android:title="@string/unarchive"
         android:icon="@drawable/icon_unarchive"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/deleteBookItem"
+        android:title="@string/delete"
+        android:icon="@drawable/icon_delete"
+        app:showAsAction="never" />
 </menu>

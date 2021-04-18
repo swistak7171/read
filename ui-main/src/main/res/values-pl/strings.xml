@@ -43,9 +43,11 @@
 
     <!-- CollectionFragment -->
     <string name="delete_book_dialog_title">Usuń książkę</string>
-    <string name="delete_book_dialog_message">Czy chcesz usunąć tę książkę?</string>
-    <string name="book_archived">Książka zarchiwizowana</string>
+    <string name="delete_book_dialog_message">Czy chcesz usunąć tę książkę? Wszystkie jej wpisy w dzienniku czytania zostaną usunięte.</string>
     <string name="book_deleted">Książka została usunięta</string>
+    <string name="book_archived">Książka zarchiwizowana</string>
+    <string name="archive_book_dialog_title">Archiwizuj książkę</string>
+    <string name="archive_book_dialog_message">Czy chcesz zarchiwizować tę książkę?</string>
     <string name="archiving_book_error_message">Wystąpił błąd podczas archiwizacji książki</string>
     <string name="deleting_book_error_message">Wystąpił błąd podczas usuwania książki</string>
     <string name="empty_collection_message">Nie masz jeszcze żadnych książek w swojej kolekcji</string>
