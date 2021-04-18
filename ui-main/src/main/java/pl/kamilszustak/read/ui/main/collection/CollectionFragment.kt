@@ -273,11 +273,14 @@ class CollectionFragment @Inject constructor(
         }
 
         viewModel.currentBook.observe(viewLifecycleOwner) { book ->
-            updateProgress(book.progressPercentage)
+            updateBookDetails(book)
         }
     }
 
-    private fun updateProgress(progress: Int) {
+    private fun updateBookDetails(book: Book) {
+        binding.nextPageTextView.text = getString(R.string.next_page_to_read, book.nextPage)
+
+        val progress = book.progressPercentage
         val lastProgress = binding.readingProgressIndicator.progress
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             binding.readingProgressIndicator.setProgress(progress, true)

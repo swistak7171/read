@@ -40,7 +40,7 @@
             android:id="@+id/collectionGroup"
             android:visibility="gone"
             tools:visibility="visible"
-            app:constraint_referenced_ids="booksRecyclerView,firstFastUpdateButton,readingProgressIndicator,progressPercentageTextView" />
+            app:constraint_referenced_ids="booksRecyclerView,firstFastUpdateButton,readingProgressIndicator,progressPercentageTextView,nextPageTextView" />
 
         <pl.kamilszustak.read.ui.base.view.custom.HoldButton
             android:layout_width="wrap_content"
@@ -83,8 +83,9 @@
             tools:progress="50"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/progressPercentageTextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_margin="@dimen/default_margin" />
+            app:layout_constraintBottom_toTopOf="@id/nextPageTextView"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/default_half_margin" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -95,5 +96,16 @@
             app:layout_constraintTop_toTopOf="@id/readingProgressIndicator"
             app:layout_constraintBottom_toBottomOf="@id/readingProgressIndicator"
             android:layout_marginEnd="@dimen/default_margin" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nextPageTextView"
+            tools:text="@string/next_page_to_read"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            android:layout_margin="@dimen/default_margin" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
