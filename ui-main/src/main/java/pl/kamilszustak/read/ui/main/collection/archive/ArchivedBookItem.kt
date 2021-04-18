@@ -27,6 +27,7 @@ class ArchivedBookItem(book: Book) : ModelAbstractBindingItem<Book, ItemArchived
         with(binding) {
             model.coverImageUrl?.let { coverImageView.load(it) }
             titleTextView.text = model.title
+            authorTextView.text = model.author
             model.archivingDate?.let { archivingDate ->
                 val date = DateFormats.dateFormat.format(archivingDate)
                 archivingDateTextView.text = binding.root.context?.getString(R.string.book_archiving_date, date)
@@ -38,6 +39,7 @@ class ArchivedBookItem(book: Book) : ModelAbstractBindingItem<Book, ItemArchived
         with(binding) {
             coverImageView.setImageDrawable(null)
             titleTextView.text = null
+            authorTextView.text = null
             archivingDateTextView.text = null
         }
     }

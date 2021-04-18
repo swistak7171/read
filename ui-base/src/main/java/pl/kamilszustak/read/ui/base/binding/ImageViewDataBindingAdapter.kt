@@ -27,6 +27,8 @@ object ImageViewDataBindingAdapter {
     fun ImageView.setImageUrl(imageUrl: String?, placeholder: Drawable?) {
         if (imageUrl != null) {
             load(imageUrl, placeholder)
+        } else {
+            setImageDrawable(null)
         }
     }
 
@@ -39,9 +41,7 @@ object ImageViewDataBindingAdapter {
     )
     @JvmStatic
     fun ImageView.setImageUrl(imageUrl: Uri?, placeholder: Drawable?) {
-        if (imageUrl != null) {
-            load(imageUrl.toString(), placeholder)
-        }
+        setImageUrl(imageUrl?.toString(), placeholder)
     }
 
     @BindingAdapter(SRC_ATTRIBUTE)
