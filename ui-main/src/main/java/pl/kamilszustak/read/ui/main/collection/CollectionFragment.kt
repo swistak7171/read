@@ -31,7 +31,8 @@ import javax.inject.Inject
 
 class CollectionFragment @Inject constructor(
     viewModelFactory: ViewModelProvider.Factory,
-) : MainDataBindingFragment<FragmentCollectionBinding, CollectionViewModel>(R.layout.fragment_collection) {
+) : MainDataBindingFragment<FragmentCollectionBinding, CollectionViewModel>(R.layout.fragment_collection),
+    BookDialogOwner by BookDialogOwnerImpl() {
 
     override val viewModel: CollectionViewModel by viewModels(viewModelFactory)
     private val mainViewModel: MainViewModel by activityViewModels(viewModelFactory)
@@ -141,17 +142,13 @@ class CollectionFragment @Inject constructor(
                                     }
 
                                     R.id.deleteBookItem -> {
-                                        dialog {
-                                            title(R.string.delete_book_dialog_title)
-                                            message(R.string.delete_book_dialog_message)
-                                            positiveButton(R.string.yes) {
+                                        showDeleteBookDialog(
+                                            onPositiveButtonClick = {
                                                 val event = CollectionEvent.OnDeleteBookButtonClicked(item.model.id)
                                                 viewModel.dispatch(event)
-                                            }
-                                            negativeButton(R.string.no) { dialog ->
-                                                dialog.dismiss()
-                                            }
-                                        }
+                                            },
+                                            onNegativeButtonClick = { it.dismiss() }
+                                        )
                                         true
                                     }
 

@@ -9,6 +9,10 @@ sealed class ArchiveEvent : ViewEvent {
     data class OnUnarchiveBookButtonClicked(
         val id: BookId,
     ) : ArchiveEvent()
+
+    data class OnDeleteBookDialogPositiveButtonClick(
+        val id: BookId,
+    ) : ArchiveEvent()
 }
 
 sealed class ArchiveAction : ViewAction {

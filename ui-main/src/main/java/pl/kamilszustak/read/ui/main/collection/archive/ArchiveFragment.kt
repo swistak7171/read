@@ -1,5 +1,6 @@
 package pl.kamilszustak.read.ui.main.collection.archive
 
+import android.os.Build
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
@@ -11,12 +12,15 @@ import pl.kamilszustak.read.model.domain.Book
 import pl.kamilszustak.read.ui.base.util.*
 import pl.kamilszustak.read.ui.main.MainDataBindingFragment
 import pl.kamilszustak.read.ui.main.R
+import pl.kamilszustak.read.ui.main.collection.BookDialogOwner
+import pl.kamilszustak.read.ui.main.collection.BookDialogOwnerImpl
 import pl.kamilszustak.read.ui.main.databinding.FragmentArchiveBinding
 import javax.inject.Inject
 
 class ArchiveFragment @Inject constructor(
     viewModelFactory: ViewModelProvider.Factory
-): MainDataBindingFragment<FragmentArchiveBinding, ArchiveViewModel>(R.layout.fragment_archive) {
+): MainDataBindingFragment<FragmentArchiveBinding, ArchiveViewModel>(R.layout.fragment_archive),
+   BookDialogOwner by BookDialogOwnerImpl() {
 
     override val viewModel: ArchiveViewModel by viewModels(viewModelFactory)
     private val modelAdapter: ModelAdapter<Book, ArchivedBookItem> by lazy {
@@ -33,11 +37,26 @@ class ArchiveFragment @Inject constructor(
                     position: Int
                 ): Boolean {
                     popupMenu(v, R.menu.popup_menu_archived_book_item) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            setForceShowIcon(true)
+                        }
+
                         setOnMenuItemClickListener { menuItem ->
                             when (menuItem.itemId) {
                                 R.id.unarchiveBookItem -> {
                                     val event = ArchiveEvent.OnUnarchiveBookButtonClicked(item.model.id)
                                     viewModel.dispatch(event)
+                                    true
+                                }
+
+                                R.id.deleteBookItem -> {
+                                    showDeleteBookDialog(
+                                        onPositiveButtonClick = {
+                                            val event = ArchiveEvent.OnDeleteBookDialogPositiveButtonClick(item.model.id)
+                                            viewModel.dispatch(event)
+                                        },
+                                        onNegativeButtonClick = { it.dismiss() }
+                                    )
                                     true
                                 }
 
