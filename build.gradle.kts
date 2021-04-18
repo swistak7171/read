@@ -1,5 +1,3 @@
-import org.jetbrains.dokka.gradle.DokkaTask
-
 plugins {
     id(Plugins.DOKKA) version (Versions.DOKKA)
 }
@@ -34,9 +32,4 @@ allprojects {
 
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
-}
-
-val dokka: DokkaTask by tasks.getting(DokkaTask::class) {
-    outputDirectory = "$buildDir/dokka"
-    outputFormat = "html"
 }

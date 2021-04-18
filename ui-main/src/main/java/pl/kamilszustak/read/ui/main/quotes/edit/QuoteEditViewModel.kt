@@ -40,7 +40,11 @@ class QuoteEditViewModel(
         get() = _selectedColorIndex
 
     init {
-        _actionBarTitle.value = R.string.add_quote
+        _actionBarTitle.value = if (inEditMode) {
+            R.string.edit_quote
+        } else {
+            R.string.add_quote
+        }
 
         if (arguments.content != null) {
             quoteContent.value = arguments.content

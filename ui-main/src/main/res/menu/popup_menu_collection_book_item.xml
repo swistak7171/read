@@ -15,6 +15,12 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/archiveBookItem"
+        android:title="@string/archive"
+        android:icon="@drawable/icon_archive"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/deleteBookItem"
         android:title="@string/delete"
         android:icon="@drawable/icon_delete"

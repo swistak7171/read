@@ -49,8 +49,12 @@
     <!-- CollectionFragment -->
     <string name="progress_percentage" translatable="false">%1$d%%</string>
     <string name="delete_book_dialog_title">Delete book</string>
-    <string name="delete_book_dialog_message">Do you want to delete this book?</string>
+    <string name="delete_book_dialog_message">Do you want to delete this book? All its reading log entries will be deleted.</string>
     <string name="book_deleted">Book deleted</string>
+    <string name="archive_book_dialog_title">Archive book</string>
+    <string name="archive_book_dialog_message">Do you want to archive this book?</string>
+    <string name="book_archived">Book archived</string>
+    <string name="archiving_book_error_message">An error occurred while archiving the book</string>
     <string name="deleting_book_error_message">An error occurred while deleting the book</string>
     <string name="empty_collection_message">You haven\'t got any books in your collection yet</string>
 
@@ -136,4 +140,11 @@
     <string name="weekly_statistics">Weekly</string>
     <string name="monthly_statistics">Monthly</string>
     <string name="read_books">Read books</string>
+
+    <!-- ArchiveFragment -->
+    <string name="books_archive">Books archive</string>
+    <string name="empty_books_archive_message">Your books archive is empty</string>
+    <string name="book_archiving_date">Archived %1$s</string>
+    <string name="book_unarchiving_success_message">Book unarchived successfully</string>
+    <string name="book_unarchiving_error_message">An error occurred while unarchiving the book</string>
 </resources>

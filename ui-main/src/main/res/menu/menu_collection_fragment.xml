@@ -9,6 +9,11 @@
         app:showAsAction="ifRoom" />
 
     <item
+        android:id="@+id/archiveItem"
+        android:title="@string/books_archive"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/readingLogItem"
         android:title="@string/reading_log"
         android:icon="@drawable/icon_restore"

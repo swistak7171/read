@@ -1,6 +1,6 @@
 package pl.kamilszustak.read.model.domain
 
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import pl.kamilszustak.model.common.id.BookId
 import pl.kamilszustak.model.common.id.VolumeId
 import java.util.*
@@ -19,7 +19,9 @@ data class Book(
     val isbn: String?,
     val description: String?,
     val coverImageUrl: String? = COVER_IMAGE_PLACEHOLDER_URL,
-    val readPages: Int = 0
+    val isArchived: Boolean = false,
+    val archivingDate: Date? = null,
+    val readPages: Int = 0,
 ) : Model() {
 
     val progress: Float

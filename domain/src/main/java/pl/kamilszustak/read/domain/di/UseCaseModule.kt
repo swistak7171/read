@@ -75,6 +75,12 @@ interface UseCaseModule {
     fun bindEditBookUseCase(useCaseImpl: EditBookUseCaseImpl): EditBookUseCase
 
     @Binds
+    fun bindArchiveBookUseCase(useCaseImpl: ArchiveBookUseCaseImpl): ArchiveBookUseCase
+
+    @Binds
+    fun bindUnarchiveBookUseCase(useCaseImpl: UnarchiveBookUseCaseImpl): UnarchiveBookUseCase
+
+    @Binds
     fun bindDeleteBookUseCase(useCaseImpl: DeleteBookUseCaseImpl): DeleteBookUseCase
 
     @Binds
