@@ -11,7 +11,7 @@ object Versions {
     const val PREFERENCE: String = "1.1.1"
     const val DATA_STORE: String = "1.0.0-alpha06"
     const val NAVIGATION: String = "2.3.4"
-    const val NAVIGATION_SAFE_ARGS_GRADLE_PLUGIN: String = "1.0.0"
+    const val NAVIGATION_SAFE_ARGS_GRADLE_PLUGIN: String = "2.3.5"
     const val LIFECYCLE: String = "2.3.1"
     const val CAMERA_X: String = "1.0.0-rc04"
     const val CAMERA_X_VIEW: String = "1.0.0-alpha23"

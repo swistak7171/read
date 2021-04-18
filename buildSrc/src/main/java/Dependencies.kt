@@ -92,7 +92,7 @@ object Dependencies {
         object Navigation {
             const val NAVIGATION_FRAGMENT_KTX: String = "androidx.navigation:navigation-fragment-ktx:${Versions.NAVIGATION}"
             const val NAVIGATION_UI_KTX: String = "androidx.navigation:navigation-ui-ktx:${Versions.NAVIGATION}"
-            const val NAVIGATION_SAFE_ARGS_GRADLE_PLUGIN: String = "android.arch.navigation:navigation-safe-args-gradle-plugin:${Versions.NAVIGATION_SAFE_ARGS_GRADLE_PLUGIN}"
+            const val NAVIGATION_SAFE_ARGS_GRADLE_PLUGIN: String = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.NAVIGATION_SAFE_ARGS_GRADLE_PLUGIN}"
         }
 
         object Room {
