@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
 import pl.kamilszustak.read.domain.access.usecase.book.ArchiveBookUseCase
@@ -30,12 +30,9 @@ class CollectionViewModel @Inject constructor(
             books.filter { !it.isArchived }
                 .sortedByDescending(Book::modificationDate)
         }
-        .also { booksFlow ->
-            viewModelScope.launch {
-                val book = booksFlow.firstOrNull()?.firstOrNull()
-                if (book != null) {
-                    _currentBook.value = book
-                }
+        .onEach { books ->
+            books.firstOrNull()?.let { book ->
+                _currentBook.value = book
             }
         }
         .asLiveData(viewModelScope.coroutineContext)
