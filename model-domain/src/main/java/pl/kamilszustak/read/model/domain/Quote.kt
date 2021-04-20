@@ -14,4 +14,15 @@ data class Quote(
     val author: String,
     val book: String?,
     @ColorInt val backgroundColorValue: Int,
-) : Model()
+) : Model() {
+
+    val overview: String
+        get() = buildString {
+            append("\"")
+            append(content)
+            append("\"")
+            appendLine()
+            append("~")
+            append(author)
+        }
+}

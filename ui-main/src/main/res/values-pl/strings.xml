@@ -82,6 +82,7 @@
     <string name="reading_progress_updated">Postęp zostały pomyślnie zaktualizowany</string>
 
     <!-- QuotesFragment -->
+    <string name="share_quote_chooser_title">Udostępnij cytat za pomocą:</string>
     <string name="delete_quote_dialog_title">Usuń cytat</string>
     <string name="delete_quote_dialog_message">Czy chcesz usunąć ten cytat?</string>
     <string name="quote_deleted">Cytat został usunięty</string>

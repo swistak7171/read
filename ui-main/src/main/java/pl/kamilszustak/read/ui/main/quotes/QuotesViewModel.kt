@@ -1,5 +1,6 @@
 package pl.kamilszustak.read.ui.main.quotes
 
+import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
@@ -22,8 +23,12 @@ class QuotesViewModel @Inject constructor(
 
     override fun handleEvent(event: QuotesEvent) {
         when (event) {
-            QuotesEvent.OnAddQuoteButtonClicked -> {
+            is QuotesEvent.OnAddQuoteButtonClicked -> {
                 _action.value = QuotesAction.NavigateToQuoteEditFragment()
+            }
+
+            is QuotesEvent.OnShareQuoteButtonClicked -> {
+                handleShareButtonClick(event)
             }
 
             is QuotesEvent.OnEditQuoteButtonClicked -> {
@@ -34,6 +39,16 @@ class QuotesViewModel @Inject constructor(
                 handleDeleteButtonClick(event)
             }
         }
+    }
+
+    private fun handleShareButtonClick(event: QuotesEvent.OnShareQuoteButtonClicked) {
+        val quote = quotes.value?.find { it.id == event.quoteId } ?: return
+        val intent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, quote.overview)
+        }
+
+        _action.value = QuotesAction.ShareQuote(intent, R.string.share_quote_chooser_title)
     }
 
     private fun handleDeleteButtonClick(event: QuotesEvent.OnDeleteQuoteButtonClicked) {
