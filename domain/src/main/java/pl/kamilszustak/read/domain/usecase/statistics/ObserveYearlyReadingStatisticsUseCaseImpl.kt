@@ -28,7 +28,7 @@ class ObserveYearlyReadingStatisticsUseCaseImpl @Inject constructor(
                     .sortedBy(LogEntryEntity::creationDate)
                     .groupBy { entry ->
                         calendar.time = entry.creationDate
-                        calendar.get(Calendar.MONTH)
+                        calendar.get(Calendar.MONTH) + 1
                     }
                     .mapValues { mapEntry ->
                         mapEntry.value.sumBy { entry ->

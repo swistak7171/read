@@ -7,8 +7,12 @@ sealed class StatisticsEvent : ViewEvent {
     object OnNextWeekButtonClicked : StatisticsEvent()
     object OnPreviousMonthButtonClicked : StatisticsEvent()
     object OnNextMonthButtonClicked : StatisticsEvent()
+    object OnPreviousYearButtonClicked : StatisticsEvent()
+    object OnNextYearButtonClicked : StatisticsEvent()
     object OnWeeklyStatisticsChartSwipedLeft : StatisticsEvent()
     object OnWeeklyStatisticsChartSwipedRight : StatisticsEvent()
     object OnMonthlyStatisticsChartSwipedLeft : StatisticsEvent()
     object OnMonthlyStatisticsChartSwipedRight : StatisticsEvent()
+    object OnYearlyStatisticsChartSwipedLeft : StatisticsEvent()
+    object OnYearlyStatisticsChartSwipedRight : StatisticsEvent()
 }

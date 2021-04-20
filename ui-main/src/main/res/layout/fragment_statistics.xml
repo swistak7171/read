@@ -129,8 +129,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/yearSwitcher"
-                app:text="@{viewModel.monthText}"
-                app:isNextButtonEnabled="@{viewModel.isNextMonthButtonEnabled}" />
+                app:text="@{viewModel.yearText}"
+                app:isNextButtonEnabled="@{viewModel.isNextYearButtonEnabled}" />
 
             <com.db.williamchart.view.BarChartView
                 android:layout_width="match_parent"
