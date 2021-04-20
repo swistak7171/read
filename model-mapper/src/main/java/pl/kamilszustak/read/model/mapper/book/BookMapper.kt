@@ -23,6 +23,8 @@ class BookMapper @Inject constructor(
             description = model.description,
             userId = userId,
             coverImageUrl = model.coverImageUrl,
+            isArchived = model.isArchived,
+            archivingDate = model.archivingDate,
             readPages = model.readPages
         ).apply {
             id = model.id.value

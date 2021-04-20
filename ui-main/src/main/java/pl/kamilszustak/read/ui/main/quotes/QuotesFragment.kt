@@ -1,5 +1,6 @@
 package pl.kamilszustak.read.ui.main.quotes
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
@@ -88,6 +89,12 @@ class QuotesFragment @Inject constructor(
     override fun observeViewModel() {
         viewModel.action.observe(viewLifecycleOwner) { action ->
             when (action) {
+                is QuotesAction.ShareQuote -> {
+                    val title = getString(action.titleResourceId)
+                    val chooserIntent = Intent.createChooser(action.intent, title)
+                    requireActivity().startActivity(chooserIntent)
+                }
+
                 is QuotesAction.NavigateToQuoteEditFragment -> {
                     navigator.navigateToQuoteEditFragment(action.quoteId)
                 }
@@ -117,6 +124,12 @@ class QuotesFragment @Inject constructor(
 
             setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
+                    R.id.shareQuoteItem -> {
+                        val event = QuotesEvent.OnShareQuoteButtonClicked(quote.id)
+                        viewModel.dispatch(event)
+                        true
+                    }
+
                     R.id.editQuoteItem -> {
                         val event = QuotesEvent.OnEditQuoteButtonClicked(quote.id)
                         viewModel.dispatch(event)

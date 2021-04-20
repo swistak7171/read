@@ -1,7 +1,7 @@
 package pl.kamilszustak.read.model.domain.user
 
 import android.net.Uri
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import pl.kamilszustak.model.common.id.UserId
 import pl.kamilszustak.read.model.domain.IdentifiedModel
 import java.util.*

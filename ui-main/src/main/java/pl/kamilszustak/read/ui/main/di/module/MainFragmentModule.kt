@@ -9,6 +9,7 @@ import pl.kamilszustak.read.ui.main.book.details.BookDetailsFragment
 import pl.kamilszustak.read.ui.main.book.edit.BookEditFragment
 import pl.kamilszustak.read.ui.main.book.progress.ReadingProgressDialogFragment
 import pl.kamilszustak.read.ui.main.collection.CollectionFragment
+import pl.kamilszustak.read.ui.main.collection.archive.ArchiveFragment
 import pl.kamilszustak.read.ui.main.collection.goal.ReadingGoalFragment
 import pl.kamilszustak.read.ui.main.collection.log.ReadingLogFragment
 import pl.kamilszustak.read.ui.main.collection.log.details.LogEntryDetailsFragment
@@ -97,4 +98,9 @@ interface MainFragmentModule {
     @IntoMap
     @FragmentKey(StatisticsFragment::class)
     fun bindStatisticsFragment(fragment: StatisticsFragment): Fragment
+
+    @Binds
+    @IntoMap
+    @FragmentKey(ArchiveFragment::class)
+    fun bindArchiveFragment(fragment: ArchiveFragment): Fragment
 }

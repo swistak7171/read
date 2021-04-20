@@ -11,7 +11,10 @@
     <string name="contact">Kontakt</string>
     <string name="clear">Wyczyść</string>
     <string name="edit">Edytuj</string>
+    <string name="archive">Archiwizuj</string>
+    <string name="unarchive">Cofnij z archiwum</string>
     <string name="delete">Usuń</string>
+    <string name="share">Udostępnij</string>
     <string name="save">Zapisz</string>
     <string name="add">Dodaj</string>
     <string name="more">Więcej</string>

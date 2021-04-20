@@ -5,5 +5,5 @@ object Configuration {
     const val TARGET_SDK_VERSION: Int = 29
     const val BUILD_TOOLS_VERSION: String = "29.0.3"
     const val VERSION_CODE: Int = 11
-    const val VERSION_NAME: String = "0.8.2"
+    const val VERSION_NAME: String = "0.9.0"
 }

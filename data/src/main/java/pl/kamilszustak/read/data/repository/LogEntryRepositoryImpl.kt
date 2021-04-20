@@ -2,7 +2,6 @@ package pl.kamilszustak.read.data.repository
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.tasks.await
-import pl.kamilszustak.read.common.date.DateFormats
 import pl.kamilszustak.read.common.util.withIOContext
 import pl.kamilszustak.read.data.access.repository.LogEntryRepository
 import pl.kamilszustak.read.data.di.qualifier.ReadingLogCollection
@@ -12,7 +11,6 @@ import pl.kamilszustak.read.data.util.readEntity
 import pl.kamilszustak.read.data.util.readEntityList
 import pl.kamilszustak.read.model.entity.DatabaseCollection
 import pl.kamilszustak.read.model.entity.LogEntryEntity
-import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -47,15 +45,13 @@ class LogEntryRepositoryImpl @Inject constructor(
 
     override suspend fun deleteAllByBookId(id: String): Result<Unit> = withIOContext {
         runCatching {
-            val entries = readEntityList<LogEntryEntity> {
-                collection.query.orderByChild(LogEntryEntity.BOOK_ID_PROPERTY)
-                    .equalTo(id)
-            }
-
-            entries.forEach { entry ->
-                collection.reference.child(entry.id)
-                    .removeValue()
-            }
+            getAll()
+                .filter { it.bookId == id }
+                .forEach { entry ->
+                    collection.reference.child(entry.id)
+                        .removeValue()
+                        .await()
+                }
         }
     }
 

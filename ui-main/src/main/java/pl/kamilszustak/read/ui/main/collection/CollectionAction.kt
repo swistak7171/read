@@ -26,10 +26,12 @@ sealed class CollectionAction : ViewAction {
         @StringRes val messageResourceId: Int,
     ) : CollectionAction()
 
+    object BookArchived : CollectionAction()
     object BookDeleted : CollectionAction()
     object ReadingProgressUpdated : CollectionAction()
     object NavigateToSearchFragment : CollectionAction()
     object NavigateToScannerFragment : CollectionAction()
+    object NavigateToArchiveFragment : CollectionAction()
     object NavigateToReadingLogFragment : CollectionAction()
     object NavigateToReadingGoalFragment : CollectionAction()
 }

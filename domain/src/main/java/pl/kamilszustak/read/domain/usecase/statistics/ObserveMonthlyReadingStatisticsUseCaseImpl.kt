@@ -25,7 +25,6 @@ class ObserveMonthlyReadingStatisticsUseCaseImpl @Inject constructor(
                     .filter { entry ->
                         calendar.time = entry.creationDate
                         val entryDate = SimpleDate.fromCalendar(calendar)
-
                         (input.year == entryDate.year && input.month == entryDate.month)
                     }
                     .sortedBy(LogEntryEntity::creationDate)

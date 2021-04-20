@@ -1,6 +1,6 @@
 package pl.kamilszustak.read.model.domain
 
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import pl.kamilszustak.model.common.id.ReadingGoalId
 import pl.kamilszustak.read.common.date.Time
 import java.util.*

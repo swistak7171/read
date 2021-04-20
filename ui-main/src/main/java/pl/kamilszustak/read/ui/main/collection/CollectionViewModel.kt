@@ -5,10 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import pl.kamilszustak.read.common.lifecycle.UniqueLiveData
+import pl.kamilszustak.read.domain.access.usecase.book.ArchiveBookUseCase
 import pl.kamilszustak.read.domain.access.usecase.book.DeleteBookUseCase
 import pl.kamilszustak.read.domain.access.usecase.book.EditBookUseCase
 import pl.kamilszustak.read.domain.access.usecase.book.ObserveAllBooksUseCase
@@ -21,22 +22,24 @@ class CollectionViewModel @Inject constructor(
     private val observeAllBooks: ObserveAllBooksUseCase,
     private val deleteBook: DeleteBookUseCase,
     private val editBook: EditBookUseCase,
+    private val archiveBook: ArchiveBookUseCase
 ) : BaseViewModel<CollectionEvent, CollectionAction>() {
 
     val books: LiveData<List<Book>> = observeAllBooks()
-        .map { it.sortedByDescending(Book::modificationDate) }
-        .also { booksFlow ->
-            viewModelScope.launch {
-                val book = booksFlow.firstOrNull()?.firstOrNull()
-                if (book != null) {
-                    _currentBook.value = book
-                }
+        .map { books ->
+            books.filter { !it.isArchived }
+                .sortedByDescending(Book::modificationDate)
+        }
+        .onEach { books ->
+            books.firstOrNull()?.let { book ->
+                _currentBook.value = book
             }
         }
         .asLiveData(viewModelScope.coroutineContext)
 
     private val _currentBook: MutableLiveData<Book> = UniqueLiveData()
-    val currentBook: LiveData<Book> = _currentBook
+    val currentBook: LiveData<Book>
+        get() = _currentBook
 
     val firstFastUpdateValue: Int = 5
     val secondFastUpdateValue: Int = 15
@@ -59,23 +62,27 @@ class CollectionViewModel @Inject constructor(
                 _action.value = CollectionAction.NavigateToBookDetailsFragment(event.bookId)
             }
 
-            CollectionEvent.OnReadingLogButtonClicked -> {
+            is CollectionEvent.OnArchiveButtonClicked -> {
+                _action.value = CollectionAction.NavigateToArchiveFragment
+            }
+
+            is CollectionEvent.OnReadingLogButtonClicked -> {
                 _action.value = CollectionAction.NavigateToReadingLogFragment
             }
 
-            CollectionEvent.OnReadingGoalButtonClicked -> {
+            is CollectionEvent.OnReadingGoalButtonClicked -> {
                 _action.value = CollectionAction.NavigateToReadingGoalFragment
             }
 
-            CollectionEvent.OnFirstFastUpdateButtonClicked -> {
+            is CollectionEvent.OnFirstFastUpdateButtonClicked -> {
                 handleFastUpdateButtonClick(firstFastUpdateValue)
             }
 
-            CollectionEvent.OnSecondFastUpdateButtonClicked -> {
+            is CollectionEvent.OnSecondFastUpdateButtonClicked -> {
                 handleFastUpdateButtonClick(secondFastUpdateValue)
             }
 
-            CollectionEvent.OnThirdFastupdateButtonClicked -> {
+            is CollectionEvent.OnThirdFastupdateButtonClicked -> {
                 handleFastUpdateButtonClick(thirdFastUpdateValue)
             }
 
@@ -99,9 +106,21 @@ class CollectionViewModel @Inject constructor(
                 _action.value = CollectionAction.NavigateToBookEditFragment(event.bookId)
             }
 
+            is CollectionEvent.OnArchiveBookButtonClicked -> {
+                handleArchiveBookButtonClick(event)
+            }
+
             is CollectionEvent.OnDeleteBookButtonClicked -> {
                 handleDeleteBookButtonClick(event)
             }
+        }
+    }
+
+    private fun handleArchiveBookButtonClick(event: CollectionEvent.OnArchiveBookButtonClicked) {
+        viewModelScope.launch(Dispatchers.Main) {
+            archiveBook(event.bookId)
+                .onSuccess { _action.value = CollectionAction.BookArchived }
+                .onFailure { _action.value = CollectionAction.Error(R.string.archiving_book_error_message) }
         }
     }
 

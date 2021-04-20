@@ -112,7 +112,6 @@ class SearchFragment @Inject constructor(
         }
 
         viewModel.volumes.observe(viewLifecycleOwner) { volumes ->
-            Timber.i("VOLUMES: $volumes")
             modelAdapter.updateModels(volumes ?: listOf())
             binding.emptySearchResultLayout.root.isVisible = volumes.isNullOrEmpty()
         }

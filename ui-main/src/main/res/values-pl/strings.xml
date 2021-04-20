@@ -42,9 +42,14 @@
     <string name="quote_edited_successfully">Cytat został edytowany pomyślnie</string>
 
     <!-- CollectionFragment -->
+    <string name="next_page_to_read">Następna strona: %1$d</string>
     <string name="delete_book_dialog_title">Usuń książkę</string>
-    <string name="delete_book_dialog_message">Czy chcesz usunąć tę książkę?</string>
+    <string name="delete_book_dialog_message">Czy chcesz usunąć tę książkę? Wszystkie jej wpisy w dzienniku czytania zostaną usunięte.</string>
     <string name="book_deleted">Książka została usunięta</string>
+    <string name="book_archived">Książka zarchiwizowana</string>
+    <string name="archive_book_dialog_title">Archiwizuj książkę</string>
+    <string name="archive_book_dialog_message">Czy chcesz zarchiwizować tę książkę?</string>
+    <string name="archiving_book_error_message">Wystąpił błąd podczas archiwizacji książki</string>
     <string name="deleting_book_error_message">Wystąpił błąd podczas usuwania książki</string>
     <string name="empty_collection_message">Nie masz jeszcze żadnych książek w swojej kolekcji</string>
 
@@ -77,6 +82,7 @@
     <string name="reading_progress_updated">Postęp zostały pomyślnie zaktualizowany</string>
 
     <!-- QuotesFragment -->
+    <string name="share_quote_chooser_title">Udostępnij cytat za pomocą:</string>
     <string name="delete_quote_dialog_title">Usuń cytat</string>
     <string name="delete_quote_dialog_message">Czy chcesz usunąć ten cytat?</string>
     <string name="quote_deleted">Cytat został usunięty</string>
@@ -134,5 +140,13 @@
     <string name="general_statistics">Ogólne</string>
     <string name="weekly_statistics">Tygodniowe</string>
     <string name="monthly_statistics">Miesięczne</string>
+    <string name="yearly_statistics">Roczne</string>
     <string name="read_books">Przeczytane książki</string>
+
+    <!-- ARchiveFragment -->
+    <string name="books_archive">Archiwum książek</string>
+    <string name="empty_books_archive_message">Twoje archiwum książek jest puste</string>
+    <string name="book_archiving_date">Zarchiwizowano %1$s</string>
+    <string name="book_unarchiving_success_message">Książka została cofnięta z archiwum</string>
+    <string name="book_unarchiving_error_message">Wystąpił błąd podczas cofania książki z archiwum</string>
 </resources>
