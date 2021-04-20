@@ -108,6 +108,37 @@
                 style="@style/BarChartView"
                 android:layout_marginHorizontal="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin" />
+
+            <View
+                android:layout_width="match_parent"
+                style="@style/Divider"
+                android:layout_marginHorizontal="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/yearlyStatisticsTextView"
+                android:text="@string/yearly_statistics"
+                android:fontFamily="sans-serif-light"
+                android:textSize="@dimen/header_text_size"
+                android:layout_marginHorizontal="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin" />
+
+            <include layout="@layout/switcher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/yearSwitcher"
+                app:text="@{viewModel.monthText}"
+                app:isNextButtonEnabled="@{viewModel.isNextMonthButtonEnabled}" />
+
+            <com.db.williamchart.view.BarChartView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/axis_chart_height"
+                android:id="@+id/yearlyStatisticsChartView"
+                style="@style/BarChartView"
+                android:layout_marginHorizontal="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin" />
         </LinearLayout>
     </ScrollView>
 </layout>

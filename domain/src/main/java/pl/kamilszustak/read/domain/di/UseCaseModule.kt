@@ -190,4 +190,10 @@ interface UseCaseModule {
 
     @Binds
     fun bindGenerateReadBooksStatisticsUseCase(useCaseImpl: GenerateReadBooksStatisticsUseCaseImpl): GenerateReadBooksStatisticsUseCase
+
+    @Binds
+    fun bindObserveYearlyReadingStatisticsUseCase(useCaseImpl: ObserveYearlyReadingStatisticsUseCaseImpl): ObserveYearlyReadingStatisticsUseCase
+
+    @Binds
+    fun bindGenerateYearlyReadingStatisticsUseCase(useCaseImpl: GenerateYearlyReadingStatisticsUseCaseImpl): GenerateYearlyReadingStatisticsUseCase
 }

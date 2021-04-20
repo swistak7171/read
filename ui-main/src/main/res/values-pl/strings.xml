@@ -140,6 +140,7 @@
     <string name="general_statistics">Ogólne</string>
     <string name="weekly_statistics">Tygodniowe</string>
     <string name="monthly_statistics">Miesięczne</string>
+    <string name="yearly_statistics">Roczne</string>
     <string name="read_books">Przeczytane książki</string>
 
     <!-- ARchiveFragment -->

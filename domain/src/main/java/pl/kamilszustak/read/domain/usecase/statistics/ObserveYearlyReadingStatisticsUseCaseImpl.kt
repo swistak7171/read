@@ -4,33 +4,31 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import pl.kamilszustak.read.common.date.SimpleDate
 import pl.kamilszustak.read.data.access.repository.LogEntryRepository
-import pl.kamilszustak.read.domain.access.usecase.statistics.ObserveMonthlyReadingStatisticsUseCase
+import pl.kamilszustak.read.domain.access.usecase.statistics.ObserveYearlyReadingStatisticsUseCase
 import pl.kamilszustak.read.model.entity.LogEntryEntity
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ObserveMonthlyReadingStatisticsUseCaseImpl @Inject constructor(
+class ObserveYearlyReadingStatisticsUseCaseImpl @Inject constructor(
     private val repository: LogEntryRepository,
-) : ObserveMonthlyReadingStatisticsUseCase {
+) : ObserveYearlyReadingStatisticsUseCase {
 
-    override fun invoke(input: SimpleDate): Flow<Map<SimpleDate, Int>> {
-        val calendar = input.toCalendar()
-        val monthLength = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+    override fun invoke(input: Int): Flow<Map<Int, Int>> {
+        val calendar = Calendar.getInstance()
 
         return repository.observeAll()
             .map { entries ->
                 entries.asSequence()
                     .filter { entry ->
-                        calendar.time = entry.creationDate
-                        val entryDate = SimpleDate.fromCalendar(calendar)
-                        (input.year == entryDate.year && input.month == entryDate.month)
+                        val date = SimpleDate.fromDate(entry.creationDate)
+                        (date.year == input)
                     }
                     .sortedBy(LogEntryEntity::creationDate)
                     .groupBy { entry ->
                         calendar.time = entry.creationDate
-                        calendar.get(Calendar.DAY_OF_MONTH)
+                        calendar.get(Calendar.MONTH)
                     }
                     .mapValues { mapEntry ->
                         mapEntry.value.sumBy { entry ->
@@ -39,18 +37,13 @@ class ObserveMonthlyReadingStatisticsUseCaseImpl @Inject constructor(
                     }
                     .toMutableMap()
                     .also { map ->
-                        for (i in 1..monthLength) {
+                        for (i in 1..12) {
                             if (!map.containsKey(i)) {
                                 map[i] = 0
                             }
                         }
                     }
                     .toSortedMap()
-                    .mapKeys { mapEntry ->
-                        input.copy(
-                            day = mapEntry.key
-                        )
-                    }
             }
     }
 }
