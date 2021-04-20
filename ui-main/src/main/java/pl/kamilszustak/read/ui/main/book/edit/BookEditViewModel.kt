@@ -139,7 +139,7 @@ class BookEditViewModel(
             return
         }
 
-        if (pages == null || pages == 0) {
+        if (pages == null || pages <= 0) {
             _action.value = BookEditAction.Error(R.string.blank_book_number_of_pages)
             return
         }

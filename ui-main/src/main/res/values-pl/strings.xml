@@ -42,6 +42,7 @@
     <string name="quote_edited_successfully">Cytat został edytowany pomyślnie</string>
 
     <!-- CollectionFragment -->
+    <string name="next_page_to_read">Następna strona: %1$d</string>
     <string name="delete_book_dialog_title">Usuń książkę</string>
     <string name="delete_book_dialog_message">Czy chcesz usunąć tę książkę? Wszystkie jej wpisy w dzienniku czytania zostaną usunięte.</string>
     <string name="book_deleted">Książka została usunięta</string>

@@ -38,7 +38,8 @@ class CollectionViewModel @Inject constructor(
         .asLiveData(viewModelScope.coroutineContext)
 
     private val _currentBook: MutableLiveData<Book> = UniqueLiveData()
-    val currentBook: LiveData<Book> = _currentBook
+    val currentBook: LiveData<Book>
+        get() = _currentBook
 
     val firstFastUpdateValue: Int = 5
     val secondFastUpdateValue: Int = 15

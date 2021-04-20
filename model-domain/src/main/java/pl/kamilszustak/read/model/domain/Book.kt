@@ -30,6 +30,9 @@ data class Book(
     val progressPercentage: Int
         get() = (progress * 100).roundToInt()
 
+    val nextPage: Int
+        get() = (readPages + 1)
+
     companion object {
         const val COVER_IMAGE_PLACEHOLDER_URL: String = "https://i.stack.imgur.com/1hvpD.jpg"
     }
