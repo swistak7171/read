@@ -63,6 +63,14 @@ class StatisticsFragment @Inject constructor(
             viewModel.dispatch(StatisticsEvent.OnNextMonthButtonClicked)
         }
 
+        binding.yearSwitcher.previousButton.setOnClickListener {
+            viewModel.dispatch(StatisticsEvent.OnPreviousYearButtonClicked)
+        }
+
+        binding.yearSwitcher.nextButton.setOnClickListener {
+            viewModel.dispatch(StatisticsEvent.OnNextYearButtonClicked)
+        }
+
         binding.weeklyStatisticsChartView.setOnTouchListener(object : OnSwipeListener(context) {
             override fun onSwipeLeft() {
                 viewModel.dispatch(StatisticsEvent.OnWeeklyStatisticsChartSwipedLeft)
@@ -80,6 +88,16 @@ class StatisticsFragment @Inject constructor(
 
             override fun onSwipeRight() {
                 viewModel.dispatch(StatisticsEvent.OnMonthlyStatisticsChartSwipedRight)
+            }
+        })
+
+        binding.yearlyStatisticsChartView.setOnTouchListener(object : OnSwipeListener(context) {
+            override fun onSwipeLeft() {
+                viewModel.dispatch(StatisticsEvent.OnYearlyStatisticsChartSwipedLeft)
+            }
+
+            override fun onSwipeRight() {
+                viewModel.dispatch(StatisticsEvent.OnYearlyStatisticsChartSwipedRight)
             }
         })
     }
@@ -107,6 +125,12 @@ class StatisticsFragment @Inject constructor(
                 barsColorsList = List(statistics.size) { barsColor }.toList()
                 animate(statistics)
             }
+        }
+
+        viewModel.yearlyStatistics.observe(viewLifecycleOwner) { statistics ->
+            statistics ?: return@observe
+
+            binding.yearlyStatisticsChartView.animate(statistics)
         }
     }
 }
